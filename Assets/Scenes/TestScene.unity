@@ -123,6 +123,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &181823643
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +998,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> origin/main
 --- !u!1 &1513910531
 GameObject:
   m_ObjectHideFlags: 0
@@ -1175,7 +1178,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
 --- !u!1001 &1907346662
+=======
+--- !u!1001 &7669222197655973595
+>>>>>>> origin/main
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1184,11 +1191,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2482366230565174764, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
       propertyPath: m_RootOrder
+<<<<<<< HEAD
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2482366230565174764, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.8977135
+=======
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482366230565174764, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+>>>>>>> origin/main
       objectReference: {fileID: 0}
     - target: {fileID: 2482366230565174764, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1196,7 +1211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2482366230565174764, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
       propertyPath: m_LocalPosition.z
+<<<<<<< HEAD
       value: 0.3194338
+=======
+      value: 0
+>>>>>>> origin/main
       objectReference: {fileID: 0}
     - target: {fileID: 2482366230565174764, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1232,6 +1251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93a6ed3021b8747b688c0b62963efdb8, type: 3}
+<<<<<<< HEAD
 --- !u!1 &2036242214
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,3 +1350,5 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> origin/main
