@@ -259,3 +259,109 @@ Received Import Request.
   path: Assets/Scripts/CardView.cs
   artifactKey: Guid(6c3dc9207e5314ad8b90944898c8c7bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/Scripts/CardView.cs using Guid(6c3dc9207e5314ad8b90944898c8c7bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b12491cbf582465e6f88e58e98920d8') in 0.009412 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 374.625318 seconds.
+  path: Assets/Scripts/CardController.cs
+  artifactKey: Guid(1eec15129d4034a089440e7fffbab0f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CardController.cs using Guid(1eec15129d4034a089440e7fffbab0f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '58d634b1b0aaa58d655c116769f288e8') in 0.001402 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.934466 seconds.
+  path: Assets/Scripts/CardModel.cs
+  artifactKey: Guid(083a96889ac6b4376a2aba088d4e899a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CardModel.cs using Guid(083a96889ac6b4376a2aba088d4e899a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2860b7a865e48eee8ea039778774bc7c') in 0.001797 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.066645 seconds.
+  path: Assets/Scripts/PlayerController.cs
+  artifactKey: Guid(6788a6c740c044595b49bd5339f65dff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/PlayerController.cs using Guid(6788a6c740c044595b49bd5339f65dff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd07b3453017ca28663fcbfabb53b999') in 0.001162 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.229784 seconds.
+  path: Assets/Scripts/Gan
+  artifactKey: Guid(a5d1b4493248841f4ac7777ef0c21f7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Gan using Guid(a5d1b4493248841f4ac7777ef0c21f7c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c54877967e79bb9d4be125ed8ecac83d') in 0.001167 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.808307 seconds.
+  path: Assets/Scripts/Gan/CardView.cs
+  artifactKey: Guid(d511b3a60404eb34bae4f38a91e4b943) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Gan/CardView.cs using Guid(d511b3a60404eb34bae4f38a91e4b943) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7795f5c13d64251d7127aba59006151') in 0.000809 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 13.725346 seconds.
+  path: Assets/Scripts/UIManager.cs
+  artifactKey: Guid(43a4ac565c4b847a2abcb2c6812dc0ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/UIManager.cs using Guid(43a4ac565c4b847a2abcb2c6812dc0ee) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33aa8b5a39cc00350352ef8bfe2b84d5') in 0.001109 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002211 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.38 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.702 seconds
+Domain Reload Profiling:
+	ReloadAssembly (703ms)
+		BeginReloadAssembly (96ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (31ms)
+		EndReloadAssembly (543ms)
+			LoadAssemblies (50ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (182ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (29ms)
+			SetupLoadedEditorAssemblies (242ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (23ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (44ms)
+				ProcessInitializeOnLoadAttributes (150ms)
+				ProcessInitializeOnLoadMethodAttributes (20ms)
+				AfterProcessingInitializeOnLoad (3ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3362 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (24.7 KB). Loaded Objects now: 3844.
+Memory consumption went from 132.9 MB to 132.9 MB.
+Total: 2.405600 ms (FindLiveObjects: 0.161900 ms CreateObjectMapping: 0.079200 ms MarkObjects: 2.143400 ms  DeleteObjects: 0.020100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 269.807245 seconds.
+  path: Assets/Resources
+  artifactKey: Guid(8618ca50efe1d4b098ab2c1e676df38d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources using Guid(8618ca50efe1d4b098ab2c1e676df38d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf11a41efb85990284440f920ae15c87') in 0.008143 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.181412 seconds.
+  path: Assets/Scripts/Wonka
+  artifactKey: Guid(f7f07cb087e16435c886988acdeddfbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Wonka using Guid(f7f07cb087e16435c886988acdeddfbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e628329f763850a75b449e7c10b6590a') in 0.001264 seconds 
