@@ -34,6 +34,5 @@ public class Test : MonoBehaviour
         card.Init(cardID.Value);
         cardIDList.Add(cardID.Value);
         CardModel cardModel = card.model;
-        Debug.Log($"カードの情報...{cardModel.information}");
     }
 }

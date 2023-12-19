@@ -27,6 +27,7 @@ public class UIManager : MonoBehaviour
         if (instance == null)
             instance = this;
     }
+
     void Start()
     {
         // テキストの拡大と透明化アニメーション
