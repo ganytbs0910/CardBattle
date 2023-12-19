@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     private int stageLevel;
 
+    //šV‹K‚Å’Ç‰Á‚µ‚Ü‚µ‚½I
+    public bool BattleState;
+
     void Awake()
     {
         if (instance == null)
