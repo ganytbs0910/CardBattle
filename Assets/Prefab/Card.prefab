@@ -168,7 +168,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toggle: {fileID: 7309307507928562119}
   cardParent: {fileID: 4699485559678173576}
-  isDrag: 0
 --- !u!114 &7309307507928562119
 MonoBehaviour:
   m_ObjectHideFlags: 0

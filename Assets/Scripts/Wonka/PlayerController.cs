@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [Header("Playerのステータス")]
+    [SerializeField] private int hp;
+    [SerializeField] private int attack;
+    [SerializeField] private float attackInterval;
+    [SerializeField] private int defense;
+    [SerializeField] private int speed;
+
+
     void Start()
     {
 
     }
 
-    // Update is called once per frame
     void Update()
     {
 

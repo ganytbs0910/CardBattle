@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class CardController : MonoBehaviour
 {
     public CardView view; // カードの見た目の処理
