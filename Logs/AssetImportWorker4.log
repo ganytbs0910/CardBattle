@@ -1,0 +1,929 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.2f1 (d6360bedb9a0) revision 14038539'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'ja' Physical Memory: 32604 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker4
+-projectPath
+C:/UnityProjects/CardBattle
+-logFile
+Logs/AssetImportWorker4.log
+-srvPort
+55421
+Successfully changed project path to: C:/UnityProjects/CardBattle
+C:/UnityProjects/CardBattle
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 49.28 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.2f1 (d6360bedb9a0)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/UnityProjects/CardBattle/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3080 (ID=0x2216)
+    Vendor:   NVIDIA
+    VRAM:     10067 MB
+    Driver:   31.0.15.2802
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56520
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.003025 seconds.
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 47.40 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.395 seconds
+Domain Reload Profiling:
+	ReloadAssembly (395ms)
+		BeginReloadAssembly (43ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (0ms)
+		EndReloadAssembly (286ms)
+			LoadAssemblies (42ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (63ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (17ms)
+			SetupLoadedEditorAssemblies (175ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (42ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (47ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (57ms)
+				ProcessInitializeOnLoadMethodAttributes (27ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003367 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.40 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.740 seconds
+Domain Reload Profiling:
+	ReloadAssembly (741ms)
+		BeginReloadAssembly (172ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (120ms)
+		EndReloadAssembly (497ms)
+			LoadAssemblies (47ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (163ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (30ms)
+			SetupLoadedEditorAssemblies (229ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (15ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (46ms)
+				ProcessInitializeOnLoadAttributes (146ms)
+				ProcessInitializeOnLoadMethodAttributes (18ms)
+				AfterProcessingInitializeOnLoad (3ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
+Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3408 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 30 unused Assets / (56.6 KB). Loaded Objects now: 3893.
+Memory consumption went from 131.5 MB to 131.4 MB.
+Total: 2.331300 ms (FindLiveObjects: 0.169700 ms CreateObjectMapping: 0.077400 ms MarkObjects: 2.027600 ms  DeleteObjects: 0.055200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 131572.158824 seconds.
+  path: Assets/RPG Tiny Hero Duo/Animator/SwordAndShieldStance 1.controller
+  artifactKey: Guid(f611d17830ea9c74d86ea424a8812a03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Animator/SwordAndShieldStance 1.controller using Guid(f611d17830ea9c74d86ea424a8812a03) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66bd3c71fe3e74885e6ce0729eaf7fc5') in 0.027775 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.928115 seconds.
+  path: Assets/RPG Tiny Hero Duo/Animator/SwordAndShieldStance.controller
+  artifactKey: Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Animator/SwordAndShieldStance.controller using Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0548ff4ae1e36280df9f75957b79f650') in 0.010277 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 7.781645 seconds.
+  path: Assets/RPG Tiny Hero Duo/Animator/PlayerController.controller
+  artifactKey: Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Animator/PlayerController.controller using Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '76576c4ea5acbb8cbe269e62cd0b8b4d') in 0.009978 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1073.775458 seconds.
+  path: Assets/RPG Tiny Hero Duo/Animator/PlayerController.controller
+  artifactKey: Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Animator/PlayerController.controller using Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5126f13b3f516df073c80aa644eede6c') in 0.011083 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 327.312782 seconds.
+  path: Assets/Scripts/Wonka/PlayerController.cs
+  artifactKey: Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Wonka/PlayerController.cs using Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e2b91acdb9b2eaaa9e3f0a6c4d07bce') in 0.006277 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 37.663909 seconds.
+  path: Assets/Scripts/Wonka/PlayerController.cs
+  artifactKey: Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Wonka/PlayerController.cs using Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92a4a39434fe1f1a3fd7a3d8701e1718') in 0.001231 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 136.332993 seconds.
+  path: Assets/Scripts/Wonka/PlayerController.cs
+  artifactKey: Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Wonka/PlayerController.cs using Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ff703aa5e65a3bff843317e92109754') in 0.001282 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.644077 seconds.
+  path: Assets/Scripts/Wonka/PlayerController.cs
+  artifactKey: Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Wonka/PlayerController.cs using Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0185a33f95d9714a663abb8359883b85') in 0.000996 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.204085 seconds.
+  path: Assets/Scripts/Wonka/PlayerController.cs
+  artifactKey: Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Wonka/PlayerController.cs using Guid(9a9543594eef7664f95d54ff998bbf60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f7d1e9a2fc16ce047f9e1f8ae48e3564') in 0.001329 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003273 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.48 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.628 seconds
+Domain Reload Profiling:
+	ReloadAssembly (628ms)
+		BeginReloadAssembly (91ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (27ms)
+		EndReloadAssembly (472ms)
+			LoadAssemblies (49ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (163ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (25ms)
+			SetupLoadedEditorAssemblies (208ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (22ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (41ms)
+				ProcessInitializeOnLoadAttributes (126ms)
+				ProcessInitializeOnLoadMethodAttributes (16ms)
+				AfterProcessingInitializeOnLoad (3ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.13 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3388 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (25.2 KB). Loaded Objects now: 3896.
+Memory consumption went from 130.0 MB to 130.0 MB.
+Total: 2.150900 ms (FindLiveObjects: 0.160800 ms CreateObjectMapping: 0.074400 ms MarkObjects: 1.897100 ms  DeleteObjects: 0.017500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 141.311870 seconds.
+  path: Assets/RPG Tiny Hero Duo/Animator/PlayerController.controller
+  artifactKey: Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Animator/PlayerController.controller using Guid(2be64f57d7d213648aa9b2e5e8e0a39b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0599b3fd3d41af52b97a3eb82fc69fa0') in 0.020356 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003097 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.39 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.650 seconds
+Domain Reload Profiling:
+	ReloadAssembly (651ms)
+		BeginReloadAssembly (92ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (3ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (26ms)
+		EndReloadAssembly (481ms)
+			LoadAssemblies (52ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (174ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (26ms)
+			SetupLoadedEditorAssemblies (206ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (21ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (36ms)
+				ProcessInitializeOnLoadAttributes (128ms)
+				ProcessInitializeOnLoadMethodAttributes (17ms)
+				AfterProcessingInitializeOnLoad (3ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.13 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3388 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (25.4 KB). Loaded Objects now: 3899.
+Memory consumption went from 130.0 MB to 130.0 MB.
+Total: 1.997800 ms (FindLiveObjects: 0.154600 ms CreateObjectMapping: 0.081800 ms MarkObjects: 1.744400 ms  DeleteObjects: 0.016100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003702 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.39 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.639 seconds
+Domain Reload Profiling:
+	ReloadAssembly (640ms)
+		BeginReloadAssembly (96ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (26ms)
+		EndReloadAssembly (481ms)
+			LoadAssemblies (55ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (173ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (25ms)
+			SetupLoadedEditorAssemblies (199ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (20ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (36ms)
+				ProcessInitializeOnLoadAttributes (122ms)
+				ProcessInitializeOnLoadMethodAttributes (17ms)
+				AfterProcessingInitializeOnLoad (3ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 1.16 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3388 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 23 unused Assets / (25.2 KB). Loaded Objects now: 3902.
+Memory consumption went from 130.0 MB to 130.0 MB.
+Total: 2.113800 ms (FindLiveObjects: 0.144600 ms CreateObjectMapping: 0.069900 ms MarkObjects: 1.882800 ms  DeleteObjects: 0.015600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 1733.443228 seconds.
+  path: Assets/AssetPack
+  artifactKey: Guid(6158e7bc67b866c49873478552ace068) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack using Guid(6158e7bc67b866c49873478552ace068) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1faf1ba8d69e7fc49dc88ee3afaeb4db') in 0.008374 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 9.059859 seconds.
+  path: Assets/AssetPack/Wand and Circles
+  artifactKey: Guid(fa1972913eb44464fabdc620aeab9fe3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles using Guid(fa1972913eb44464fabdc620aeab9fe3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c16a619de86cd7527c19b89cb44f36f3') in 0.001056 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.703402 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack
+  artifactKey: Guid(7fc0dadbbc7f8a84192ed45989051fa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack using Guid(7fc0dadbbc7f8a84192ed45989051fa1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2487b806ffd9751b9b09acaf38b5dfde') in 0.001524 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 4.563647 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo
+  artifactKey: Guid(8a32fad7003cee24cb0447186ac35b60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo using Guid(8a32fad7003cee24cb0447186ac35b60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e39381084b06f5b31de463a99a1214d7') in 0.001144 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.059893 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/CircleICO.png
+  artifactKey: Guid(a0da84963233e5344914292397e4707a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/CircleICO.png using Guid(a0da84963233e5344914292397e4707a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '584757734c7a2e4823d870215f74ed1e') in 0.094535 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.887522 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/Demo.unity
+  artifactKey: Guid(7c339d6293ae6b7478574828045e70c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/Demo.unity using Guid(7c339d6293ae6b7478574828045e70c1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '721c56ab2813e13053cfdfc6bd67de58') in 0.000969 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 133.964340 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/Intersection [Location].prefab
+  artifactKey: Guid(96fd17b654ffbce49bec26afec76afc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/Intersection [Location].prefab using Guid(96fd17b654ffbce49bec26afec76afc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6edeedc8cc636329f017361da4035f1b') in 0.173816 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.833493 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/Throne room [Location].prefab
+  artifactKey: Guid(e4f0c52be5359a04f86b2da93d17ba3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Demo/Throne room [Location].prefab using Guid(e4f0c52be5359a04f86b2da93d17ba3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc1ee90ccb8e122e6d683dc1e1bc6c6a') in 0.033217 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 155.810240 seconds.
+  path: Assets/Scenes/TestScene.unity
+  artifactKey: Guid(2e6704e1ec0bd274daf22a56091c5ad3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/TestScene.unity using Guid(2e6704e1ec0bd274daf22a56091c5ad3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e8f8026c1533626b40099704f662c956') in 0.001660 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 16.246220 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs
+  artifactKey: Guid(39e163fbddd305747b4d1525af60bf98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs using Guid(39e163fbddd305747b4d1525af60bf98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca0766db8e0925d3233ff162d2f04bc7') in 0.001745 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.977172 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props
+  artifactKey: Guid(27b105a0c7a785846920cce233c85584) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props using Guid(27b105a0c7a785846920cce233c85584) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3416e13b6e97bfbd1961123e9f5162bd') in 0.001187 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.086790 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch.prefab
+  artifactKey: Guid(343e9fd05edd06148a06b59e5c70d745) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch.prefab using Guid(343e9fd05edd06148a06b59e5c70d745) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '676ba6fb4a93304a5864a2c6e6a54bf5') in 0.011444 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_21.prefab
+  artifactKey: Guid(4a3c41cb3a97fd4469f8233ca6f6cb42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_21.prefab using Guid(4a3c41cb3a97fd4469f8233ca6f6cb42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '65e1c1bf6f39d8816344799f2cce0eeb') in 0.008268 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_5.prefab
+  artifactKey: Guid(e251eed821ddcd3459cfa6c02d21f960) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_5.prefab using Guid(e251eed821ddcd3459cfa6c02d21f960) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d4b6a3f99daf7ad4b1893b1e7d330f1') in 0.007253 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_4.prefab
+  artifactKey: Guid(f2d1718ea37078947904a5176b6101a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_4.prefab using Guid(f2d1718ea37078947904a5176b6101a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'edb4b94951db91477d66a6be35407810') in 0.006483 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_19.prefab
+  artifactKey: Guid(3652b7fad00f8864c9755d6d43640528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_19.prefab using Guid(3652b7fad00f8864c9755d6d43640528) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94a38d2c91db15b02b4d1a2a3022c375') in 0.006568 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_20.prefab
+  artifactKey: Guid(e07ff41d586e6f64cbb3278e9f6d96b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_20.prefab using Guid(e07ff41d586e6f64cbb3278e9f6d96b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c23b0d4912145be93c84f0dc1918d98d') in 0.006144 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_9.prefab
+  artifactKey: Guid(42dea56e1c119574787288476090ca20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_9.prefab using Guid(42dea56e1c119574787288476090ca20) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b6646ab7a2039c2bf3f6c9a27755a0d') in 0.006379 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_5.prefab
+  artifactKey: Guid(6cbead40818cb3d4c9c25efed5716883) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_5.prefab using Guid(6cbead40818cb3d4c9c25efed5716883) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00850b8c71b5458ba3fd76d777265084') in 0.006324 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_6.prefab
+  artifactKey: Guid(a969762a50d8ee64abfd75c0fda5d70a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_6.prefab using Guid(a969762a50d8ee64abfd75c0fda5d70a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e1f7647c8c0ccee7750c9a13f2151669') in 0.006367 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_24.prefab
+  artifactKey: Guid(0d9d292740cfb164a80004a0e3fcf20e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_24.prefab using Guid(0d9d292740cfb164a80004a0e3fcf20e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '629ba902e746a7dfccc1f6eb3a029d18') in 0.007005 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_17.prefab
+  artifactKey: Guid(570bcd565ed034147bd45aa445f32eb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_17.prefab using Guid(570bcd565ed034147bd45aa445f32eb9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '92ee854e24fe3e1d8a9b1e32fa8ea8b9') in 0.006141 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_16.prefab
+  artifactKey: Guid(dce34072fe30f164bad17d496faacacf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_16.prefab using Guid(dce34072fe30f164bad17d496faacacf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ea1eef1b8ef7d5c51268c502ad4ea20a') in 0.007563 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_4.prefab
+  artifactKey: Guid(e2d3af59233b85f4d80008f300d9039c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_4.prefab using Guid(e2d3af59233b85f4d80008f300d9039c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4ce4d27e6099e889cf5c3d3e749b57a') in 0.006247 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_12.prefab
+  artifactKey: Guid(b12d9dd7d03a21849ac17a6ce6b6a212) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_12.prefab using Guid(b12d9dd7d03a21849ac17a6ce6b6a212) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b30ca388f93bfd6ed365e5ae347fdd3a') in 0.006986 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_10.prefab
+  artifactKey: Guid(657bcf216d585ee45ad4e39c078016ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_10.prefab using Guid(657bcf216d585ee45ad4e39c078016ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '34f4abcf3a3ada0d534568857ada7679') in 0.006623 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_2.prefab
+  artifactKey: Guid(98c362f8deb2e444ba21641b9fb657b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_2.prefab using Guid(98c362f8deb2e444ba21641b9fb657b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9d9a57275d23ca75f5b23f00975bec9b') in 0.006982 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_18.prefab
+  artifactKey: Guid(b3b635602b980624295b2ef8782d677c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_18.prefab using Guid(b3b635602b980624295b2ef8782d677c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e55a6f6c2c6880a8bd5b1e3d045ae2d') in 0.007709 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_3.prefab
+  artifactKey: Guid(00fb8e5929764a74e8a38a188249c2d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_3.prefab using Guid(00fb8e5929764a74e8a38a188249c2d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '60ddebf10680ea000663bd323bc6fe3c') in 0.007353 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_22.prefab
+  artifactKey: Guid(ae410917b2847a8448cfb87879ffb300) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_22.prefab using Guid(ae410917b2847a8448cfb87879ffb300) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fa1450d4abce4bc2e1f0dd02be559f6a') in 0.006241 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_23.prefab
+  artifactKey: Guid(bc0b4bcbc7dbff944ae70decfa2f535e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_23.prefab using Guid(bc0b4bcbc7dbff944ae70decfa2f535e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '867689abc38d4064cf20506b1ce6a887') in 0.005825 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_25.prefab
+  artifactKey: Guid(41f3a11eaf7224c46872fb0f92c5862a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_25.prefab using Guid(41f3a11eaf7224c46872fb0f92c5862a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff041567d48923e8c5dd031453acfe52') in 0.006999 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_3.prefab
+  artifactKey: Guid(da01cd9cdb60249429683c49ca55e4dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_3.prefab using Guid(da01cd9cdb60249429683c49ca55e4dc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'beea64814603d25fafd5b967a1a1ec39') in 0.006680 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_14.prefab
+  artifactKey: Guid(1155bd977fea5df439916fb851d5e559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_14.prefab using Guid(1155bd977fea5df439916fb851d5e559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8da3322168966843e9c77e762d9ae5e9') in 0.006192 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_2.prefab
+  artifactKey: Guid(ea88b4560a1f4df40bc23382b5ebb787) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_2.prefab using Guid(ea88b4560a1f4df40bc23382b5ebb787) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '98f3c642d27c57482e45010409be5fdc') in 0.006553 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_7.prefab
+  artifactKey: Guid(f13343d38feb2864cacb25e4261d2483) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_7.prefab using Guid(f13343d38feb2864cacb25e4261d2483) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb2e1a1ab7fd310b3566e34ac3b3b494') in 0.006351 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom.prefab
+  artifactKey: Guid(7eff9b2be38a4f347b3d0e5d5ac766bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom.prefab using Guid(7eff9b2be38a4f347b3d0e5d5ac766bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f96cfae458224021c058ea66df04dc4a') in 0.007294 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_13.prefab
+  artifactKey: Guid(4007ba976ed01e949909d51e5427e543) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Branch_13.prefab using Guid(4007ba976ed01e949909d51e5427e543) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b52c6dc46d6d9331ce673a66bbaf8509') in 0.007327 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.940281 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_7.prefab
+  artifactKey: Guid(ed2c05f7e6eaaf44296290718962ac7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_7.prefab using Guid(ed2c05f7e6eaaf44296290718962ac7a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4577be894287f9d38023433fbc60459c') in 0.006587 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_11.prefab
+  artifactKey: Guid(663930505302d9e45bf87a7db42fab4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_11.prefab using Guid(663930505302d9e45bf87a7db42fab4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1cdfaaef22599576154040076694c84f') in 0.008202 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_12.prefab
+  artifactKey: Guid(daa14c626decca34da2bbd250d915279) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_12.prefab using Guid(daa14c626decca34da2bbd250d915279) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b239b8a0451c52fffb70210b76b63069') in 0.008181 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_9.prefab
+  artifactKey: Guid(8da65edf4d053234db32c4a328397fc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Mushroom_9.prefab using Guid(8da65edf4d053234db32c4a328397fc3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf6d1c3b3276067c615aae61da9a4d4f') in 0.007605 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_3.prefab
+  artifactKey: Guid(b3263158749d43347947246786f14e30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_3.prefab using Guid(b3263158749d43347947246786f14e30) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec9792395559949498c6d7eb5ec52946') in 0.007083 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_5.prefab
+  artifactKey: Guid(43ebd8e754cb8bf469358f4c32312514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_5.prefab using Guid(43ebd8e754cb8bf469358f4c32312514) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e316e3405c82aaa58ce7c3e195c56f0') in 0.007950 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_2.prefab
+  artifactKey: Guid(4f0ccfb7035c0464caa891ea125eb96b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_2.prefab using Guid(4f0ccfb7035c0464caa891ea125eb96b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fea62b3b5961c3ba24c0e9dabf99f99') in 0.007691 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_7.prefab
+  artifactKey: Guid(d5312b1fcfaf9194ea4131e9db4ce720) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_7.prefab using Guid(d5312b1fcfaf9194ea4131e9db4ce720) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d929046e1b97e4cd11ea1cab9f252ef') in 0.007167 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_6.prefab
+  artifactKey: Guid(57ec5f6eb3262c342bbc6e68b8d302d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_6.prefab using Guid(57ec5f6eb3262c342bbc6e68b8d302d0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '324d8996a80282805bdb38463e1fc798') in 0.007180 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_1.prefab
+  artifactKey: Guid(40f0b54dcfdc16943ac379e3356a63b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_1.prefab using Guid(40f0b54dcfdc16943ac379e3356a63b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a89a7345951e30a852af7620a78072b9') in 0.006891 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_4.prefab
+  artifactKey: Guid(11bd5dd55b9b82f4db69a1eae892047b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Pillar_4.prefab using Guid(11bd5dd55b9b82f4db69a1eae892047b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50270a7279210f6b9346665aa1a56ef0') in 0.006488 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.197615 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_3.prefab
+  artifactKey: Guid(ebee262505904a54bba65400e67ec118) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_3.prefab using Guid(ebee262505904a54bba65400e67ec118) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ebf64c9bfa10f497fc67c3738920e080') in 0.006524 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_8.prefab
+  artifactKey: Guid(0961a78217102d44682e3575ff78429e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_8.prefab using Guid(0961a78217102d44682e3575ff78429e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50dd65816fe971dbd2ac556f566a7475') in 0.008830 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_7.prefab
+  artifactKey: Guid(06ab36ff8349e8546a8d31e8c60eb8f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_7.prefab using Guid(06ab36ff8349e8546a8d31e8c60eb8f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e0ffcd60c8a1375eabc15cdac30eb37c') in 0.007971 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_16.prefab
+  artifactKey: Guid(a550791fdac8dbc45807500cdec4dd1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_16.prefab using Guid(a550791fdac8dbc45807500cdec4dd1b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '94cc834d88b2edc2770182d84f91333e') in 0.006625 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_9.prefab
+  artifactKey: Guid(d68341f088a6bd1428f051ebf96e8ebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_9.prefab using Guid(d68341f088a6bd1428f051ebf96e8ebd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '52e6e59e639a6c976bfad078f08fff8e') in 0.006654 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_2.prefab
+  artifactKey: Guid(18878739295ff1f44ad45368a4db509f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_2.prefab using Guid(18878739295ff1f44ad45368a4db509f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e2250918486475f72315725084d8704') in 0.007451 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_3.prefab
+  artifactKey: Guid(21be1f78a0e9a1d4d99dea0f077df87d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_3.prefab using Guid(21be1f78a0e9a1d4d99dea0f077df87d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44a6ed54796aebf91305cf1c0b1dfc2e') in 0.006986 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_8.prefab
+  artifactKey: Guid(eef16b0646b5c274ca3165cb4b9cece5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_8.prefab using Guid(eef16b0646b5c274ca3165cb4b9cece5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '357ad34604dad9222ca72cfa88726e72') in 0.008418 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike.prefab
+  artifactKey: Guid(71497ab2f664f864bb16557f1e01379d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike.prefab using Guid(71497ab2f664f864bb16557f1e01379d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6f9c546fd3aa1f9135cd5c48428a7dc') in 0.007128 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_6.prefab
+  artifactKey: Guid(0cf88c6a46695e942b5aaed1558ba6ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_6.prefab using Guid(0cf88c6a46695e942b5aaed1558ba6ea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '70e03a3256dc303dca6d08dbb227eadd') in 0.007027 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_0.prefab
+  artifactKey: Guid(5fd0f2d4840322948af2ef2292fee18f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_0.prefab using Guid(5fd0f2d4840322948af2ef2292fee18f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'def5baa9d3645a23b71cc36ce50f77ff') in 0.008224 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_13.prefab
+  artifactKey: Guid(6e6ed9b1f8db8124cbc2917fd7246070) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_13.prefab using Guid(6e6ed9b1f8db8124cbc2917fd7246070) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd8d4f740d49c991646d2c6e6bffd385b') in 0.007030 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_11.prefab
+  artifactKey: Guid(f40f946adda2439468f690a6126f5c7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Shrub_11.prefab using Guid(f40f946adda2439468f690a6126f5c7d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '908152eaf6d94965cf3f3f61e76d2979') in 0.006782 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_5.prefab
+  artifactKey: Guid(491f153a5c93ff64b957af52e5e18387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Spike_5.prefab using Guid(491f153a5c93ff64b957af52e5e18387) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7587aa6a627d178c4eb6160ead317a7b') in 0.008087 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.481976 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Stone Circle.prefab
+  artifactKey: Guid(3bc8b07c5faf38b4993198bc4ec4118e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Stone Circle.prefab using Guid(3bc8b07c5faf38b4993198bc4ec4118e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ed46ba336dec2dcfbf687dc0bd13cf61') in 0.008003 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.515526 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals
+  artifactKey: Guid(d8eb6e58da0a877439babae06b21e6a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals using Guid(d8eb6e58da0a877439babae06b21e6a8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b363f13902468e0594acb6841898ec9d') in 0.000964 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.039367 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal.prefab
+  artifactKey: Guid(0cd24a30fe7695649b8142f85c9a7dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal.prefab using Guid(0cd24a30fe7695649b8142f85c9a7dcb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79c5303b87914ccd410894f3ad2411be') in 0.007450 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_11.prefab
+  artifactKey: Guid(f60dd4ffa01defb4b9a11d658e20aaf5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_11.prefab using Guid(f60dd4ffa01defb4b9a11d658e20aaf5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd0419e9942b44b0e6fa3ff47134f76ef') in 0.009279 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_5.prefab
+  artifactKey: Guid(0081169bb29206c44a0717a8fe9259a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_5.prefab using Guid(0081169bb29206c44a0717a8fe9259a4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10eb340cdeeed120123957d2f3912fe4') in 0.008191 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_9.prefab
+  artifactKey: Guid(17074903e71431f4f80fbf0a7938dd86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_9.prefab using Guid(17074903e71431f4f80fbf0a7938dd86) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2daf36efa4fe8db563defa4d277d2038') in 0.008387 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_8.prefab
+  artifactKey: Guid(9df205059b92c8e4db913ed07e4ee21d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_8.prefab using Guid(9df205059b92c8e4db913ed07e4ee21d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fce70ef70ac8d0c8e70c9539fe554af8') in 0.008784 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_2.prefab
+  artifactKey: Guid(1975f93af0dd0204f97e1c042dad4a9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Crystal_2.prefab using Guid(1975f93af0dd0204f97e1c042dad4a9d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f8d5e9c3efb26c95824f6c49994a8dbb') in 0.009920 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1.258040 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D
+  artifactKey: Guid(f2984999c05991e4dab692e389a0bdc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D using Guid(f2984999c05991e4dab692e389a0bdc4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3fa86acc549727a226541f1069e85a9') in 0.001336 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.045432 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal.prefab
+  artifactKey: Guid(d29c3242221166046a66c8dd867ef898) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal.prefab using Guid(d29c3242221166046a66c8dd867ef898) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '222bf711fad2e3c1530aebbcc61c4ffe') in 0.008554 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_7.prefab
+  artifactKey: Guid(4900ea75ae8e42f41b6f9384df10c747) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_7.prefab using Guid(4900ea75ae8e42f41b6f9384df10c747) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c885d2f276a32f8c35b74d33536b56a') in 0.008420 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_16.prefab
+  artifactKey: Guid(767692584978d8140942502cd250ab6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_16.prefab using Guid(767692584978d8140942502cd250ab6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24ae6df1f35f9d38b41209a990df0e19') in 0.010153 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_12.prefab
+  artifactKey: Guid(29c9f35c9bcbaab48a271268f1c67978) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_12.prefab using Guid(29c9f35c9bcbaab48a271268f1c67978) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '123cde5a7efacaf11e2e174e688bc0ec') in 0.013803 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_11.prefab
+  artifactKey: Guid(10bc24246b7c532498fada2bc678c3fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_11.prefab using Guid(10bc24246b7c532498fada2bc678c3fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c52679c5e177fec2b1fe2aafda0d5161') in 0.011089 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_34.prefab
+  artifactKey: Guid(587e38037063279479f4c13905bd8690) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_34.prefab using Guid(587e38037063279479f4c13905bd8690) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3dbf9a35b31bb99ca5c1f2d51a5275b8') in 0.013385 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_35.prefab
+  artifactKey: Guid(6b0146714e7cd784596d27c0daaa8ed4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_35.prefab using Guid(6b0146714e7cd784596d27c0daaa8ed4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '22a50e618e1508450007c2f44e4f398f') in 0.013546 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_17.prefab
+  artifactKey: Guid(1edbfa1579d184f47be03eda6278d5ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_17.prefab using Guid(1edbfa1579d184f47be03eda6278d5ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'debdd95ee30a469e908b886be802c35d') in 0.011809 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_22.prefab
+  artifactKey: Guid(91a0be14c17300041bbe41710bffc8e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_22.prefab using Guid(91a0be14c17300041bbe41710bffc8e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6cbf611d3a6f69b94934a0a68d77bc6f') in 0.013902 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_13.prefab
+  artifactKey: Guid(d9a32a6e09018c340877c3ee6b54931b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_13.prefab using Guid(d9a32a6e09018c340877c3ee6b54931b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fbb91132cb1105c3d399da018cc93fa') in 0.009433 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_14.prefab
+  artifactKey: Guid(a678f9084fb76ce44a3a3c0a5c51ea80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_14.prefab using Guid(a678f9084fb76ce44a3a3c0a5c51ea80) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3aac1aa351b779743d654c99c1e2f496') in 0.009908 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_20.prefab
+  artifactKey: Guid(054ac4be55fb6f742940390816bfb21e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_20.prefab using Guid(054ac4be55fb6f742940390816bfb21e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ca9e53ed63a2120655f7f1130afc2a4f') in 0.016240 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_24.prefab
+  artifactKey: Guid(4eafd371df6533e40bff02c4856856b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_24.prefab using Guid(4eafd371df6533e40bff02c4856856b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af47ee40f62561def9cb9504fb41441f') in 0.008269 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.464208 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_40.prefab
+  artifactKey: Guid(44b73004752b8ae43b4e59a75e2c75b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_40.prefab using Guid(44b73004752b8ae43b4e59a75e2c75b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6fac4ee4f87506d847f24f048077a263') in 0.007714 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_44.prefab
+  artifactKey: Guid(b12a35b84264c0740bc468693a057181) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_44.prefab using Guid(b12a35b84264c0740bc468693a057181) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36937ddea094eda11ff95f1786abd8fe') in 0.010763 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.002152 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_47.prefab
+  artifactKey: Guid(39db9c691980eba43a072510cdc01bec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Prefabs/Cave Props/Crystals/Color D/Crystal_47.prefab using Guid(39db9c691980eba43a072510cdc01bec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3acdc13875fd7ef7873e603eaf1eda7d') in 0.007862 seconds 

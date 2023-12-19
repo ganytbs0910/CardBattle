@@ -423,3 +423,49 @@ Received Import Request.
   path: Assets/RPG Tiny Hero Duo/Animation
   artifactKey: Guid(ce9fc0549a119344c9f1e480f227ad31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
 Start importing Assets/RPG Tiny Hero Duo/Animation using Guid(ce9fc0549a119344c9f1e480f227ad31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7851d20d99ee3db1f5eb1b4c2ded4670') in 0.001636 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1089.302287 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh
+  artifactKey: Guid(a597685b29c02da42af8db48b57f3b4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh using Guid(a597685b29c02da42af8db48b57f3b4c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '12dde3c9a8e409622d48433e1c312236') in 0.001887 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.028103 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh/ModularCharacterPBR.fbx
+  artifactKey: Guid(34b0895dfc863f742aa5075a4e691859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh/ModularCharacterPBR.fbx using Guid(34b0895dfc863f742aa5075a4e691859) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79d45e7afccc3fb6a229109a7867d959') in 0.068948 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh/OHS03Polyart.fbx
+  artifactKey: Guid(3164d361d8955d14c996186ce47ba3bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh/OHS03Polyart.fbx using Guid(3164d361d8955d14c996186ce47ba3bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd9aa630878f667f8da3affe2a7a95e06') in 0.010276 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh/OHS06PBR.fbx
+  artifactKey: Guid(8e583e9185af1be4e9dd6f501e6fe7d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh/OHS06PBR.fbx using Guid(8e583e9185af1be4e9dd6f501e6fe7d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ada6462114247bd245d2845c7fcf68fe') in 0.013544 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh/Shield08Polyart.fbx
+  artifactKey: Guid(c987a0ed5f8902041b988ba78a977080) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh/Shield08Polyart.fbx using Guid(c987a0ed5f8902041b988ba78a977080) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae990f3c948cb7758f80d7dfad8ecaa7') in 0.010830 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000014 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh/OHS06Polyart.fbx
+  artifactKey: Guid(892e5ad366182fd4f823a971e9e16281) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh/OHS06Polyart.fbx using Guid(892e5ad366182fd4f823a971e9e16281) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bae4adcae13e0af25d3cb8c21c5e0904') in 0.011911 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/RPG Tiny Hero Duo/Mesh/Stage.fbx
+  artifactKey: Guid(0f138a164e7f81a4a9e93cf85a9020e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RPG Tiny Hero Duo/Mesh/Stage.fbx using Guid(0f138a164e7f81a4a9e93cf85a9020e9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '79a4110ec2eff523c7b668d718fa61b5') in 0.010527 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
