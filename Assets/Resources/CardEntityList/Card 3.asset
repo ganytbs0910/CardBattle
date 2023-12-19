@@ -15,4 +15,4 @@ MonoBehaviour:
   cardID: 0
   name: 
   information: "\u30AB\u30FC\u30C93\u3060\u3088"
-  icon: {fileID: 21300000, guid: 92b204cca46037444ab18ba6701f86f7, type: 3}
+  icon: {fileID: 21300000, guid: d89e205d5af5b4bf58105ce69dfd4298, type: 3}
