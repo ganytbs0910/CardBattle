@@ -7,12 +7,13 @@ using DG.Tweening;
 
 public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private GameObject targetMarker; // 衝突点に表示するマーカー
-    [SerializeField] private float rayWidth = 1.5f; // レイの幅
-    public float rayDistance = 100f; // レイの射程距離
+    [SerializeField] private GameObject targetMarker;
+    [SerializeField] private float rayWidth = 1.5f;
+    public float rayDistance = 100f;
     [SerializeField] private Toggle toggle;
     public Transform cardParent;
     bool rayTarget = false;
+    private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
 
     private void Start()
     {
@@ -23,37 +24,59 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     void Update()
     {
-        if (rayTarget)
+        if (rayTarget && Input.GetMouseButton(0)) // rayTargetがtrueで、かつ画面がタッチされている場合
         {
-            //触れている画面にRayを飛ばす
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit = new RaycastHit();
-            if (Physics.Raycast(ray, out hit))
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, rayDistance))
             {
-                //Rayが触れているオブジェクトの名前を表示
-                Debug.Log(hit.collider.gameObject.name);
-
-                //射程距離内にある場合はマーカーを表示
                 targetMarker.SetActive(true);
                 targetMarker.transform.position = hit.point;
                 Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
                 targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
 
-                //Rayの幅を変更
-                //Rayの当たっている箇所に半径rayWidthの当たり判定を作成
-                Collider[] colliders = Physics.OverlapSphere(hit.point, rayWidth);
+                lastRaycastHit = hit; // 最後のRayの衝突情報を保存
+                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
                 foreach (Collider collider in colliders)
                 {
-                    //当たり判定の中にPlayerタグがあれば"プレイヤー発見"というログを出す
                     if (collider.gameObject.tag == "Player")
                     {
-                        //対象のオブジェクトの色を白くする
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
+                        Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in renderers)
+                        {
+                            renderer.material.color = new Color(1f, 0.7f, 0.7f, 1f); // 淡いピンク色
+                        }
                     }
-                    //Enemyタグがあれば”敵発見”というログを出す
-                    if (collider.gameObject.tag == "Enemy")
+                    else if (collider.gameObject.tag == "Enemy")
                     {
-                        //対象のオブジェクトの色を白くする
+                        //Debug.Log("Enemyを発見");
                     }
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0)) // 画面から手が離されたとき
+        {
+            if (lastRaycastHit.collider != null) // 最後のRayの衝突情報がある場合
+            {
+                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.gameObject.tag == "Player")
+                    {
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
+                        Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in renderers)
+                        {
+                            renderer.material.color = Color.white;
+                        }
+                    }
+                    else if (collider.gameObject.tag == "Enemy")
+                    {
+                        //Debug.Log("Enemyを発見");
+                    }
+                    targetMarker.SetActive(false);
                 }
             }
         }
