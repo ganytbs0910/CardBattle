@@ -1,0 +1,387 @@
+Using pre-set license
+Built from '2021.3/staging' branch; Version is '2021.3.2f1 (d6360bedb9a0) revision 14038539'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'ja' Physical Memory: 32604 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
+
+COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2021.3.2f1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker8
+-projectPath
+C:/UnityProjects/CardBattle
+-logFile
+Logs/AssetImportWorker8.log
+-srvPort
+55421
+Successfully changed project path to: C:/UnityProjects/CardBattle
+C:/UnityProjects/CardBattle
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Refreshing native plugins compatible for Editor in 63.17 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2021.3.2f1 (d6360bedb9a0)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/UnityProjects/CardBattle/Assets
+GfxDevice: creating device client; threaded=0; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce RTX 3080 (ID=0x2216)
+    Vendor:   NVIDIA
+    VRAM:     10067 MB
+    Driver:   31.0.15.2802
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56640
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.004253 seconds.
+Native extension for WindowsStandalone target not found
+[usbmuxd] Start listen thread
+[usbmuxd] Listen thread started
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 61.16 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.470 seconds
+Domain Reload Profiling:
+	ReloadAssembly (470ms)
+		BeginReloadAssembly (53ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (328ms)
+			LoadAssemblies (52ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (77ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (18ms)
+			SetupLoadedEditorAssemblies (196ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (46ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (61ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (60ms)
+				ProcessInitializeOnLoadMethodAttributes (28ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.003514 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\UnityProjects\CardBattle\Library\PackageCache\com.unity.visualscripting@1.7.6\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for WindowsStandalone target not found
+Native extension for iOS target not found
+Native extension for Android target not found
+Refreshing native plugins compatible for Editor in 0.62 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  0.802 seconds
+Domain Reload Profiling:
+	ReloadAssembly (802ms)
+		BeginReloadAssembly (172ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (116ms)
+		EndReloadAssembly (555ms)
+			LoadAssemblies (48ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (191ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (33ms)
+			SetupLoadedEditorAssemblies (251ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (15ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (51ms)
+				ProcessInitializeOnLoadAttributes (161ms)
+				ProcessInitializeOnLoadMethodAttributes (19ms)
+				AfterProcessingInitializeOnLoad (4ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
+Refreshing native plugins compatible for Editor in 0.88 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3413 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 30 unused Assets / (56.9 KB). Loaded Objects now: 3901.
+Memory consumption went from 135.2 MB to 135.2 MB.
+Total: 2.286200 ms (FindLiveObjects: 0.181300 ms CreateObjectMapping: 0.078700 ms MarkObjects: 1.967400 ms  DeleteObjects: 0.058100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 185844.857064 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Orc
+  artifactKey: Guid(18d55951984dd5c43a51a356ca25e53a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Orc using Guid(18d55951984dd5c43a51a356ca25e53a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b71f827a1ce1892c4ece0f5866cee412') in 0.004836 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.399031 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Attack01.anim
+  artifactKey: Guid(2ae2c4a112e7bd040bb51f06a62c6359) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Attack01.anim using Guid(2ae2c4a112e7bd040bb51f06a62c6359) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2fa661bb0c79b39c1276b03ab43c89e2') in 0.023231 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 8.820073 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Skeleten_Attack01.anim
+  artifactKey: Guid(2ae2c4a112e7bd040bb51f06a62c6359) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Skeleten_Attack01.anim using Guid(2ae2c4a112e7bd040bb51f06a62c6359) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '83f244e24d1a7086c66bdf627fac2adf') in 0.009629 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.277261 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Attack02.anim
+  artifactKey: Guid(1b85083f85c46c345a01951c6485a763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Attack02.anim using Guid(1b85083f85c46c345a01951c6485a763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '13418c5abfa20783e7d3a34501d76e6d') in 0.011100 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 11.364873 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Skeleten_Attack02.anim
+  artifactKey: Guid(1b85083f85c46c345a01951c6485a763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Skeleton/Skeleten_Attack02.anim using Guid(1b85083f85c46c345a01951c6485a763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c4e3c6a6cf12429d7132f5be47a74f3') in 0.011587 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 6.892115 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Slime/Attack01_Slime_Anim.fbx
+  artifactKey: Guid(438236b1bb4dc03468cb3f2d12fa922c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Slime/Attack01_Slime_Anim.fbx using Guid(438236b1bb4dc03468cb3f2d12fa922c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe4e6e2205976bd1d054a6013e70ca7f') in 0.140404 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/TurtleShell/Attack01_TurtleShell_Anim.fbx
+  artifactKey: Guid(18d0edd1f2ba4444d9ba9bdf01f251d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/TurtleShell/Attack01_TurtleShell_Anim.fbx using Guid(18d0edd1f2ba4444d9ba9bdf01f251d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '19805eb854d5586ba6c4247c0e14cb35') in 0.017962 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Spider/Die_Spider_Anim.fbx
+  artifactKey: Guid(b6eeb1d7ff7bad940a8fc826ae937c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Spider/Die_Spider_Anim.fbx using Guid(b6eeb1d7ff7bad940a8fc826ae937c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '249f3ccc64d9ce92a93b86efcdd4afb0') in 0.018593 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/MonsterPlant/Attack02_MP_Anim.fbx
+  artifactKey: Guid(eaabf67901e309b4e9de5e3c1fd7b6b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/MonsterPlant/Attack02_MP_Anim.fbx using Guid(eaabf67901e309b4e9de5e3c1fd7b6b5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b89dcb20e5dacf619a9e5fd6a18acdf') in 0.017329 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Orc/Dizzy_Orc_Anim.fbx
+  artifactKey: Guid(cc990e79d01442743897983f21a1676a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Orc/Dizzy_Orc_Anim.fbx using Guid(cc990e79d01442743897983f21a1676a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6117bb21ef8410b973e7663fe5dce2b8') in 0.025347 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/TurtleShell/Defend_TurtleShell_Anim.fbx
+  artifactKey: Guid(eece6c7b0fef3a74cacd7b1169d86d3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/TurtleShell/Defend_TurtleShell_Anim.fbx using Guid(eece6c7b0fef3a74cacd7b1169d86d3b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'af21ce197d24f1218a6a467e79cff9f9') in 0.015393 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Slime/Dizzy_Slime_Anim.fbx
+  artifactKey: Guid(08a0ee10a8d761e41bf8bc9b832040d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Slime/Dizzy_Slime_Anim.fbx using Guid(08a0ee10a8d761e41bf8bc9b832040d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a9c2df1494d720337a962f15924d0f31') in 0.015862 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000016 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/FlyBWD_Bat_Anim.fbx
+  artifactKey: Guid(a71c9157aad3c68459b951ed14a696b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/FlyBWD_Bat_Anim.fbx using Guid(a71c9157aad3c68459b951ed14a696b3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c2d515b08b924ffe40c0a5457228c20') in 0.015649 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000019 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Dragon/GetHit_Dragon_Anim.fbx
+  artifactKey: Guid(00f745576dedfab45ac4fe5f0249d677) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Dragon/GetHit_Dragon_Anim.fbx using Guid(00f745576dedfab45ac4fe5f0249d677) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7be8451a3381939df141bc1cb854dee4') in 0.018371 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Dragon/Die_Dragon_Anim.fbx
+  artifactKey: Guid(7a1757c32fec69643811291ee8094352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Dragon/Die_Dragon_Anim.fbx using Guid(7a1757c32fec69643811291ee8094352) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3954f557355b042ed16850ffc6edea88') in 0.021596 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000020 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/FlyFWD_Bat_Anim.fbx
+  artifactKey: Guid(9131ce34f95a5644b8e97ce243154bfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/FlyFWD_Bat_Anim.fbx using Guid(9131ce34f95a5644b8e97ce243154bfc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e2c9ff7fb66864b7267292e1e43a19df') in 0.018045 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Spider/Attack02_Spider_Anim.fbx
+  artifactKey: Guid(92f894feadc811142bbd1b840c870141) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Spider/Attack02_Spider_Anim.fbx using Guid(92f894feadc811142bbd1b840c870141) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '563d715a2695c805d766557b23fc86cb') in 0.016041 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/MonsterPlant/Dizzy_MP_Anim.fbx
+  artifactKey: Guid(f9f7ebfe99b062d4a8f3b32a9a3cdec8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/MonsterPlant/Dizzy_MP_Anim.fbx using Guid(f9f7ebfe99b062d4a8f3b32a9a3cdec8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc3c06839f2220340fc1a9646e0b5f51') in 0.016477 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/EvilMage/Attack01_EvilMage_Anim.fbx
+  artifactKey: Guid(9078b40d437984148b9ac2b2ae1b8d01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/EvilMage/Attack01_EvilMage_Anim.fbx using Guid(9078b40d437984148b9ac2b2ae1b8d01) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf14fc443119bf4323b40ca3f1742e90') in 0.023835 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/Attack02_Bat_Anim.fbx
+  artifactKey: Guid(c2c169395dc431b47a0dc5bfaab3539f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/Attack02_Bat_Anim.fbx using Guid(c2c169395dc431b47a0dc5bfaab3539f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b7a8839678db12e1a91b395247f3e20a') in 0.016709 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000021 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Slime/Die_Slime_Anim.fbx
+  artifactKey: Guid(f76b9b823f2fc9a469d0c2c780514380) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Slime/Die_Slime_Anim.fbx using Guid(f76b9b823f2fc9a469d0c2c780514380) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '84d83d128bc40111687a898752a899b3') in 0.020502 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 2.193697 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/SenseSomethingRPT_Bat_Anim.fbx
+  artifactKey: Guid(8dddfa64f7e19214593ae3fbe4fc3625) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Bat/SenseSomethingRPT_Bat_Anim.fbx using Guid(8dddfa64f7e19214593ae3fbe4fc3625) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3775dd6904fec8d812aaa9125a3acb9c') in 0.016828 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000013 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Orc/SenseSomethingST_Orc_Anim.fbx
+  artifactKey: Guid(31ec55cfbad33294e86c5739bac00adb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Orc/SenseSomethingST_Orc_Anim.fbx using Guid(31ec55cfbad33294e86c5739bac00adb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f56b7394536e198ecfede1db9adafdc') in 0.024677 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Dragon/SenseSomethingRPT_Dragon_Anim.fbx
+  artifactKey: Guid(8732fd7dcc0239f4c99031de98e519c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Dragon/SenseSomethingRPT_Dragon_Anim.fbx using Guid(8732fd7dcc0239f4c99031de98e519c2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3b1c57364e460a799d4b0eeb6cfc0023') in 0.016240 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/EvilMage/SenseSomethingRPT_EvilMage_Anim.fbx
+  artifactKey: Guid(8d88f68698bb6df47b88aabf86759eb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/EvilMage/SenseSomethingRPT_EvilMage_Anim.fbx using Guid(8d88f68698bb6df47b88aabf86759eb6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1c86ea72a29d1dd2ba4dc7db751f7552') in 0.022284 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000015 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/MonsterPlant/SenseSomethingRT_MP_Anim.fbx
+  artifactKey: Guid(865f527d896350d468fca42ac58d3de3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/MonsterPlant/SenseSomethingRT_MP_Anim.fbx using Guid(865f527d896350d468fca42ac58d3de3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de94b0c7109828f4b1e724bfcf3125c0') in 0.016687 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Animations/Golem/SenseSomethingRT_Golem_Anim.fbx
+  artifactKey: Guid(b88ed1d41d695384c8a1abfd631df32a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Animations/Golem/SenseSomethingRT_Golem_Anim.fbx using Guid(b88ed1d41d695384c8a1abfd631df32a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0f2030005a28916bf619a4d77398501c') in 0.016414 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 37.412116 seconds.
+  path: Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Models/01.fbx
+  artifactKey: Guid(c7c68342d14a1b3458918c992bcfdc10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/Wand and Circles/Stylized Dungeon Pack/Models/01.fbx using Guid(c7c68342d14a1b3458918c992bcfdc10) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0b4ea3dbedcbe4594d9435829fe324f7') in 0.357708 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Assets/AssetPack/RPG Monster Wave PBR/Textures/DefaultPBR/Albedo.png
+  artifactKey: Guid(91542c688c9c9dc4b82b5d98fd850f8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/AssetPack/RPG Monster Wave PBR/Textures/DefaultPBR/Albedo.png using Guid(91542c688c9c9dc4b82b5d98fd850f8b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1305778cae49149b63a40c8d4e83a6f7') in 0.020170 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-light@2x.png
+  artifactKey: Guid(ec2e3aa6d0ab8ce4eac29b56d65d61d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-light@2x.png using Guid(ec2e3aa6d0ab8ce4eac29b56d65d61d5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ecef179c2814b82152723db2c53a44d1') in 0.007490 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000018 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Styles/AlertBox.uss
+  artifactKey: Guid(85516056fd2579c45b10c08bc3c52a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Styles/AlertBox.uss using Guid(85516056fd2579c45b10c08bc3c52a08) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38a3c39c877c6d244052f28a202f0318') in 0.007141 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-dark.png
+  artifactKey: Guid(1a4f52b613391cd449af3ad2e44affeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-dark.png using Guid(1a4f52b613391cd449af3ad2e44affeb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fa69aaa28f624d131403c0573ee223e') in 0.006189 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-dark@2x.png
+  artifactKey: Guid(c223e0c507e2c6549a2cb97441b62cbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-dark@2x.png using Guid(c223e0c507e2c6549a2cb97441b62cbe) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8f1ceeb581b85a44378bb578588ea349') in 0.006028 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.services.core/Editor/Core/UiHelpers/UXML/AccessTokenError.uxml
+  artifactKey: Guid(9bbe9fb6e9537684cac89a4e82cf3d63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.services.core/Editor/Core/UiHelpers/UXML/AccessTokenError.uxml using Guid(9bbe9fb6e9537684cac89a4e82cf3d63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bda8d13c388491e806223e61b34fd349') in 0.007041 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Layouts/AlertBox.uxml
+  artifactKey: Guid(13d7e179675caff4293e8d5c7fb1dda8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Layouts/AlertBox.uxml using Guid(13d7e179675caff4293e8d5c7fb1dda8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'eb03477dc5509bdb9dace9d47a662b1d') in 0.002315 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000017 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-light.png
+  artifactKey: Guid(397fff6c3885f8343bb65714f0064b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/Collaborate/Assets/Icons/added-file-light.png using Guid(397fff6c3885f8343bb65714f0064b5d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43bcfd698b922885e7084765914787fe') in 0.007358 seconds 
+Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
+AssetImportWorker is now disconnected from the server
+Process exiting
+Exiting without the bug reporter. Application will terminate with return code 0
