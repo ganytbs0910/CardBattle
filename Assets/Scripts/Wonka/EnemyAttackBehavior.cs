@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,7 +8,7 @@ public class EnemyAttackBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //�ړ��s�\
+        //移動不可能
         animator.GetComponent<EnemyController>().CantMove = true;
     }
 
@@ -21,7 +21,7 @@ public class EnemyAttackBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //�ړ��\
+        //移動可能
         animator.GetComponent<EnemyController>().CantMove = false;
     }
 

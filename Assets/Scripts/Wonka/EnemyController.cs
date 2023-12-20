@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-//Distance 7ˆÈ‰ºËRun‚ÉˆÚs
-//Ditstance 2ˆÈ‰ºËAttackˆÚs
+//Distance 7ä»¥ä¸‹â‡’Runã«ç§»è¡Œ
+//Ditstance 2ä»¥ä¸‹â‡’Attackç§»è¡Œ
 public class EnemyController : MonoBehaviour
 { 
-    [Header("Player‚ÌƒXƒe[ƒ^ƒX")]
+    [Header("Playerã®ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹")]
     [SerializeField] private int hp;
     [SerializeField] private int attack;
     [SerializeField] private float attackInterval;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
 
-    public Transform playerTarget; // “G‚ÌˆÊ’u
+    public Transform playerTarget; // æ•µã®ä½ç½®
     private NavMeshAgent agent; // NavMesh Agent
     private Animator animator;
     private bool isAttacking = false;
@@ -32,40 +32,40 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); // NavMesh Agent‚Ìæ“¾
-                                              // AnimatorƒRƒ“ƒ|[ƒlƒ“ƒg‚ğæ“¾
+        agent = GetComponent<NavMeshAgent>(); // NavMesh Agentã®å–å¾—
+                                              // Animatorã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’å–å¾—
         animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (GameManager.instance.BattleState == true || Input.GetKeyDown(KeyCode.Space)) // ƒoƒgƒ‹ŠJn
+        if (GameManager.instance.BattleState == true || Input.GetKeyDown(KeyCode.Space)) // ãƒãƒˆãƒ«é–‹å§‹
         {
-            agent.SetDestination(playerTarget.position); // “G‚ÉŒü‚©‚Á‚ÄˆÚ“®ŠJn
-            Move();//ˆÚ“®ƒAƒjƒ
-            print("ˆÚ“®ŠJn");
+            agent.SetDestination(playerTarget.position); // æ•µã«å‘ã‹ã£ã¦ç§»å‹•é–‹å§‹
+            Move();//ç§»å‹•ã‚¢ãƒ‹ãƒ¡
+            print("ç§»å‹•é–‹å§‹");
         }
 
-        //“G‚Æ©•ª‚Ì‹——£UŒ‚”ÍˆÍ
+        //æ•µã¨è‡ªåˆ†ã®è·é›¢ï¼æ”»æ’ƒç¯„å›²
         float distance = Vector3.Distance(transform.position, playerTarget.position);
-        if (distance <= agent.stoppingDistance) // UŒ‚”ÍˆÍ<=’â~ˆÊ’u“G=“G‚ªUŒ‚”ÍˆÍ“à‚É‚¢‚é
+        if (distance <= agent.stoppingDistance) // æ”»æ’ƒç¯„å›²<=åœæ­¢ä½ç½®æ•µ=æ•µãŒæ”»æ’ƒç¯„å›²å†…ã«ã„ã‚‹
         {
-            Attack(); // UŒ‚
-            print("UŒ‚ŠJn");
+            Attack(); // æ”»æ’ƒ
+            print("æ”»æ’ƒé–‹å§‹");
         }
     }
 
-    // ŠeƒAƒjƒ[ƒVƒ‡ƒ“ó‘Ô‚ğƒgƒŠƒK[‚·‚éƒƒ\ƒbƒh
+    // å„ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çŠ¶æ…‹ã‚’ãƒˆãƒªã‚¬ãƒ¼ã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
     public void Move()
     {
         if (CantMove == false)
         {
             animator.SetTrigger("Move");
-            print("MoveƒAƒjƒ[ƒVƒ‡ƒ“Às");
+            print("Moveã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œ");
         }
         else
         {
-            print("PlayerAttackBehavior‚É‚æ‚èˆÚ“®•s‰Â”\");
+            print("PlayerAttackBehaviorã«ã‚ˆã‚Šç§»å‹•ä¸å¯èƒ½");
         }
     }
 
@@ -78,15 +78,15 @@ public class EnemyController : MonoBehaviour
     {
         if (isAttacking)
         {
-            // ‚·‚Å‚ÉUŒ‚’†‚Ìê‡A‰½‚à‚µ‚È‚¢
+            // ã™ã§ã«æ”»æ’ƒä¸­ã®å ´åˆã€ä½•ã‚‚ã—ãªã„
             return;
         }
 
         isAttacking = true;
 
-        int attackNumber = Random.Range(1, 3); // 1‚©‚ç2‚ÌŠÔ‚Ìƒ‰ƒ“ƒ_ƒ€‚È”‚ğ¶¬
+        int attackNumber = Random.Range(1, 3); // 1ã‹ã‚‰2ã®é–“ã®ãƒ©ãƒ³ãƒ€ãƒ ãªæ•°ã‚’ç”Ÿæˆ
 
-        // ¶¬‚³‚ê‚½”‚É‰‚¶‚ÄˆÙ‚È‚éUŒ‚ƒAƒjƒ[ƒVƒ‡ƒ“‚ğƒgƒŠƒK[
+        // ç”Ÿæˆã•ã‚ŒãŸæ•°ã«å¿œã˜ã¦ç•°ãªã‚‹æ”»æ’ƒã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ãƒˆãƒªã‚¬ãƒ¼
         switch (attackNumber)
         {
             case 1:
@@ -96,10 +96,10 @@ public class EnemyController : MonoBehaviour
                 animator.SetTrigger("Attack02");
                 break;
         }
-        print("AttackƒAƒjƒ[ƒVƒ‡ƒ“Às");
+        print("Attackã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³å®Ÿè¡Œ");
     }
 
-    // ƒAƒjƒ[ƒVƒ‡ƒ“ƒCƒxƒ“ƒg‚Ü‚½‚Í‚»‚Ì‘¼‚Ì•û–@‚ÅUŒ‚ó‘Ô‚ğƒŠƒZƒbƒg‚·‚é
+    // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚¤ãƒ™ãƒ³ãƒˆã¾ãŸã¯ãã®ä»–ã®æ–¹æ³•ã§æ”»æ’ƒçŠ¶æ…‹ã‚’ãƒªã‚»ãƒƒãƒˆã™ã‚‹
     public void ResetAttackState()
     {
         isAttacking = false;
