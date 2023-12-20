@@ -45,14 +45,15 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                         Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
                         foreach (Renderer renderer in renderers)
                         {
-                            renderer.material.color = new Color(1f, 0.7f, 0.7f, 1f); // 淡いピンク色
+                            renderer.material.color = Color.red;
                         }
                     }
                     else if (collider.gameObject.tag == "Enemy")
                     {
-                        //Debug.Log("Enemyを発見");
+
                     }
                 }
+
             }
         }
 
@@ -60,7 +61,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         {
             if (lastRaycastHit.collider != null) // 最後のRayの衝突情報がある場合
             {
-                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
+                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, 300);
                 foreach (Collider collider in colliders)
                 {
                     if (collider.gameObject.tag == "Player")
