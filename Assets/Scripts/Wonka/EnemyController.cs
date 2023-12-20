@@ -6,7 +6,7 @@ using UnityEngine.AI;
 //Distance 7以下⇒Runに移行
 //Ditstance 2以下⇒Attack移行
 public class EnemyController : MonoBehaviour
-{ 
+{
     [Header("Playerのステータス")]
     [SerializeField] private int hp;
     [SerializeField] private int attack;

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour
         }
 
         isAttacking = true;
-          
+
         int attackNumber = Random.Range(1, 5); // 1から4の間のランダムな数を生成
 
         // 生成された数に応じて異なる攻撃アニメーションをトリガー

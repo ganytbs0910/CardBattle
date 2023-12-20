@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [SerializeField] private GameObject targetMarker; // 衝突点に表示するマーカー
+    public float rayDistance = 100f; // レイの射程距離
     [SerializeField] private Toggle toggle;
     public Transform cardParent;
     bool rayTarget = false;
@@ -15,6 +17,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     {
         toggle.group = GetComponentInParent<ToggleGroup>();
         toggle.onValueChanged.AddListener(OnToggleChanged);
+        targetMarker = GameObject.Find("TargetMarker");
     }
 
     void Update()
@@ -26,8 +29,14 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
             RaycastHit hit = new RaycastHit();
             if (Physics.Raycast(ray, out hit))
             {
-                //のちにRayが触れた範囲にサークルをつける
-                Debug.DrawLine(ray.origin, hit.point, Color.red);
+                //Rayが触れているオブジェクトの名前を表示
+                Debug.Log(hit.collider.gameObject.name);
+
+                // 射程距離内にある場合はマーカーを表示
+                targetMarker.SetActive(true);
+                targetMarker.transform.position = hit.point;
+                Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
+                targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
             }
         }
     }

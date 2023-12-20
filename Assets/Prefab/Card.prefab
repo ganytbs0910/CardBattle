@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3525c805d62784194b67aa1f1c93ec3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetMarker: {fileID: 0}
+  rayDistance: 100
   toggle: {fileID: 7309307507928562119}
   cardParent: {fileID: 4699485559678173576}
 --- !u!114 &7309307507928562119
