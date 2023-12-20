@@ -23,6 +23,11 @@ public class EnemyAttackBehavior : StateMachineBehaviour
     {
         //移動可能
         animator.GetComponent<EnemyController>().CantMove = false;
+
+        //GetHitアニメの予約を取り消す。
+        animator.ResetTrigger("GetHit");
+
+        animator.GetComponent<EnemyController>().isAttacking = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

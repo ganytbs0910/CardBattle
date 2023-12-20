@@ -1,17 +1,20 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyIdleBehavior : StateMachineBehaviour
+public class EnemyGetHitBehavior : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<NavMeshAgent>().speed = 0;
+        //GetHitアニメの予約を取り消す。
+        animator.ResetTrigger("GetHit");
+        //移動不可能
+        animator.GetComponent<EnemyController>().CantMove = true;
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
@@ -20,7 +23,11 @@ public class EnemyIdleBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //移動可能
+        animator.GetComponent<EnemyController>().CantMove = false;
 
+        //GetHitアニメの予約を取り消す。
+        animator.ResetTrigger("GetHit");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

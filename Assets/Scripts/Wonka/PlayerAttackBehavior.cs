@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,15 +13,20 @@ public class PlayerAttackBehavior : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //�ړ��s�\
+        //移動不可能
         animator.GetComponent<PlayerController>().CantMove = true;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //�ړ��\
+        //移動可能
         animator.GetComponent<PlayerController>().CantMove = false;
+
+        //GetHitアニメの予約を取り消す。
+        animator.ResetTrigger("GetHit");
+
+        animator.GetComponent<PlayerController>().isAttacking = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
