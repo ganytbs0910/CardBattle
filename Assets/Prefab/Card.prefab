@@ -118,7 +118,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 185, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6394700211272796275
 CanvasRenderer:
@@ -166,6 +166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3525c805d62784194b67aa1f1c93ec3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetMarker: {fileID: 0}
+  rayWidth: 1.5
+  rayDistance: 100
   toggle: {fileID: 7309307507928562119}
   cardParent: {fileID: 4699485559678173576}
 --- !u!114 &7309307507928562119

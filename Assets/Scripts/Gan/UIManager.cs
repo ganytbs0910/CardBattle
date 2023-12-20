@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform togglesPanel;
     [SerializeField] private RectTransform difficultyPanel;
+    [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
     [SerializeField] private GameObject winPanel;
@@ -69,8 +70,10 @@ public class UIManager : MonoBehaviour
         camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
         //1秒かけてtogglePanelのy座標を現在の位置-250する
         togglesPanel.DOAnchorPosY(togglesPanel.anchoredPosition.y - 250, 1.0f);
-        //0.8秒かけてdifficultyPanelのy座標を現在の位置+250する
+        //1秒かけてdifficultyPanelのy座標を現在の位置+250する
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+        //1秒かけてcardListPanelのy座標を現在の位置-250する
+        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
 
         //★失礼！　デバッグ用で追加しました！　いつでも消して大丈夫です！
         GameManager.instance.BattleState = true;

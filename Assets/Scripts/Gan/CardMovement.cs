@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,27 +7,77 @@ using DG.Tweening;
 
 public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [SerializeField] private GameObject targetMarker;
+    [SerializeField] private float rayWidth = 1.5f;
+    public float rayDistance = 100f;
     [SerializeField] private Toggle toggle;
     public Transform cardParent;
     bool rayTarget = false;
+    private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
 
     private void Start()
     {
         toggle.group = GetComponentInParent<ToggleGroup>();
         toggle.onValueChanged.AddListener(OnToggleChanged);
+        targetMarker = GameObject.Find("TargetMarker");
     }
 
     void Update()
     {
-        if (rayTarget)
+        if (rayTarget && Input.GetMouseButton(0)) // rayTargetがtrueで、かつ画面がタッチされている場合
         {
-            //触れている画面にRayを飛ばす
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit = new RaycastHit();
-            if (Physics.Raycast(ray, out hit))
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, rayDistance))
             {
-                //のちにRayが触れた範囲にサークルをつける
-                Debug.DrawLine(ray.origin, hit.point, Color.red);
+                targetMarker.SetActive(true);
+                targetMarker.transform.position = hit.point;
+                Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
+                targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
+
+                lastRaycastHit = hit; // 最後のRayの衝突情報を保存
+                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.gameObject.tag == "Player")
+                    {
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
+                        Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in renderers)
+                        {
+                            renderer.material.color = new Color(1f, 0.7f, 0.7f, 1f); // 淡いピンク色
+                        }
+                    }
+                    else if (collider.gameObject.tag == "Enemy")
+                    {
+                        //Debug.Log("Enemyを発見");
+                    }
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0)) // 画面から手が離されたとき
+        {
+            if (lastRaycastHit.collider != null) // 最後のRayの衝突情報がある場合
+            {
+                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
+                foreach (Collider collider in colliders)
+                {
+                    if (collider.gameObject.tag == "Player")
+                    {
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
+                        Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in renderers)
+                        {
+                            renderer.material.color = Color.white;
+                        }
+                    }
+                    else if (collider.gameObject.tag == "Enemy")
+                    {
+                        //Debug.Log("Enemyを発見");
+                    }
+                    targetMarker.SetActive(false);
+                }
             }
         }
     }

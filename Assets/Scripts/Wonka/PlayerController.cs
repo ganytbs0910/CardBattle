@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private NavMeshAgent agent; // NavMesh Agent
     private Animator animator;
 
-    
+
     public Collider weaponCollider;//武器の当たり判定
     public PlayerUIManager playerUIManager;
 
