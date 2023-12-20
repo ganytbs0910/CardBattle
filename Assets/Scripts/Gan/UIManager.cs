@@ -71,6 +71,9 @@ public class UIManager : MonoBehaviour
         togglesPanel.DOAnchorPosY(togglesPanel.anchoredPosition.y - 250, 1.0f);
         //0.8秒かけてdifficultyPanelのy座標を現在の位置+250する
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+
+        //★失礼！　デバッグ用で追加しました！　いつでも消して大丈夫です！
+        GameManager.instance.BattleState = true;
     }
 
     public void BattleEnd()
