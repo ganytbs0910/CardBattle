@@ -63,21 +63,21 @@ public class EnemyController : MonoBehaviour
 
             if (distance <= agent.stoppingDistance)
             {
-                print("攻撃範囲内");
+                //print("攻撃範囲内");
                 if (CanAttack())　//攻撃可能
                 {
-                    print("攻撃");
+                    //print("攻撃");
                     Attack(); // 攻撃
                 }
                 else//攻撃までのインターバル中
                 {
-                    print("防御");
+                    //print("防御");
                     Deffend(); // 防御
                 }
             }
             else
             {
-                print("範囲外");
+                //print("範囲外");
                 agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }

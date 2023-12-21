@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Card 3
   m_EditorClassIdentifier: 
   cardID: 0
-  name: 
+  name: Card C
   information: "\u30AB\u30FC\u30C93\u3060\u3088"
   icon: {fileID: 21300000, guid: d89e205d5af5b4bf58105ce69dfd4298, type: 3}
