@@ -15,5 +15,5 @@ MonoBehaviour:
   cardID: 2
   name: Card B
   information: "\u30AB\u30FC\u30C92\u3060\u3088"
-  icon: {fileID: 21300000, guid: a950d36837a2143388ba6c76ba8f63d4, type: 3}
+  icon: {fileID: -1790223000, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
   canPlayerUse: 0
