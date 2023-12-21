@@ -13,6 +13,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     [SerializeField] private Toggle toggle;
     public Transform cardParent;
     bool rayTarget = false;
+    public bool colorChange = false;
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     GameObject targetObject;
 
@@ -26,6 +27,18 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     void Update()
     {
+        if (!colorChange)
+        {
+            if (targetObject != null)
+            {
+                Renderer[] renderers = targetObject.GetComponentsInChildren<Renderer>();
+                foreach (Renderer renderer in renderers)
+                {
+                    renderer.material.color = Color.white;
+                }
+            }
+
+        }
         if (rayTarget && Input.GetMouseButton(0)) // rayTargetがtrueで、かつ画面がタッチされている場合
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -38,12 +51,13 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                 targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
 
                 lastRaycastHit = hit; // 最後のRayの衝突情報を保存
+                colorChange = false; // ここで初期化
                 Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
                 foreach (Collider collider in colliders)
                 {
                     if (collider.gameObject.tag == "Player")
                     {
-                        Debug.Log("Playerを発見");
+                        colorChange = true;
                         targetObject = collider.gameObject;
                         // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
                         Renderer[] renderers = targetObject.GetComponentsInChildren<Renderer>();
@@ -52,21 +66,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                             renderer.material.color = Color.red;
                         }
                     }
-                    else
-                    {
-                        if (targetObject != null)
-                        {
-                            Debug.Log("Playerを見失う");
-                            Renderer[] renderers = targetObject.GetComponentsInChildren<Renderer>();
-                            foreach (Renderer renderer in renderers)
-                            {
-                                renderer.material.color = Color.white;
-                            }
-
-                        }
-                    }
                 }
-
             }
         }
 

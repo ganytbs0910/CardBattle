@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         //死亡中はリターン
         if (IsDead)
         {
-            print("プレイヤーが死亡しました");
+            //print("プレイヤーが死亡しました");
             return;
         }
 
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
             if (distance <= agent.stoppingDistance)
             {
-                print("攻撃範囲内");
+                //print("攻撃範囲内");
                 if (CanAttack())　//攻撃可能
                 {
                     //print("攻撃");
