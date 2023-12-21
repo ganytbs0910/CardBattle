@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        // DoTweenの初期化
+        DOTween.Init();
     }
     void Start()
     {

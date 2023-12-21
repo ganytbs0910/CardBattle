@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 //Distance 7以下⇒Runに移行
 //Ditstance 2以下⇒Attack移行
@@ -36,24 +37,6 @@ public class EnemyController : MonoBehaviour
 
         enemyUIManager.Init(this);
     }
-
-    //void Update()
-    //{
-    //    if (GameManager.instance.BattleState == true || Input.GetKeyDown(KeyCode.Space)) // バトル開始
-    //    {
-    //        agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
-    //        Move();//移動アニメ
-    //        //print("移動開始");
-    //    }
-
-    //    //敵と自分の距離＝攻撃範囲
-    //    float distance = Vector3.Distance(transform.position, playerTarget.position);
-    //    if (distance <= agent.stoppingDistance) // 攻撃範囲<=停止位置敵=敵が攻撃範囲内にいる
-    //    {
-    //        Attack(); // 攻撃
-    //        //print("攻撃開始");
-    //    }
-    //}
 
     void Update()
     {
@@ -217,14 +200,25 @@ public class EnemyController : MonoBehaviour
     {
         animator.SetTrigger("Die");
         IsDead = true;
+        //// ディレイののち、オブジェクトを2秒かけて縮小
+        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
     }
 
     // 勝利アニメーションをトリガーするメソッド
     public void Victory()
     {
-        if (!IsDead)
+        if (!IsDead && GameManager.instance.battleState == true)
         {
-            animator.SetTrigger("Victory");
+            print("勝利した");
+            GameManager.instance.battleState = false;
+
+            // 2秒後に実行される処理
+            DOVirtual.DelayedCall(2.0f, () =>
+            {
+                animator.SetTrigger("Victory");
+                transform.LookAt(Camera.main.transform);
+
+            });
         }
     }
 

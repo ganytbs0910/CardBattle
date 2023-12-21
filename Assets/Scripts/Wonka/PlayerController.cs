@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public Collider weaponCollider;//武器の当たり判定
     public PlayerUIManager playerUIManager;
 
+    Rigidbody rb;
+
 
     void Start()
     {
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
         // Animatorコンポーネントを取得
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
         DisableColliderWeapon();//武器の当たり判定無効化
 
         playerUIManager.Init(this);//スライダーの初期化
@@ -45,8 +49,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //死亡中はリターン
-        if (IsDead)
+        //死亡中とバトル状態じゃないときはリターン
+        if (IsDead || GameManager.instance.battleState == false)
         {
             //print("プレイヤーが死亡しました");
             return;
@@ -238,14 +242,24 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Die");
         IsDead = true;
+        //// ディレイののち、オブジェクトを2秒かけて縮小
+        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
     }
 
     public void Victory()
     {
-        if (!IsDead)
+        if (!IsDead && GameManager.instance.battleState == true)
         {
-            animator.SetTrigger("Victory");
-            transform.LookAt(Camera.main.transform);
+            print("勝利した");
+            GameManager.instance.battleState = false;
+
+            // 2秒後に実行される処理
+            DOVirtual.DelayedCall(2.0f, () =>
+            {
+                animator.SetTrigger("Victory");
+                transform.LookAt(Camera.main.transform);
+
+            });
         }
     }
 
