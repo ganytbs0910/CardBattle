@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     float lastAttackTime = 0f; //最後に攻撃した時間
     public int maxHp = 100;
 
-    public bool isDie;
+    public bool IsDead;
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
 
@@ -57,7 +57,17 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.BattleState == true || Input.GetKeyDown(KeyCode.Space))
+        //死亡中はリターン
+        if (IsDead)
+        {
+            print("エネミーが死亡しました");
+            return;
+        }
+
+        transform.LookAt(playerTarget);//常に敵のほうを向く
+
+
+        if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
             float distance = Vector3.Distance(transform.position, playerTarget.position);
 
@@ -206,12 +216,16 @@ public class EnemyController : MonoBehaviour
     public void Die()
     {
         animator.SetTrigger("Die");
-        isDie = true;
+        IsDead = true;
     }
 
+    // 勝利アニメーションをトリガーするメソッド
     public void Victory()
     {
-        animator.SetTrigger("Victory");
+        if (!IsDead)
+        {
+            animator.SetTrigger("Victory");
+        }
     }
 }
 

@@ -76,7 +76,7 @@ public class UIManager : MonoBehaviour
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
 
         //★失礼！　デバッグ用で追加しました！　いつでも消して大丈夫です！
-        GameManager.instance.BattleState = true;
+        GameManager.instance.battleState = true;
     }
 
     public void BattleEnd()
