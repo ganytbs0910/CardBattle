@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Playerのステータス")]
     [SerializeField] private int hp;
+    [SerializeField] private int mp;
     [SerializeField] private int attack;
     [SerializeField] private float attackInterval;
     [SerializeField] private int defense;
@@ -14,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     float lastAttackTime = 0f; //最後に攻撃した時間
     public int maxHp = 100;
+    public int maxMp = 100;
 
     public bool IsDead = false;
     public bool isAttacking = false;//攻撃中かどうかの判定
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         hp = maxHp;
+        mp = maxMp;
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
         // Animatorコンポーネントを取得
         animator = GetComponent<Animator>();
@@ -119,10 +122,30 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("Attack03");
                 break;
             case 4:
-                animator.SetTrigger("Attack04");
+                SkillAttack(20);//消費MPをいれて。
                 break;
         }
         print("Attackアニメーション実行");
+    }
+
+    /// <summary>
+    /// スキルによる攻撃
+    /// </summary>
+    /// <param name="UseMp">消費MPをいれてください</param>
+    public void SkillAttack(int UseMp)
+    {
+        if (mp >= UseMp)
+        {
+            mp -= UseMp;
+            playerUIManager.UpdateMP(mp);//HPSliderの更新
+            animator.SetTrigger("Attack04");
+            print(gameObject.name + "の残りMP= : " + mp);
+        }
+        else
+        {
+            print(gameObject.name + "の残りMPが足りないので通常攻撃発動");
+            animator.SetTrigger("Attack01");
+        }
     }
 
     /// <summary>
