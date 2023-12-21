@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     [SerializeField] private Camera camera;
-    [SerializeField] private RectTransform togglesPanel;
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private GameObject startCheckButton;
@@ -17,9 +16,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
     [SerializeField] private int loadTime;
-
+    [SerializeField] private Button battleStartButton;
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text inforText;
+    [SerializeField] private TMP_Text canUseText;
 
 
 
@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        battleStartButton.gameObject.SetActive(false);
         // テキストの拡大と透明化アニメーション
         Sequence mySequence = DOTween.Sequence();
         mySequence.Append(inforText.rectTransform.DOScale(1.15f, 1.0f));
@@ -61,21 +62,21 @@ public class UIManager : MonoBehaviour
         stageText.text = $"Level : {stageLevel}";
     }
 
-    public void BattleStart()
+    public void MoveUI()
     {
-
         startCheckButton.SetActive(false);
         inforText.gameObject.SetActive(false);
         //1秒かけてカメラの角度のx座標を現在の位置-10する
         camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-        //1秒かけてtogglePanelのy座標を現在の位置-250する
-        togglesPanel.DOAnchorPosY(togglesPanel.anchoredPosition.y - 250, 1.0f);
         //1秒かけてdifficultyPanelのy座標を現在の位置+250する
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
         //1秒かけてcardListPanelのy座標を現在の位置-250する
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
+        battleStartButton.gameObject.SetActive(true);
+    }
 
-        //★失礼！　デバッグ用で追加しました！　いつでも消して大丈夫です！
+    public void BattleStart()
+    {
         GameManager.instance.battleState = true;
     }
 
@@ -93,5 +94,19 @@ public class UIManager : MonoBehaviour
     public void Lose()
     {
         losePanel.SetActive(true);
+    }
+
+    public void ErrorCardTarget()
+    {
+        //透明度を1にする
+        canUseText.DOFade(1, 0);
+        //y座標を元の位置に戻す
+        canUseText.rectTransform.DOAnchorPosY(canUseText.rectTransform.anchoredPosition.y - 50, 0);
+
+        canUseText.text = "Can't use this target...";
+        //DOTweenで1秒かけて透明度を0にする
+        canUseText.DOFade(0, 1.0f);
+        //DOTweenで1秒かけてyに50移動する
+        canUseText.rectTransform.DOAnchorPosY(canUseText.rectTransform.anchoredPosition.y + 50, 1.0f);
     }
 }

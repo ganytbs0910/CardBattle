@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using TMPro;
 
 public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -16,6 +17,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public bool colorChange = false;
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     GameObject targetObject;
+    public bool canPlayerUse;
 
 
     private void Start()
@@ -23,6 +25,17 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         toggle.group = GetComponentInParent<ToggleGroup>();
         toggle.onValueChanged.AddListener(OnToggleChanged);
         targetMarker = GameObject.Find("TargetMarker");
+        //プレイヤーに使えるか
+        CardController cardController = GetComponent<CardController>();
+        CardModel cardModel = cardController.model;
+        if (cardModel.canPlayerUse)
+        {
+            canPlayerUse = true;
+        }
+        else
+        {
+            canPlayerUse = false;
+        }
     }
 
     void Update()
@@ -57,6 +70,19 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                 {
                     if (collider.gameObject.tag == "Player")
                     {
+                        if (!canPlayerUse) return;
+                        colorChange = true;
+                        targetObject = collider.gameObject;
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
+                        Renderer[] renderers = targetObject.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in renderers)
+                        {
+                            renderer.material.color = Color.red;
+                        }
+                    }
+                    if (collider.gameObject.tag == "Enemy")
+                    {
+                        if (canPlayerUse) return;
                         colorChange = true;
                         targetObject = collider.gameObject;
                         // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
@@ -74,21 +100,37 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         {
             if (lastRaycastHit.collider != null) // 最後のRayの衝突情報がある場合
             {
-                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, 300);
+                //カードの情報を取得
+                CardController cardController = GetComponent<CardController>();
+                CardModel cardModel = cardController.model;
+
+                Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, 1.5f);
                 foreach (Collider collider in colliders)
                 {
                     if (collider.gameObject.tag == "Player")
                     {
-                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を元に戻す
                         Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
                         foreach (Renderer renderer in renderers)
                         {
                             renderer.material.color = Color.white;
                         }
+
+                        //プレイヤーに使えるか
+                        if (!canPlayerUse) UIManager.instance.ErrorCardTarget();
+                        else collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID);
                     }
                     else if (collider.gameObject.tag == "Enemy")
                     {
-                        //Debug.Log("Enemyを発見");
+                        // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を元に戻す
+                        Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
+                        foreach (Renderer renderer in renderers)
+                        {
+                            renderer.material.color = Color.white;
+                        }
+                        //敵に使えるか
+                        if (canPlayerUse) UIManager.instance.ErrorCardTarget();
+                        else collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardModel.cardID);
                     }
                     targetMarker.SetActive(false);
                 }
@@ -111,6 +153,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         transform.SetParent(cardParent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = true; // blocksRaycastsをオンにする
     }
+
     private void OnToggleChanged(bool isOn)
     {
         if (isOn)

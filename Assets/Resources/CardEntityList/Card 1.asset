@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
   m_Name: Card 1
   m_EditorClassIdentifier: 
-  cardID: 0
+  cardID: 1
   name: Card A
   information: "\u30AB\u30FC\u30C91\u3060\u3088"
   icon: {fileID: 21300000, guid: 74dee8d331d8449d78ea5f40f566f03a, type: 3}
+  canPlayerUse: 0

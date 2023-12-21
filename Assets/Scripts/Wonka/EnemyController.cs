@@ -227,5 +227,35 @@ public class EnemyController : MonoBehaviour
             animator.SetTrigger("Victory");
         }
     }
+
+    public void GetCardEffect(int effectNumber)
+    {
+        switch (effectNumber)
+        {
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+        }
+    }
+
+    /// <summary>
+    /// カードのエフェクト一覧
+    /// </summary>
+
+    public bool EquippedSword()
+    {
+        return true;
+    }
+
+    public bool EquippedShield()
+    {
+        return true;
+    }
 }
 
