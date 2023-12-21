@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GachaController : MonoBehaviour
 {
+    public TMP_Text pullText;
     public Image parentPanel;
     public Image gachaResultPanel;
     [SerializeField] CardController cardPrefab;
     [SerializeField] List<int> cardIDList = new List<int>();
     void Start()
     {
+        pullText.text = "";
         int num = Random.Range(1, 6);
         for (int i = 0; i < num; i++)
         {
@@ -51,5 +54,6 @@ public class GachaController : MonoBehaviour
         card.Init(cardID);
         cardIDList.Add(cardID);
         CardModel cardModel = card.model;
+        pullText.text = $"Pull {cardModel.name} Card!";
     }
 }

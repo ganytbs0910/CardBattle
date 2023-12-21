@@ -14,6 +14,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public Transform cardParent;
     bool rayTarget = false;
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
+    GameObject targetObject;
+
 
     private void Start()
     {
@@ -41,16 +43,27 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                 {
                     if (collider.gameObject.tag == "Player")
                     {
+                        Debug.Log("Playerを発見");
+                        targetObject = collider.gameObject;
                         // Playerタグのオブジェクトとその子オブジェクトのRendererを取得し、色を赤に設定
-                        Renderer[] renderers = collider.gameObject.GetComponentsInChildren<Renderer>();
+                        Renderer[] renderers = targetObject.GetComponentsInChildren<Renderer>();
                         foreach (Renderer renderer in renderers)
                         {
                             renderer.material.color = Color.red;
                         }
                     }
-                    else if (collider.gameObject.tag == "Enemy")
+                    else
                     {
+                        if (targetObject != null)
+                        {
+                            Debug.Log("Playerを見失う");
+                            Renderer[] renderers = targetObject.GetComponentsInChildren<Renderer>();
+                            foreach (Renderer renderer in renderers)
+                            {
+                                renderer.material.color = Color.white;
+                            }
 
+                        }
                     }
                 }
 
