@@ -6,6 +6,7 @@ using DG.Tweening;
 public class PlayerUIManager : MonoBehaviour
 {
     public Slider hpSlider;
+    public Slider mpSlider;
 
     private void Update()
     {
@@ -21,6 +22,9 @@ public class PlayerUIManager : MonoBehaviour
     {
         hpSlider.maxValue = playerController.maxHp;
         hpSlider.value = playerController.maxHp;
+
+        mpSlider.maxValue = playerController.maxMp;
+        mpSlider.value = playerController.maxMp;
     }
 
     /// <summary>
@@ -30,6 +34,12 @@ public class PlayerUIManager : MonoBehaviour
     public void UpdateHP(int hp)
     {
         hpSlider.DOValue(hp, 0.5f);
+        //一つ目に最終的な値、二つ目に時間を入れる。
+    }
+
+    public void UpdateMP(int mp)
+    {
+        mpSlider.DOValue(mp, 0.5f);
         //一つ目に最終的な値、二つ目に時間を入れる。
     }
 }

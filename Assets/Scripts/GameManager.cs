@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     /// プレイヤーの生存判定。プレイヤーが全滅したらTrueを返す。
     /// </summary>
     /// <returns></returns>
-    bool AreAllPlayersDead()
+    public bool AreAllPlayersDead()
     {
         foreach (var player in players)
         {
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     /// エネミーの生存判定。エネミーが全滅したらTrueを返す。
     /// </summary>
     /// <returns></returns>
-    bool AreAllEnemiesDead()
+    public bool AreAllEnemiesDead()
     {
         foreach (var enemy in enemies)
         {
