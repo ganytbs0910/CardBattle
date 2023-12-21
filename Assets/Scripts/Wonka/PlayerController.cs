@@ -245,6 +245,7 @@ public class PlayerController : MonoBehaviour
         if (!IsDead)
         {
             animator.SetTrigger("Victory");
+            transform.LookAt(Camera.main.transform);
         }
     }
 
