@@ -117,9 +117,15 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                         }
 
                         //プレイヤーに使えるか
-                        if (!canPlayerUse) UIManager.instance.ErrorCardTarget();
-                        else collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID);
-                        Destroy(gameObject);
+                        if (!canPlayerUse)
+                        {
+                            UIManager.instance.ErrorCardTarget();
+                        }
+                        else
+                        {
+                            collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID);
+                            Destroy(gameObject);
+                        }
                     }
                     else if (collider.gameObject.tag == "Enemy")
                     {
@@ -130,9 +136,15 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                             renderer.material.color = Color.white;
                         }
                         //敵に使えるか
-                        if (canPlayerUse) UIManager.instance.ErrorCardTarget();
-                        else collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardModel.cardID);
-                        Destroy(gameObject);
+                        if (canPlayerUse)
+                        {
+                            UIManager.instance.ErrorCardTarget();
+                        }
+                        else
+                        {
+                            collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardModel.cardID);
+                            Destroy(gameObject);
+                        }
                     }
                     targetMarker.SetActive(false);
                 }
