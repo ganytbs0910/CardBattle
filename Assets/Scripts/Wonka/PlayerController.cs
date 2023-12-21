@@ -254,13 +254,13 @@ public class PlayerController : MonoBehaviour
         switch (effectNumber)
         {
             case 1:
-
+                Debug.Log("カード1の効果を発動");
                 break;
             case 2:
-
+                Debug.Log("カード2の効果を発動");
                 break;
             case 3:
-
+                Debug.Log("カード3の効果を発動");
                 break;
         }
     }
