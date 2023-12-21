@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class EnemyUIManager : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class EnemyUIManager : MonoBehaviour
     /// <param name="hp">現在のHPを渡してください</param>
     public void UpdateHP(int hp)
     {
-        hpSlider.value = hp;
+        hpSlider.DOValue(hp, 0.5f);
+        //一つ目に最終的な値、二つ目に時間を入れる。
     }
 }
