@@ -162,7 +162,7 @@ public class EnemyController : MonoBehaviour
 
             GetHit();//ノックバック
 
-            Damage(weapon.damage);//ダメージを与える
+            Damage(attack);//ダメージを与える
         }
     }
 
