@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
 
-        CheckFieldCharacter();
+        CheckCharacterList();
     }
 
 
@@ -42,10 +42,11 @@ public class GameManager : MonoBehaviour
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
-        UIManager.instance.SetUpStage(stageHierarchy);
+        UIManager.instance.Loading(stageHierarchy);
     }
 
-    public void CheckFieldCharacter()
+    //キャラクターの増減時に呼ぶ
+    public void CheckCharacterList()
     {
         // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
         players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
@@ -54,28 +55,27 @@ public class GameManager : MonoBehaviour
 
     public void CheckGameStatus()
     {
-        CheckFieldCharacter();
         //敵が勝利したパターン
         if (AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
         {
+            Debug.Log("敗北！！！！！！！！！！！！！！");
+            UIManager.instance.LosePanel();
             // すべての敵が勝利アニメーションを再生
             foreach (var enemy in enemies)
             {
                 enemy.Victory();
-                Debug.Log("敗北！！！！！！！！！！！！！！x");
-                UIManager.instance.LosePanel();
             }
         }
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
         {
+            Debug.Log("勝利！！！！！！！！！！！！！！");
+            UIManager.instance.WinPanel();
+            NextStage();
             // すべてのプレイヤーが勝利アニメーションを再生
             foreach (var player in players)
             {
                 player.Victory();
-                Debug.Log("勝利！！！！！！！！！！！！！！");
-                UIManager.instance.WinPanel();
-                NextStage();
             }
         }
     }

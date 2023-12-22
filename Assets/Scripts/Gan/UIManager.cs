@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject loadPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
-    [SerializeField] private int loadTime;
+    [SerializeField] private int loadTime = 1;
     [SerializeField] private Button battleStartButton;
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text inforText;
@@ -43,6 +43,9 @@ public class UIManager : MonoBehaviour
 
         // 無限ループに設定
         mySequence.SetLoops(-1);
+
+        //stageTextを更新
+        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
     }
 
     public void MoveUI()
@@ -54,23 +57,27 @@ public class UIManager : MonoBehaviour
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
         battleStartButton.gameObject.SetActive(true);
     }
-
-    void Loading()
+    public void Loading(int stageHierarchy)
     {
-        loadPanel.SetActive(true);
-        //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す
-        loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.anchoredPosition.y + 100, loadTime / 2).SetLoops(-loadTime / 2, LoopType.Yoyo);
+        StartCoroutine(LoadingCoroutine(stageHierarchy));
     }
 
-    public void SetUpStage(int stageHierarchy)
+    IEnumerator LoadingCoroutine(int stageHierarchy)
     {
-        Debug.Log("SetUpStageが呼ばれた");
+        yield return new WaitForSeconds(2);
+        loadPanel.SetActive(true);
+        //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
+        loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
+        yield return new WaitForSeconds(1);
+        loadPanel.SetActive(false);
         stageText.text = $"Level : {stageHierarchy}";
+        winPanel.SetActive(false);
+        losePanel.SetActive(false);
         startCheckButton.SetActive(true);
         inforText.gameObject.SetActive(true);
         // カメラの角度を調整
         Vector3 currentCameraRotation = camera.transform.eulerAngles;
-        camera.transform.eulerAngles = new Vector3(currentCameraRotation.x - 10, currentCameraRotation.y, currentCameraRotation.z);
+        camera.transform.eulerAngles = new Vector3(currentCameraRotation.x + 10, currentCameraRotation.y, currentCameraRotation.z);
 
         // UIパネルの位置を調整
         Vector2 difficultyPanelPosition = difficultyPanel.anchoredPosition;
@@ -82,6 +89,11 @@ public class UIManager : MonoBehaviour
 
         battleStartButton.gameObject.SetActive(false);
         GameManager.instance.battleState = false;
+        loadPanel.SetActive(true);
+        //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
+        loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
+        yield return new WaitForSeconds(1);
+        loadPanel.SetActive(false);
     }
 
     //ボタンで使用

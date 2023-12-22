@@ -203,10 +203,17 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
+        Debug.Log("敵が倒れた");
         animator.SetTrigger("Die");
         IsDead = true;
+        //このゲームオブジェクトについている当たり判定が消える
+        GetComponent<Collider>().enabled = false;
+        //剣の当たり判定も消す
+        DisableColliderWeapon();
+
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
+        GameManager.instance.CheckCharacterList();
         GameManager.instance.CheckGameStatus();
     }
 

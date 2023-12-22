@@ -242,10 +242,16 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        Debug.Log("プレイヤーが死亡しました");
         animator.SetTrigger("Die");
         IsDead = true;
+        //このゲームオブジェクトについている当たり判定が消える
+        GetComponent<Collider>().enabled = false;
+        //剣の当たり判定も消す
+        DisableColliderWeapon();
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
+        GameManager.instance.CheckCharacterList();
         GameManager.instance.CheckGameStatus();
     }
 
@@ -356,7 +362,7 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(gameObject, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
         }
-        GameManager.instance.CheckFieldCharacter();
+        GameManager.instance.CheckCharacterList();
     }
     void AttackUp(float value)
     {
