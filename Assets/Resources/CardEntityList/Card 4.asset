@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 4
   m_EditorClassIdentifier: 
   cardID: 4
-  name: "HP\u56DE\u5FA9\u30DD\u30FC\u30B7\u30E7\u30F3"
+  name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6570+4"
   information: "HP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3"
   icon: {fileID: -1077186370, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
-  canPlayerUse: 0
+  canPlayerUse: 1

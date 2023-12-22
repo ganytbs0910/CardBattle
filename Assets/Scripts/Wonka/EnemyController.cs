@@ -22,6 +22,10 @@ public class EnemyController : MonoBehaviour
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
 
+    bool poison;
+    bool paralyze;
+    bool sleep;
+    bool freeze;
     public Transform playerTarget; // 敵の位置
     private NavMeshAgent agent; // NavMesh Agent
     private Animator animator;
@@ -31,6 +35,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
+        hp = maxHp;
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得              
         animator = GetComponent<Animator>();// Animatorコンポーネントを取得
         DisableColliderWeapon();//武器の当たり判定無効化
@@ -43,7 +48,7 @@ public class EnemyController : MonoBehaviour
         //死亡中はリターン
         if (IsDead)
         {
-            print("エネミーが死亡しました");
+            //print("エネミーが死亡しました");
             return;
         }
 
@@ -119,13 +124,13 @@ public class EnemyController : MonoBehaviour
     public void DisableColliderWeapon()
     {
         weaponCollider.enabled = false;
-        print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
+        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
     }
 
     public void EnableColliderWeapon()
     {
         weaponCollider.enabled = true;
-        print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
+        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
     }
 
     /// <summary>
@@ -139,12 +144,12 @@ public class EnemyController : MonoBehaviour
         {
             hp = 0;
             Die();
-            print("死亡アニメに移行します");
+            //print("死亡アニメに移行します");
         }
 
         enemyUIManager.UpdateHP(hp);//HPSliderの更新
 
-        print(gameObject.name + "の残りHP= : " + hp);
+        //print(gameObject.name + "の残りHP= : " + hp);
     }
 
     public void OnTriggerEnter(Collider other)
@@ -153,7 +158,7 @@ public class EnemyController : MonoBehaviour
         if (weapon != null)
         {
             //ダメージを与えるものにぶつかったら
-            print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
+            //print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
 
             GetHit();//ノックバック
 
@@ -202,6 +207,7 @@ public class EnemyController : MonoBehaviour
         IsDead = true;
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
+        GameManager.instance.CheckGameStatus();
     }
 
     // 勝利アニメーションをトリガーするメソッド
@@ -209,7 +215,7 @@ public class EnemyController : MonoBehaviour
     {
         if (!IsDead && GameManager.instance.battleState == true)
         {
-            print("勝利した");
+            //print("勝利した");
             GameManager.instance.battleState = false;
 
             // 2秒後に実行される処理
@@ -222,18 +228,91 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void GetCardEffect(int effectNumber)
+    void CheckAbnormalCondition()
     {
+
+    }
+
+    public void GetCardEffect(int effectNumber, int? targetNumber = null)
+    {
+
+        if (!targetNumber.HasValue)
+        {
+            targetNumber = 1;
+        }
         switch (effectNumber)
         {
             case 1:
-
+                //プレイヤーがターゲット
                 break;
             case 2:
-
+                //プレイヤーがターゲット
                 break;
             case 3:
-
+                //プレイヤーがターゲット
+                break;
+            case 4:
+                //プレイヤーがターゲット
+                break;
+            case 5:
+                //プレイヤーがターゲット
+                break;
+            case 6:
+                //プレイヤーがターゲット
+                break;
+            case 7:
+                //プレイヤーがターゲット
+                break;
+            case 8:
+                //敵がターゲット
+                DecreaseHealth(0.1f);
+                break;
+            case 9:
+                //敵がターゲット
+                DecreaseHealth(0.2f);
+                break;
+            case 10:
+                //敵がターゲット
+                DecreaseHealth(0.3f);
+                break;
+            case 11:
+                //プレイヤーがターゲット
+                break;
+            case 12:
+                //プレイヤーがターゲット
+                break;
+            case 13:
+                //プレイヤーがターゲット
+                break;
+            case 14:
+                //プレイヤーがターゲット
+                break;
+            case 15:
+                //プレイヤーがターゲット
+                break;
+            case 16:
+                //プレイヤーがターゲット
+                break;
+            case 17:
+                //敵がターゲット
+                break;
+            case 18:
+                //敵がターゲット
+                break;
+            case 19:
+                //敵がターゲット
+                break;
+            case 20:
+                //敵がターゲット
+                break;
+            case 21:
+                //プレイヤーがターゲット
+                break;
+            case 22:
+                //プレイヤーがターゲット
+                break;
+            case 23:
+                //プレイヤーがターゲット
                 break;
         }
     }
@@ -241,15 +320,9 @@ public class EnemyController : MonoBehaviour
     /// <summary>
     /// カードのエフェクト一覧
     /// </summary>
-
-    public bool EquippedSword()
+    void DecreaseHealth(float value)
     {
-        return true;
-    }
-
-    public bool EquippedShield()
-    {
-        return true;
+        hp = (int)(hp * (1 - value));
     }
 }
 

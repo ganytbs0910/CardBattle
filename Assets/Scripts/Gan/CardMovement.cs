@@ -8,6 +8,7 @@ using TMPro;
 
 public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
+    [SerializeField] private string checkEffect;
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private float rayWidth = 1.5f;
     public float rayDistance = 100f;
@@ -28,6 +29,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         //プレイヤーに使えるか
         CardController cardController = GetComponent<CardController>();
         CardModel cardModel = cardController.model;
+        checkEffect = $"{cardModel.name}";
         if (cardModel.canPlayerUse)
         {
             canPlayerUse = true;
@@ -123,7 +125,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                         }
                         else
                         {
-                            collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID);
+                            int playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
+                            collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID, playerCount);
                             Destroy(gameObject);
                         }
                     }
@@ -154,17 +157,17 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData) // ドラッグを始めるときに行う処理
     {
-        cardParent = transform.parent;
-        transform.SetParent(cardParent.parent, false);
+        //cardParent = transform.parent;
+        //transform.SetParent(cardParent.parent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = false; // blocksRaycastsをオフにする
     }
     public void OnDrag(PointerEventData eventData) // ドラッグした時に起こす処理
     {
-        transform.position = eventData.position;
+        //transform.position = eventData.position;
     }
     public void OnEndDrag(PointerEventData eventData) // カードを離したときに行う処理
     {
-        transform.SetParent(cardParent, false);
+        //transform.SetParent(cardParent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = true; // blocksRaycastsをオンにする
     }
 

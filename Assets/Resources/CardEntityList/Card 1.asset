@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 1
   m_EditorClassIdentifier: 
   cardID: 1
-  name: Card A
-  information: "\u30AB\u30FC\u30C91\u3060\u3088"
+  name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6570+1"
+  information: 
   icon: {fileID: -657064968, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
-  canPlayerUse: 0
+  canPlayerUse: 1

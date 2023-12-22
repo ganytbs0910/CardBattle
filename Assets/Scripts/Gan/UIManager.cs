@@ -45,9 +45,14 @@ public class UIManager : MonoBehaviour
         mySequence.SetLoops(-1);
     }
 
-    void Update()
+    public void MoveUI()
     {
-
+        startCheckButton.SetActive(false);
+        inforText.gameObject.SetActive(false);
+        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
+        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
+        battleStartButton.gameObject.SetActive(true);
     }
 
     void Loading()
@@ -57,41 +62,40 @@ public class UIManager : MonoBehaviour
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.anchoredPosition.y + 100, loadTime / 2).SetLoops(-loadTime / 2, LoopType.Yoyo);
     }
 
-    public void StageUpdate(int stageLevel)
+    public void SetUpStage(int stageHierarchy)
     {
-        stageText.text = $"Level : {stageLevel}";
+        Debug.Log("SetUpStageが呼ばれた");
+        stageText.text = $"Level : {stageHierarchy}";
+        startCheckButton.SetActive(true);
+        inforText.gameObject.SetActive(true);
+        // カメラの角度を調整
+        Vector3 currentCameraRotation = camera.transform.eulerAngles;
+        camera.transform.eulerAngles = new Vector3(currentCameraRotation.x - 10, currentCameraRotation.y, currentCameraRotation.z);
+
+        // UIパネルの位置を調整
+        Vector2 difficultyPanelPosition = difficultyPanel.anchoredPosition;
+        difficultyPanel.anchoredPosition = new Vector2(difficultyPanelPosition.x, difficultyPanelPosition.y - 500);
+
+        Vector2 cardListPanelPosition = cardListPanel.anchoredPosition;
+        cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 350);
+
+
+        battleStartButton.gameObject.SetActive(false);
+        GameManager.instance.battleState = false;
     }
 
-    public void MoveUI()
-    {
-        startCheckButton.SetActive(false);
-        inforText.gameObject.SetActive(false);
-        //1秒かけてカメラの角度のx座標を現在の位置-10する
-        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-        //1秒かけてdifficultyPanelのy座標を現在の位置+250する
-        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-        //1秒かけてcardListPanelのy座標を現在の位置-250する
-        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
-        battleStartButton.gameObject.SetActive(true);
-    }
-
+    //ボタンで使用
     public void BattleStart()
     {
         GameManager.instance.battleState = true;
     }
 
-    public void BattleEnd()
-    {
-        startCheckButton.SetActive(true);
-        inforText.gameObject.SetActive(true);
-    }
-
-    public void Win()
+    public void WinPanel()
     {
         winPanel.SetActive(true);
     }
 
-    public void Lose()
+    public void LosePanel()
     {
         losePanel.SetActive(true);
     }
@@ -100,13 +104,13 @@ public class UIManager : MonoBehaviour
     {
         //透明度を1にする
         canUseText.DOFade(1, 0);
-        //y座標を元の位置に戻す
-        canUseText.rectTransform.DOAnchorPosY(canUseText.rectTransform.anchoredPosition.y - 50, 0);
+        //y座標を-50する
+        canUseText.rectTransform.DOAnchorPosY(0, 0);
 
         canUseText.text = "Can't use this target...";
         //DOTweenで1秒かけて透明度を0にする
         canUseText.DOFade(0, 1.0f);
-        //DOTweenで1秒かけてyに50移動する
-        canUseText.rectTransform.DOAnchorPosY(canUseText.rectTransform.anchoredPosition.y + 50, 1.0f);
+        //DOTweenで1秒かけて現在のcanUseTextのy座標を+50の位置に移動する
+        canUseText.rectTransform.DOAnchorPosY(50, 1.0f);
     }
 }

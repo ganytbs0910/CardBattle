@@ -6,7 +6,8 @@ using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private int stageLevel;
+    public int stageHierarchy;
+    public int coin;
 
     public bool battleState;
 
@@ -23,33 +24,46 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        if (!PlayerPrefs.HasKey("StageLevel"))
+        if (!PlayerPrefs.HasKey("StageHierarchy"))
         {
-            PlayerPrefs.SetInt("StageLevel", 1);
+            PlayerPrefs.SetInt("StageHierarchy", 1);
         }
-        stageLevel = PlayerPrefs.GetInt("StageLevel");
-        UIManager.instance.StageUpdate(stageLevel);
+        stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
 
-        // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
-        players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
-        enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+        CheckFieldCharacter();
     }
 
 
     void Update()
     {
-        CheckGameStatus();
+
+    }
+    void NextStage()
+    {
+        stageHierarchy++;
+        PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
+        UIManager.instance.SetUpStage(stageHierarchy);
     }
 
-    void CheckGameStatus()
+    public void CheckFieldCharacter()
     {
+        // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
+        players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
+        enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+    }
+
+    public void CheckGameStatus()
+    {
+        CheckFieldCharacter();
         //敵が勝利したパターン
-        if(AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
+        if (AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
         {
             // すべての敵が勝利アニメーションを再生
             foreach (var enemy in enemies)
             {
                 enemy.Victory();
+                Debug.Log("敗北！！！！！！！！！！！！！！x");
+                UIManager.instance.LosePanel();
             }
         }
         //プレイヤーが勝利したパターン
@@ -59,6 +73,9 @@ public class GameManager : MonoBehaviour
             foreach (var player in players)
             {
                 player.Victory();
+                Debug.Log("勝利！！！！！！！！！！！！！！");
+                UIManager.instance.WinPanel();
+                NextStage();
             }
         }
     }

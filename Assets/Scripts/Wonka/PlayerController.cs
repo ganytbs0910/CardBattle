@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public bool IsDead = false;
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
+    bool isEqipmentWeapon = false;//武器を装備しているかどうか
+    bool isEqipmentArmor = false;//防具を装備しているかどうか
 
     public Transform enemyTarget; // 敵の位置
     private NavMeshAgent agent; // NavMesh Agent
@@ -129,7 +131,7 @@ public class PlayerController : MonoBehaviour
                 SkillAttack(20);//消費MPをいれて。
                 break;
         }
-        print("Attackアニメーション実行");
+        //print("Attackアニメーション実行");
     }
 
     /// <summary>
@@ -143,11 +145,11 @@ public class PlayerController : MonoBehaviour
             mp -= UseMp;
             playerUIManager.UpdateMP(mp);//HPSliderの更新
             animator.SetTrigger("Attack04");
-            print(gameObject.name + "の残りMP= : " + mp);
+            //print(gameObject.name + "の残りMP= : " + mp);
         }
         else
         {
-            print(gameObject.name + "の残りMPが足りないので通常攻撃発動");
+            //print(gameObject.name + "の残りMPが足りないので通常攻撃発動");
             animator.SetTrigger("Attack01");
         }
     }
@@ -163,12 +165,12 @@ public class PlayerController : MonoBehaviour
         {
             hp = 0;
             Die();
-            print("死亡アニメに移行します");
+            //print("死亡アニメに移行します");
         }
 
         playerUIManager.UpdateHP(hp);//HPSliderの更新
 
-        print(gameObject.name + "の残りHP= : " + hp);
+        //print(gameObject.name + "の残りHP= : " + hp);
     }
 
 
@@ -184,7 +186,7 @@ public class PlayerController : MonoBehaviour
         if (weapon != null)
         {
             //ダメージを与えるものにぶつかったら
-            print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
+            //print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
 
             GetHit();//ノックバック
             Damage(weapon.damage);//ダメージを与える
@@ -200,13 +202,13 @@ public class PlayerController : MonoBehaviour
     public void DisableColliderWeapon()
     {
         weaponCollider.enabled = false;
-        print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
+        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
     }
 
     public void EnableColliderWeapon()
     {
         weaponCollider.enabled = true;
-        print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
+        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
     }
 
     // 各アニメーション状態をトリガーするメソッド
@@ -244,13 +246,14 @@ public class PlayerController : MonoBehaviour
         IsDead = true;
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
+        GameManager.instance.CheckGameStatus();
     }
 
     public void Victory()
     {
         if (!IsDead && GameManager.instance.battleState == true)
         {
-            print("勝利した");
+            //print("勝利した");
             GameManager.instance.battleState = false;
 
             // 2秒後に実行される処理
@@ -263,18 +266,82 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void GetCardEffect(int effectNumber)
+    public void GetCardEffect(int effectNumber, int? targetNumber = null)
     {
+        if (!targetNumber.HasValue)
+        {
+            targetNumber = 1;
+        }
         switch (effectNumber)
         {
             case 1:
-                Debug.Log("カード1の効果を発動");
+                IncreasePlayers(1);
                 break;
             case 2:
-                Debug.Log("カード2の効果を発動");
+                IncreasePlayers(2);
                 break;
             case 3:
-                Debug.Log("カード3の効果を発動");
+                IncreasePlayers(3);
+                break;
+            case 4:
+                IncreasePlayers(4);
+                break;
+            case 5:
+                IncreasePlayers(5);
+                break;
+            case 6:
+                IncreasePlayers(targetNumber.Value * 2);
+                break;
+            case 7:
+                IncreasePlayers(targetNumber.Value * 3);
+                break;
+            case 8:
+                //敵がターゲット
+                break;
+            case 9:
+                //敵がターゲット
+                break;
+            case 10:
+                //敵がターゲット
+                break;
+            case 11:
+                AttackUp(1.1f);
+                break;
+            case 12:
+                AttackUp(1.2f);
+                break;
+            case 13:
+                AttackUp(1.3f);
+                break;
+            case 14:
+                DefenceUp(1.1f);
+                break;
+            case 15:
+                DefenceUp(1.2f);
+                break;
+            case 16:
+                DefenceUp(1.3f);
+                break;
+            case 17:
+                //敵がターゲット
+                break;
+            case 18:
+                //敵がターゲット
+                break;
+            case 19:
+                //敵がターゲット
+                break;
+            case 20:
+                //敵がターゲット
+                break;
+            case 21:
+                GetCoin();
+                break;
+            case 22:
+                EquipmentWeapon();
+                break;
+            case 23:
+                EquipmentArmor();
                 break;
         }
     }
@@ -282,14 +349,39 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// カードのエフェクト一覧
     /// </summary>
-
-    public bool EquippedSword()
+    void IncreasePlayers(int number)
     {
-        return true;
+        //このゲームオブジェクトの近くにnumberの数だけプレイヤーを生成する
+        for (int i = 0; i < number; i++)
+        {
+            Instantiate(gameObject, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
+        }
+        GameManager.instance.CheckFieldCharacter();
     }
-
-    public bool EquippedShield()
+    void AttackUp(float value)
     {
-        return true;
+        attack = Mathf.RoundToInt(attack * value);
+    }
+    void DefenceUp(float value)
+    {
+        defense = Mathf.RoundToInt(defense * value);
+    }
+    void GetCoin()
+    {
+        //コインをnumber枚取得する
+        float randomNum = Random.Range(0.8f, 2f);
+        GameManager.instance.coin += Mathf.RoundToInt(GameManager.instance.stageHierarchy * randomNum);
+    }
+    void EquipmentWeapon()
+    {
+        //武器を装備する
+        AttackUp(1.3f);
+        isEqipmentWeapon = true;
+    }
+    void EquipmentArmor()
+    {
+        //防具を装備する
+        DefenceUp(1.3f);
+        isEqipmentArmor = true;
     }
 }
