@@ -194,7 +194,7 @@ public class PlayerController : MonoBehaviour
             //print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
 
             GetHit();//ノックバック
-            Damage(weapon.damage);//ダメージを与える
+            Damage(attack);//ダメージを与える
         }
     }
 
