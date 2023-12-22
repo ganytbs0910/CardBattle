@@ -203,7 +203,6 @@ public class EnemyController : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("敵が倒れた");
         animator.SetTrigger("Die");
         IsDead = true;
         //このゲームオブジェクトについている当たり判定が消える

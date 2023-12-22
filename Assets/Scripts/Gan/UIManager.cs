@@ -64,11 +64,12 @@ public class UIManager : MonoBehaviour
 
     IEnumerator LoadingCoroutine(int stageHierarchy)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3.5f);
         loadPanel.SetActive(true);
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
+        //全てを初期化
         loadPanel.SetActive(false);
         stageText.text = $"Level : {stageHierarchy}";
         winPanel.SetActive(false);

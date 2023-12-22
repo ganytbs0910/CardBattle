@@ -20,6 +20,8 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     GameObject targetObject;
     public bool canPlayerUse;
 
+    public GraphicRaycaster raycaster;
+    public EventSystem eventSystem;
 
     private void Start()
     {
@@ -52,7 +54,6 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                     renderer.material.color = Color.white;
                 }
             }
-
         }
         if (rayTarget && Input.GetMouseButton(0)) // rayTargetがtrueで、かつ画面がタッチされている場合
         {
@@ -62,9 +63,6 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
             {
                 targetMarker.SetActive(true);
                 targetMarker.transform.position = hit.point;
-                Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
-                targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
-
                 lastRaycastHit = hit; // 最後のRayの衝突情報を保存
                 colorChange = false; // ここで初期化
                 Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);

@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
         //敵が勝利したパターン
         if (AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
         {
-            Debug.Log("敗北！！！！！！！！！！！！！！");
             UIManager.instance.LosePanel();
             // すべての敵が勝利アニメーションを再生
             foreach (var enemy in enemies)
@@ -69,7 +68,6 @@ public class GameManager : MonoBehaviour
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
         {
-            Debug.Log("勝利！！！！！！！！！！！！！！");
             UIManager.instance.WinPanel();
             NextStage();
             // すべてのプレイヤーが勝利アニメーションを再生

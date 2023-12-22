@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
         playerUIManager.Init(this);//スライダーの初期化
     }
 
-
     void Update()
     {
         //死亡中とバトル状態じゃないときはリターン
@@ -87,8 +86,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ResetState()
+    {
+        //状態を初期化
+        animator.SetTrigger("Idle_Battle_SwordAndShield");
+    }
 
-    bool CanAttack()　//インターバル
+
+    bool CanAttack() //インターバル
     {
         return Time.time - lastAttackTime >= attackInterval;
     }
@@ -242,7 +247,6 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("プレイヤーが死亡しました");
         animator.SetTrigger("Die");
         IsDead = true;
         //このゲームオブジェクトについている当たり判定が消える
