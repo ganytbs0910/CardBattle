@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("Playerのステータス")]
     [SerializeField] private int hp;
     [SerializeField] private int mp;
-    [SerializeField] private int attack;
+    public int attack;
     [SerializeField] private float attackInterval;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
@@ -187,14 +187,18 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        WeaponDamage weapon = other.GetComponent<WeaponDamage>();
-        if (weapon != null)
+        if (other.CompareTag("Enemy"))
         {
-            //ダメージを与えるものにぶつかったら
-            //print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                //ダメージを与えるものにぶつかったら
+                print(other.name + "が" + gameObject.name + "に" + enemy + "のダメージを与えた");
 
-            GetHit();//ノックバック
-            Damage(attack);//ダメージを与える
+                GetHit();//ノックバック
+
+                Damage(enemy.attack);//ダメージを与える
+            }
         }
     }
 

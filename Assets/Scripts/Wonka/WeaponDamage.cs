@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponDamage : MonoBehaviour
 {
-    public int damage;
+    public int weaponDamage;
     // Start is called before the first frame update
     void Start()
     {
