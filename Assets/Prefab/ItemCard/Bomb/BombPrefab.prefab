@@ -30447,7 +30447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShakeFeedback: {fileID: 3151859027257368277}
-  Attack: 30
+  Attack: 50
 --- !u!54 &5347544746712649414
 Rigidbody:
   m_ObjectHideFlags: 0
