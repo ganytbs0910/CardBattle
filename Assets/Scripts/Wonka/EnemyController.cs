@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
 {
     [Header("Enemyのステータス")]
     [SerializeField] private int hp;
-    [SerializeField] private int attack;
+    public int attack;
     [SerializeField] private float attackInterval;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
@@ -154,15 +154,32 @@ public class EnemyController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        WeaponDamage weapon = other.GetComponent<WeaponDamage>();
-        if (weapon != null)
+        if (other.CompareTag("Player"))
         {
-            //ダメージを与えるものにぶつかったら
-            //print(other.name + "が" + gameObject.name + "に" + weapon.damage + "のダメージを与えた");
+            PlayerController player = other.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                //ダメージを与えるものにぶつかったら
+                print(other.name + "が" + gameObject.name + "に" + player + "のダメージを与えた");
 
-            GetHit();//ノックバック
+                GetHit();//ノックバック
 
-            Damage(attack);//ダメージを与える
+                Damage(player.attack);//ダメージを与える
+            }
+        }
+
+        if (other.CompareTag("Bomb"))
+        {
+            BombController bomb = other.GetComponent<BombController>();
+            if (bomb != null)
+            {
+                //ダメージを与えるものにぶつかったら
+                print(other.name + "が" + gameObject.name + "に" + bomb.Attack + "のダメージを与えた");
+
+                GetHit();//ノックバック
+
+                Damage(bomb.Attack);//ダメージを与える
+            }
         }
     }
 
