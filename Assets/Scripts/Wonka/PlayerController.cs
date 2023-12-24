@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 //print("攻撃範囲内");
-                if (CanAttack())　//攻撃可能
+                if (CanAttack()) //攻撃可能
                 {
                     //print("攻撃");
                     Attack(); // 攻撃
@@ -163,7 +163,7 @@ public class PlayerController : MonoBehaviour
             agent.isStopped = true; // 移動を停止
             agent.SetDestination(enemyTarget.position);
         }
-        print(gameObject.name+"の新しいターゲットを更新しました");
+        print(gameObject.name + "の新しいターゲットを更新しました");
     }
 
 

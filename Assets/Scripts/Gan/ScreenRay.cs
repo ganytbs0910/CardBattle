@@ -87,7 +87,7 @@ public class ScreenRay : MonoBehaviour
             }
         }
         StartCoroutine(ToggleCheck());
-        ResetTargetColors();
+        //ResetTargetColors();
     }
 
     void RayCastUI()
