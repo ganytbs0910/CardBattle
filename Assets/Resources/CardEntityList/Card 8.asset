@@ -16,4 +16,4 @@ MonoBehaviour:
   name: "\u6575\u306E\u4F53\u529B\u309210%\u596A\u3046"
   information: 
   icon: {fileID: -1077186370, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
-  canPlayerUse: 0
+  targetType: 1

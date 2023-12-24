@@ -11,13 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int mp;
     public int attack;
     [SerializeField] private float attackInterval;
+    [SerializeField] private float throwPower;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
+
 
     float lastAttackTime = 0f; //最後に攻撃した時間
     public int maxHp = 100;
     public int maxMp = 100;
 
+    [Header("Playerの状態")]
     public bool IsDead = false;
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
@@ -27,7 +30,6 @@ public class PlayerController : MonoBehaviour
     public Transform enemyTarget; // 敵の位置
     private NavMeshAgent agent; // NavMesh Agent
     private Animator animator;
-
 
     public Collider weaponCollider;//武器の当たり判定
     public PlayerUIManager playerUIManager;
@@ -311,12 +313,15 @@ public class PlayerController : MonoBehaviour
                 IncreasePlayers(targetNumber.Value * 3);
                 break;
             case 8:
+
                 //敵がターゲット
                 break;
             case 9:
+
                 //敵がターゲット
                 break;
             case 10:
+
                 //敵がターゲット
                 break;
             case 11:
@@ -329,35 +334,49 @@ public class PlayerController : MonoBehaviour
                 AttackUp(1.3f);
                 break;
             case 14:
+
                 DefenceUp(1.1f);
                 break;
             case 15:
+
                 DefenceUp(1.2f);
                 break;
             case 16:
+
                 DefenceUp(1.3f);
                 break;
             case 17:
+
                 //敵がターゲット
                 break;
             case 18:
+
                 //敵がターゲット
                 break;
             case 19:
+
                 //敵がターゲット
                 break;
             case 20:
+
                 //敵がターゲット
                 break;
             case 21:
+
                 GetCoin();
                 break;
             case 22:
+
                 EquipmentWeapon();
                 break;
             case 23:
+
                 EquipmentArmor();
                 break;
+            case 24:
+                //特殊スキルでScreenRay.csに記述
+                break;
+
         }
     }
 

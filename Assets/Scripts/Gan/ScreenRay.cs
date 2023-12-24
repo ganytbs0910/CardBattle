@@ -9,6 +9,7 @@ public class ScreenRay : MonoBehaviour
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private GameObject cardListPanel;
     [SerializeField] private GameObject chooseCard;
+    public GameObject bombPrefab;
     [SerializeField] private List<GameObject> targetObjects = new List<GameObject>();
     [SerializeField] private int cardID;
     [SerializeField] private float rayWidth = 1.5f;
@@ -53,7 +54,6 @@ public class ScreenRay : MonoBehaviour
             }
             if (cardID == 0)
             {
-                Debug.Log("カードを選択してください");
                 return;
             }
             targetMarker.SetActive(false);
@@ -61,42 +61,33 @@ public class ScreenRay : MonoBehaviour
             foreach (Collider collider in colliders)
             {
                 //もしPlayerタグを持っているオブジェクトに当たったら
-                if (collider.gameObject.tag == "Player")
+                if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
-                    if (targetType == CardEntity.TargetType.Player)
-                    {
-                        collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
-                    }
-                    else
-                    {
-                        Debug.Log("Playerに使えないカードです");
-                    }
+                    collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
+                    Destroy(chooseCard);
+                    cardID = 0;
                 }
-                else if (collider.gameObject.tag == "Enemy")
+                else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
-                    if (targetType == CardEntity.TargetType.Enemy)
-                    {
-                        collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
-                    }
-                    else
-                    {
-                        Debug.Log("Enemyに使えないカードです");
-                    }
+                    collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
+                    Destroy(chooseCard);
+                    cardID = 0;
                 }
                 else
                 {
-                    if (targetType == CardEntity.TargetType.All)
+                    switch (cardID)
                     {
-                        Debug.Log("Allに使えるカードです");
-                        collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
+                        case 24:
+                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500);
+                            Destroy(chooseCard);
+                            cardID = 0;
+                            break;
                     }
                 }
-                Destroy(chooseCard);
-                cardID = 0;
-                StartCoroutine(ToggleCheck());
             }
-            ResetTargetColors();
         }
+        StartCoroutine(ToggleCheck());
+        ResetTargetColors();
     }
 
     void RayCastUI()
@@ -129,7 +120,6 @@ public class ScreenRay : MonoBehaviour
             targetMarker.transform.position = hit.point;
             Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
             targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
-            lastRaycastHit = hit; // 最後のRayの衝突情報を保存
             targetObjects.Clear();
             baseColor = true;
             Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
@@ -188,11 +178,23 @@ public class ScreenRay : MonoBehaviour
         {
             if (cardListPanel.transform.GetChild(i).GetComponent<Toggle>().isOn)
             {
-                oneRayUpIgnore = false;
                 chooseCard = cardListPanel.transform.GetChild(i).gameObject;
                 cardID = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardID;
                 targetType = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().targetType;
             }
         }
+    }
+    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power)
+    {
+        // 弾丸をメインカメラの位置に生成
+        GameObject bomb = Instantiate(throwObject, Camera.main.transform.position, Quaternion.identity);
+
+        // メインカメラの位置からターゲットの位置への方向ベクトルを計算
+        Vector3 direction = targetPos - Camera.main.transform.position;
+
+        // 弾丸に力を加える（方向ベクトルを正規化し、力を乗算）
+        bomb.GetComponent<Rigidbody>().AddForce(direction.normalized * power);
+
+        Debug.Log($"ターゲットの場所は{targetPos}でカメラの位置は{Camera.main.transform.position}です");
     }
 }

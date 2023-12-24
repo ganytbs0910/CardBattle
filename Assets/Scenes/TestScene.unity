@@ -9538,12 +9538,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetMarker: {fileID: 157694802}
   cardListPanel: {fileID: 906088915}
+  chooseCard: {fileID: 0}
+  bombPrefab: {fileID: 1818861082154570, guid: 5e45c8f884f6d124ea0499aae7fdbec8, type: 3}
   targetObjects: []
   cardID: 0
   rayWidth: 1.5
   rayDistance: 100
   cardMove: 1
   baseColor: 1
+  colorChangeIgnore: 0
+  oneRayUpIgnore: 0
+  rayTarget: 0
 --- !u!4 &1173356395
 Transform:
   m_ObjectHideFlags: 0
@@ -12637,7 +12642,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853159663}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e6ddf2f2c758734999b1d07d9177e43, type: 3}
   m_Name: 
