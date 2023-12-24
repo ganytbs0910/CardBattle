@@ -369,7 +369,10 @@ public class PlayerController : MonoBehaviour
         //このゲームオブジェクトの近くにnumberの数だけプレイヤーを生成する
         for (int i = 0; i < number; i++)
         {
-            Instantiate(playerPrefab, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
+            float x = Random.Range(-1f, 1f);
+            float z = Random.Range(-1f, 1f);
+            Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
+
         }
         GameManager.instance.CheckCharacterList();
     }
