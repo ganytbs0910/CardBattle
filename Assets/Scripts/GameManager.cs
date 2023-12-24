@@ -63,27 +63,27 @@ public class GameManager : MonoBehaviour
         //RandomTarget();//それぞれのターゲットをランダム指定
     }
 
-    //死亡したキャラを除外してリストを再構築
-    public void CheckCharacterList()
-    {
-        players.Clear();
-        foreach (var player in players)
-        {
-            if (!player.IsDead)
-            {
-                players.Add(player);
-            }
-        }
+    ////死亡したキャラを除外してリストを再構築
+    //public void CheckCharacterList()
+    //{
+    //    players.Clear();
+    //    foreach (var player in players)
+    //    {
+    //        if (!player.IsDead)
+    //        {
+    //            players.Add(player);
+    //        }
+    //    }
 
-        enemies.Clear();
-        foreach (var enemy in enemies)
-        {
-            if (!enemy.IsDead)
-            {
-                enemies.Add(enemy);
-            }
-        }
-    }
+    //    enemies.Clear();
+    //    foreach (var enemy in enemies)
+    //    {
+    //        if (!enemy.IsDead)
+    //        {
+    //            enemies.Add(enemy);
+    //        }
+    //    }
+    //}
 
     public void RemoveEnemyFromList(EnemyController enemy)
     {
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
         print("敵をSpawnPointにスポーンする");
 
         // キャラクターリストを更新
-        CheckCharacterList();
+        CreateCharacterList();
     }
 
     //プレイヤーとエネミーを初期位置と初期アニメに戻す

@@ -476,7 +476,7 @@ public class PlayerController : MonoBehaviour
             Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
 
         }
-        GameManager.instance.CheckCharacterList();
+        GameManager.instance.CreateCharacterList();
     }
     void AttackUp(float value)
     {
