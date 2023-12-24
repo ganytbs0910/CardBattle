@@ -105,9 +105,14 @@ public class UIManager : MonoBehaviour
 
         GameManager.instance.battleState = false;
         GameManager.instance.RemoveAllEnemies();// 現在の敵リストからすべての要素を削除
+        yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.CreateCharacterList();//敵をスポーンさせる
+        yield return new WaitForSeconds(0.1f);
         GameManager.instance.ResetCharacters();//位置とアニメをリセット
-        //GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
+        yield return new WaitForSeconds(0.1f);
+        GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
 
     }
 

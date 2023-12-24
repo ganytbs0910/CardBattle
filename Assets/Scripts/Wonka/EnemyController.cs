@@ -56,13 +56,24 @@ public class EnemyController : MonoBehaviour
             return;
         }
 
+        // 現在のターゲットが死んでいれば新しいターゲットを探す
+        if (playerTarget != null)
+        {
+            PlayerController targetEnemy = playerTarget.GetComponent<PlayerController>();
+            if (targetEnemy != null && targetEnemy.IsDead)
+            {
+                print("プレイヤーを倒したので次のターゲットを探します");
+                FindClosestPlayer(transform);
+            }
+        }
+
         transform.LookAt(playerTarget);//常に敵のほうを向く
 
 
         if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
             float distance = Vector3.Distance(transform.position, playerTarget.position);
-
+            agent.isStopped = false;
             if (distance <= agent.stoppingDistance)
             {
                 //print("攻撃範囲内");
@@ -86,27 +97,64 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 現在の位置から最も近くにいるプレイヤーを探す
+    /// </summary>
+    /// <param name="enemyTransform">現在位置を登録</param>
+    public void FindClosestPlayer(Transform enemyTransform)
+    {
+        PlayerController closestPlayer = null;
+        float closestDistanceSqr = Mathf.Infinity;
+
+        foreach (var player in GameManager.instance.players)
+        {
+            if (!player.IsDead)//死んでいなければ
+            {
+                float distanceSqr = (player.transform.position - enemyTransform.position).sqrMagnitude;
+                if (distanceSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distanceSqr;
+                    closestPlayer = player;
+                }
+            }
+        }
+        if (closestPlayer != null)
+        {
+            UpdateNavMeshTarget(closestPlayer.transform) ;
+        }
+        else
+        {
+            UpdateNavMeshTarget(null); // ターゲットが見つからない場合は null を設定
+        }
+    }
+
     //位置とアニメを初期状態にリセットする
     public void ResetToInitialPosition()
     {
         transform.position = initialPosition;
         //animator.SetTrigger("Idle");
         // その他のリセット処理（必要に応じて）
+
+        // プレイヤーグループの平均位置に向く
+        Vector3 averagePlayerPosition = GetAveragePositionOfPlayers();
+        LookTowards(averagePlayerPosition);
     }
 
     // NavMeshAgentのターゲットを更新するメソッド
     public void UpdateNavMeshTarget(Transform newTarget)
     {
-        //if (newTarget != null)
-        //{
-        //    agent.isStopped = false; // 移動を再開
-        //    agent.SetDestination(newTarget.position);
-        //}
-        //else
-        //{
-        //    agent.isStopped = true; // 移動を停止
-        //}
-        print("敵のtarget(Player)を更新します");
+        if (newTarget == null)
+        {
+            return;
+        }
+        playerTarget = newTarget;
+        if (agent != null) //ヌルリファ対策
+        {
+            agent.isStopped = true; // 移動を停止
+            agent.SetDestination(playerTarget.position);
+        }
+        print(gameObject.name + "の新しいターゲットを更新しました");
     }
 
 
@@ -255,10 +303,16 @@ public class EnemyController : MonoBehaviour
         //剣の当たり判定も消す
         DisableColliderWeapon();
 
-        //// ディレイののち、オブジェクトを2秒かけて縮小
-        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
-        GameManager.instance.CheckCharacterList();
+        // GameManager のプレイヤーリストから自身を除外
+        GameManager.instance.RemoveEnemyFromList(this);
+        //Debug.LogError("Enemy removed from list: " + gameObject.name);
+
+        //GameManager.instance.CheckCharacterList();
         GameManager.instance.CheckGameStatus();
+
+        //// ディレイののち、オブジェクトを2秒かけて縮小
+        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+
     }
 
     // 勝利アニメーションをトリガーするメソッド
@@ -374,6 +428,24 @@ public class EnemyController : MonoBehaviour
     void DecreaseHealth(float value)
     {
         hp = (int)(hp * (1 - value));
+    }
+
+    void LookTowards(Vector3 position)
+    {
+        Vector3 direction = position - transform.position;
+        direction.y = 0; // Y軸の回転は無視
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    Vector3 GetAveragePositionOfPlayers()
+    {
+        var players = FindObjectsOfType<PlayerController>();
+        Vector3 sum = Vector3.zero;
+        foreach (var player in players)
+        {
+            sum += player.transform.position;
+        }
+        return players.Length > 0 ? sum / players.Length : Vector3.zero;
     }
 }
 

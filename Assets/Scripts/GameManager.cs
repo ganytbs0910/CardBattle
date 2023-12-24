@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
 
-        CheckCharacterList();
+        CreateCharacterList(); //プレイヤーと敵のリストを更新
     }
 
 
@@ -50,6 +50,58 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         UIManager.instance.Loading(stageHierarchy);
         gachaController.DrawCard();
+    }
+
+    //キャラクターの増減時に呼ぶ
+    public void CreateCharacterList()
+    {
+        // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
+        players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
+        enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
+
+        UpdateAllNavmeshTargets();//敵と味方のターゲットを最も近い相手に指定
+        //RandomTarget();//それぞれのターゲットをランダム指定
+    }
+
+    //死亡したキャラを除外してリストを再構築
+    public void CheckCharacterList()
+    {
+        players.Clear();
+        foreach (var player in players)
+        {
+            if (!player.IsDead)
+            {
+                players.Add(player);
+            }
+        }
+
+        enemies.Clear();
+        foreach (var enemy in enemies)
+        {
+            if (!enemy.IsDead)
+            {
+                enemies.Add(enemy);
+            }
+        }
+    }
+
+    public void RemoveEnemyFromList(EnemyController enemy)
+    {
+        if (enemies.Contains(enemy))
+        {
+            enemies.Remove(enemy);
+            //Debug.LogError("Enemy removed from list: " + gameObject.name);
+            //print("リストから敵一人が除名されました");
+        }
+    }
+
+    public void RemovePlayerFromList(PlayerController player)
+    {
+        if (players.Contains(player))
+        {
+            players.Remove(player);
+            print("リストからプレイヤー一人が除名されました");
+        }
     }
 
     // 現在の敵リストからすべての要素を削除するメソッド
@@ -108,21 +160,22 @@ public class GameManager : MonoBehaviour
     {
         foreach (var player in players)
         {
-            player.UpdateNavMeshTarget(null);
+            if (!player.IsDead)
+            {
+                player.FindClosestEnemy(player.transform);
+            }
         }
         foreach (var enemy in enemies)
         {
-            enemy.UpdateNavMeshTarget(null);
+            if (!enemy.IsDead)
+            {
+                enemy.FindClosestPlayer(enemy.transform);
+            }
         }
+
+        print("敵とプレイヤーのターゲットを更新しました");
     }
 
-    //キャラクターの増減時に呼ぶ
-    public void CheckCharacterList()
-    {
-        // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
-        players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
-        enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
-    }
 
     public void CheckGameStatus()
     {
@@ -155,6 +208,11 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool AreAllPlayersDead()
     {
+        if (players.Count == 0)
+        {
+            return true;
+        }
+
         foreach (var player in players)
         {
             if (!player.IsDead) // もし生きているプレイヤーがいたら
@@ -171,6 +229,12 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     public bool AreAllEnemiesDead()
     {
+        // 敵のリストが空の場合はすべての敵が死んでいるとみなす
+        if (enemies.Count == 0)
+        {
+            return true;
+        }
+
         foreach (var enemy in enemies)
         {
             if (!enemy.IsDead) // もし生きている敵がいたら

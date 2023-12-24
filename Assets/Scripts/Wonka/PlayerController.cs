@@ -61,11 +61,23 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        // 現在のターゲットが死んでいれば新しいターゲットを探す
+        if (enemyTarget != null)
+        {
+            EnemyController targetEnemy = enemyTarget.GetComponent<EnemyController>();
+            if (targetEnemy != null && targetEnemy.IsDead)
+            {
+                print("エネミーを倒したので次のターゲットを探します");
+                FindClosestEnemy(transform);
+            }
+        }
+
         transform.LookAt(enemyTarget);//常に敵のほうを向く
 
         if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
             float distance = Vector3.Distance(transform.position, enemyTarget.position);
+            agent.isStopped = false; // 移動を再開
 
             if (distance <= agent.stoppingDistance)
             {
@@ -90,26 +102,66 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// 現在の位置から最も近くにいるプレイヤーを探す
+    /// </summary>
+    /// <param name="enemyTransform">現在位置を登録</param>
+    public void FindClosestEnemy(Transform playerTransform)
+    {
+        EnemyController closestEnemy = null;
+        float closestDistanceSqr = Mathf.Infinity;
+
+        foreach (var enemy in GameManager.instance.enemies)
+        {
+            if (!enemy.IsDead)//死んでいなければ
+            {
+                float distanceSqr = (enemy.transform.position - playerTransform.position).sqrMagnitude;
+                if (distanceSqr < closestDistanceSqr)
+                {
+                    closestDistanceSqr = distanceSqr;
+                    closestEnemy = enemy;
+                    print("一番近い敵を発見しました");
+                }
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            UpdateNavMeshTarget(closestEnemy.transform);
+        }
+        else
+        {
+            UpdateNavMeshTarget(null); // ターゲットが見つからない場合は null を設定
+        }
+    }
+
     //位置とアニメを初期状態にリセットする
     public void ResetToInitialPosition()
     {
         transform.position = initialPosition;
         animator.SetTrigger("Idle");
         // その他のリセット処理（必要に応じて）
+
+        // 敵グループの平均位置に向く
+        Vector3 averageEnemyPosition = GetAveragePositionOfEnemies();
+        LookTowards(averageEnemyPosition);
     }
 
     // NavMeshAgentのターゲットを更新するメソッド
     public void UpdateNavMeshTarget(Transform newTarget)
     {
-        if (newTarget != null)
+        if (newTarget == null)
         {
-            agent.isStopped = false; // 移動を再開
-            agent.SetDestination(newTarget.position);
+            return;
         }
-        else
+        enemyTarget = newTarget;
+        if (agent != null) //ヌルリファ対策
         {
             agent.isStopped = true; // 移動を停止
+            agent.SetDestination(enemyTarget.position);
         }
+        print(gameObject.name+"の新しいターゲットを更新しました");
     }
 
 
@@ -284,9 +336,14 @@ public class PlayerController : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         //剣の当たり判定も消す
         DisableColliderWeapon();
+
+        // GameManager のプレイヤーリストから自身を除外
+        GameManager.instance.RemovePlayerFromList(this);
+
         //// ディレイののち、オブジェクトを2秒かけて縮小
-        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => gameObject.SetActive(false));
-        GameManager.instance.CheckCharacterList();
+        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+
+        //GameManager.instance.CheckCharacterList();
         GameManager.instance.CheckGameStatus();
     }
 
@@ -427,5 +484,23 @@ public class PlayerController : MonoBehaviour
         //防具を装備する
         DefenceUp(1.3f);
         isEqipmentArmor = true;
+    }
+
+    void LookTowards(Vector3 position)
+    {
+        Vector3 direction = position - transform.position;
+        direction.y = 0; // Y軸の回転は無視
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    Vector3 GetAveragePositionOfEnemies()
+    {
+        var enemies = FindObjectsOfType<EnemyController>();
+        Vector3 sum = Vector3.zero;
+        foreach (var enemy in enemies)
+        {
+            sum += enemy.transform.position;
+        }
+        return enemies.Length > 0 ? sum / enemies.Length : Vector3.zero;
     }
 }
