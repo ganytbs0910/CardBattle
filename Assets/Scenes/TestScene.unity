@@ -9518,7 +9518,7 @@ GameObject:
   - component: {fileID: 1173356395}
   - component: {fileID: 1173356394}
   m_Layer: 0
-  m_Name: TestRay
+  m_Name: ScreenRay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9537,7 +9537,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetMarker: {fileID: 157694802}
+  cardListPanel: {fileID: 906088915}
   targetObjects: []
+  cardID: 0
   rayWidth: 1.5
   rayDistance: 100
   cardMove: 1
@@ -12337,6 +12339,7 @@ MonoBehaviour:
   battleState: 0
   players: []
   enemies: []
+  gachaController: {fileID: 2139142455}
 --- !u!4 &1793213612
 Transform:
   m_ObjectHideFlags: 0
@@ -84177,10 +84180,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1135281782299098324, guid: ac37da8a20b514f41a96ecec35b781cf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135281782299098324, guid: ac37da8a20b514f41a96ecec35b781cf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1135281783371065015, guid: ac37da8a20b514f41a96ecec35b781cf, type: 3}
       propertyPath: enemyTarget
       value: 
       objectReference: {fileID: 680629874280308003}
+    - target: {fileID: 1135281783792724474, guid: ac37da8a20b514f41a96ecec35b781cf, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1135281783792724474, guid: ac37da8a20b514f41a96ecec35b781cf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac37da8a20b514f41a96ecec35b781cf, type: 3}
 --- !u!1 &8159381536679838762
@@ -99318,7 +99337,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

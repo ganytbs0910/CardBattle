@@ -4,19 +4,20 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TestRay : MonoBehaviour
+public class ScreenRay : MonoBehaviour
 {
     [SerializeField] private GameObject targetMarker;
-    GameObject chooseCard;
+    [SerializeField] private GameObject cardListPanel;
+    [SerializeField] private GameObject chooseCard;
     [SerializeField] private List<GameObject> targetObjects = new List<GameObject>();
-    int cardID;
+    [SerializeField] private int cardID;
     [SerializeField] private float rayWidth = 1.5f;
     public float rayDistance = 100f;
     public bool cardMove = true;
     public bool baseColor = true;
-    bool colorChangeIgnore = false;
-    bool oneRayUpIgnore = false;
-    bool rayTarget = false;
+    [SerializeField] private bool colorChangeIgnore = false;
+    [SerializeField] private bool oneRayUpIgnore = false;
+    [SerializeField] private bool rayTarget = false;
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     CardEntity.TargetType targetType;
 
@@ -28,6 +29,10 @@ public class TestRay : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            ToggleCheck();
+        }
         if (!baseColor && colorChangeIgnore)
         {
             ResetTargetColors(); // すべてのターゲットの色をリセット
@@ -61,8 +66,6 @@ public class TestRay : MonoBehaviour
                     if (targetType == CardEntity.TargetType.Player)
                     {
                         collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
-                        Destroy(chooseCard);
-                        cardID = 0;
                     }
                     else
                     {
@@ -74,8 +77,6 @@ public class TestRay : MonoBehaviour
                     if (targetType == CardEntity.TargetType.Enemy)
                     {
                         collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
-                        Destroy(chooseCard);
-                        cardID = 0;
                     }
                     else
                     {
@@ -88,10 +89,11 @@ public class TestRay : MonoBehaviour
                     {
                         Debug.Log("Allに使えるカードです");
                         collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
-                        Destroy(chooseCard);
-                        cardID = 0;
                     }
                 }
+                Destroy(chooseCard);
+                cardID = 0;
+                StartCoroutine(ToggleCheck());
             }
             ResetTargetColors();
         }
@@ -175,6 +177,22 @@ public class TestRay : MonoBehaviour
         foreach (Renderer renderer in renderers)
         {
             renderer.material.color = color;
+        }
+    }
+
+    IEnumerator ToggleCheck()
+    {
+        yield return null;
+        //cardListPanelの子要素をすべて取得してToggleのIsOnのオブジェクトからCardIDを取得する
+        for (int i = 0; i < cardListPanel.transform.childCount; i++)
+        {
+            if (cardListPanel.transform.GetChild(i).GetComponent<Toggle>().isOn)
+            {
+                oneRayUpIgnore = false;
+                chooseCard = cardListPanel.transform.GetChild(i).gameObject;
+                cardID = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardID;
+                targetType = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().targetType;
+            }
         }
     }
 }

@@ -11,11 +11,7 @@ public class GachaController : MonoBehaviour
     [SerializeField] List<int> cardIDList = new List<int>();
     void Start()
     {
-        int num = Random.Range(1, 6);
-        for (int i = 0; i < num; i++)
-        {
-            DrawCard();
-        }
+        DrawCard();
     }
 
     void Update()
@@ -25,15 +21,18 @@ public class GachaController : MonoBehaviour
 
     public void DrawCard(int? cardID = null)
     {
-        if (parentPanel.transform.childCount > 8) return;
-        //もしカードにIDがないならランダムでカードを引く
-        if (!cardID.HasValue)
+        int num = Random.Range(2, 6);
+        for (int i = 0; i < num; i++)
         {
+            if (parentPanel.transform.childCount > 8) return;
+            //もしカードにIDがないならランダムでカードを引く
             cardID = Random.Range(1, Resources.LoadAll<CardEntity>("CardEntityList").Length + 1);
+            CardController card = Instantiate(cardPrefab, parentPanel.transform);
+            //名前を変更
+            card.name = $"Card_{cardID}";
+            card.Init(cardID.Value);
+            cardIDList.Add(cardID.Value);
+            CardModel cardModel = card.model;
         }
-        CardController card = Instantiate(cardPrefab, parentPanel.transform);
-        card.Init(cardID.Value);
-        cardIDList.Add(cardID.Value);
-        CardModel cardModel = card.model;
     }
 }
