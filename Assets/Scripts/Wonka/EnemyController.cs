@@ -33,6 +33,8 @@ public class EnemyController : MonoBehaviour
     public Collider weaponCollider;//武器の当たり判定
     public EnemyUIManager enemyUIManager;
 
+    private Vector3 initialPosition;
+
     void Start()
     {
         hp = maxHp;
@@ -41,6 +43,8 @@ public class EnemyController : MonoBehaviour
         DisableColliderWeapon();//武器の当たり判定無効化
 
         enemyUIManager.Init(this);
+
+        initialPosition = transform.position;
     }
 
     void Update()
@@ -81,6 +85,30 @@ public class EnemyController : MonoBehaviour
             }
         }
     }
+
+    //位置とアニメを初期状態にリセットする
+    public void ResetToInitialPosition()
+    {
+        transform.position = initialPosition;
+        //animator.SetTrigger("Idle");
+        // その他のリセット処理（必要に応じて）
+    }
+
+    // NavMeshAgentのターゲットを更新するメソッド
+    public void UpdateNavMeshTarget(Transform newTarget)
+    {
+        //if (newTarget != null)
+        //{
+        //    agent.isStopped = false; // 移動を再開
+        //    agent.SetDestination(newTarget.position);
+        //}
+        //else
+        //{
+        //    agent.isStopped = true; // 移動を停止
+        //}
+        print("敵のtarget(Player)を更新します");
+    }
+
 
     bool CanAttack()　//インターバル
     {

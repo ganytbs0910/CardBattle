@@ -102,6 +102,13 @@ public class UIManager : MonoBehaviour
         */
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
+
+        GameManager.instance.battleState = false;
+        GameManager.instance.RemoveAllEnemies();// 現在の敵リストからすべての要素を削除
+        GameManager.instance.SpawnEnemies();//敵をスポーンさせる
+        GameManager.instance.ResetCharacters();//位置とアニメをリセット
+        //GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
+
     }
 
     //ボタンで使用

@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     public List<EnemyController> enemies;
     [SerializeField] private GachaController gachaController;
 
+    public GameObject enemyPrefab; // 敵のプレハブ
+    public List<Transform> spawnPoints; // スポーン位置のリスト
+
     void Awake()
     {
         if (instance == null)
@@ -39,12 +42,78 @@ public class GameManager : MonoBehaviour
     {
 
     }
+
+
     void NextStage()
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         UIManager.instance.Loading(stageHierarchy);
         gachaController.DrawCard();
+    }
+
+    // 現在の敵リストからすべての要素を削除するメソッド
+    public void RemoveAllEnemies()
+    {
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy.gameObject); // シーンから敵を削除
+        }
+        enemies.Clear(); // リストを空にする
+        print("現在のすべての敵をリストから除外します");
+    }
+
+    //敵をスポーンさせる
+    public void SpawnEnemies()
+    {
+        // "Enemies" という名前のゲームオブジェクトを探す
+        GameObject enemiesParent = GameObject.Find("Enemies");
+
+        // 存在しない場合は新しく作成
+        if (enemiesParent == null)
+        {
+            enemiesParent = new GameObject("Enemies");
+        }
+
+        foreach (var spawnPoint in spawnPoints)
+        {
+            // 敵をインスタンス化し、"Enemies" オブジェクトの子として設定
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            newEnemy.transform.SetParent(enemiesParent.transform);
+        }
+        print("敵をSpawnPointにスポーンする");
+
+        // キャラクターリストを更新
+        CheckCharacterList();
+    }
+
+    //プレイヤーとエネミーを初期位置と初期アニメに戻す
+    public void ResetCharacters()
+    {
+        foreach (var player in players)
+        {
+            player.ResetToInitialPosition();
+        }
+        //敵を新しくスポーンしたい。
+        foreach (var enemy in enemies)
+        {
+            enemy.ResetToInitialPosition();
+        }
+
+        print("プレイヤーとエネミーの位置とアニメをリセットします");
+    }
+
+    // 各陣営のNavMeshターゲットを更新
+    public void UpdateAllNavmeshTargets()
+    {
+        foreach (var player in players)
+        {
+            player.UpdateNavMeshTarget(null);
+        }
+        foreach (var enemy in enemies)
+        {
+            enemy.UpdateNavMeshTarget(null);
+        }
     }
 
     //キャラクターの増減時に呼ぶ

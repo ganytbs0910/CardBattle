@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject playerPrefab;
 
+    private Vector3 initialPosition;
+
     void Start()
     {
         hp = maxHp;
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         DisableColliderWeapon();//武器の当たり判定無効化
 
         playerUIManager.Init(this);//スライダーの初期化
+        initialPosition = transform.position;
     }
 
     void Update()
@@ -86,6 +89,29 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+    //位置とアニメを初期状態にリセットする
+    public void ResetToInitialPosition()
+    {
+        transform.position = initialPosition;
+        animator.SetTrigger("Idle");
+        // その他のリセット処理（必要に応じて）
+    }
+
+    // NavMeshAgentのターゲットを更新するメソッド
+    public void UpdateNavMeshTarget(Transform newTarget)
+    {
+        if (newTarget != null)
+        {
+            agent.isStopped = false; // 移動を再開
+            agent.SetDestination(newTarget.position);
+        }
+        else
+        {
+            agent.isStopped = true; // 移動を停止
+        }
+    }
+
 
     public void ResetState()
     {
