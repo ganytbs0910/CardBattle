@@ -9,8 +9,8 @@ public class CardModel
     public string name;
     public string information;
     public Sprite icon;
-    public bool canPlayerUse;
     public Action<CardModel> effect; // 効果を保存するための変数
+    public CardEntity.TargetType targetType;
 
     public CardModel(int cardID)
     {
@@ -24,8 +24,7 @@ public class CardModel
             information = cardEntity.information;
             icon = cardEntity.icon;
             effect = cardEntity.effect;
-            canPlayerUse = cardEntity.canPlayerUse;
-
+            targetType = cardEntity.targetType;
         }
     }
 

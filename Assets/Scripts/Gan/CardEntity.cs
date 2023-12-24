@@ -13,7 +13,13 @@ public class CardEntity : ScriptableObject
     public string information;
     public Sprite icon;
     public Action<CardModel> effect;
-    public bool canPlayerUse;
+    public enum TargetType
+    {
+        Player,
+        Enemy,
+        All
+    }
+    public TargetType targetType;
     public void InitEffect()
     {
 

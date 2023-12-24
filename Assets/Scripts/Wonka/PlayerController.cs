@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+    public GameObject playerPrefab;
 
     void Start()
     {
@@ -368,7 +369,7 @@ public class PlayerController : MonoBehaviour
         //このゲームオブジェクトの近くにnumberの数だけプレイヤーを生成する
         for (int i = 0; i < number; i++)
         {
-            Instantiate(gameObject, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
+            Instantiate(playerPrefab, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
         }
         GameManager.instance.CheckCharacterList();
     }
