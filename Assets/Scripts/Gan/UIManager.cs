@@ -93,6 +93,13 @@ public class UIManager : MonoBehaviour
         loadPanel.SetActive(true);
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
+        //cardListPanelの子オブジェクトにあるCardMovementのcardMoveをtrueにする
+        /*
+        for (int i = 0; i < cardListPanel.transform.childCount; i++)
+        {
+            cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardMove = true;
+        }
+        */
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
     }
@@ -101,6 +108,12 @@ public class UIManager : MonoBehaviour
     public void BattleStart()
     {
         GameManager.instance.battleState = true;
+        /*
+        for (int i = 0; i < cardListPanel.transform.childCount; i++)
+        {
+            cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardMove = false;
+        }
+        */
     }
 
     public void WinPanel()
@@ -125,5 +138,9 @@ public class UIManager : MonoBehaviour
         canUseText.DOFade(0, 1.0f);
         //DOTweenで1秒かけて現在のcanUseTextのy座標を+50の位置に移動する
         canUseText.rectTransform.DOAnchorPosY(50, 1.0f);
+    }
+    public void CannotUseCard()
+    {
+
     }
 }

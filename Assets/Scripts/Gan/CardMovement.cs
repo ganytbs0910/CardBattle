@@ -8,20 +8,18 @@ using TMPro;
 
 public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private string checkEffect;
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private float rayWidth = 1.5f;
     public float rayDistance = 100f;
     [SerializeField] private Toggle toggle;
     public Transform cardParent;
+    public bool cardMove = true;
     bool rayTarget = false;
     public bool colorChange = false;
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     GameObject targetObject;
     public bool canPlayerUse;
 
-    public GraphicRaycaster raycaster;
-    public EventSystem eventSystem;
 
     private void Start()
     {
@@ -31,7 +29,6 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         //プレイヤーに使えるか
         CardController cardController = GetComponent<CardController>();
         CardModel cardModel = cardController.model;
-        checkEffect = $"{cardModel.name}";
         if (cardModel.canPlayerUse)
         {
             canPlayerUse = true;
@@ -54,7 +51,9 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                     renderer.material.color = Color.white;
                 }
             }
+
         }
+        if (!cardMove) return;
         if (rayTarget && Input.GetMouseButton(0)) // rayTargetがtrueで、かつ画面がタッチされている場合
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -63,6 +62,9 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
             {
                 targetMarker.SetActive(true);
                 targetMarker.transform.position = hit.point;
+                Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
+                targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
+
                 lastRaycastHit = hit; // 最後のRayの衝突情報を保存
                 colorChange = false; // ここで初期化
                 Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
@@ -123,8 +125,7 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
                         }
                         else
                         {
-                            int playerCount = GameObject.FindGameObjectsWithTag("Player").Length;
-                            collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID, playerCount);
+                            collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardModel.cardID);
                             Destroy(gameObject);
                         }
                     }
@@ -155,17 +156,17 @@ public class CardMovement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData) // ドラッグを始めるときに行う処理
     {
-        //cardParent = transform.parent;
-        //transform.SetParent(cardParent.parent, false);
+        cardParent = transform.parent;
+        transform.SetParent(cardParent.parent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = false; // blocksRaycastsをオフにする
     }
     public void OnDrag(PointerEventData eventData) // ドラッグした時に起こす処理
     {
-        //transform.position = eventData.position;
+        transform.position = eventData.position;
     }
     public void OnEndDrag(PointerEventData eventData) // カードを離したときに行う処理
     {
-        //transform.SetParent(cardParent, false);
+        transform.SetParent(cardParent, false);
         GetComponent<CanvasGroup>().blocksRaycasts = true; // blocksRaycastsをオンにする
     }
 
