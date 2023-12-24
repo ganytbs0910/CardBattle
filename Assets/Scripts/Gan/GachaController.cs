@@ -21,7 +21,7 @@ public class GachaController : MonoBehaviour
 
     public void DrawCard(int? cardID = null)
     {
-        int num = Random.Range(2, 6);
+        int num = Random.Range(5, 6);
         for (int i = 0; i < num; i++)
         {
             if (parentPanel.transform.childCount > 8) return;
