@@ -9,14 +9,14 @@ public class GameManager : MonoBehaviour
     public int stageHierarchy;
     public int coin;
 
-    public bool battleState;
+    public bool battleState; //バトル開始後==true バトル開始前==false 
 
     public List<PlayerController> players;
     public List<EnemyController> enemies;
     [SerializeField] private DrawCardController drawCardController;
 
     public GameObject enemyPrefab; // 敵のプレハブ
-    public List<Transform> spawnPoints; // スポーン位置のリスト
+    public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
 
     void Awake()
     {
@@ -37,13 +37,7 @@ public class GameManager : MonoBehaviour
         CreateCharacterList(); //プレイヤーと敵のリストを更新
     }
 
-
-    void Update()
-    {
-
-    }
-
-
+    //次のステージへ移行する
     void NextStage()
     {
         stageHierarchy++;
@@ -52,7 +46,7 @@ public class GameManager : MonoBehaviour
         drawCardController.DrawCard();
     }
 
-    //キャラクターの増減時に呼ぶ
+    //キャラクターのリストを作成する。あるいはリストをリフレッシュするする。
     public void CreateCharacterList()
     {
         // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
@@ -63,98 +57,6 @@ public class GameManager : MonoBehaviour
         //RandomTarget();//それぞれのターゲットをランダム指定
     }
 
-    ////死亡したキャラを除外してリストを再構築
-    //public void CheckCharacterList()
-    //{
-    //    players.Clear();
-    //    foreach (var player in players)
-    //    {
-    //        if (!player.IsDead)
-    //        {
-    //            players.Add(player);
-    //        }
-    //    }
-
-    //    enemies.Clear();
-    //    foreach (var enemy in enemies)
-    //    {
-    //        if (!enemy.IsDead)
-    //        {
-    //            enemies.Add(enemy);
-    //        }
-    //    }
-    //}
-
-    public void RemoveEnemyFromList(EnemyController enemy)
-    {
-        if (enemies.Contains(enemy))
-        {
-            enemies.Remove(enemy);
-            //Debug.LogError("Enemy removed from list: " + gameObject.name);
-            //print("リストから敵一人が除名されました");
-        }
-    }
-
-    public void RemovePlayerFromList(PlayerController player)
-    {
-        if (players.Contains(player))
-        {
-            players.Remove(player);
-            print("リストからプレイヤー一人が除名されました");
-        }
-    }
-
-    // 現在の敵リストからすべての要素を削除するメソッド
-    public void RemoveAllEnemies()
-    {
-        foreach (var enemy in enemies)
-        {
-            Destroy(enemy.gameObject); // シーンから敵を削除
-        }
-        enemies.Clear(); // リストを空にする
-        print("現在のすべての敵をリストから除外します");
-    }
-
-    //敵をスポーンさせる
-    public void SpawnEnemies()
-    {
-        // "Enemies" という名前のゲームオブジェクトを探す
-        GameObject enemiesParent = GameObject.Find("Enemies");
-
-        // 存在しない場合は新しく作成
-        if (enemiesParent == null)
-        {
-            enemiesParent = new GameObject("Enemies");
-        }
-
-        foreach (var spawnPoint in spawnPoints)
-        {
-            // 敵をインスタンス化し、"Enemies" オブジェクトの子として設定
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-            newEnemy.transform.SetParent(enemiesParent.transform);
-        }
-        print("敵をSpawnPointにスポーンする");
-
-        // キャラクターリストを更新
-        CreateCharacterList();
-    }
-
-    //プレイヤーとエネミーを初期位置と初期アニメに戻す
-    public void ResetCharacters()
-    {
-        foreach (var player in players)
-        {
-            player.ResetToInitialPosition();
-        }
-        //敵を新しくスポーンしたい。
-        foreach (var enemy in enemies)
-        {
-            enemy.ResetToInitialPosition();
-        }
-
-        print("プレイヤーとエネミーの位置とアニメをリセットします");
-    }
-
     // 各陣営のNavMeshターゲットを更新
     public void UpdateAllNavmeshTargets()
     {
@@ -163,6 +65,7 @@ public class GameManager : MonoBehaviour
             if (!player.IsDead)
             {
                 player.FindClosestEnemy(player.transform);
+                //最も近い敵を探してターゲットにする
             }
         }
         foreach (var enemy in enemies)
@@ -170,14 +73,66 @@ public class GameManager : MonoBehaviour
             if (!enemy.IsDead)
             {
                 enemy.FindClosestPlayer(enemy.transform);
+                //最も近いプレイヤーを探してターゲットにする
             }
         }
 
-        print("敵とプレイヤーのターゲットを更新しました");
+        print("すべての敵とプレイヤーのターゲットを更新しました");
+    }
+
+    /// <summary>
+    /// リストから特定の敵を除外する
+    /// </summary>
+    /// <param name="removeEnemy">リストから除外する敵</param>
+    public void RemoveEnemyFromList(EnemyController removeEnemy)
+    {
+        if (enemies.Contains(removeEnemy))//removeEnemyがリストに含まれていたら
+        {
+            enemies.Remove(removeEnemy);
+            print("リストから"+removeEnemy.name+"が除名されました");
+        }
+    }
+    /// <summary>
+    /// リストから特定のプレイヤーを除外する
+    /// </summary>
+    /// <param name="removePlayer">リストから除外するプレイヤー</param>
+    public void RemovePlayerFromList(PlayerController removePlayer)
+    {
+        if (players.Contains(removePlayer))//removePlayerがリストに含まれていたら
+        {
+            players.Remove(removePlayer);
+            print("リストから"+removePlayer+"が除名されました");
+        }
+    }
+
+    //敵をスポーンする
+    public void SpawnEnemies()
+    {
+        // "Enemies" という名前のゲームオブジェクトを探す
+        GameObject enemiesParent = GameObject.Find("Enemies");
+
+        // 存在しない場合はEnemiesを新しく作成
+        if (enemiesParent == null)
+        {
+            enemiesParent = new GameObject("Enemies");
+        }
+
+        //スポーンポイントの数だけ敵をスポーンさせる　※修正の余地あり
+        foreach (var spawnPoint in enemySpawnPoints)
+        {
+            // 敵をインスタンス化し、"Enemies" オブジェクトの子として設定
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            newEnemy.transform.SetParent(enemiesParent.transform);
+            print(newEnemy.name + "をSpawnPointにスポーンさせました");
+        }
+
+        // キャラクターリストを更新
+        CreateCharacterList();
     }
 
 
-    public void CheckGameStatus()
+    //両陣営のリストとIsDeadを基準に勝敗をジャッジする
+    public void CheckBattleStatus()
     {
         //敵が勝利したパターン
         if (AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
@@ -202,13 +157,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //プレイヤーとエネミーを初期位置と初期アニメに戻す
+    public void ResetCharacters()
+    {
+        foreach (var player in players)
+        {
+            player.ResetToInitialPosition();
+            //プレイヤーの位置とアニメを初期設定に戻す
+        }
+
+        foreach (var enemy in enemies)
+        {
+            enemy.ResetToInitialPosition();
+            //敵の位置とアニメを初期設定に戻す
+        }
+
+        print("プレイヤーとエネミーの位置とアニメをリセットします");
+    }
+
     /// <summary>
     /// プレイヤーの生存判定。プレイヤーが全滅したらTrueを返す。
     /// </summary>
     /// <returns></returns>
     public bool AreAllPlayersDead()
     {
-        if (players.Count == 0)
+        if (players.Count == 0)//リストが空になったら
         {
             return true;
         }
