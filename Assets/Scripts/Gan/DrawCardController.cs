@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GachaController : MonoBehaviour
+public class DrawCardController : MonoBehaviour
 {
     public Image parentPanel;
     [SerializeField] CardController cardPrefab;
@@ -21,10 +21,10 @@ public class GachaController : MonoBehaviour
 
     public void DrawCard(int? cardID = null)
     {
-        int num = Random.Range(5, 6);
+        int num = Random.Range(8, 9);
         for (int i = 0; i < num; i++)
         {
-            if (parentPanel.transform.childCount > 8) return;
+            if (parentPanel.transform.childCount > 7) return;
             //もしカードにIDがないならランダムでカードを引く
             cardID = Random.Range(1, Resources.LoadAll<CardEntity>("CardEntityList").Length + 1);
             CardController card = Instantiate(cardPrefab, parentPanel.transform);

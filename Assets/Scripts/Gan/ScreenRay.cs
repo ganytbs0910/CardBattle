@@ -129,7 +129,7 @@ public class ScreenRay : MonoBehaviour
                 if (collider.gameObject.tag == "Player" && cardID != 0 && targetType == CardEntity.TargetType.Player)
                 {
                     targetObjects.Add(collider.gameObject);
-                    SetColor(Color.red, collider.gameObject);
+                    SetColor(Color.green, collider.gameObject);
                     baseColor = false;
                     colorChangeIgnore = true;
                 }

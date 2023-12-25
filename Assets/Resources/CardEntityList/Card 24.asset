@@ -15,5 +15,5 @@ MonoBehaviour:
   cardID: 24
   name: "\u30DC\u30E0\u6295\u4E0B"
   information: 
-  icon: {fileID: -1077186370, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  icon: {fileID: 21300000, guid: 850390017e2834efd81d6f0b95fd791f, type: 3}
   targetType: 2

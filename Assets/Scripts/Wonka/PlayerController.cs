@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
 
@@ -11,7 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int mp;
     public int attack;
     [SerializeField] private float attackInterval;
-    [SerializeField] private float throwPower;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
 
@@ -473,8 +473,16 @@ public class PlayerController : MonoBehaviour
         {
             float x = Random.Range(-1f, 1f);
             float z = Random.Range(-1f, 1f);
-            Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
-
+            GameObject clonePlayer = Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
+            clonePlayer.GetComponent<PlayerController>().hp /= 2;
+            clonePlayer.GetComponent<PlayerController>().mp /= 2;
+            clonePlayer.GetComponent<PlayerController>().attack /= 2;
+            clonePlayer.GetComponent<PlayerController>().defense /= 2;
+            Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.material.color = Color.gray;
+            }
         }
         GameManager.instance.CreateCharacterList();
     }
