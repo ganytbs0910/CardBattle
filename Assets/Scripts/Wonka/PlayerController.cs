@@ -7,18 +7,17 @@ using DG.Tweening;
 public class PlayerController : MonoBehaviour
 {
     [Header("Playerのステータス")]
-    [SerializeField] private int hp;
-    [SerializeField] private int mp;
+    public int maxHp = 100;
+    public int maxMp = 100;
     public int attack;
-    [SerializeField] private float attackInterval;
-    [SerializeField] private float throwPower;
+    [SerializeField] private float attackInterval;//攻撃間隔
     [SerializeField] private int defense;
     [SerializeField] private int speed;
 
-
+    //通常変数
+    int hp;
+    int mp;
     float lastAttackTime = 0f; //最後に攻撃した時間
-    public int maxHp = 100;
-    public int maxMp = 100;
 
     [Header("Playerの状態")]
     public bool IsDead = false;
@@ -167,13 +166,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void ResetState()
-    {
-        //状態を初期化
-        animator.SetTrigger("Idle_Battle_SwordAndShield");
-    }
-
-
     bool CanAttack() //インターバル
     {
         return Time.time - lastAttackTime >= attackInterval;
@@ -283,25 +275,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // アニメーションイベントまたはその他の方法で攻撃状態をリセットする
-    public void ResetAttackState()
-    {
-        isAttacking = false;
-    }
-
+    //アニメイベントで使用します
     public void DisableColliderWeapon()
     {
         weaponCollider.enabled = false;
         //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
     }
-
+    //アニメイベントで使用します
     public void EnableColliderWeapon()
     {
         weaponCollider.enabled = true;
         //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
     }
 
-    // 各アニメーション状態をトリガーするメソッド
+    //移動
     public void Move()
     {
         if (CantMove == false)
@@ -315,21 +302,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //防御
     public void Deffend()
     {
         animator.SetTrigger("Deffend");
     }
 
-    public void Idle()
-    {
-        animator.SetTrigger("Idle");
-    }
-
+    //ノックバック
     public void GetHit()
     {
         animator.SetTrigger("GetHit");
     }
 
+    //死亡
     public void Die()
     {
         animator.SetTrigger("Die");
@@ -345,8 +330,8 @@ public class PlayerController : MonoBehaviour
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
 
-        //GameManager.instance.CheckCharacterList();
-        GameManager.instance.CheckGameStatus();
+        //ゲームの勝敗をチェックする
+        GameManager.instance.CheckBattleStatus();
     }
 
     public void Victory()
