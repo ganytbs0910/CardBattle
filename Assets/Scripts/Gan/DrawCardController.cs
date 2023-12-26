@@ -21,7 +21,7 @@ public class DrawCardController : MonoBehaviour
 
     public void DrawCard(int? cardID = null)
     {
-        int num = Random.Range(8, 9);
+        int num = Random.Range(1, 27);
         for (int i = 0; i < num; i++)
         {
             if (parentPanel.transform.childCount > 7) return;

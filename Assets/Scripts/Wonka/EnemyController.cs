@@ -9,15 +9,16 @@ using DG.Tweening;
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemyのステータス")]
-    [SerializeField] private int hp;
+    public int maxHp = 100;
     public int attack;
     [SerializeField] private float attackInterval;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
+    public Weapon weapon = null;
 
+    //通常変数
     float lastAttackTime = 0f; //最後に攻撃した時間
-    public int maxHp = 100;
-
+    int hp;
     public bool IsDead;
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
@@ -69,7 +70,6 @@ public class EnemyController : MonoBehaviour
 
         transform.LookAt(playerTarget);//常に敵のほうを向く
 
-
         if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
             float distance = Vector3.Distance(transform.position, playerTarget.position);
@@ -80,12 +80,12 @@ public class EnemyController : MonoBehaviour
                 if (CanAttack())　//攻撃可能
                 {
                     //print("攻撃");
-                    Attack(); // 攻撃
+                    Attack(); 
                 }
                 else//攻撃までのインターバル中
                 {
                     //print("防御");
-                    Deffend(); // 防御
+                    Defend(); 
                 }
             }
             else
@@ -115,12 +115,13 @@ public class EnemyController : MonoBehaviour
                 if (distanceSqr < closestDistanceSqr)
                 {
                     closestDistanceSqr = distanceSqr;
-                    closestPlayer = player;
+                    closestPlayer = player;　//一番近いプレイヤーを登録
                 }
             }
         }
         if (closestPlayer != null)
         {
+            //ターゲットを設定
             UpdateNavMeshTarget(closestPlayer.transform) ;
         }
         else
@@ -129,14 +130,14 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+
     //位置とアニメを初期状態にリセットする
     public void ResetToInitialPosition()
     {
+        //初期位置に移動させる
         transform.position = initialPosition;
-        //animator.SetTrigger("Idle");
-        // その他のリセット処理（必要に応じて）
 
-        // プレイヤーグループの平均位置に向く
+        // プレイヤーグループの平均位置に敵を向かせる
         Vector3 averagePlayerPosition = GetAveragePositionOfPlayers();
         LookTowards(averagePlayerPosition);
     }
@@ -158,11 +159,45 @@ public class EnemyController : MonoBehaviour
     }
 
 
-    bool CanAttack()　//インターバル
+    bool CanAttack()　//インターバルの設定
     {
         return Time.time - lastAttackTime >= attackInterval;
     }
 
+
+    public void OnTriggerEnter(Collider other)
+    {
+        print(other.name);
+        if (other.CompareTag("Weapon_Player"))
+        {
+            PlayerWeapon playerWeapon = other.GetComponent<PlayerWeapon>();
+            if (playerWeapon != null)
+            {
+                //ダメージを与えるものにぶつかったら
+                print(other.name + "が" + gameObject.name + "に"+ playerWeapon.SumDamage()+"ダメージを与えた");
+
+                GetHit();//ノックバック
+
+                Damage(playerWeapon.SumDamage()); //ダメージを与える
+            }
+        }
+
+        if (other.CompareTag("Bomb"))
+        {
+            BombController bomb = other.GetComponent<BombController>();
+            if (bomb != null)
+            {
+                //ダメージを与えるものにぶつかったら
+                print(other.name + "が" + gameObject.name + "に" + bomb.Attack + "のダメージを与えた");
+
+                GetHit();//ノックバック
+
+                Damage(bomb.Attack);//ダメージを与える
+            }
+        }
+    }
+
+    //攻撃
     public void Attack()
     {
         if (isAttacking)
@@ -182,32 +217,25 @@ public class EnemyController : MonoBehaviour
 
         lastAttackTime = Time.time; // 攻撃時刻を更新
 
-        int attackNumber = Random.Range(1, 3); // 1から2の間のランダムな数を生成
+        animator.SetTrigger("Attack");
+        animator.SetInteger("AttackType", Random.Range(1, 3));
 
-        // 生成された数に応じて異なる攻撃アニメーションをトリガー
-        switch (attackNumber)
-        {
-            case 1:
-                animator.SetTrigger("Attack01");
-                break;
-            case 2:
-                animator.SetTrigger("Attack02");
-                break;
-        }
+        //int attackNumber = Random.Range(1, 3); // 1から2の間のランダムな数を生成
+
+        //// 生成された数に応じて異なる攻撃アニメーションをトリガー
+        //switch (attackNumber)
+        //{
+        //    case 1:
+        //        animator.SetTrigger("Attack01");
+        //        break;
+        //    case 2:
+        //        animator.SetTrigger("Attack02");
+        //        break;
+        //}
         //print("Attackアニメーション実行");
     }
 
-    public void DisableColliderWeapon()
-    {
-        weaponCollider.enabled = false;
-        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
-    }
 
-    public void EnableColliderWeapon()
-    {
-        weaponCollider.enabled = true;
-        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
-    }
 
     /// <summary>
     /// ダメージを与える関数
@@ -228,40 +256,11 @@ public class EnemyController : MonoBehaviour
         //print(gameObject.name + "の残りHP= : " + hp);
     }
 
-    public void OnTriggerEnter(Collider other)
+
+    //防御
+    public void Defend()
     {
-        if (other.CompareTag("Player"))
-        {
-            PlayerController player = other.GetComponent<PlayerController>();
-            if (player != null)
-            {
-                //ダメージを与えるものにぶつかったら
-                print(other.name + "が" + gameObject.name + "に" + player + "のダメージを与えた");
-
-                GetHit();//ノックバック
-
-                Damage(player.attack);//ダメージを与える
-            }
-        }
-
-        if (other.CompareTag("Bomb"))
-        {
-            BombController bomb = other.GetComponent<BombController>();
-            if (bomb != null)
-            {
-                //ダメージを与えるものにぶつかったら
-                print(other.name + "が" + gameObject.name + "に" + bomb.Attack + "のダメージを与えた");
-
-                GetHit();//ノックバック
-
-                Damage(bomb.Attack);//ダメージを与える
-            }
-        }
-    }
-
-    public void Deffend()
-    {
-        animator.SetTrigger("Deffend");
+        animator.SetTrigger("Defend");
     }
 
     // 各アニメーション状態をトリガーするメソッド
@@ -283,17 +282,14 @@ public class EnemyController : MonoBehaviour
         animator.SetTrigger("Idle");
     }
 
-    // アニメーションイベントまたはその他の方法で攻撃状態をリセットする
-    public void ResetAttackState()
-    {
-        isAttacking = false;
-    }
 
+    //ノックバック
     public void GetHit()
     {
         animator.SetTrigger("GetHit");
     }
 
+    //死亡
     public void Die()
     {
         animator.SetTrigger("Die");
@@ -305,13 +301,12 @@ public class EnemyController : MonoBehaviour
 
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemoveEnemyFromList(this);
-        //Debug.LogError("Enemy removed from list: " + gameObject.name);
-
-        //GameManager.instance.CheckCharacterList();
-        GameManager.instance.CheckGameStatus();
 
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+
+        //ゲームの勝敗をチェックする
+        GameManager.instance.CheckBattleStatus();
 
     }
 
@@ -331,6 +326,20 @@ public class EnemyController : MonoBehaviour
 
             });
         }
+    }
+
+    //アニメイベントでも使用中
+    public void DisableColliderWeapon()
+    {
+        weaponCollider.enabled = false;
+        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
+    }
+
+    //アニメイベントで使用中
+    public void EnableColliderWeapon()
+    {
+        weaponCollider.enabled = true;
+        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
     }
 
     void CheckAbnormalCondition()
@@ -369,15 +378,15 @@ public class EnemyController : MonoBehaviour
                 //プレイヤーがターゲット
                 break;
             case 8:
-                //敵がターゲット
+                //敵がターゲット 敵の体力-10％
                 DecreaseHealth(0.1f);
                 break;
             case 9:
-                //敵がターゲット
+                //敵がターゲット 敵の体力-20％
                 DecreaseHealth(0.2f);
                 break;
             case 10:
-                //敵がターゲット
+                //敵がターゲット 敵の体力-30％
                 DecreaseHealth(0.3f);
                 break;
             case 11:
@@ -398,16 +407,16 @@ public class EnemyController : MonoBehaviour
             case 16:
                 //プレイヤーがターゲット
                 break;
-            case 17:
+            case 17://敵を毒状態にする
                 //敵がターゲット
                 break;
-            case 18:
+            case 18://敵をマヒ状態にする
                 //敵がターゲット
                 break;
-            case 19:
+            case 19://敵を眠り状態にする
                 //敵がターゲット
                 break;
-            case 20:
+            case 20://敵をスロー状態にする
                 //敵がターゲット
                 break;
             case 21:
@@ -430,13 +439,15 @@ public class EnemyController : MonoBehaviour
         hp = (int)(hp * (1 - value));
     }
 
+    //
     void LookTowards(Vector3 position)
     {
         Vector3 direction = position - transform.position;
         direction.y = 0; // Y軸の回転は無視
         transform.rotation = Quaternion.LookRotation(direction);
     }
-
+    
+    //プレイヤーたちの平均の位置を取得
     Vector3 GetAveragePositionOfPlayers()
     {
         var players = FindObjectsOfType<PlayerController>();

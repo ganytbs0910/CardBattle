@@ -22,7 +22,7 @@ public class ScreenRay : MonoBehaviour
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     CardEntity.TargetType targetType;
 
-
+    [SerializeField] private Weapon weapon;
     private void Start()
     {
 
@@ -64,6 +64,12 @@ public class ScreenRay : MonoBehaviour
                 if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
                     collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
+
+                    if (weapon != null) //武器カードだったら直接ここで装備させる
+                    {
+                        collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
+                    }
+
                     Destroy(chooseCard);
                     cardID = 0;
                 }
@@ -108,6 +114,8 @@ public class ScreenRay : MonoBehaviour
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
                 cardID = result.gameObject.GetComponent<CardMovement>().cardID;
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
+
+                weapon = result.gameObject.GetComponent<CardMovement>().weapon;
                 return;
             }
         }
