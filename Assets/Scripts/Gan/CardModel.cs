@@ -12,6 +12,8 @@ public class CardModel
     public Action<CardModel> effect; // 効果を保存するための変数
     public CardEntity.TargetType targetType;
 
+    public Weapon weapon =null;
+
     public CardModel(int cardID)
     {
         CardEntity cardEntity = Resources.Load<CardEntity>("CardEntityList/Card " + cardID);
@@ -25,6 +27,8 @@ public class CardModel
             icon = cardEntity.icon;
             effect = cardEntity.effect;
             targetType = cardEntity.targetType;
+
+            this.weapon = cardEntity.weapon;
         }
     }
 

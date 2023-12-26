@@ -30,7 +30,7 @@ public class EnemyUIManager : MonoBehaviour
     /// <param name="hp">現在のHPを渡してください</param>
     public void UpdateHP(int hp)
     {
-        hpSlider.DOValue(hp, 0.5f);
+        hpSlider.DOValue(hp, 0.2f);
         //一つ目に最終的な値、二つ目に時間を入れる。
     }
 }

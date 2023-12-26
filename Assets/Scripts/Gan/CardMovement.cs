@@ -15,6 +15,8 @@ public class CardMovement : MonoBehaviour
     public int cardID;
     public CardEntity.TargetType targetType;
 
+    public Weapon weapon;
+
     private void Start()
     {
         toggle.group = GetComponentInParent<ToggleGroup>();
@@ -24,6 +26,8 @@ public class CardMovement : MonoBehaviour
         cardModel = cardController.model;
         cardID = cardModel.cardID;
         targetType = cardModel.targetType;
+
+        weapon = cardModel.weapon;
     }
 
     void Update()

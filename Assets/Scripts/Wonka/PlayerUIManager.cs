@@ -33,13 +33,13 @@ public class PlayerUIManager : MonoBehaviour
     /// <param name="hp">現在のHPをいれる</param>
     public void UpdateHP(int hp)
     {
-        hpSlider.DOValue(hp, 0.5f);
+        hpSlider.DOValue(hp, 0.2f);
         //一つ目に最終的な値、二つ目に時間を入れる。
     }
 
     public void UpdateMP(int mp)
     {
-        mpSlider.DOValue(mp, 0.5f);
+        mpSlider.DOValue(mp, 0.2f);
         //一つ目に最終的な値、二つ目に時間を入れる。
     }
 }
