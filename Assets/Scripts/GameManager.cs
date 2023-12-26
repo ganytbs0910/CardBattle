@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public List<PlayerController> players;
     public List<EnemyController> enemies;
-    [SerializeField] private GachaController gachaController;
+    [SerializeField] private DrawCardController drawCardController;
 
     public GameObject enemyPrefab; // 敵のプレハブ
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         UIManager.instance.Loading(stageHierarchy);
-        gachaController.DrawCard();
+        drawCardController.DrawCard();
     }
 
     //キャラクターのリストを作成する。あるいはリストをリフレッシュするする。

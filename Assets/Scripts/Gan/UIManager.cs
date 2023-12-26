@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
         inforText.gameObject.SetActive(false);
         camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 350, 1.0f);
+        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
         battleStartButton.gameObject.SetActive(true);
     }
     public void Loading(int stageHierarchy)

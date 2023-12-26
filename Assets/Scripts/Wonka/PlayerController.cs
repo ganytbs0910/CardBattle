@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
 
@@ -61,7 +62,8 @@ public class PlayerController : MonoBehaviour
         playerUIManager.Init(this);//スライダーの初期化
         initialPosition = transform.position;
 
-        //EquipWeapon(defaultWeapon);
+        EquipWeapon(defaultWeapon);
+
     }
 
     void Update()
@@ -94,7 +96,7 @@ public class PlayerController : MonoBehaviour
             if (distance <= agent.stoppingDistance)
             {
                 //print("攻撃範囲内");
-                if (CanAttack())　//攻撃可能
+                if (CanAttack()) //攻撃可能
                 {
                     //print("攻撃");
                     Attack(); // 攻撃
@@ -328,6 +330,9 @@ public class PlayerController : MonoBehaviour
             weaponCollider.enabled = false;
         }
 
+        if (currentWeapon == null) return;
+        weaponCollider = currentWeapon.GetCollider();
+        weaponCollider.enabled = false;
     }
 
     //アニメイベントで使用します
@@ -342,6 +347,10 @@ public class PlayerController : MonoBehaviour
             weaponCollider = currentWeapon.GetCollider();
             weaponCollider.enabled = true;
         }
+
+        if (currentWeapon == null) return;
+        weaponCollider = currentWeapon.GetCollider();
+        weaponCollider.enabled = true;
     }
 
     //移動
@@ -508,8 +517,16 @@ public class PlayerController : MonoBehaviour
         {
             float x = Random.Range(-1f, 1f);
             float z = Random.Range(-1f, 1f);
-            Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
-
+            GameObject clonePlayer = Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
+            clonePlayer.GetComponent<PlayerController>().hp /= 2;
+            clonePlayer.GetComponent<PlayerController>().mp /= 2;
+            clonePlayer.GetComponent<PlayerController>().attack /= 2;
+            clonePlayer.GetComponent<PlayerController>().defense /= 2;
+            Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
+            foreach (Renderer renderer in renderers)
+            {
+                renderer.material.color = Color.gray;
+            }
         }
         GameManager.instance.CreateCharacterList();
     }
