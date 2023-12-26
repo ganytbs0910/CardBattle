@@ -14,11 +14,12 @@ public class Weapon : ScriptableObject
     BoxCollider weaponCollider;
     [SerializeField] bool isRightHanded = true;
     [SerializeField] bool TwoHandedWeapon;
+    [SerializeField] bool isShield;
 
     const string rightWeaponName = "rightWeapon";
     const string leftWeaponName = "leftWeapon";
 
-    public void Spawn(Transform rightHand, Transform leftHand,Animator animator)
+    public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
         if (weaponPrefab != null)
         {
@@ -27,7 +28,7 @@ public class Weapon : ScriptableObject
             Transform handTransform = GetTransform(rightHand, leftHand);
             //手の位置を取得する。
 
-            GameObject weapon =Instantiate(weaponPrefab, handTransform);
+            GameObject weapon = Instantiate(weaponPrefab, handTransform);
             //手の位置に武器を生成する
 
             weaponCollider = weapon.GetComponent<BoxCollider>();
@@ -40,9 +41,25 @@ public class Weapon : ScriptableObject
             {
                 weapon.name = leftWeaponName;
             }
-  
         }
-        if (animatorOverride != null)
+
+        // 右手装備の武器かつ左手が空の場合の処理(OHS用)
+        if (isRightHanded && IsLeftHandEmpty(leftHand))
+        {
+            if (animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = animatorOverride;
+                //現在のアニメーターにoverrideを上書きする   
+            }
+        }
+        // 右手装備が空かつ左手が盾の処理(盾用)
+        if (isShield && IsRightHandEmpty(leftHand))
+        {
+            //NoWeaponのアニメーターを維持
+            //ApplyAnimatorOverride(animator,"Player_NoWeapon");
+            //現在のアニメーターにoverrideを上書きする   
+        }
+        else
         {
             animator.runtimeAnimatorController = animatorOverride;
             //現在のアニメーターにoverrideを上書きする   
@@ -59,7 +76,7 @@ public class Weapon : ScriptableObject
 
         if (TwoHandedWeapon || !isRightHanded) // 両手に装備または左手に装備
         {
-            DestroyWeaponInHand(leftHand, leftWeaponName);
+            DestroyWeaponInHand(leftHand, leftWeaponName);                    
         }
     }
 
@@ -102,5 +119,35 @@ public class Weapon : ScriptableObject
     {
         
         return weaponCollider;
+    }
+
+    // 左手が空かどうかを確認する
+    public bool IsLeftHandEmpty(Transform leftHand)
+    {
+        return leftHand.Find(leftWeaponName) == null;
+    }
+
+    // 右手が空かどうかを確認する
+    public bool IsRightHandEmpty(Transform rightHand)
+    {
+        return rightHand.Find(leftWeaponName) == null;
+    }
+
+    AnimatorOverrideController LoadAnimatorOverride(string name)
+    {
+        return Resources.Load<AnimatorOverrideController>(name);
+    }
+
+    void ApplyAnimatorOverride(Animator animator, string overrideName)
+    {
+        AnimatorOverrideController overrideController = LoadAnimatorOverride(overrideName);
+        if (overrideController != null)
+        {
+            animator.runtimeAnimatorController = overrideController;
+        }
+        else
+        {
+            Debug.LogError("Animator Override not found: " + overrideName);
+        }
     }
 }

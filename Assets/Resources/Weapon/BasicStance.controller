@@ -32,7 +32,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DefendHit_SwordAndShield
+  m_Name: DefendHit
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -138,7 +138,7 @@ AnimatorStateMachine:
   m_AnyStatePosition: {x: -10, y: 240, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
-  m_ParentStateMachinePosition: {x: 440, y: -130, z: 0}
+  m_ParentStateMachinePosition: {x: 440, y: -120, z: 0}
   m_DefaultState: {fileID: 4778133979189956749}
 --- !u!1107 &-7502922942882250525
 AnimatorStateMachine:
@@ -238,7 +238,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack01_SwordAndShiled
+  m_Name: Attack01
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -302,7 +302,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo05_InPlaceWithRMHeight_SwordAndShield
+  m_Name: Combo05_InPlaceWithRMHeight
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -316,7 +316,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 14d93537385869745bfeec9c4ae53cc9, type: 3}
+  m_Motion: {fileID: 7400000, guid: 6a9e5f4ed129da144ba5342d5f53f958, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -363,7 +363,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack04_SwordAndShiled
+  m_Name: Attack04
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -390,7 +390,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack03_SwordAndShiled
+  m_Name: Attack03
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -442,7 +442,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MoveFWD_Battle_InPlace_SwordAndShield
+  m_Name: MoveFWD_Battle_InPlace
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -613,7 +613,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Battle_SwordAndShield
+  m_Name: Idle_Battle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -737,7 +737,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Attack02_SwordAndShiled
+  m_Name: Attack02
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -854,7 +854,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo04_InPlace_SwordAndShield
+  m_Name: Combo04_InPlace
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -868,7 +868,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: ae5a37503dafc8c499545a44d0a7ccf5, type: 3}
+  m_Motion: {fileID: 7400000, guid: 579acbb1a39823140b8b4494a2bb0a4c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -969,7 +969,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GetHit02_SwordAndShield
+  m_Name: GetHit02
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1052,7 +1052,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Die01_SwordAndShield
+  m_Name: Die01
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1079,7 +1079,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo01_InPlace_SwordAndShield
+  m_Name: Combo01_InPlace
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1093,7 +1093,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: f9551df6b2799a54aa79faeac8d146e2, type: 3}
+  m_Motion: {fileID: 7400000, guid: 20056f015ff1bd443be42da5292a39ad, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1175,7 +1175,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Defend_SwordAndShield
+  m_Name: Defend
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1260,7 +1260,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo02_InPlace_SwordAndShield
+  m_Name: Combo02_InPlace
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1274,7 +1274,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: 7413d1436ce0e8647861f0dc44921e1f, type: 3}
+  m_Motion: {fileID: 7400000, guid: 382db44f918133348a5bb8eceb284772, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1287,7 +1287,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GetHit01_SwordAndShield
+  m_Name: GetHit01
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1469,7 +1469,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Die01_Stay_SwordAndShield
+  m_Name: Die01_Stay
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1573,7 +1573,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Victory_Battle_SwordAndShield
+  m_Name: Victory_Battle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1617,7 +1617,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Combo03_InPlace_SwordAndShield
+  m_Name: Combo03_InPlace
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1631,7 +1631,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1827226128182048838, guid: fdd9955f7bfef2b48a0b3bf547c08294, type: 3}
+  m_Motion: {fileID: 7400000, guid: bd6cc2793a305d947a39a3d85ecd4d69, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -18,3 +18,4 @@ MonoBehaviour:
   defendPoint: 10
   isRightHanded: 0
   TwoHandedWeapon: 0
+  isShield: 1
