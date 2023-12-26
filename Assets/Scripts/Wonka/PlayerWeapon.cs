@@ -13,6 +13,8 @@ public class PlayerWeapon : MonoBehaviour
     }
     public int SumDamage()
     {
+        if (player.currentWeapon == null) return player.attack;
+
         int weaponDamage = player.attack + (int)player.currentWeapon.GetAttackPoint();
 
         return weaponDamage;
