@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float attackInterval;
     [SerializeField] private int defense;
     [SerializeField] private int speed;
+    public Weapon weapon = null;
 
     //通常変数
     float lastAttackTime = 0f; //最後に攻撃した時間
@@ -84,7 +85,7 @@ public class EnemyController : MonoBehaviour
                 else//攻撃までのインターバル中
                 {
                     //print("防御");
-                    Deffend(); 
+                    Defend(); 
                 }
             }
             else
@@ -166,17 +167,18 @@ public class EnemyController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        print(other.name);
+        if (other.CompareTag("Weapon_Player"))
         {
-            PlayerController player = other.GetComponent<PlayerController>();
-            if (player != null)
+            PlayerWeapon playerWeapon = other.GetComponent<PlayerWeapon>();
+            if (playerWeapon != null)
             {
                 //ダメージを与えるものにぶつかったら
-                print(other.name + "が" + gameObject.name + "に" + player + "のダメージを与えた");
+                print(other.name + "が" + gameObject.name + "に"+ playerWeapon.SumDamage()+"ダメージを与えた");
 
                 GetHit();//ノックバック
 
-                Damage(player.attack);//ダメージを与える
+                Damage(playerWeapon.SumDamage()); //ダメージを与える
             }
         }
 
@@ -215,18 +217,21 @@ public class EnemyController : MonoBehaviour
 
         lastAttackTime = Time.time; // 攻撃時刻を更新
 
-        int attackNumber = Random.Range(1, 3); // 1から2の間のランダムな数を生成
+        animator.SetTrigger("Attack");
+        animator.SetInteger("AttackType", Random.Range(1, 3));
 
-        // 生成された数に応じて異なる攻撃アニメーションをトリガー
-        switch (attackNumber)
-        {
-            case 1:
-                animator.SetTrigger("Attack01");
-                break;
-            case 2:
-                animator.SetTrigger("Attack02");
-                break;
-        }
+        //int attackNumber = Random.Range(1, 3); // 1から2の間のランダムな数を生成
+
+        //// 生成された数に応じて異なる攻撃アニメーションをトリガー
+        //switch (attackNumber)
+        //{
+        //    case 1:
+        //        animator.SetTrigger("Attack01");
+        //        break;
+        //    case 2:
+        //        animator.SetTrigger("Attack02");
+        //        break;
+        //}
         //print("Attackアニメーション実行");
     }
 
@@ -253,9 +258,9 @@ public class EnemyController : MonoBehaviour
 
 
     //防御
-    public void Deffend()
+    public void Defend()
     {
-        animator.SetTrigger("Deffend");
+        animator.SetTrigger("Defend");
     }
 
     // 各アニメーション状態をトリガーするメソッド
@@ -373,15 +378,15 @@ public class EnemyController : MonoBehaviour
                 //プレイヤーがターゲット
                 break;
             case 8:
-                //敵がターゲット
+                //敵がターゲット 敵の体力-10％
                 DecreaseHealth(0.1f);
                 break;
             case 9:
-                //敵がターゲット
+                //敵がターゲット 敵の体力-20％
                 DecreaseHealth(0.2f);
                 break;
             case 10:
-                //敵がターゲット
+                //敵がターゲット 敵の体力-30％
                 DecreaseHealth(0.3f);
                 break;
             case 11:
@@ -402,16 +407,16 @@ public class EnemyController : MonoBehaviour
             case 16:
                 //プレイヤーがターゲット
                 break;
-            case 17:
+            case 17://敵を毒状態にする
                 //敵がターゲット
                 break;
-            case 18:
+            case 18://敵をマヒ状態にする
                 //敵がターゲット
                 break;
-            case 19:
+            case 19://敵を眠り状態にする
                 //敵がターゲット
                 break;
-            case 20:
+            case 20://敵をスロー状態にする
                 //敵がターゲット
                 break;
             case 21:

@@ -13,6 +13,8 @@ public class CardEntity : ScriptableObject
     public string information;
     public Sprite icon;
     public Action<CardModel> effect;
+
+    public Weapon weapon = null;
     public enum TargetType
     {
         Player,
