@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062f3841fcc2deb4e85adf94ba0ba757, type: 3}
   m_Name: NoWeapon
   m_EditorClassIdentifier: 
-  animatorOverride: {fileID: 0}
+  animatorOverride: {fileID: 22100000, guid: 1fa1579904e67b34d8f02c044f45024d, type: 2}
   weaponPrefab: {fileID: 0}
-  weaponDamage: 0
-  weaponRange: 0
-  usehand: 2
+  attackPoint: 0
+  defendPoint: 0
+  isRightHanded: 0
+  TwoHandedWeapon: 0
+  isShield: 0

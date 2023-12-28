@@ -7,7 +7,9 @@ using UnityEngine;
 
 public class Weapon : ScriptableObject
 {
-    [SerializeField] AnimatorOverrideController animatorOverride = null; //animatorの登録
+
+    [SerializeField] AnimatorOverrideController animatorOverride; //animatorの登録
+
     [SerializeField] GameObject weaponPrefab = null; //武器の登録
     [SerializeField] int attackPoint;
     [SerializeField] int defendPoint;

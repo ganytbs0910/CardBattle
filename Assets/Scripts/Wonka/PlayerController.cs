@@ -46,6 +46,9 @@ public class PlayerController : MonoBehaviour
     public Weapon currentWeapon = null;
     BoxCollider weaponCollider;
 
+    public GameObject NoWeapon_r;
+    public GameObject NoWeapon_l;
+
     void Start()
     {
         hp = maxHp;
@@ -60,6 +63,7 @@ public class PlayerController : MonoBehaviour
         initialPosition = transform.position;
 
         EquipWeapon(defaultWeapon);
+
     }
 
     void Update()
@@ -316,6 +320,16 @@ public class PlayerController : MonoBehaviour
     //アニメイベントで使用します
     public void DisableColliderWeapon()
     {
+        if (currentWeapon == null)
+        {
+            NoWeapon_l.GetComponent<BoxCollider>().enabled = false;
+        }
+        else
+        {
+            weaponCollider = currentWeapon.GetCollider();
+            weaponCollider.enabled = false;
+        }
+
         if (currentWeapon == null) return;
         weaponCollider = currentWeapon.GetCollider();
         weaponCollider.enabled = false;
@@ -324,6 +338,16 @@ public class PlayerController : MonoBehaviour
     //アニメイベントで使用します
     public void EnableColliderWeapon()
     {
+        if (currentWeapon == null)
+        {
+            NoWeapon_l.GetComponent<BoxCollider>().enabled = true;
+        }
+        else
+        {
+            weaponCollider = currentWeapon.GetCollider();
+            weaponCollider.enabled = true;
+        }
+
         if (currentWeapon == null) return;
         weaponCollider = currentWeapon.GetCollider();
         weaponCollider.enabled = true;
