@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
+    [SerializeField] private RectTransform collectionContent;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
     [SerializeField] private GameObject winPanel;
@@ -21,9 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text inforText;
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
-
-
-
+    public int i = 0;
     void Awake()
     {
         if (instance == null)
@@ -47,6 +46,8 @@ public class UIManager : MonoBehaviour
 
         //stageTextを更新
         stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
+
+        CollectionCardUpdate();
     }
 
     public void MoveUI()
@@ -161,8 +162,25 @@ public class UIManager : MonoBehaviour
         //DOTweenで1秒かけて現在のcanUseTextのy座標を+50の位置に移動する
         canUseText.rectTransform.DOAnchorPosY(50, 1.0f);
     }
-    public void CannotUseCard()
-    {
 
+    //コレクションが集まったら呼び出してほしい
+    public void CollectionCardUpdate()
+    {
+        //コレクションのカードを更新
+        for (int i = 0; i < collectionContent.transform.childCount; i++)
+        {
+            //カードを所持していたら...以下の処理を行う
+
+            //子オブジェクトのDetailPanelを取得
+            GameObject detailPanel = collectionContent.transform.GetChild(i).GetChild(0).gameObject;
+            TMP_Text itemName = detailPanel.transform.GetChild(0).GetComponent<TMP_Text>();
+            Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
+            TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
+            CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i + 1));
+            //コレクションの情報を反映
+            itemName.text = collectionEntity.name;
+            itemInformation.text = collectionEntity.information;
+            itemIcon.sprite = collectionEntity.icon;
+        }
     }
 }

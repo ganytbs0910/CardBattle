@@ -32,6 +32,7 @@ public class CardMovement : MonoBehaviour
 
     void Update()
     {
+
     }
 
     private void OnToggleChanged(bool isOn)

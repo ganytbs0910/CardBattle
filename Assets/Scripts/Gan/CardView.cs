@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +6,7 @@ using TMPro;
 
 public class CardView : MonoBehaviour
 {
+
     //[SerializeField] TMP_Text nameText, informationText;
     [SerializeField] Image iconImage;
 
