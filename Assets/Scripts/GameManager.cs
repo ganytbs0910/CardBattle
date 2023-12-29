@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
         if (enemies.Contains(removeEnemy))//removeEnemyがリストに含まれていたら
         {
             enemies.Remove(removeEnemy);
-            print("リストから"+removeEnemy.name+"が除名されました");
+            print("リストから" + removeEnemy.name + "が除名されました");
         }
     }
     /// <summary>
@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         if (players.Contains(removePlayer))//removePlayerがリストに含まれていたら
         {
             players.Remove(removePlayer);
-            print("リストから"+removePlayer+"が除名されました");
+            print("リストから" + removePlayer + "が除名されました");
         }
     }
 

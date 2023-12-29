@@ -7,6 +7,8 @@ using UnityEditor;
 
 namespace GarageKit
 {
+    //Unityエディターのみで動作する
+#if UNITY_EDITOR
     /// <summary>
     /// 新規スクリプト生成時にテキストエンコードをUTF-8に変換する
     /// </summary>
@@ -259,4 +261,5 @@ namespace GarageKit
             return null;
         }
     }
+#endif
 }
