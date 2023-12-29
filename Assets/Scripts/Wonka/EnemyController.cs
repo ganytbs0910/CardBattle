@@ -11,9 +11,9 @@ public class EnemyController : MonoBehaviour
     [Header("Enemyのステータス")]
     public int maxHp = 100;
     public int attack;
-    [SerializeField] private float attackInterval;
-    [SerializeField] private int defense;
-    [SerializeField] private int speed;
+    public float attackInterval;
+    public int defense;
+    public int speed;
     public Weapon weapon = null;
 
     //通常変数
@@ -80,12 +80,12 @@ public class EnemyController : MonoBehaviour
                 if (CanAttack())　//攻撃可能
                 {
                     //print("攻撃");
-                    Attack(); 
+                    Attack();
                 }
                 else//攻撃までのインターバル中
                 {
                     //print("防御");
-                    Defend(); 
+                    Defend();
                 }
             }
             else
@@ -122,7 +122,7 @@ public class EnemyController : MonoBehaviour
         if (closestPlayer != null)
         {
             //ターゲットを設定
-            UpdateNavMeshTarget(closestPlayer.transform) ;
+            UpdateNavMeshTarget(closestPlayer.transform);
         }
         else
         {
@@ -174,7 +174,7 @@ public class EnemyController : MonoBehaviour
             if (playerWeapon != null)
             {
                 //ダメージを与えるものにぶつかったら
-                print(other.name + "が" + gameObject.name + "に"+ playerWeapon.SumDamage()+"ダメージを与えた");
+                print(other.name + "が" + gameObject.name + "に" + playerWeapon.SumDamage() + "ダメージを与えた");
 
                 GetHit();//ノックバック
 
@@ -446,7 +446,7 @@ public class EnemyController : MonoBehaviour
         direction.y = 0; // Y軸の回転は無視
         transform.rotation = Quaternion.LookRotation(direction);
     }
-    
+
     //プレイヤーたちの平均の位置を取得
     Vector3 GetAveragePositionOfPlayers()
     {

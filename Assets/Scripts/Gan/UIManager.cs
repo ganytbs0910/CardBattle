@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text inforText;
     [SerializeField] private TMP_Text canUseText;
+    [SerializeField] private TMP_Text RemainingBossText;
 
 
 
@@ -100,6 +101,15 @@ public class UIManager : MonoBehaviour
             cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardMove = true;
         }
         */
+        int stage = 10 - GameManager.instance.stageHierarchy;
+        if (stage == 0)
+        {
+            RemainingBossText.text = $"ボス戦 !!";
+        }
+        else
+        {
+            RemainingBossText.text = $"ボスまで残り:{stage}階層";
+        }
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
 

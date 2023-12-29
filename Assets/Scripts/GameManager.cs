@@ -122,6 +122,11 @@ public class GameManager : MonoBehaviour
         {
             // 敵をインスタンス化し、"Enemies" オブジェクトの子として設定
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+            //敵のステータスを階層によって強くするように調整
+            newEnemy.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 10);
+            newEnemy.GetComponent<EnemyController>().attack = 10 + (stageHierarchy);
+            newEnemy.GetComponent<EnemyController>().defense = 5 + (stageHierarchy);
+
             newEnemy.transform.SetParent(enemiesParent.transform);
             print(newEnemy.name + "をSpawnPointにスポーンさせました");
         }
