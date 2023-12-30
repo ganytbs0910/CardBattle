@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: OHS_WoodShield
   m_EditorClassIdentifier: 
   animatorOverride: {fileID: 22100000, guid: d5179670baab01741b624af0d87f5c18, type: 2}
+  subAnimatorOverride: {fileID: 0}
   weaponPrefab: {fileID: 8224238496433084121, guid: d7baac3b721ffd14face3ef5c42dc077, type: 3}
+  weaponRange: 0
   attackPoint: 0
-  defendPoint: 10
+  defendPoint: 30
   isRightHanded: 0
   TwoHandedWeapon: 0
   isShield: 1

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062f3841fcc2deb4e85adf94ba0ba757, type: 3}
   m_Name: OHS_WoodStick
   m_EditorClassIdentifier: 
-  animatorOverride: {fileID: 22100000, guid: d5179670baab01741b624af0d87f5c18, type: 2}
+  animatorOverride: {fileID: 22100000, guid: a7b864040d0aaed42983e1a7780c013d, type: 2}
+  subAnimatorOverride: {fileID: 22100000, guid: 23f9879ea8c7472488eeb3d9da8c418a, type: 2}
   weaponPrefab: {fileID: 7386842131459821807, guid: fe7f85e88ae0a5542a04a12a5a021094, type: 3}
-  attackPoint: 10
+  weaponRange: 0
+  attackPoint: 30
   defendPoint: 0
   isRightHanded: 1
+  TwoHandedWeapon: 0
+  isShield: 0

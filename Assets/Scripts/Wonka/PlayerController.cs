@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     public Transform enemyTarget; // 敵の位置
     private NavMeshAgent agent; // NavMesh Agent
+    public float Distance;//NavMeshAgent
     private Animator animator;
 
     //public Collider weaponCollider;//武器の当たり判定
@@ -128,9 +129,15 @@ public class PlayerController : MonoBehaviour
         }
         currentWeapon = weapon;
 
+        //武器を生成
         weapon.Spawn(rightHandTransform,leftHandTransform, animator);
 
+        //武器のコライダーを取得
         weaponCollider = currentWeapon.GetCollider();
+
+        //武器による距離を調整
+        Distance = weapon.GetRange();
+        agent.stoppingDistance = Distance;
 
         print(weapon + "を装備しました");
     }

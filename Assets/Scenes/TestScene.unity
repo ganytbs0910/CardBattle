@@ -18832,6 +18832,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 938333424}
     m_Modifications:
+    - target: {fileID: 4320264501732765, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3146518274554010978, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -18847,6 +18851,42 @@ PrefabInstance:
     - target: {fileID: 3146518274888729039, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275510574696, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275510574697, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275510574697, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275510574697, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275575334020, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275575334021, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.045
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518275575334021, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772086771619537499, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 1fa1579904e67b34d8f02c044f45024d, type: 2}
+    - target: {fileID: 6309590542698810560, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6309590542698810562, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
       propertyPath: m_RootOrder
