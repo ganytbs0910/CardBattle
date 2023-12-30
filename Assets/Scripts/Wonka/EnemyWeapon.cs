@@ -14,7 +14,8 @@ public class EnemyWeapon : MonoBehaviour
 
     public int SumDamage()
     {
-        int weaponDamage = enemy.attack + (int)enemy.weapon.GetAttackPoint();
+        int weaponDamage = enemy.attack;
+            //+ (int)enemy.weapon.GetAttackPoint();
 
         return weaponDamage;
     }
