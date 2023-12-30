@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScreenRay : MonoBehaviour
 {
+    public TMP_Text debugCardEffectText;
     public DrawCardController drawCardController;
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private GameObject cardListPanel;
@@ -24,10 +26,6 @@ public class ScreenRay : MonoBehaviour
     CardEntity.TargetType targetType;
 
     [SerializeField] private Weapon weapon;
-    private void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -117,7 +115,7 @@ public class ScreenRay : MonoBehaviour
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
                 cardID = result.gameObject.GetComponent<CardMovement>().cardID;
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
-
+                debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 weapon = result.gameObject.GetComponent<CardMovement>().weapon;
                 return;
             }
@@ -192,6 +190,7 @@ public class ScreenRay : MonoBehaviour
                 chooseCard = cardListPanel.transform.GetChild(i).gameObject;
                 cardID = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardID;
                 targetType = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().targetType;
+                debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().name;
             }
         }
     }

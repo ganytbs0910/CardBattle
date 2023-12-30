@@ -157,9 +157,9 @@ public class GameManager : MonoBehaviour
         {
             GameObject newEnemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
             //ステータス調整
-            newEnemy.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 10);
-            newEnemy.GetComponent<EnemyController>().attack = 10 + (stageHierarchy);
-            newEnemy.GetComponent<EnemyController>().defense = 5 + (stageHierarchy);
+            newEnemy.GetComponent<EnemyController>().maxHp = 100 / enemiesToSpawn + (stageHierarchy * 10);
+            newEnemy.GetComponent<EnemyController>().attack = 10 / enemiesToSpawn + (stageHierarchy);
+            newEnemy.GetComponent<EnemyController>().defense = 5 / enemiesToSpawn + (stageHierarchy);
             newEnemy.transform.SetParent(enemiesParent.transform);
             //print(newEnemy.name + "をSpawnPointにスポーンさせました");
         }
