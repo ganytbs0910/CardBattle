@@ -158,6 +158,7 @@ public class UIManager : MonoBehaviour
     {
         GameManager.instance.battleState = false;
         losePanel.SetActive(true);
+        PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("StageHierarchy", 1);
         Loading(1);
     }

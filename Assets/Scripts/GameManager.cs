@@ -25,15 +25,17 @@ public class GameManager : MonoBehaviour
 
         // DoTweenの初期化
         DOTween.Init();
-    }
-    void Start()
-    {
+
         if (!PlayerPrefs.HasKey("StageHierarchy"))
         {
             PlayerPrefs.SetInt("StageHierarchy", 1);
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
         CreateCharacterList(); //プレイヤーと敵のリストを更新
+    }
+    void Start()
+    {
+
     }
 
     //次のステージへ移行する
@@ -43,14 +45,28 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         drawCardController.DrawCard();
 
-        // 逆順にループ
+        // 複製したプレイヤーを削除
         for (int i = playerObjects.Count - 1; i >= 0; i--)
         {
             if (playerObjects[i].name == "ShadowPlayer")
             {
                 Destroy(playerObjects[i]);
                 playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
+
             }
+        }
+        KeepCurrentStage();
+    }
+
+    void KeepCurrentStage()
+    {
+        PlayerPrefs.SetInt("CurrentStagePlayers", players.Count);
+        PlayerPrefs.SetInt("CurrentStageEnemies", enemies.Count);
+        PlayerPrefs.SetInt("CurrentStageCard", drawCardController.cardIDList.Count);
+        //このカードの内容まで保存するか怪しい。
+        for (int i = 0; i < drawCardController.cardIDList.Count; i++)
+        {
+            PlayerPrefs.SetInt($"Card{i}", drawCardController.cardIDList[i]);
         }
     }
 
@@ -64,7 +80,7 @@ public class GameManager : MonoBehaviour
         enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
 
         UpdateAllNavmeshTargets();//敵と味方のターゲットを最も近い相手に指定
-        //RandomTarget();//それぞれのターゲットをランダム指定
+        //RandomTarget(); //それぞれのターゲットをランダム指定
     }
 
     // 各陣営のNavMeshターゲットを更新

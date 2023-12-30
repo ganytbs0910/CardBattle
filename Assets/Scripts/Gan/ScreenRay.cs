@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ScreenRay : MonoBehaviour
 {
+    public DrawCardController drawCardController;
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private GameObject cardListPanel;
     [SerializeField] private GameObject chooseCard;
@@ -63,8 +64,8 @@ public class ScreenRay : MonoBehaviour
                 //もしPlayerタグを持っているオブジェクトに当たったら
                 if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
+                    drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
-
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
@@ -75,6 +76,7 @@ public class ScreenRay : MonoBehaviour
                 }
                 else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
+                    drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
                     Destroy(chooseCard);
                     cardID = 0;
@@ -84,6 +86,7 @@ public class ScreenRay : MonoBehaviour
                     switch (cardID)
                     {
                         case 24:
+                            drawCardController.cardIDList.Remove(cardID);
                             ThrowObject(bombPrefab, lastRaycastHit.point, 2500);
                             Destroy(chooseCard);
                             cardID = 0;
