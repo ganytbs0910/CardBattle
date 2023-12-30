@@ -437,6 +437,8 @@ public class EnemyController : MonoBehaviour
     void DecreaseHealth(float value)
     {
         hp = (int)(hp * (1 - value));
+
+        print("敵に" + value + "ダメージを与えました");
     }
 
     //

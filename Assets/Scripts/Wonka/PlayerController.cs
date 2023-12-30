@@ -46,8 +46,11 @@ public class PlayerController : MonoBehaviour
     public Weapon currentWeapon = null;
     BoxCollider weaponCollider;
 
-    public GameObject NoWeapon_r;
-    public GameObject NoWeapon_l;
+    //public GameObject NoWeapon_r;
+    //public GameObject NoWeapon_l;
+
+    //public GameObject[] NoWeapons;
+    public BoxCollider[] noWeaponCols;
 
     void Start()
     {
@@ -129,29 +132,7 @@ public class PlayerController : MonoBehaviour
 
         weaponCollider = currentWeapon.GetCollider();
 
-        //switch (defaultWeapon.usehand)
-        //{
-        //    case Weapon.UseHand.Left:
-        //        //左手に武器を装備する
-        //        defaultWeapon.Spawn(leftHandTransform, animator);
-        //        break;
-        //    case Weapon.UseHand.Right:
-        //        //右手に武器を装備する
-        //        defaultWeapon.Spawn(rightHandTransform, animator);
-        //        break;
-        //    case Weapon.UseHand.TwoHandOneWeapon:
-        //        //両手に武器を装備する
-        //        defaultWeapon.Spawn(rightHandTransform, animator);
-        //        break;
-        //    case Weapon.UseHand.TwoHandTwoWeapon:
-        //        //両手に武器を装備する
-        //        defaultWeapon.Spawn(leftHandTransform, animator);
-        //        defaultWeapon.Spawn(rightHandTransform, animator);
-        //        break;
-        //    case Weapon.UseHand.Unarmed:
-        //        //武器を装備しない。
-        //        break;
-        //}
+        print(weapon + "を装備しました");
     }
 
 
@@ -322,7 +303,10 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon == null)
         {
-            NoWeapon_l.GetComponent<BoxCollider>().enabled = false;
+            foreach (BoxCollider noWeaponCol in noWeaponCols)
+            {
+                noWeaponCol.enabled = false;
+            }
         }
         else
         {
@@ -340,7 +324,10 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon == null)
         {
-            NoWeapon_l.GetComponent<BoxCollider>().enabled = true;
+            foreach (BoxCollider noWeaponCol in noWeaponCols)
+            {
+                noWeaponCol.enabled = true;
+            }
         }
         else
         {
@@ -433,6 +420,7 @@ public class PlayerController : MonoBehaviour
         {
             case 1://プレイヤーの数＋1
                 IncreasePlayers(1);
+                print("プレイヤーの数が＋１増えました");
                 break;
             case 2://プレイヤーの数＋2
                 IncreasePlayers(2);
@@ -529,33 +517,26 @@ public class PlayerController : MonoBehaviour
             }
         }
         GameManager.instance.CreateCharacterList();
+
+        print("プレイヤーの数が" + number + "増えました");
     }
     void AttackUp(float value)
     {
         attack = Mathf.RoundToInt(attack * value);
+        print("プレイヤーの攻撃力が" + value + "増えました");
     }
     void DefenceUp(float value)
     {
         defense = Mathf.RoundToInt(defense * value);
+        print("プレイヤーの防御力が" + value + "増えました");
     }
     void GetCoin()
     {
         //コインをnumber枚取得する
         float randomNum = Random.Range(0.8f, 2f);
         GameManager.instance.coin += Mathf.RoundToInt(GameManager.instance.stageHierarchy * randomNum);
+        print("コインを" + randomNum + "獲得しました");
     }
-    //void EquipmentWeapon()
-    //{
-    //    //武器を装備する
-    //    AttackUp(1.3f);
-    //    isEqipmentWeapon = true;
-    //}
-    //void EquipmentArmor()
-    //{
-    //    //防具を装備する
-    //    DefenceUp(1.3f);
-    //    isEqipmentArmor = true;
-    //}
 
     void LookTowards(Vector3 position)
     {
