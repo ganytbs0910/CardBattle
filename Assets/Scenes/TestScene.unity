@@ -13280,6 +13280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e2745d4c48eb4d6ab2266206d48fb9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drawCardController: {fileID: 2139142455}
   targetMarker: {fileID: 157694802}
   cardListPanel: {fileID: 906088915}
   chooseCard: {fileID: 0}
@@ -17444,6 +17445,7 @@ MonoBehaviour:
   stageHierarchy: 0
   coin: 0
   battleState: 0
+  playerObjects: []
   players: []
   enemies: []
   drawCardController: {fileID: 2139142455}
@@ -18611,13 +18613,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Skeleton
       objectReference: {fileID: 0}
-    - target: {fileID: 1038011146532634151, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}
-      propertyPath: m_AnchorMax.x
+    - target: {fileID: 511558849965164573, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1038011146532634151, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1038011146532634151, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}

@@ -46,11 +46,13 @@ public class UIManager : MonoBehaviour
         // 無限ループに設定
         mySequence.SetLoops(-1);
 
-        //stageTextを更新
-        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
 
         CollectionCardUpdate();
         UpdateCoinText();
+
+        //stageTextを更新
+        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
+        RemainingBossText.text = $"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層";
     }
 
     public void MoveUI()

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-
+        SpawnEnemies();
     }
 
     //次のステージへ移行する
@@ -43,7 +45,10 @@ public class GameManager : MonoBehaviour
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
-        drawCardController.DrawCard();
+        for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
+        {
+            drawCardController.DrawCard();
+        }
 
         // 複製したプレイヤーを削除
         for (int i = playerObjects.Count - 1; i >= 0; i--)
@@ -60,8 +65,6 @@ public class GameManager : MonoBehaviour
 
     void KeepCurrentStage()
     {
-        PlayerPrefs.SetInt("CurrentStagePlayers", players.Count);
-        PlayerPrefs.SetInt("CurrentStageEnemies", enemies.Count);
         PlayerPrefs.SetInt("CurrentStageCard", drawCardController.cardIDList.Count);
         //このカードの内容まで保存するか怪しい。
         for (int i = 0; i < drawCardController.cardIDList.Count; i++)
@@ -69,7 +72,6 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt($"Card{i}", drawCardController.cardIDList[i]);
         }
     }
-
 
     //キャラクターのリストを作成する。あるいはリストをリフレッシュするする。
     public void CreateCharacterList()
@@ -135,7 +137,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //敵をスポーンする
+    // 敵をスポーンする
     public void SpawnEnemies()
     {
         // "Enemies" という名前のゲームオブジェクトを探す
@@ -147,21 +149,25 @@ public class GameManager : MonoBehaviour
             enemiesParent = new GameObject("Enemies");
         }
 
-        //スポーンポイントの数だけ敵をスポーンさせる　※修正の余地あり
-        foreach (var spawnPoint in enemySpawnPoints)
+        // stageHierarchyの値に基づいて敵の数を決定
+        int remainder = (stageHierarchy - 1) % 10; // stageHierarchyを10で割った余り
+        int enemiesToSpawn = remainder / 2 + 1; // 余りを2で割り、1を足す
+
+        for (int i = 0; i < enemiesToSpawn; i++)
         {
-            // 敵をインスタンス化し、"Enemies" オブジェクトの子として設定
-            GameObject newEnemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-            //敵のステータスを階層によって強くするように調整
+            GameObject newEnemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+            //ステータス調整
             newEnemy.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 10);
             newEnemy.GetComponent<EnemyController>().attack = 10 + (stageHierarchy);
             newEnemy.GetComponent<EnemyController>().defense = 5 + (stageHierarchy);
             newEnemy.transform.SetParent(enemiesParent.transform);
             //print(newEnemy.name + "をSpawnPointにスポーンさせました");
         }
+
         // キャラクターリストを更新
         CreateCharacterList();
     }
+
 
 
     //両陣営のリストとIsDeadを基準に勝敗をジャッジする
