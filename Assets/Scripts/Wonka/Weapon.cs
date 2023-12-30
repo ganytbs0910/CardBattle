@@ -9,8 +9,10 @@ public class Weapon : ScriptableObject
 {
 
     [SerializeField] AnimatorOverrideController animatorOverride; //animatorの登録
+    [SerializeField] AnimatorOverrideController subAnimatorOverride = null; //サブアニメーターの登録
 
     [SerializeField] GameObject weaponPrefab = null; //武器の登録
+    [SerializeField] float weaponRange;
     [SerializeField] int attackPoint;
     [SerializeField] int defendPoint;
     BoxCollider weaponCollider;
@@ -27,58 +29,83 @@ public class Weapon : ScriptableObject
         {
             DestroyOldWeapon(rightHand, leftHand);//古い武器を削除する
 
-            Transform handTransform = GetTransform(rightHand, leftHand);
+            Transform handTransform = GetTransform(rightHand, leftHand ,animator);
             //手の位置を取得する。
+
+            // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
+            bool shouldFlip = isRightHanded && !IsRightHandEmpty(rightHand);
 
             GameObject weapon = Instantiate(weaponPrefab, handTransform);
             //手の位置に武器を生成する
 
             weaponCollider = weapon.GetComponent<BoxCollider>();
 
-            if (isRightHanded == true)
+            // 正しい武器の名前を設定
+            if (shouldFlip)
             {
-                weapon.name = rightWeaponName;
+                weapon.name = leftWeaponName; // 左手に装備するので名前をleftWeaponに
             }
             else
             {
-                weapon.name = leftWeaponName;
+                weapon.name = isRightHanded ? rightWeaponName : leftWeaponName;
+            }
+
+            // 武器の反転が必要な場合、スケールを反転
+            if (shouldFlip)
+            {
+                // 武器をZ軸で-180度回転させる
+                weapon.transform.localRotation = Quaternion.Euler(0, -90, -180);
             }
         }
+    }
 
-        // 右手装備の武器かつ左手が空の場合の処理(OHS用)
-        if (isRightHanded && IsLeftHandEmpty(leftHand))
+    //装備する手を取得する
+    private Transform GetTransform(Transform rightHand, Transform leftHand ,Animator animator)
+    {
+        // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
+        if (isRightHanded && !IsRightHandEmpty(rightHand))
+        {
+            if (subAnimatorOverride != null)
+            {
+                animator.runtimeAnimatorController = subAnimatorOverride;
+            }
+            return leftHand; //右手を取得
+        }
+        else 
         {
             if (animatorOverride != null)
             {
                 animator.runtimeAnimatorController = animatorOverride;
-                //現在のアニメーターにoverrideを上書きする   
             }
+            return isRightHanded ? rightHand : leftHand;
         }
-        // 右手装備が空かつ左手が盾の処理(盾用)
-        if (isShield && IsRightHandEmpty(leftHand))
-        {
-            //NoWeaponのアニメーターを維持
-            //ApplyAnimatorOverride(animator,"Player_NoWeapon");
-            //現在のアニメーターにoverrideを上書きする   
-        }
-        else
-        {
-            animator.runtimeAnimatorController = animatorOverride;
-            //現在のアニメーターにoverrideを上書きする   
-        }
+
     }
 
     // 古い武器を削除する
     private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
     {
-        if (TwoHandedWeapon || isRightHanded) // 両手に装備または右手に装備
+        // 右手に装備しようとしているが、右手が既に埋まっている場合、左手の武器を削除
+        if (isRightHanded && !IsRightHandEmpty(rightHand))
         {
-            DestroyWeaponInHand(rightHand, rightWeaponName);
+            DestroyWeaponInHand(leftHand, leftWeaponName);
+            DestroyWeaponInHand(leftHand, "NoWeapon_l");
         }
-
-        if (TwoHandedWeapon || !isRightHanded) // 両手に装備または左手に装備
+        else // 右手が空の場合、通常通り処理
         {
-            DestroyWeaponInHand(leftHand, leftWeaponName);                    
+            if (TwoHandedWeapon || isRightHanded) // 両手に装備または右手に装備
+            {
+                DestroyWeaponInHand(rightHand, rightWeaponName);
+                // 右手に装備する場合、右手のデフォルトのオブジェクト（NoWeapon_r）を削除
+                DestroyWeaponInHand(rightHand, "NoWeapon_r");
+            }
+
+            if (TwoHandedWeapon || !isRightHanded) // 両手に装備または左手に装備
+            {
+                DestroyWeaponInHand(leftHand, leftWeaponName);
+                // 左手に装備する場合、左手のデフォルトのオブジェクト（NoWeapon_l）も削除
+                DestroyWeaponInHand(leftHand, "NoWeapon_l");
+            }
         }
     }
 
@@ -90,21 +117,6 @@ public class Weapon : ScriptableObject
         {
             Destroy(oldWeapon.gameObject);
         }
-    }
-
-    //装備する手を取得する
-    private Transform GetTransform(Transform rightHand, Transform leftHand)
-    {
-        Transform handTransform;
-        if (isRightHanded)//右手の場合
-        {
-            handTransform = rightHand; //右手を取得
-        }
-        else //左手の場合
-        {
-            handTransform = leftHand;　//左手を取得
-        } 
-        return handTransform;
     }
 
     public float GetAttackPoint()
@@ -123,6 +135,11 @@ public class Weapon : ScriptableObject
         return weaponCollider;
     }
 
+    public float GetRange()
+    {
+        return weaponRange;
+    }    
+
     // 左手が空かどうかを確認する
     public bool IsLeftHandEmpty(Transform leftHand)
     {
@@ -132,24 +149,6 @@ public class Weapon : ScriptableObject
     // 右手が空かどうかを確認する
     public bool IsRightHandEmpty(Transform rightHand)
     {
-        return rightHand.Find(leftWeaponName) == null;
-    }
-
-    AnimatorOverrideController LoadAnimatorOverride(string name)
-    {
-        return Resources.Load<AnimatorOverrideController>(name);
-    }
-
-    void ApplyAnimatorOverride(Animator animator, string overrideName)
-    {
-        AnimatorOverrideController overrideController = LoadAnimatorOverride(overrideName);
-        if (overrideController != null)
-        {
-            animator.runtimeAnimatorController = overrideController;
-        }
-        else
-        {
-            Debug.LogError("Animator Override not found: " + overrideName);
-        }
+        return rightHand.Find(rightWeaponName) == null;
     }
 }
