@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
@@ -12,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private RectTransform collectionContent;
+    [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
     [SerializeField] private GameObject winPanel;
@@ -48,6 +50,7 @@ public class UIManager : MonoBehaviour
         stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
 
         CollectionCardUpdate();
+        UpdateCoinText();
     }
 
     public void MoveUI()
@@ -59,6 +62,7 @@ public class UIManager : MonoBehaviour
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
         battleStartButton.gameObject.SetActive(true);
     }
+
     public void Loading(int stageHierarchy)
     {
         StartCoroutine(LoadingCoroutine(stageHierarchy));
@@ -87,7 +91,7 @@ public class UIManager : MonoBehaviour
         difficultyPanel.anchoredPosition = new Vector2(difficultyPanelPosition.x, difficultyPanelPosition.y - 500);
 
         Vector2 cardListPanelPosition = cardListPanel.anchoredPosition;
-        cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 350);
+        cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 100);
 
 
         battleStartButton.gameObject.SetActive(false);
@@ -142,11 +146,28 @@ public class UIManager : MonoBehaviour
     public void WinPanel()
     {
         winPanel.SetActive(true);
+        Loading(GameManager.instance.stageHierarchy);
     }
 
     public void LosePanel()
     {
         losePanel.SetActive(true);
+    }
+
+    public void GiveUpButton()
+    {
+        GameManager.instance.battleState = false;
+        losePanel.SetActive(true);
+        PlayerPrefs.SetInt("StageHierarchy", 1);
+        Loading(1);
+    }
+
+    public void RevivalButton()
+    {
+        GameManager.instance.battleState = true;
+        losePanel.SetActive(false);
+        //敵とキャラクターとカードをリセット
+
     }
 
     public void ErrorCardTarget()
@@ -171,6 +192,7 @@ public class UIManager : MonoBehaviour
         {
             //カードを所持していたら...以下の処理を行う
 
+
             //子オブジェクトのDetailPanelを取得
             GameObject detailPanel = collectionContent.transform.GetChild(i).GetChild(0).gameObject;
             TMP_Text itemName = detailPanel.transform.GetChild(0).GetComponent<TMP_Text>();
@@ -182,5 +204,10 @@ public class UIManager : MonoBehaviour
             itemInformation.text = collectionEntity.information;
             itemIcon.sprite = collectionEntity.icon;
         }
+    }
+
+    public void UpdateCoinText()
+    {
+        coinPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 }

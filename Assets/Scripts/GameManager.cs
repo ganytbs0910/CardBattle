@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public int coin;
 
     public bool battleState; //バトル開始後==true バトル開始前==false 
-
+    public List<GameObject> playerObjects = new List<GameObject>();
     public List<PlayerController> players;
     public List<EnemyController> enemies;
     [SerializeField] private DrawCardController drawCardController;
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("StageHierarchy", 1);
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
-
         CreateCharacterList(); //プレイヤーと敵のリストを更新
     }
 
@@ -42,15 +41,26 @@ public class GameManager : MonoBehaviour
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
-        UIManager.instance.Loading(stageHierarchy);
         drawCardController.DrawCard();
+
+        // 逆順にループ
+        for (int i = playerObjects.Count - 1; i >= 0; i--)
+        {
+            if (playerObjects[i].name == "ShadowPlayer")
+            {
+                Destroy(playerObjects[i]);
+                playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
+            }
+        }
     }
+
 
     //キャラクターのリストを作成する。あるいはリストをリフレッシュするする。
     public void CreateCharacterList()
     {
         // シーン内のすべてのPlayerControllerとEnemyControllerを検索し、リストに追加
         players = new List<PlayerController>(FindObjectsOfType<PlayerController>());
+        playerObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Player"));
         enemies = new List<EnemyController>(FindObjectsOfType<EnemyController>());
 
         UpdateAllNavmeshTargets();//敵と味方のターゲットを最も近い相手に指定
@@ -89,7 +99,7 @@ public class GameManager : MonoBehaviour
         if (enemies.Contains(removeEnemy))//removeEnemyがリストに含まれていたら
         {
             enemies.Remove(removeEnemy);
-            print("リストから" + removeEnemy.name + "が除名されました");
+            //print("リストから" + removeEnemy.name + "が除名されました");
         }
     }
     /// <summary>
@@ -101,7 +111,11 @@ public class GameManager : MonoBehaviour
         if (players.Contains(removePlayer))//removePlayerがリストに含まれていたら
         {
             players.Remove(removePlayer);
-            print("リストから" + removePlayer + "が除名されました");
+            //print("リストから" + removePlayer + "が除名されました");
+        }
+        if (playerObjects.Contains(removePlayer.gameObject))//removePlayerがリストに含まれていたら
+        {
+            playerObjects.Remove(removePlayer.gameObject);
         }
     }
 
@@ -126,11 +140,9 @@ public class GameManager : MonoBehaviour
             newEnemy.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 10);
             newEnemy.GetComponent<EnemyController>().attack = 10 + (stageHierarchy);
             newEnemy.GetComponent<EnemyController>().defense = 5 + (stageHierarchy);
-
             newEnemy.transform.SetParent(enemiesParent.transform);
-            print(newEnemy.name + "をSpawnPointにスポーンさせました");
+            //print(newEnemy.name + "をSpawnPointにスポーンさせました");
         }
-
         // キャラクターリストを更新
         CreateCharacterList();
     }
@@ -177,7 +189,7 @@ public class GameManager : MonoBehaviour
             //敵の位置とアニメを初期設定に戻す
         }
 
-        print("プレイヤーとエネミーの位置とアニメをリセットします");
+        //print("プレイヤーとエネミーの位置とアニメをリセットします");
     }
 
     /// <summary>
