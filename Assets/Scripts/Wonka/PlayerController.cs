@@ -498,7 +498,18 @@ public class PlayerController : MonoBehaviour
             case 24:
                 //特殊スキルでScreenRay.csに記述
                 break;
-
+            case 25:
+                break;
+            case 26:
+                break;
+            case 27:
+                //範囲内のプレイヤーの体力を20%回復
+                Heal(20);
+                break;
+            case 28:
+                //範囲内のプレイヤーの体力を50%回復
+                Heal(50);
+                break;
         }
     }
 
@@ -567,5 +578,15 @@ public class PlayerController : MonoBehaviour
             sum += enemy.transform.position;
         }
         return enemies.Length > 0 ? sum / enemies.Length : Vector3.zero;
+    }
+    void Heal(int value)
+    {
+        //現在のHPをvalue%回復し、体力が100%を超えないようにする
+        hp += Mathf.RoundToInt(hp * value);
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+        print("プレイヤーの体力が" + value + "回復しました");
     }
 }

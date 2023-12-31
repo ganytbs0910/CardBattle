@@ -6719,7 +6719,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 871582008}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2139142454}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: RevivalButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &871582008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20822,6 +20834,10 @@ PrefabInstance:
     - target: {fileID: 6309590542698810562, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6309590542698810567, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: attack
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6691218231397078648, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
       propertyPath: m_Name

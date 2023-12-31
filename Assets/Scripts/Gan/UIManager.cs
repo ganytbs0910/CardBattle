@@ -194,18 +194,19 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < collectionContent.transform.childCount; i++)
         {
             //カードを所持していたら...以下の処理を行う
-
-
-            //子オブジェクトのDetailPanelを取得
-            GameObject detailPanel = collectionContent.transform.GetChild(i).GetChild(0).gameObject;
-            TMP_Text itemName = detailPanel.transform.GetChild(0).GetComponent<TMP_Text>();
-            Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
-            TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
-            CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i + 1));
-            //コレクションの情報を反映
-            itemName.text = collectionEntity.name;
-            itemInformation.text = collectionEntity.information;
-            itemIcon.sprite = collectionEntity.icon;
+            if (PlayerPrefs.HasKey($"Collection{i}"))
+            {
+                //子オブジェクトのDetailPanelを取得
+                GameObject detailPanel = collectionContent.transform.GetChild(i).GetChild(0).gameObject;
+                TMP_Text itemName = detailPanel.transform.GetChild(0).GetComponent<TMP_Text>();
+                Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
+                TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
+                CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i + 1));
+                //コレクションの情報を反映
+                itemName.text = collectionEntity.name;
+                itemInformation.text = collectionEntity.information;
+                itemIcon.sprite = collectionEntity.icon;
+            }
         }
     }
 

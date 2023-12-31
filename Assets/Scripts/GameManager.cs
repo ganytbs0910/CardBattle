@@ -148,24 +148,49 @@ public class GameManager : MonoBehaviour
         {
             enemiesParent = new GameObject("Enemies");
         }
-
-        // stageHierarchyの値に基づいて敵の数を決定
-        int remainder = (stageHierarchy - 1) % 10; // stageHierarchyを10で割った余り
-        int enemiesToSpawn = remainder / 2 + 1; // 余りを2で割り、1を足す
-
-        for (int i = 0; i < enemiesToSpawn; i++)
+        switch (stageHierarchy)
         {
-            GameObject newEnemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
-            //ステータス調整
-            newEnemy.GetComponent<EnemyController>().maxHp = 100 / enemiesToSpawn + (stageHierarchy * 10);
-            newEnemy.GetComponent<EnemyController>().attack = 10 / enemiesToSpawn + (stageHierarchy);
-            newEnemy.GetComponent<EnemyController>().defense = 5 / enemiesToSpawn + (stageHierarchy);
-            newEnemy.transform.SetParent(enemiesParent.transform);
-            //print(newEnemy.name + "をSpawnPointにスポーンさせました");
-        }
+            //以降ボス戦
+            case 10:
+                //要改善
+                GameObject boss = Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                //ステータス調整
+                boss.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
+                boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
+                boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
+                boss.transform.SetParent(enemiesParent.transform);
+                //newEnemyはスケールが1.5倍
+                boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                break;
+            case 20:
+                break;
+            case 30:
+                break;
+            case 40:
+                break;
+            case 50:
+                break;
 
-        // キャラクターリストを更新
-        CreateCharacterList();
+            default:
+                // stageHierarchyの値に基づいて敵の数を決定
+                int remainder = (stageHierarchy - 1) % 10; // stageHierarchyを10で割った余り
+                int enemiesToSpawn = remainder / 2 + 1; // 余りを2で割り、1を足す
+
+                for (int i = 0; i < enemiesToSpawn; i++)
+                {
+                    GameObject newEnemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+                    //ステータス調整
+                    newEnemy.GetComponent<EnemyController>().maxHp = 100 / enemiesToSpawn + (stageHierarchy * 10);
+                    newEnemy.GetComponent<EnemyController>().attack = 10 / enemiesToSpawn + (stageHierarchy);
+                    newEnemy.GetComponent<EnemyController>().defense = 5 / enemiesToSpawn + (stageHierarchy);
+                    newEnemy.transform.SetParent(enemiesParent.transform);
+                    //print(newEnemy.name + "をSpawnPointにスポーンさせました");
+                }
+
+                // キャラクターリストを更新
+                CreateCharacterList();
+                break;
+        }
     }
 
 

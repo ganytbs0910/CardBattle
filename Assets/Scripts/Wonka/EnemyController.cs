@@ -158,12 +158,10 @@ public class EnemyController : MonoBehaviour
         //print(gameObject.name + "の新しいターゲットを更新しました");
     }
 
-
-    bool CanAttack()　//インターバルの設定
+    bool CanAttack() //インターバルの設定
     {
         return Time.time - lastAttackTime >= attackInterval;
     }
-
 
     public void OnTriggerEnter(Collider other)
     {
