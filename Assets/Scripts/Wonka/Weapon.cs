@@ -62,6 +62,16 @@ public class Weapon : ScriptableObject
     //装備する手を取得する
     private Transform GetTransform(Transform rightHand, Transform leftHand ,Animator animator)
     {
+        // 両手に装備する場合、常に右手を使用
+        if (TwoHandedWeapon)
+        {
+            if (animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = animatorOverride;
+            }
+            return rightHand;
+        }
+
         // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
         if (isRightHanded && !IsRightHandEmpty(rightHand))
         {
@@ -79,12 +89,19 @@ public class Weapon : ScriptableObject
             }
             return isRightHanded ? rightHand : leftHand;
         }
-
     }
 
     // 古い武器を削除する
     private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
     {
+        // 両手に装備する武器の場合
+        if (TwoHandedWeapon)
+        {
+            // 右手のすべての武器を削除
+            DestroyAllWeaponsInHand(rightHand);
+            // 左手のデフォルトのオブジェクト（NoWeapon_l）も削除
+            DestroyWeaponInHand(leftHand, "NoWeapon_l");
+        }
         // 右手に装備しようとしているが、右手が既に埋まっている場合、左手の武器を削除
         if (isRightHanded && !IsRightHandEmpty(rightHand))
         {
@@ -116,6 +133,17 @@ public class Weapon : ScriptableObject
         if (oldWeapon != null) // 古い武器が存在する場合は削除
         {
             Destroy(oldWeapon.gameObject);
+        }
+    }
+
+    private void DestroyAllWeaponsInHand(Transform hand)
+    {
+        foreach (Transform child in hand)
+        {
+            if (child.name == rightWeaponName || child.name == leftWeaponName || child.name == "NoWeapon_r" || child.name == "NoWeapon_l")
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 

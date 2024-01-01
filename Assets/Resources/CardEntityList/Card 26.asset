@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card 26
   m_EditorClassIdentifier: 
   cardID: 26
-  name: "\u6728\u306E\u76FE\u88C5\u5099"
+  name: "\u69CD\u88C5\u5099"
   information: "\u6B66\u5668\u300E\u6728\u306E\u68D2\u3092\u88C5\u5099\u3059\u308B\u300F"
-  icon: {fileID: 386636081, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
-  weapon: {fileID: 11400000, guid: 90dff2cda75cad34fa83579876be00da, type: 2}
+  icon: {fileID: 1781249878, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  weapon: {fileID: 11400000, guid: fb90d25839294cf40b5ec3dc4025c17e, type: 2}
   targetType: 0
