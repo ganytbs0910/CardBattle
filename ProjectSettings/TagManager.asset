@@ -9,6 +9,7 @@ TagManager:
   - Card
   - Weapon_Player
   - Weapon_Enemy
+  - UI
   layers:
   - Default
   - TransparentFX
