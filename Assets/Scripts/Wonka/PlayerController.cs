@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             EnemyController targetEnemy = enemyTarget.GetComponent<EnemyController>();
             if (targetEnemy != null && targetEnemy.IsDead)
             {
-                print("エネミーを倒したので次のターゲットを探します");
+                //print("エネミーを倒したので次のターゲットを探します");
                 FindClosestEnemy(transform);
             }
         }
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         currentWeapon = weapon;
 
         //武器を生成
-        weapon.Spawn(rightHandTransform,leftHandTransform, animator);
+        weapon.Spawn(rightHandTransform, leftHandTransform, animator);
 
         //武器のコライダーを取得
         weaponCollider = currentWeapon.GetCollider();
@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour
                 {
                     closestDistanceSqr = distanceSqr;
                     closestEnemy = enemy;
-                    print("一番近い敵を発見しました");
+                    //print("一番近い敵を発見しました");
                 }
             }
         }
@@ -498,7 +498,18 @@ public class PlayerController : MonoBehaviour
             case 24:
                 //特殊スキルでScreenRay.csに記述
                 break;
-
+            case 25:
+                break;
+            case 26:
+                break;
+            case 27:
+                //範囲内のプレイヤーの体力を20%回復
+                Heal(20);
+                break;
+            case 28:
+                //範囲内のプレイヤーの体力を50%回復
+                Heal(50);
+                break;
         }
     }
 
@@ -513,11 +524,14 @@ public class PlayerController : MonoBehaviour
             float x = Random.Range(-1f, 1f);
             float z = Random.Range(-1f, 1f);
             GameObject clonePlayer = Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
+            //clonePlayerの名前をShadowPlayerにする
+            clonePlayer.name = "ShadowPlayer";
             clonePlayer.GetComponent<PlayerController>().hp /= 2;
             clonePlayer.GetComponent<PlayerController>().mp /= 2;
             clonePlayer.GetComponent<PlayerController>().attack /= 2;
             clonePlayer.GetComponent<PlayerController>().defense /= 2;
             Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
+
             foreach (Renderer renderer in renderers)
             {
                 renderer.material.color = Color.gray;
@@ -543,6 +557,9 @@ public class PlayerController : MonoBehaviour
         float randomNum = Random.Range(0.8f, 2f);
         GameManager.instance.coin += Mathf.RoundToInt(GameManager.instance.stageHierarchy * randomNum);
         print("コインを" + randomNum + "獲得しました");
+        PlayerPrefs.SetInt("Coin", GameManager.instance.coin);
+        UIManager.instance.UpdateCoinText();
+
     }
 
     void LookTowards(Vector3 position)
@@ -561,5 +578,15 @@ public class PlayerController : MonoBehaviour
             sum += enemy.transform.position;
         }
         return enemies.Length > 0 ? sum / enemies.Length : Vector3.zero;
+    }
+    void Heal(int value)
+    {
+        //現在のHPをvalue%回復し、体力が100%を超えないようにする
+        hp += Mathf.RoundToInt(hp * value);
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+        print("プレイヤーの体力が" + value + "回復しました");
     }
 }

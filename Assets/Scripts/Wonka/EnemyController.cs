@@ -63,7 +63,7 @@ public class EnemyController : MonoBehaviour
             PlayerController targetEnemy = playerTarget.GetComponent<PlayerController>();
             if (targetEnemy != null && targetEnemy.IsDead)
             {
-                print("プレイヤーを倒したので次のターゲットを探します");
+                //print("プレイヤーを倒したので次のターゲットを探します");
                 FindClosestPlayer(transform);
             }
         }
@@ -155,26 +155,24 @@ public class EnemyController : MonoBehaviour
             agent.isStopped = true; // 移動を停止
             agent.SetDestination(playerTarget.position);
         }
-        print(gameObject.name + "の新しいターゲットを更新しました");
+        //print(gameObject.name + "の新しいターゲットを更新しました");
     }
 
-
-    bool CanAttack()　//インターバルの設定
+    bool CanAttack() //インターバルの設定
     {
         return Time.time - lastAttackTime >= attackInterval;
     }
 
-
     public void OnTriggerEnter(Collider other)
     {
-        print(other.name);
+        //print(other.name);
         if (other.CompareTag("Weapon_Player"))
         {
             PlayerWeapon playerWeapon = other.GetComponent<PlayerWeapon>();
             if (playerWeapon != null)
             {
                 //ダメージを与えるものにぶつかったら
-                print(other.name + "が" + gameObject.name + "に" + playerWeapon.SumDamage() + "ダメージを与えた");
+                //print(other.name + "が" + gameObject.name + "に" + playerWeapon.SumDamage() + "ダメージを与えた");
 
                 GetHit();//ノックバック
 
@@ -188,7 +186,7 @@ public class EnemyController : MonoBehaviour
             if (bomb != null)
             {
                 //ダメージを与えるものにぶつかったら
-                print(other.name + "が" + gameObject.name + "に" + bomb.Attack + "のダメージを与えた");
+                //print(other.name + "が" + gameObject.name + "に" + bomb.Attack + "のダメージを与えた");
 
                 GetHit();//ノックバック
 

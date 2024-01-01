@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
 
 public class ScreenRay : MonoBehaviour
 {
+    public TMP_Text debugCardEffectText;
+    public DrawCardController drawCardController;
     [SerializeField] private GameObject targetMarker;
     [SerializeField] private GameObject cardListPanel;
     [SerializeField] private GameObject chooseCard;
@@ -23,10 +26,6 @@ public class ScreenRay : MonoBehaviour
     CardEntity.TargetType targetType;
 
     [SerializeField] private Weapon weapon;
-    private void Start()
-    {
-
-    }
 
     void Update()
     {
@@ -63,8 +62,8 @@ public class ScreenRay : MonoBehaviour
                 //もしPlayerタグを持っているオブジェクトに当たったら
                 if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
+                    drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
-
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
@@ -75,6 +74,7 @@ public class ScreenRay : MonoBehaviour
                 }
                 else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
+                    drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
                     Destroy(chooseCard);
                     cardID = 0;
@@ -84,6 +84,7 @@ public class ScreenRay : MonoBehaviour
                     switch (cardID)
                     {
                         case 24:
+                            drawCardController.cardIDList.Remove(cardID);
                             ThrowObject(bombPrefab, lastRaycastHit.point, 2500);
                             Destroy(chooseCard);
                             cardID = 0;
@@ -114,7 +115,7 @@ public class ScreenRay : MonoBehaviour
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
                 cardID = result.gameObject.GetComponent<CardMovement>().cardID;
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
-
+                debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 weapon = result.gameObject.GetComponent<CardMovement>().weapon;
                 return;
             }
@@ -189,6 +190,7 @@ public class ScreenRay : MonoBehaviour
                 chooseCard = cardListPanel.transform.GetChild(i).gameObject;
                 cardID = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardID;
                 targetType = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().targetType;
+                debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().name;
             }
         }
     }

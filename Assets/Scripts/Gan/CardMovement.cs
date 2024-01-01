@@ -12,7 +12,9 @@ public class CardMovement : MonoBehaviour
     public Toggle toggle;
     CardController cardController;
     CardModel cardModel;
+
     public int cardID;
+    public string name;
     public CardEntity.TargetType targetType;
 
     public Weapon weapon;
@@ -21,10 +23,12 @@ public class CardMovement : MonoBehaviour
     {
         toggle.group = GetComponentInParent<ToggleGroup>();
         toggle.onValueChanged.AddListener(OnToggleChanged);
+
         //プレイヤーに使えるか
         cardController = GetComponent<CardController>();
         cardModel = cardController.model;
         cardID = cardModel.cardID;
+        name = cardModel.name;
         targetType = cardModel.targetType;
 
         weapon = cardModel.weapon;
