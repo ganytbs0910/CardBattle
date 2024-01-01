@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
   m_Name: card 30
   m_EditorClassIdentifier: 
-  cardID: 29
-  name: "\u5F13\u77E2\u3092\u88C5\u5099\u3059\u308B"
-  information: "\u73FE\u5728\u306E\u4F53\u529B\u304B\u308950%\u56DE\u5FA9\u3059\u308B"
-  icon: {fileID: 1238376397, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
-  weapon: {fileID: 11400000, guid: 715aa3b5b62702743b3e5f7da53fc6e1, type: 2}
+  cardID: 30
+  name: "\u6756\u3092\u88C5\u5099\u3059\u308B"
+  information: "\u6756\u3092\u88C5\u5099\u3059\u308B"
+  icon: {fileID: -2142564388, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  weapon: {fileID: 11400000, guid: d75e626324243b24ea63e141564d6b24, type: 2}
   targetType: 0
