@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class PlayerGetHitBehavior : StateMachineBehaviour
 {
+    private float originalSpeed;
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //移動不可能
-        animator.GetComponent<PlayerController>().CantMove = true;
+        var playerController = animator.GetComponent<PlayerController>();
+        if (playerController != null && playerController.agent != null)
+        {
+            // 元の速度を保存し、速度を0に設定
+            originalSpeed = playerController.agent.speed;
+            playerController.agent.speed = 0f;
+            playerController.CantMove = true;
+        }
 
-        //GetHitアニメの予約を取り消す。
         animator.ResetTrigger("GetHit");
     }
+
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,10 +30,14 @@ public class PlayerGetHitBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //移動可能
-        animator.GetComponent<PlayerController>().CantMove = false;
+        var playerController = animator.GetComponent<PlayerController>();
+        if (playerController != null && playerController.agent != null)
+        {
+            // 速度を元に戻す
+            playerController.agent.speed = originalSpeed;
+            playerController.CantMove = false;
+        }
 
-        //GetHitアニメの予約を取り消す。
         animator.ResetTrigger("GetHit");
     }
 

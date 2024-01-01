@@ -24,14 +24,12 @@ public class PlayerController : MonoBehaviour
     public bool IsDead = false;
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
-    bool isEqipmentWeapon = false;//武器を装備しているかどうか
-    bool isEqipmentArmor = false;//防具を装備しているかどうか
     public Weapon defaultWeapon = null;
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
 
     public Transform enemyTarget; // 敵の位置
-    private NavMeshAgent agent; // NavMesh Agent
+    public NavMeshAgent agent; // NavMesh Agent
     public float Distance;//NavMeshAgent
     private Animator animator;
 
@@ -232,6 +230,15 @@ public class PlayerController : MonoBehaviour
 
         animator.SetTrigger("Attack");
         animator.SetInteger("AttackType", Random.Range(1, 5));
+    }
+
+    public void Shoot()
+    {
+        if (currentWeapon.HasProjectile())
+        {
+            currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform,animator);
+            print("矢を撃ちました");
+        }
     }
 
     /// <summary>
