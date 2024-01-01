@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public List<EnemyController> enemies;
     [SerializeField] private DrawCardController drawCardController;
     public GameObject[] bossPrefab;
-    public GameObject enemyPrefab; // 敵のプレハブ
+    public GameObject[] enemyPrefab; // 敵のプレハブ
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
 
     void Awake()
@@ -173,7 +173,8 @@ public class GameManager : MonoBehaviour
 
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
-                    GameObject newEnemy = Instantiate(enemyPrefab, enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+                    int randomIndex = UnityEngine.Random.Range(0, enemyPrefab.Length);
+                    GameObject newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
                     //ステータス調整
                     newEnemy.GetComponent<EnemyController>().maxHp = 100 / enemiesToSpawn + (stageHierarchy * 10);
                     newEnemy.GetComponent<EnemyController>().attack = 10 / enemiesToSpawn + (stageHierarchy);

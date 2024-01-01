@@ -916,11 +916,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 89039b09-52f7-4370-b7f3-0dc47231db15
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: CardBattle
+  organizationId: nakakou2002
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
