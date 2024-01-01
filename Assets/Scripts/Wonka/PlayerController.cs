@@ -588,5 +588,7 @@ public class PlayerController : MonoBehaviour
             hp = maxHp;
         }
         print("プレイヤーの体力が" + value + "回復しました");
+
+        animator.SetTrigger("Drink");
     }
 }
