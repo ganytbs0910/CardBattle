@@ -424,6 +424,24 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Drink");
     }
 
+    void LookTowards(Vector3 position)
+    {
+        Vector3 direction = position - transform.position;
+        direction.y = 0; // Y軸の回転は無視
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    Vector3 GetAveragePositionOfEnemies()
+    {
+        var enemies = FindObjectsOfType<EnemyController>();
+        Vector3 sum = Vector3.zero;
+        foreach (var enemy in enemies)
+        {
+            sum += enemy.transform.position;
+        }
+        return enemies.Length > 0 ? sum / enemies.Length : Vector3.zero;
+    }
+
     public void GetCardEffect(int effectNumber, int? targetNumber = null)
     {
         if (!targetNumber.HasValue)
@@ -545,47 +563,25 @@ public class PlayerController : MonoBehaviour
             }
         }
         GameManager.instance.CreateCharacterList();
-
-        print("プレイヤーの数が" + number + "増えました");
     }
     void AttackUp(float value)
     {
         attack = Mathf.RoundToInt(attack * value);
-        print("プレイヤーの攻撃力が" + value + "増えました");
     }
     void DefenceUp(float value)
     {
         defense = Mathf.RoundToInt(defense * value);
-        print("プレイヤーの防御力が" + value + "増えました");
     }
     void GetCoin()
     {
         //コインをnumber枚取得する
         float randomNum = Random.Range(0.8f, 2f);
         GameManager.instance.coin += Mathf.RoundToInt(GameManager.instance.stageHierarchy * randomNum);
-        print("コインを" + randomNum + "獲得しました");
         PlayerPrefs.SetInt("Coin", GameManager.instance.coin);
         UIManager.instance.UpdateCoinText();
 
     }
 
-    void LookTowards(Vector3 position)
-    {
-        Vector3 direction = position - transform.position;
-        direction.y = 0; // Y軸の回転は無視
-        transform.rotation = Quaternion.LookRotation(direction);
-    }
-
-    Vector3 GetAveragePositionOfEnemies()
-    {
-        var enemies = FindObjectsOfType<EnemyController>();
-        Vector3 sum = Vector3.zero;
-        foreach (var enemy in enemies)
-        {
-            sum += enemy.transform.position;
-        }
-        return enemies.Length > 0 ? sum / enemies.Length : Vector3.zero;
-    }
     void Heal(int value)
     {
         //現在のHPをvalue%回復し、体力が100%を超えないようにする
@@ -597,5 +593,7 @@ public class PlayerController : MonoBehaviour
         print("プレイヤーの体力が" + value + "回復しました");
 
         animator.SetTrigger("Drink");
+        //Sliderを修正
+        playerUIManager.UpdateHP(hp);
     }
 }
