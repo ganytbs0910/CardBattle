@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> players;
     public List<EnemyController> enemies;
     [SerializeField] private DrawCardController drawCardController;
-
+    public GameObject[] bossPrefab;
     public GameObject enemyPrefab; // 敵のプレハブ
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
 
@@ -148,27 +148,22 @@ public class GameManager : MonoBehaviour
         {
             enemiesParent = new GameObject("Enemies");
         }
+
+        GameObject boss = null;
         switch (stageHierarchy)
         {
             //以降ボス戦
             case 10:
-                //要改善
-                GameObject boss = Instantiate(enemyPrefab, enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-                //ステータス調整
-                boss.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
-                boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
-                boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
-                boss.transform.SetParent(enemiesParent.transform);
-                //newEnemyはスケールが1.5倍
-                boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
                 break;
             case 20:
+                boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
                 break;
             case 30:
+                boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
                 break;
             case 40:
-                break;
-            case 50:
+                boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
                 break;
 
             default:
@@ -186,11 +181,20 @@ public class GameManager : MonoBehaviour
                     newEnemy.transform.SetParent(enemiesParent.transform);
                     //print(newEnemy.name + "をSpawnPointにスポーンさせました");
                 }
-
-                // キャラクターリストを更新
-                CreateCharacterList();
                 break;
         }
+
+        if (boss != null)
+        {
+            // ステータス調整
+            boss.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
+            boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
+            boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
+            boss.transform.SetParent(enemiesParent.transform);
+            boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        // キャラクターリストを更新
+        CreateCharacterList();
     }
 
 

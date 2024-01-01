@@ -17598,6 +17598,11 @@ MonoBehaviour:
   players: []
   enemies: []
   drawCardController: {fileID: 2139142455}
+  bossPrefab:
+  - {fileID: 170346, guid: 88e480c990c9d6a458b5fc85fe1da2aa, type: 3}
+  - {fileID: 100720, guid: 8252519d2c6fd014bb5f75765a8c4fda, type: 3}
+  - {fileID: 109776, guid: 8e302007cba46d94b970c6a0955b9628, type: 3}
+  - {fileID: 139696, guid: eb58e8f2831a51f45a44a261e6710cdd, type: 3}
   enemyPrefab: {fileID: 511558849965164573, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}
   enemySpawnPoints:
   - {fileID: 1322217330}
@@ -20739,8 +20744,8 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2306041138636851312, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 3146518274554010977, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3146518274554010978, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
@@ -20749,6 +20754,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3146518274554010978, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146518274888729038, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3146518274888729039, guid: 284f1c7c7e03c7b4aa03ced633c8eb98, type: 3}

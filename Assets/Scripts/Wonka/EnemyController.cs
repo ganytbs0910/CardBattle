@@ -347,7 +347,6 @@ public class EnemyController : MonoBehaviour
 
     public void GetCardEffect(int effectNumber, int? targetNumber = null)
     {
-
         if (!targetNumber.HasValue)
         {
             targetNumber = 1;
@@ -406,16 +405,16 @@ public class EnemyController : MonoBehaviour
                 //プレイヤーがターゲット
                 break;
             case 17://敵を毒状態にする
-                //敵がターゲット
+                Poison();
                 break;
             case 18://敵をマヒ状態にする
-                //敵がターゲット
+                Paralyze();
                 break;
             case 19://敵を眠り状態にする
-                //敵がターゲット
+                Sleep();
                 break;
-            case 20://敵をスロー状態にする
-                //敵がターゲット
+            case 20://敵をフリーズ状態にする
+                Freeze();
                 break;
             case 21:
                 //プレイヤーがターゲット
@@ -434,9 +433,10 @@ public class EnemyController : MonoBehaviour
     /// </summary>
     void DecreaseHealth(float value)
     {
-        hp = (int)(hp * (1 - value));
-
-        print("敵に" + value + "ダメージを与えました");
+        //hpをvalue%分減らす
+        hp -= (int)(hp * value);
+        enemyUIManager.UpdateHP(hp);//HPSliderの更新
+        print("敵に" + hp * value + "ダメージを与えました");
     }
 
     //
@@ -457,6 +457,47 @@ public class EnemyController : MonoBehaviour
             sum += player.transform.position;
         }
         return players.Length > 0 ? sum / players.Length : Vector3.zero;
+    }
+
+    void Poison()
+    {
+        poison = true;
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を紫色にする
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = Color.magenta;
+        }
+    }
+    void Paralyze()
+    {
+        paralyze = true;
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を黄色にする
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = Color.yellow;
+        }
+    }
+    void Sleep()
+    {
+        sleep = true;
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を青色にする
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = Color.blue;
+        }
+    }
+    void Freeze()
+    {
+        freeze = true;
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を水色にする
+        foreach (Renderer renderer in renderers)
+        {
+            renderer.material.color = Color.cyan;
+        }
     }
 }
 
