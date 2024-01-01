@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062f3841fcc2deb4e85adf94ba0ba757, type: 3}
   m_Name: Wand
   m_EditorClassIdentifier: 
-  animatorOverride: {fileID: 0}
-  subAnimatorOverride: {fileID: 0}
-  weaponPrefab: {fileID: 0}
-  weaponRange: 0
-  attackPoint: 0
+  animatorOverride: {fileID: 22100000, guid: 6bb62c27e08f373458019393283b1238, type: 2}
+  subAnimatorOverride: {fileID: 22100000, guid: 6bb62c27e08f373458019393283b1238, type: 2}
+  weaponPrefab: {fileID: 6921434268843926247, guid: 52d426000d81d0b4cac1a6184b50ea15, type: 3}
+  weaponRange: 15
+  attackPoint: 10
   defendPoint: 0
   isRightHanded: 1
   TwoHandedWeapon: 0
   isShield: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 2523139674656023851, guid: dfb85277a4a133d45bc2d5f31d82309c, type: 3}

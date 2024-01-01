@@ -6,8 +6,18 @@ public class Projectile : MonoBehaviour
 {
     public Transform enemyTarget; // 敵の位置
     [SerializeField] float speed = 1;
+    [SerializeField] GameObject hitEffect = null;
+    [SerializeField] GameObject MuzzleEffect = null;
     public int damage = 0;
     // Update is called once per frame
+
+    private void Start()
+    {
+        if (MuzzleEffect != null)
+        {
+            Instantiate(MuzzleEffect, transform.position, transform.rotation);
+        }
+    }
     void Update()
     {
         //ProjectTileから最も近い距離にいる敵を探す
@@ -29,6 +39,11 @@ public class Projectile : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             Destroy(gameObject);
+
+            if (hitEffect != null)
+            {
+                Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+            }
         }
 
     }

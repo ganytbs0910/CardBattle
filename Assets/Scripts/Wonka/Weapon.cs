@@ -81,15 +81,6 @@ public class Weapon : ScriptableObject
             }
             return rightHand;
         }
-        // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
-        else if (isRightHanded && !IsRightHandEmpty(rightHand))
-        {
-            if (subAnimatorOverride != null)
-            {
-                animator.runtimeAnimatorController = subAnimatorOverride;
-            }
-            return leftHand;
-        }
         // 杖のパターン（右手に装備し、プロジェクタイルがある場合）
         else if (isRightHanded && projectile != null)
         {
@@ -99,6 +90,16 @@ public class Weapon : ScriptableObject
             }
             return rightHand;
         }
+        // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
+        else if (isRightHanded && !IsRightHandEmpty(rightHand))
+        {
+            if (subAnimatorOverride != null)
+            {
+                animator.runtimeAnimatorController = subAnimatorOverride;
+            }
+            return leftHand;
+        }
+
         // その他の場合
         else
         {
