@@ -81,17 +81,26 @@ public class Weapon : ScriptableObject
             }
             return rightHand;
         }
-
         // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
-        if (isRightHanded && !IsRightHandEmpty(rightHand))
+        else if (isRightHanded && !IsRightHandEmpty(rightHand))
         {
             if (subAnimatorOverride != null)
             {
                 animator.runtimeAnimatorController = subAnimatorOverride;
             }
-            return leftHand; //右手を取得
+            return leftHand;
         }
-        else 
+        // 杖のパターン（右手に装備し、プロジェクタイルがある場合）
+        else if (isRightHanded && projectile != null)
+        {
+            if (animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = animatorOverride;
+            }
+            return rightHand;
+        }
+        // その他の場合
+        else
         {
             if (animatorOverride != null)
             {
@@ -99,6 +108,52 @@ public class Weapon : ScriptableObject
             }
             return isRightHanded ? rightHand : leftHand;
         }
+        //// 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
+        //if (isRightHanded && !IsRightHandEmpty(rightHand))
+        //{
+        //    if (subAnimatorOverride != null)
+        //    {
+        //        animator.runtimeAnimatorController = subAnimatorOverride;
+        //    }
+        //    return leftHand; //右手を取得
+        //}
+        //else 
+        //{
+        //    if (animatorOverride != null)
+        //    {
+        //        animator.runtimeAnimatorController = animatorOverride;
+        //    }
+        //    return isRightHanded ? rightHand : leftHand;
+        //}
+
+        //// 両手に装備する武器で、かつプロジェクタイルがある場合、常に左手を使用
+        //if (TwoHandedWeapon && projectile != null)
+        //{
+        //    if (animatorOverride != null)
+        //    {
+        //        animator.runtimeAnimatorController = animatorOverride;
+        //    }
+        //    return leftHand;
+        //}
+        //// 両手に装備する通常の武器の場合、常に右手を使用
+        //else if (TwoHandedWeapon)
+        //{
+        //    if (animatorOverride != null)
+        //    {
+        //        animator.runtimeAnimatorController = animatorOverride;
+        //    }
+        //    return rightHand;
+        //}
+
+        ////杖のパターン
+        //if (isRightHanded && projectile != null)
+        //{
+        //    if (animatorOverride != null)
+        //    {
+        //        animator.runtimeAnimatorController = animatorOverride;
+        //    }
+        //    return rightHand;
+        //}
     }
 
     // 古い武器を削除する
