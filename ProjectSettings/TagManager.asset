@@ -9,6 +9,7 @@ TagManager:
   - Card
   - Weapon_Player
   - Weapon_Enemy
+  - Projectile_Player
   layers:
   - Default
   - TransparentFX

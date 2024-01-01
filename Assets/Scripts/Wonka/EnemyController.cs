@@ -28,7 +28,7 @@ public class EnemyController : MonoBehaviour
     bool sleep;
     bool freeze;
     public Transform playerTarget; // 敵の位置
-    private NavMeshAgent agent; // NavMesh Agent
+    public NavMeshAgent agent; // NavMesh Agent
     private Animator animator;
 
     public Collider weaponCollider;//武器の当たり判定
@@ -174,9 +174,16 @@ public class EnemyController : MonoBehaviour
                 //ダメージを与えるものにぶつかったら
                 //print(other.name + "が" + gameObject.name + "に" + playerWeapon.SumDamage() + "ダメージを与えた");
 
-                GetHit();//ノックバック
-
                 Damage(playerWeapon.SumDamage()); //ダメージを与える
+            }
+        }
+
+        if (other.CompareTag("Projectile_Player"))
+        {
+            Projectile projectile = other.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                Damage(projectile.damage);
             }
         }
 
@@ -187,8 +194,6 @@ public class EnemyController : MonoBehaviour
             {
                 //ダメージを与えるものにぶつかったら
                 //print(other.name + "が" + gameObject.name + "に" + bomb.Attack + "のダメージを与えた");
-
-                GetHit();//ノックバック
 
                 Damage(bomb.Attack);//ダメージを与える
             }
@@ -247,6 +252,10 @@ public class EnemyController : MonoBehaviour
             hp = 0;
             Die();
             //print("死亡アニメに移行します");
+        }
+        else
+        {
+            GetHit();//ノックバック
         }
 
         enemyUIManager.UpdateHP(hp);//HPSliderの更新

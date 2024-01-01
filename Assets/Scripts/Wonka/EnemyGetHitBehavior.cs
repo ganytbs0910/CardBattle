@@ -5,13 +5,21 @@ using UnityEngine.AI;
 
 public class EnemyGetHitBehavior : StateMachineBehaviour
 {
+    private float originalSpeed;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //GetHitアニメの予約を取り消す。
+        var enemyController = animator.GetComponent<EnemyController>();
+        if (enemyController != null && enemyController.agent != null)
+        {
+            // 元の速度を保存し、速度を0に設定
+            originalSpeed = enemyController.agent.speed;
+            enemyController.agent.speed = 0f;
+            enemyController.CantMove = true;
+        }
+
         animator.ResetTrigger("GetHit");
-        //移動不可能
-        animator.GetComponent<EnemyController>().CantMove = true;
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -23,10 +31,14 @@ public class EnemyGetHitBehavior : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //移動可能
-        animator.GetComponent<EnemyController>().CantMove = false;
+        var enemyController = animator.GetComponent<EnemyController>();
+        if (enemyController != null && enemyController.agent != null)
+        {
+            // 速度を元に戻す
+            enemyController.agent.speed = originalSpeed;
+            enemyController.CantMove = false;
+        }
 
-        //GetHitアニメの予約を取り消す。
         animator.ResetTrigger("GetHit");
     }
 

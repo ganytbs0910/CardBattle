@@ -19,6 +19,7 @@ public class Weapon : ScriptableObject
     [SerializeField] bool isRightHanded = true;
     [SerializeField] bool TwoHandedWeapon;
     [SerializeField] bool isShield;
+    [SerializeField] Projectile projectile = null;
 
     const string rightWeaponName = "rightWeapon";
     const string leftWeaponName = "leftWeapon";
@@ -62,8 +63,17 @@ public class Weapon : ScriptableObject
     //装備する手を取得する
     private Transform GetTransform(Transform rightHand, Transform leftHand ,Animator animator)
     {
-        // 両手に装備する場合、常に右手を使用
-        if (TwoHandedWeapon)
+        // 両手に装備する武器で、かつプロジェクタイルがある場合、常に左手を使用
+        if (TwoHandedWeapon && projectile != null)
+        {
+            if (animatorOverride != null)
+            {
+                animator.runtimeAnimatorController = animatorOverride;
+            }
+            return leftHand;
+        }
+        // 両手に装備する通常の武器の場合、常に右手を使用
+        else if (TwoHandedWeapon)
         {
             if (animatorOverride != null)
             {
@@ -159,7 +169,8 @@ public class Weapon : ScriptableObject
 
     public BoxCollider GetCollider()
     {
-        
+        if (weaponCollider == null)
+        { return null; }
         return weaponCollider;
     }
 
@@ -178,5 +189,16 @@ public class Weapon : ScriptableObject
     public bool IsRightHandEmpty(Transform rightHand)
     {
         return rightHand.Find(rightWeaponName) == null;
+    }
+
+    public bool HasProjectile()
+    {
+        return projectile != null;
+    }
+
+    public void LaunchProjectile(Transform rightHand, Transform leftHand,Animator animator)
+    { 
+        Projectile projectileInstance =Instantiate(projectile, GetTransform(rightHand,leftHand,animator).position,Quaternion.identity);
+        projectileInstance.damage = attackPoint;
     }
 }
