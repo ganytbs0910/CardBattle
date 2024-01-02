@@ -9,6 +9,7 @@ using DG.Tweening;
 public class EnemyController : MonoBehaviour
 {
     [Header("Enemyのステータス")]
+    public int id;
     public int maxHp = 100;
     public int attack;
     public float attackInterval;

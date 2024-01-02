@@ -37,7 +37,19 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SpawnEnemies();
+        if (PlayerPrefs.HasKey("Enemy"))
+        {
+            for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
+            {
+                int id = PlayerPrefs.GetInt($"Enemy{i}");
+                GameObject newEnemy = Instantiate(enemyPrefab[id], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+                newEnemy.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
+                newEnemy.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
+                newEnemy.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
+                newEnemy.transform.SetParent(GameObject.Find("Enemies").transform);
+                enemies.Add(newEnemy.GetComponent<EnemyController>());
+            }
+        }
     }
 
     //次のステージへ移行する
@@ -70,6 +82,11 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < drawCardController.cardIDList.Count; i++)
         {
             PlayerPrefs.SetInt($"Card{i}", drawCardController.cardIDList[i]);
+        }
+        PlayerPrefs.SetInt("EnemyCount", enemies.Count);
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            PlayerPrefs.SetInt($"Enemy{i}", enemies[i].GetComponent<EnemyController>().id);
         }
     }
 
@@ -140,6 +157,7 @@ public class GameManager : MonoBehaviour
     // 敵をスポーンする
     public void SpawnEnemies()
     {
+
         // "Enemies" という名前のゲームオブジェクトを探す
         GameObject enemiesParent = GameObject.Find("Enemies");
 

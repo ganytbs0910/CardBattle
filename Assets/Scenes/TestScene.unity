@@ -166,7 +166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -125}
+  m_AnchoredPosition: {x: 0, y: -124.99988}
   m_SizeDelta: {x: 0, y: -250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &18771437
@@ -17613,6 +17613,26 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 1931298151966786, guid: e5bf32a70c2e58f4f9ec61dad9659a4b, type: 3}
+  - {fileID: 1123161434240648, guid: e2ce315c37e32fd4b9d2fd8f2d56a7d0, type: 3}
+  - {fileID: 1557585983417840, guid: a81cfdb3f3b757345a955fb9947163c8, type: 3}
+  - {fileID: 1524411113276028, guid: ad121b684e3934947a2d412b4202d8fd, type: 3}
+  - {fileID: 1706760125350986, guid: 45f36e2270151a542be4982f9f1dd581, type: 3}
+  - {fileID: 1748489546896114, guid: fb6e154907ded46479e5d7ff1c7ef748, type: 3}
+  - {fileID: 1765397208479606, guid: 3e08eaa99fbf41647adc835cdda0472a, type: 3}
+  - {fileID: 511558849965164573, guid: 98e0e24462821124abcc371aabc91e3b, type: 3}
+  - {fileID: 1594767147126006, guid: 33eba0da32885b84ebf38245df0735fa, type: 3}
+  - {fileID: 1201003157251696, guid: f397a44c833ad65409eba4bce5ea62ed, type: 3}
+  - {fileID: 2219292830553907877, guid: 454080f5f7736ab449b8dd6c701db4a8, type: 3}
+  - {fileID: 4530003306004163418, guid: 5cdd6bcb747ac81499811938257f1041, type: 3}
+  - {fileID: 1802286859466036053, guid: 1fe9b7b57f071994f8c7c91f933f3484, type: 3}
+  - {fileID: 6928589415477418788, guid: eab7d955b38f12e45b725d1d6da3a635, type: 3}
+  - {fileID: 3891923349452443982, guid: 4d72544ac965a074d899f0c105cfc5d5, type: 3}
+  - {fileID: 7512065305920264353, guid: 7d59c6b5787e75e4dbce9c36da160cde, type: 3}
+  - {fileID: 8925892822458641477, guid: 0a002f501a6b0cf4ba2ba786e4ef3da0, type: 3}
+  - {fileID: 8548725443831320241, guid: 03c813d020433f849b063c06e022ff45, type: 3}
+  - {fileID: 5785497811905594081, guid: 9ed62976a330f544fa0602493a7a2245, type: 3}
+  - {fileID: 7581544333513177157, guid: eaeed9b5531d545469bed80f1156b08d, type: 3}
   enemySpawnPoints:
   - {fileID: 1322217330}
   - {fileID: 2047201984}
