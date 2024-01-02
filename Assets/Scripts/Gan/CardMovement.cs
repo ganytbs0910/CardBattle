@@ -18,6 +18,7 @@ public class CardMovement : MonoBehaviour
     public CardEntity.TargetType targetType;
 
     public Weapon weapon;
+    public Armor armor;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class CardMovement : MonoBehaviour
         targetType = cardModel.targetType;
 
         weapon = cardModel.weapon;
+        armor = cardModel.armor;
     }
 
     void Update()

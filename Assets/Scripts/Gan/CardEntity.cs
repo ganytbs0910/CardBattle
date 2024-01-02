@@ -15,6 +15,8 @@ public class CardEntity : ScriptableObject
     public Action<CardModel> effect;
 
     public Weapon weapon = null;
+    public Armor armor = null;
+
     public enum TargetType
     {
         Player,

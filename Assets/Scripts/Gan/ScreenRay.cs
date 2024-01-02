@@ -26,6 +26,7 @@ public class ScreenRay : MonoBehaviour
     CardEntity.TargetType targetType;
 
     [SerializeField] private Weapon weapon;
+    [SerializeField] private Armor armor;
 
     void Update()
     {
@@ -67,6 +68,10 @@ public class ScreenRay : MonoBehaviour
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
+                    }
+                    if (armor != null) //防具カードを装備
+                    {
+                        collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
                     }
 
                     Destroy(chooseCard);
@@ -117,6 +122,7 @@ public class ScreenRay : MonoBehaviour
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 weapon = result.gameObject.GetComponent<CardMovement>().weapon;
+                armor = result.gameObject.GetComponent<CardMovement>().armor;
                 return;
             }
             //もしレイヤーがUIなら

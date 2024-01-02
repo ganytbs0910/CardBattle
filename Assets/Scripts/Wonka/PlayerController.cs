@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float attackInterval;//攻撃間隔
     [SerializeField] private int defense;
     [SerializeField] private int speed;
+    [SerializeField] private int Agility;//回比率
 
     //通常変数
     int hp;
@@ -25,8 +26,13 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
     public Weapon defaultWeapon = null;
+    //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
+    //防具の装備箇所
+    [SerializeField] Transform headTransform = null; //アタマ防具
+    [SerializeField] Transform backPackTransform = null;　//バックパック
+    [SerializeField] Transform bodyTransform = null;　//鎧、マント
 
     public Transform enemyTarget; // 敵の位置
     public NavMeshAgent agent; // NavMesh Agent
@@ -43,6 +49,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 initialPosition;
 
     public Weapon currentWeapon = null;
+
+    [SerializeField] Armor currentArmor = null;
+    [SerializeField] Armor currentHead = null;
+    [SerializeField] Armor currentBackpack = null;
     BoxCollider weaponCollider;
 
     //public GameObject NoWeapon_r;
@@ -139,6 +149,110 @@ public class PlayerController : MonoBehaviour
 
         print(weapon + "を装備しました");
     }
+
+    public void EquipArmor(Armor armor)
+    {
+        if (armor == null)
+        {
+            return;
+        }
+
+        //防具を生成
+        armor.Spawn(headTransform, bodyTransform, backPackTransform);
+
+
+        switch (armor.armorType)
+        {
+            case Armor.ArmorType.Head:
+                currentHead = armor;
+                break;
+            case Armor.ArmorType.Body:
+                currentArmor = armor;
+                break;
+            case Armor.ArmorType.BackPack:
+                currentBackpack = armor;
+                break;
+        }
+
+        UpdateStats();
+
+        print("防具を装備した");
+    }
+
+    private void UpdateStats()
+    {
+        //初期値に戻す
+        ResetStatus();
+
+        //武器と防具量を加算
+        AddWeaponState();
+        AddArmorState();
+    }
+
+
+    private void AddWeaponState()
+    {
+        if (currentWeapon == null) return;
+
+        int weaponATK = currentWeapon.GetATKPoint();
+        int weaponDEF = currentWeapon.GetDEFPoint();
+
+        attack += weaponATK;
+        defense += weaponDEF;
+    }
+
+    private void AddArmorState()
+    {
+        int armorATK = 0;
+        int armorDEF = 0;
+        int armorAGI = 0;
+        int armorMAXHP = 0;
+        int armorMAXMP = 0;
+
+        if (currentArmor != null)
+        {
+            armorATK += currentArmor.GetATKPoint();
+            armorDEF += currentArmor.GetDEFPoint();
+            armorAGI += currentArmor.GetAGIPoint();
+            armorMAXHP += currentArmor.GetAddMAXHP();
+            armorMAXMP += currentArmor.GetAddMAXMP();
+        }
+
+        if (currentHead != null)
+        {
+            armorATK += currentHead.GetATKPoint();
+            armorDEF += currentHead.GetDEFPoint();
+            armorAGI += currentHead.GetAGIPoint();
+            armorMAXHP += currentHead.GetAddMAXHP();
+            armorMAXMP += currentHead.GetAddMAXMP();
+        }
+
+        if (currentBackpack != null)
+        {
+            armorATK += currentBackpack.GetATKPoint();
+            armorDEF += currentBackpack.GetDEFPoint();
+            armorAGI += currentBackpack.GetAGIPoint();
+            armorMAXHP += currentBackpack.GetAddMAXHP();
+            armorMAXMP += currentBackpack.GetAddMAXMP();
+        }
+
+
+        attack += armorATK;
+        defense += armorDEF;
+        Agility += armorAGI;
+        maxHp += armorMAXHP;
+        maxMp += armorMAXMP;
+    }
+
+    void ResetStatus()
+    {
+        maxHp = 100;
+        maxMp = 100;
+        attack = 10;
+        defense = 0;
+        Agility = 0;//回比率
+    }
+        
 
 
     /// <summary>
@@ -267,7 +381,9 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
-        hp -= damage;
+        int sumDamage;
+        sumDamage = damage - defense;
+        hp -= sumDamage;
         if (hp <= 0)
         {
             hp = 0;
@@ -280,13 +396,13 @@ public class PlayerController : MonoBehaviour
         //print(gameObject.name + "の残りHP= : " + hp);
     }
 
-    //プレイヤーの基礎攻撃力＋武器ダメージを返す
-    public int SumDamage()
-    {
-        int weaponDamage = attack + (int)defaultWeapon.GetAttackPoint();
+    ////プレイヤーの基礎攻撃力＋武器ダメージを返す
+    //public int SumDamage()
+    //{
+    //    int weaponDamage = attack + (int)defaultWeapon.GetAttackPoint();
 
-        return weaponDamage;
-    }
+    //    return weaponDamage;
+    //}
 
 
     public void OnTriggerEnter(Collider other)
