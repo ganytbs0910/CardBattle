@@ -15,7 +15,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (player.currentWeapon == null) return player.attack;
 
-        int weaponDamage = player.attack + (int)player.currentWeapon.GetAttackPoint();
+        int weaponDamage = player.attack;
 
         return weaponDamage;
     }

@@ -213,12 +213,12 @@ public class Weapon : ScriptableObject
         }
     }
 
-    public float GetAttackPoint()
+    public int GetATKPoint()
     {
         return attackPoint;
     }
 
-    public float GetDefendPoint()
+    public int GetDEFPoint()
     {
         return defendPoint;
     }

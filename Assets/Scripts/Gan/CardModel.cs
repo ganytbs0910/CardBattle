@@ -13,6 +13,7 @@ public class CardModel
     public CardEntity.TargetType targetType;
 
     public Weapon weapon =null;
+    public Armor armor = null;
 
     public CardModel(int cardID)
     {
@@ -29,6 +30,7 @@ public class CardModel
             targetType = cardEntity.targetType;
 
             this.weapon = cardEntity.weapon;
+            this.armor = cardEntity.armor;
         }
     }
 
