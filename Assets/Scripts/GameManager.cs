@@ -37,8 +37,16 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        if (PlayerPrefs.HasKey("Enemy"))
+        if (PlayerPrefs.HasKey("EnemyCount"))
         {
+            // "Enemies" という名前のゲームオブジェクトを探す
+            GameObject enemiesParent = GameObject.Find("Enemies");
+
+            // 存在しない場合はEnemiesを新しく作成
+            if (enemiesParent == null)
+            {
+                enemiesParent = new GameObject("Enemies");
+            }
             for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
             {
                 int id = PlayerPrefs.GetInt($"Enemy{i}");
@@ -49,6 +57,12 @@ public class GameManager : MonoBehaviour
                 newEnemy.transform.SetParent(GameObject.Find("Enemies").transform);
                 enemies.Add(newEnemy.GetComponent<EnemyController>());
             }
+            // キャラクターリストを更新
+            CreateCharacterList();
+        }
+        else
+        {
+            SpawnEnemies();
         }
     }
 
@@ -188,10 +202,13 @@ public class GameManager : MonoBehaviour
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10; // stageHierarchyを10で割った余り
                 int enemiesToSpawn = remainder / 2 + 1; // 余りを2で割り、1を足す
-
+                Debug.Log("敵の数: " + enemiesToSpawn);
+                PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
                     int randomIndex = UnityEngine.Random.Range(0, enemyPrefab.Length);
+                    Debug.Log("ランダムインデックス: " + randomIndex);
+                    PlayerPrefs.SetInt($"Enemy{i}", randomIndex);
                     GameObject newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
                     //ステータス調整
                     newEnemy.GetComponent<EnemyController>().maxHp = 100 / enemiesToSpawn + (stageHierarchy * 10);

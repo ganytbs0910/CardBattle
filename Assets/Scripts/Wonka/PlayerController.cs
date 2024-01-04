@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour
         defense = 0;
         Agility = 0;//回比率
     }
-        
+
 
 
     /// <summary>
@@ -348,9 +348,10 @@ public class PlayerController : MonoBehaviour
 
     public void Shoot()
     {
+        if (currentWeapon == null) return;
         if (currentWeapon.HasProjectile())
         {
-            currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform,animator);
+            currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, animator);
             print("矢を撃ちました");
         }
     }
