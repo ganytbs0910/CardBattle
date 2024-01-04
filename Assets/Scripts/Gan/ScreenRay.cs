@@ -25,6 +25,7 @@ public class ScreenRay : MonoBehaviour
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     CardEntity.TargetType targetType;
 
+    [SerializeField] private int tiar;
     [SerializeField] private Weapon weapon;
     [SerializeField] private Armor armor;
 
@@ -119,6 +120,7 @@ public class ScreenRay : MonoBehaviour
                 chooseCard = result.gameObject;
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
                 cardID = result.gameObject.GetComponent<CardMovement>().cardID;
+                tiar = result.gameObject.GetComponent<CardMovement>().tiar;
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 weapon = result.gameObject.GetComponent<CardMovement>().weapon;

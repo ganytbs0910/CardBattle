@@ -11,6 +11,8 @@ public class CardEntity : ScriptableObject
     public new string name;
     [TextArea(1, 3)]
     public string information;
+    [Range(1, 6)]
+    public int tiar =1;
     public Sprite icon;
     public Action<CardModel> effect;
 

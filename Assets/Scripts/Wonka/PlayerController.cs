@@ -629,7 +629,7 @@ public class PlayerController : MonoBehaviour
                 //敵がターゲット
                 break;
             case 21://コインを取得する
-                GetCoin();
+                GameManager.instance.GetCoin();
                 break;
             case 22://武器を装備する
                 //EquipmentWeapon();
@@ -688,15 +688,6 @@ public class PlayerController : MonoBehaviour
     void DefenceUp(float value)
     {
         defense = Mathf.RoundToInt(defense * value);
-    }
-    void GetCoin()
-    {
-        //コインをnumber枚取得する
-        float randomNum = Random.Range(0.8f, 2f);
-        GameManager.instance.coin += Mathf.RoundToInt(GameManager.instance.stageHierarchy * randomNum);
-        PlayerPrefs.SetInt("Coin", GameManager.instance.coin);
-        UIManager.instance.UpdateCoinText();
-
     }
 
     void Heal(int value)

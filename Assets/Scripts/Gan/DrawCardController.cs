@@ -9,6 +9,8 @@ public class DrawCardController : MonoBehaviour
     public Image parentPanel;
     [SerializeField] CardController cardPrefab;
     public List<int> cardIDList = new List<int>();
+
+    public RuntimeAnimatorController[] outlineAnimators;
     void Awake()
     {
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
@@ -47,6 +49,9 @@ public class DrawCardController : MonoBehaviour
             card.Init(cardID.Value);
             cardIDList.Add(cardID.Value);
             CardModel cardModel = card.model;
+
+            //ランクに応じてアウトライン変更
+            TiarSelectOutline(card, cardModel);
         }
         else
         {
@@ -56,6 +61,37 @@ public class DrawCardController : MonoBehaviour
             card.Init(cardID.Value);
             cardIDList.Add(cardID.Value);
             CardModel cardModel = card.model;
+
+            //ランクに応じてアウトライン変更
+            TiarSelectOutline(card,cardModel);
+        }
+    }
+
+    //ランクに応じてアウトライン変更
+    public void TiarSelectOutline(CardController card,CardModel cardModel)
+    {
+        Animator anim = card.gameObject.GetComponentInChildren<Animator>();
+        switch (cardModel.tiar)
+        {
+            case 1:
+                anim.runtimeAnimatorController = outlineAnimators[0];
+                break;
+            case 2:
+                anim.runtimeAnimatorController = outlineAnimators[1];
+                break;
+            case 3:
+                anim.runtimeAnimatorController = outlineAnimators[2];
+                break;
+            case 4:
+                anim.runtimeAnimatorController = outlineAnimators[3];
+                break;
+            case 5:
+                anim.runtimeAnimatorController = outlineAnimators[4];
+                break;
+            case 6:
+                anim.runtimeAnimatorController = outlineAnimators[5];
+                break;
+
         }
     }
 }

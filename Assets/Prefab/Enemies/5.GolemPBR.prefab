@@ -1517,6 +1517,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   weaponCollider: {fileID: 3053927201588970853}
   enemyUIManager: {fileID: 5986764716961027156}
+  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
 --- !u!1 &1713691074708414
 GameObject:
   m_ObjectHideFlags: 0

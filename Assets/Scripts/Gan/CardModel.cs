@@ -8,6 +8,7 @@ public class CardModel
     public int cardID;
     public string name;
     public string information;
+    public int tiar;
     public Sprite icon;
     public Action<CardModel> effect; // 効果を保存するための変数
     public CardEntity.TargetType targetType;
@@ -25,6 +26,7 @@ public class CardModel
             this.cardID = cardEntity.cardID;
             name = cardEntity.name;
             information = cardEntity.information;
+            tiar = cardEntity.tiar;
             icon = cardEntity.icon;
             effect = cardEntity.effect;
             targetType = cardEntity.targetType;
