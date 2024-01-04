@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     public int defense;
     public int speed;
     public Weapon weapon = null;
+    
 
     //通常変数
     float lastAttackTime = 0f; //最後に攻撃した時間
@@ -36,6 +37,8 @@ public class EnemyController : MonoBehaviour
     public EnemyUIManager enemyUIManager;
 
     private Vector3 initialPosition;
+
+    [SerializeField] GameObject coinEffectPrefab;
 
     void Start()
     {
@@ -306,6 +309,15 @@ public class EnemyController : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         //剣の当たり判定も消す
         DisableColliderWeapon();
+
+        if (coinEffectPrefab != null)
+        {
+            // コインエフェクトのインスタンス化
+            Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
+        }
+
+        //コインを入手
+        GameManager.instance.GetCoin();
 
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemoveEnemyFromList(this);

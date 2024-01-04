@@ -15,6 +15,7 @@ public class CardMovement : MonoBehaviour
 
     public int cardID;
     public string name;
+    public int tiar;
     public CardEntity.TargetType targetType;
 
     public Weapon weapon;
@@ -30,6 +31,7 @@ public class CardMovement : MonoBehaviour
         cardModel = cardController.model;
         cardID = cardModel.cardID;
         name = cardModel.name;
+        tiar = cardModel.tiar;
         targetType = cardModel.targetType;
 
         weapon = cardModel.weapon;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: card 30
+  m_Name: Card 30
   m_EditorClassIdentifier: 
   cardID: 30
   name: "\u6756\u3092\u88C5\u5099\u3059\u308B"

@@ -66,8 +66,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GetCoin()
+    {
+        //コインをnumber枚取得する
+        float randomNum = UnityEngine.Random.Range(0.8f, 2f);
+        coin += Mathf.RoundToInt(stageHierarchy * randomNum*10);
+        PlayerPrefs.SetInt("Coin", coin);
+        UIManager.instance.UpdateCoinText();
+    }
+
     //次のステージへ移行する
-    void NextStage()
+    public void NextStage()
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
@@ -252,12 +261,13 @@ public class GameManager : MonoBehaviour
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
         {
             UIManager.instance.WinPanel();
-            NextStage();
             // すべてのプレイヤーが勝利アニメーションを再生
             foreach (var player in players)
             {
                 player.Victory();
             }
+
+            NextStage();
         }
     }
 
