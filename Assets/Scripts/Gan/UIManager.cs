@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
         {
             RemainingBossText.text = $"ボスまで残り:{stage}階層";
         }
-        stageText.text = $"Level : {stage}";
+        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
@@ -122,9 +122,8 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
-
+        PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         GameManager.instance.battleState = false;
-        //GameManager.instance.RemoveAllEnemies();// 現在の敵リストからすべての要素を削除
     }
 
     //ボタンで使用
