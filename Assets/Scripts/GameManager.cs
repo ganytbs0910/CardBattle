@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     {
         //コインをnumber枚取得する
         float randomNum = UnityEngine.Random.Range(0.8f, 2f);
-        coin += Mathf.RoundToInt(stageHierarchy * randomNum*10);
+        coin += Mathf.RoundToInt(stageHierarchy * randomNum * 10);
         PlayerPrefs.SetInt("Coin", coin);
         UIManager.instance.UpdateCoinText();
     }
@@ -147,7 +147,6 @@ public class GameManager : MonoBehaviour
                 //最も近いプレイヤーを探してターゲットにする
             }
         }
-
         print("すべての敵とプレイヤーのターゲットを更新しました");
     }
 
