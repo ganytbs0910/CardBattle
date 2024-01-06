@@ -149,7 +149,6 @@ public class Armor : ScriptableObject
     }
 
 
-
     // Headが空かどうかを確認する
     public bool IsHeadEmpty(Transform head)
     {
