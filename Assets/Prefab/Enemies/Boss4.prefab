@@ -1235,7 +1235,7 @@ Transform:
   m_GameObject: {fileID: 139696}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 446710}
@@ -1326,7 +1326,7 @@ MonoBehaviour:
   CantMove: 0
   playerTarget: {fileID: 0}
   agent: {fileID: 0}
-  weaponCollider: {fileID: 0}
+  weaponCollider: {fileID: 2734659214964109328}
   enemyUIManager: {fileID: 2383829394717414798}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
 --- !u!136 &5366046694328417375
@@ -2751,6 +2751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 489500}
+  - component: {fileID: 2734659214964109328}
   m_Layer: 0
   m_Name: Jaw02
   m_TagString: Untagged
@@ -2773,6 +2774,19 @@ Transform:
   m_Father: {fileID: 472304}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2734659214964109328
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 200, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &170080
 GameObject:
   m_ObjectHideFlags: 0
@@ -4304,9 +4318,9 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3871017865263648378}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -15.587582}
-  m_LocalScale: {x: 0.018181818, y: 0.018181818, z: 0.018181818}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.04, y: 0.02, z: 0.02}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2125979717010809106}
   m_Father: {fileID: 485588}
@@ -4314,7 +4328,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -7.1444216, y: 5.0034394}
+  m_AnchoredPosition: {x: 0, y: 8}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3698312263559125926
@@ -4425,7 +4439,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

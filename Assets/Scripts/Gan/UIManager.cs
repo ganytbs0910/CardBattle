@@ -79,7 +79,6 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         //全てを初期化
         loadPanel.SetActive(false);
-        stageText.text = $"Level : {stageHierarchy}";
         winPanel.SetActive(false);
         losePanel.SetActive(false);
         startCheckButton.SetActive(true);
@@ -101,13 +100,6 @@ public class UIManager : MonoBehaviour
         loadPanel.SetActive(true);
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
-        //cardListPanelの子オブジェクトにあるCardMovementのcardMoveをtrueにする
-        /*
-        for (int i = 0; i < cardListPanel.transform.childCount; i++)
-        {
-            cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardMove = true;
-        }
-        */
         int stage = 10 - GameManager.instance.stageHierarchy;
         if (stage == 0)
         {
@@ -117,6 +109,7 @@ public class UIManager : MonoBehaviour
         {
             RemainingBossText.text = $"ボスまで残り:{stage}階層";
         }
+        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
@@ -130,27 +123,20 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
-
+        PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         GameManager.instance.battleState = false;
-        //GameManager.instance.RemoveAllEnemies();// 現在の敵リストからすべての要素を削除
     }
 
     //ボタンで使用
     public void BattleStart()
     {
         GameManager.instance.battleState = true;
-        /*
-        for (int i = 0; i < cardListPanel.transform.childCount; i++)
-        {
-            cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardMove = false;
-        }
-        */
     }
 
     public void WinPanel()
     {
         winPanel.SetActive(true);
-        //Loading(GameManager.instance.stageHierarchy);
+        Loading(GameManager.instance.stageHierarchy);
     }
 
     public void LosePanel()

@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         SpawnEnemies();
 
         SpawnItems();
-        /*
+
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -56,13 +56,26 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
             {
                 int id = PlayerPrefs.GetInt($"Enemy{i}");
-                GameObject newEnemy = Instantiate(enemyPrefab[id], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+                GameObject newEnemy = Instantiate(enemyPrefab[id - 1], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
                 newEnemy.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
                 newEnemy.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
                 newEnemy.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
                 newEnemy.transform.SetParent(GameObject.Find("Enemies").transform);
                 enemies.Add(newEnemy.GetComponent<EnemyController>());
             }
+
+            // ボスの場合   
+            if (stageHierarchy % 10 == 0)
+            {
+                int id = stageHierarchy / 10 - 1;
+                GameObject boss = Instantiate(bossPrefab[id], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                boss.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
+                boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
+                boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
+                boss.transform.SetParent(GameObject.Find("Enemies").transform);
+                enemies.Add(boss.GetComponent<EnemyController>());
+            }
+
             // キャラクターリストを更新
             CreateCharacterList();
         }
@@ -70,14 +83,14 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
-        */
+
     }
 
     public void GetCoin()
     {
         //コインをnumber枚取得する
         float randomNum = UnityEngine.Random.Range(0.8f, 2f);
-        coin += Mathf.RoundToInt(stageHierarchy * randomNum*10);
+        coin += Mathf.RoundToInt(stageHierarchy * randomNum * 10);
         PlayerPrefs.SetInt("Coin", coin);
         UIManager.instance.UpdateCoinText();
     }
@@ -86,7 +99,6 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         stageHierarchy++;
-        PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
         {
             drawCardController.DrawCard();
@@ -102,7 +114,6 @@ public class GameManager : MonoBehaviour
 
             }
         }
-        KeepCurrentStage();
     }
 
     void KeepCurrentStage()
@@ -151,7 +162,6 @@ public class GameManager : MonoBehaviour
                 //最も近いプレイヤーを探してターゲットにする
             }
         }
-
         print("すべての敵とプレイヤーのターゲットを更新しました");
     }
 
@@ -233,15 +243,15 @@ public class GameManager : MonoBehaviour
                             break;
                         case 1:
                             // 11~19の場合の処理
-                            randomIndex = UnityEngine.Random.Range(0, 10);
+                            randomIndex = UnityEngine.Random.Range(6, 10);
                             break;
                         case 2:
                             // 21~29の場合の処理
-                            randomIndex = UnityEngine.Random.Range(0, 15);
+                            randomIndex = UnityEngine.Random.Range(11, 15);
                             break;
                         case 3:
                             // 31~39の場合の処理
-                            randomIndex = UnityEngine.Random.Range(0, 20);
+                            randomIndex = UnityEngine.Random.Range(16, 20);
                             break;
                     }
 
@@ -262,11 +272,11 @@ public class GameManager : MonoBehaviour
             boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy * 10);
             boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy * 5);
             boss.transform.SetParent(enemiesParent.transform);
-            boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
 
         // キャラクターリストを更新
         CreateCharacterList();
+        KeepCurrentStage();
     }
 
     //アイテムをスポーンさせる
@@ -323,7 +333,6 @@ public class GameManager : MonoBehaviour
             {
                 player.Victory();
             }
-
             NextStage();
         }
     }

@@ -127,15 +127,16 @@ public class ScreenRay : MonoBehaviour
                 armor = result.gameObject.GetComponent<CardMovement>().armor;
                 return;
             }
+
             //もしレイヤーがUIなら
-            if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
+            else if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
             {
-                /*
+                //oneRayUpIgnore = true;
                 targetMarker.SetActive(false);
                 targetMarker.transform.position = result.gameObject.transform.position;
-                return;
-                */
+                //return;
             }
+
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

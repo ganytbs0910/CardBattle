@@ -496,7 +496,6 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("GetHit");
         animator.SetInteger("GetHitType", Random.Range(1, 4));
-        print("!!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     //死亡
