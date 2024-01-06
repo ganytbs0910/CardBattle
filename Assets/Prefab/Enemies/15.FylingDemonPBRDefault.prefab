@@ -2472,7 +2472,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 1.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300
@@ -2511,10 +2511,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 15
-  maxHp: 100
-  attack: 0
-  attackInterval: 0
-  defense: 0
+  maxHp: 150
+  attack: 15
+  attackInterval: 2
+  defense: 10
   speed: 0
   weapon: {fileID: 0}
   IsDead: 0

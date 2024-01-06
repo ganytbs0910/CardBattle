@@ -1479,10 +1479,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 6
-  maxHp: 100
-  attack: 0
-  attackInterval: 0
-  defense: 0
+  maxHp: 40
+  attack: 9
+  attackInterval: 1
+  defense: 2
   speed: 0
   weapon: {fileID: 0}
   IsDead: 0

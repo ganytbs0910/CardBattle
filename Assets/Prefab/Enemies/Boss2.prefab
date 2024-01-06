@@ -111,9 +111,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   maxHp: 100
-  attack: 0
-  attackInterval: 0
-  defense: 0
+  attack: 12
+  attackInterval: 1
+  defense: 9
   speed: 0
   weapon: {fileID: 0}
   IsDead: 0

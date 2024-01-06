@@ -431,10 +431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  maxHp: 100
-  attack: 0
-  attackInterval: 0
-  defense: 0
+  maxHp: 150
+  attack: 20
+  attackInterval: 2
+  defense: 17
   speed: 0
   weapon: {fileID: 0}
   IsDead: 0

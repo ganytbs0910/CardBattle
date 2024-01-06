@@ -963,10 +963,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 16
-  maxHp: 100
-  attack: 0
-  attackInterval: 0
-  defense: 0
+  maxHp: 120
+  attack: 30
+  attackInterval: 2
+  defense: 10
   speed: 0
   weapon: {fileID: 0}
   IsDead: 0

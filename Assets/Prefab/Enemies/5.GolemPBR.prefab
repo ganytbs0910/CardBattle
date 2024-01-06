@@ -1504,11 +1504,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 5
-  maxHp: 100
-  attack: 0
-  attackInterval: 0
-  defense: 0
-  speed: 0
+  maxHp: 25
+  attack: 7
+  attackInterval: 1
+  defense: 3
+  speed: 1
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0
