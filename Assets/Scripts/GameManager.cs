@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SpawnEnemies();
-        /*
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -66,7 +64,6 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
-        */
     }
 
     public void GetCoin()
