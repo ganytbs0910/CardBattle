@@ -6,6 +6,8 @@ using TMPro;
 
 public class DrawCardController : MonoBehaviour
 {
+    public static DrawCardController instance;
+
     public Image parentPanel;
     [SerializeField] CardController cardPrefab;
     public List<int> cardIDList = new List<int>();
@@ -14,6 +16,8 @@ public class DrawCardController : MonoBehaviour
     public RuntimeAnimatorController[] outlineAnimators;
     void Awake()
     {
+        instance = this;
+
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
         if (!PlayerPrefs.HasKey("CurrentStageCard"))
         {

@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private DrawCardController drawCardController;
     public GameObject[] bossPrefab;
     public GameObject[] enemyPrefab; // 敵のプレハブ
+    public GameObject[] itemPrefab; //アイテムのプレファブ。
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
+    public List<Transform> itemSpawnPoints;　//フィールド上のアイテムオブジェのリスト
 
     void Awake()
     {
@@ -38,6 +40,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         SpawnEnemies();
+
+        SpawnItems();
         /*
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
@@ -263,6 +267,35 @@ public class GameManager : MonoBehaviour
 
         // キャラクターリストを更新
         CreateCharacterList();
+    }
+
+    //アイテムをスポーンさせる
+    public void SpawnItems()
+    {
+        GameObject itemParent = GameObject.Find("Items");
+        if (itemParent == null)
+        {
+            itemParent = new GameObject("Items");
+        }
+
+        int randomAmountIndex = UnityEngine.Random.Range(1, itemSpawnPoints.Count + 1);
+
+        // 使用された位置を追跡するためのリストのコピーを作成
+        List<Transform> availableSpawnPoints = new List<Transform>(itemSpawnPoints);
+
+        for (int i = 0; i < randomAmountIndex; i++)
+        {
+            if (availableSpawnPoints.Count == 0) break; // すべてのスポーンポイントが使用された場合はループを抜ける
+
+            int randomPositionIndex = UnityEngine.Random.Range(0, availableSpawnPoints.Count);
+            int randomTypeIndex = UnityEngine.Random.Range(0, itemPrefab.Length);
+
+            GameObject newItem = Instantiate(itemPrefab[randomTypeIndex], availableSpawnPoints[randomPositionIndex].position, availableSpawnPoints[randomPositionIndex].rotation);
+            newItem.transform.SetParent(itemParent.transform);
+
+            // 使用されたスポーンポイントをリストから削除
+            availableSpawnPoints.RemoveAt(randomPositionIndex);
+        }
     }
 
 

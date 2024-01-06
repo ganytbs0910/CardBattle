@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6514279778771666416, guid: fe7f85e88ae0a5542a04a12a5a021094, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -1688535419942235147, guid: 7052175d662ac1d46bace90644396a65, type: 3}
     - target: {fileID: 7386842131459821807, guid: fe7f85e88ae0a5542a04a12a5a021094, type: 3}
       propertyPath: m_Name
-      value: OHS1_WoodStick Tiar1
+      value: OHS5 Katana
       objectReference: {fileID: 0}
     - target: {fileID: 7910719412489751125, guid: fe7f85e88ae0a5542a04a12a5a021094, type: 3}
       propertyPath: m_RootOrder

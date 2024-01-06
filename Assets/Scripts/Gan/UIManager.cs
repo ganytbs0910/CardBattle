@@ -120,6 +120,7 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
+        GameManager.instance.SpawnItems();
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.CreateCharacterList();//リストを更新
         yield return new WaitForSeconds(0.1f);
