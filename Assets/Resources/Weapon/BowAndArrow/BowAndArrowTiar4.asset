@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062f3841fcc2deb4e85adf94ba0ba757, type: 3}
+  m_Name: BowAndArrowTiar4
+  m_EditorClassIdentifier: 
+  animatorOverride: {fileID: 22100000, guid: d3f6c1db23875bb4a8f7970d231d94cd, type: 2}
+  subAnimatorOverride: {fileID: 22100000, guid: d3f6c1db23875bb4a8f7970d231d94cd, type: 2}
+  weaponPrefab: {fileID: 4870839823681686658, guid: f529b97bd4bd90c48ab807eeca67930f, type: 3}
+  weaponRange: 15
+  attackPoint: 0
+  defendPoint: 0
+  isRightHanded: 0
+  TwoHandedWeapon: 1
+  isShield: 0
+  projectile: {fileID: 4454889629378727053, guid: bc54beb04c2466446a20dfe1fe2580a2, type: 3}

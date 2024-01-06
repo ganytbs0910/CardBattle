@@ -9,6 +9,7 @@ public class DrawCardController : MonoBehaviour
     public Image parentPanel;
     [SerializeField] CardController cardPrefab;
     public List<int> cardIDList = new List<int>();
+   int MaxCard =8;
 
     public RuntimeAnimatorController[] outlineAnimators;
     void Awake()
@@ -16,7 +17,7 @@ public class DrawCardController : MonoBehaviour
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
         if (!PlayerPrefs.HasKey("CurrentStageCard"))
         {
-            for (int i = 0; i < Random.Range(4, 8); i++)
+            for (int i = 0; i < Random.Range(5, MaxCard+1); i++)
             {
                 DrawCard();
             }

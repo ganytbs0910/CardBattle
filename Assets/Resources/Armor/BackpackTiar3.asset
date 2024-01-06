@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b42f383960e8da4d8c521fc4f87eae5, type: 3}
+  m_Name: BackpackTiar3
+  m_EditorClassIdentifier: 
+  armorType: 2
+  armorPrefab: {fileID: 8548668356409296441, guid: f3a8e550b3578674397096fbebb1da29, type: 3}
+  armorName: 
+  ATKPoint: 0
+  DEFPoint: 0
+  AGIPoint: 0
+  MAXHPAdd: 30
+  MAXMPAdd: 30

@@ -34,29 +34,51 @@ public class Weapon : ScriptableObject
             //手の位置を取得する。
 
             // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
-            bool shouldFlip = isRightHanded && !IsRightHandEmpty(rightHand);
+            //bool shouldFlip = isRightHanded && !IsRightHandEmpty(rightHand);
 
             GameObject weapon = Instantiate(weaponPrefab, handTransform);
             //手の位置に武器を生成する
 
             weaponCollider = weapon.GetComponent<BoxCollider>();
 
-            // 正しい武器の名前を設定
-            if (shouldFlip)
+            // 両手持ち武器の場合、常に右手に装備
+            if (TwoHandedWeapon)
             {
-                weapon.name = leftWeaponName; // 左手に装備するので名前をleftWeaponに
+                weapon.name = rightWeaponName;
             }
+            // 盾の場合、常に左手に装備
+            else if (isShield)
+            {
+                weapon.name = leftWeaponName;
+            }
+            // その他の場合、右手または左手に装備
             else
             {
                 weapon.name = isRightHanded ? rightWeaponName : leftWeaponName;
             }
 
             // 武器の反転が必要な場合、スケールを反転
-            if (shouldFlip)
+            if (isRightHanded && !IsRightHandEmpty(rightHand))
             {
                 // 武器をZ軸で-180度回転させる
-                weapon.transform.localRotation = Quaternion.Euler(0, -90, -180);
+                //weapon.transform.localRotation = Quaternion.Euler(0, -90, -180);
             }
+            //// 正しい武器の名前を設定
+            //if (shouldFlip)
+            //{
+            //    weapon.name = leftWeaponName; // 左手に装備するので名前をleftWeaponに
+            //}
+            //else
+            //{
+            //    weapon.name = isRightHanded ? rightWeaponName : leftWeaponName;
+            //}
+
+            //// 武器の反転が必要な場合、スケールを反転
+            //if (shouldFlip)
+            //{
+            //    // 武器をZ軸で-180度回転させる
+            //    weapon.transform.localRotation = Quaternion.Euler(0, -90, -180);
+            //}
         }
     }
 
