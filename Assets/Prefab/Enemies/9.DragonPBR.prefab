@@ -939,7 +939,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1594767147126006}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.86
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
@@ -962,10 +962,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.2
+  m_Radius: 0.9
   m_Height: 2.5
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0.4}
 --- !u!114 &3193248125078435993
 MonoBehaviour:
   m_ObjectHideFlags: 0

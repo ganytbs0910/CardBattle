@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        SpawnEnemies();
+        /*
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
+        */
     }
 
     public void GetCoin()
@@ -180,7 +183,6 @@ public class GameManager : MonoBehaviour
     // 敵をスポーンする
     public void SpawnEnemies()
     {
-
         // "Enemies" という名前のゲームオブジェクトを探す
         GameObject enemiesParent = GameObject.Find("Enemies");
 
@@ -191,9 +193,12 @@ public class GameManager : MonoBehaviour
         }
 
         GameObject boss = null;
+        GameObject newEnemy = null;  // newEnemyの宣言をここに移動
+        int randomIndex = 0;  // randomIndexの宣言をここに移動
+
         switch (stageHierarchy)
         {
-            //以降ボス戦
+            // 以降ボス戦
             case 10:
                 boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
                 break;
@@ -209,38 +214,57 @@ public class GameManager : MonoBehaviour
 
             default:
                 // stageHierarchyの値に基づいて敵の数を決定
-                int remainder = (stageHierarchy - 1) % 10; // stageHierarchyを10で割った余り
-                int enemiesToSpawn = remainder / 2 + 1; // 余りを2で割り、1を足す
-                Debug.Log("敵の数: " + enemiesToSpawn);
+                int remainder = (stageHierarchy - 1) % 10;
+                int enemiesToSpawn = remainder / 2 + 1;
                 PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
-                    int randomIndex = UnityEngine.Random.Range(0, enemyPrefab.Length);
-                    Debug.Log("ランダムインデックス: " + randomIndex);
-                    PlayerPrefs.SetInt($"Enemy{i}", randomIndex);
-                    GameObject newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
-                    //ステータス調整
+                    int range = stageHierarchy / 10;
+
+                    switch (range)
+                    {
+                        case 0:
+                            // 1~9の場合の処理
+                            randomIndex = UnityEngine.Random.Range(0, 5);
+                            break;
+                        case 1:
+                            // 11~19の場合の処理
+                            randomIndex = UnityEngine.Random.Range(0, 10);
+                            break;
+                        case 2:
+                            // 21~29の場合の処理
+                            randomIndex = UnityEngine.Random.Range(0, 15);
+                            break;
+                        case 3:
+                            // 31~39の場合の処理
+                            randomIndex = UnityEngine.Random.Range(0, 20);
+                            break;
+                    }
+
+                    // 敵のインスタンス化とステータスの調整
+                    newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
                     newEnemy.GetComponent<EnemyController>().maxHp = 100 / enemiesToSpawn + (stageHierarchy * 10);
                     newEnemy.GetComponent<EnemyController>().attack = 10 / enemiesToSpawn + (stageHierarchy);
                     newEnemy.GetComponent<EnemyController>().defense = 5 / enemiesToSpawn + (stageHierarchy);
                     newEnemy.transform.SetParent(enemiesParent.transform);
-                    //print(newEnemy.name + "をSpawnPointにスポーンさせました");
                 }
                 break;
         }
 
         if (boss != null)
         {
-            // ステータス調整
+            // ボスのステータス調整
             boss.GetComponent<EnemyController>().maxHp = 100 + (stageHierarchy * 30);
-            boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy + 10);
-            boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy + 5);
+            boss.GetComponent<EnemyController>().attack = 10 + (stageHierarchy * 10);
+            boss.GetComponent<EnemyController>().defense = 5 + (stageHierarchy * 5);
             boss.transform.SetParent(enemiesParent.transform);
             boss.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         }
+
         // キャラクターリストを更新
         CreateCharacterList();
     }
+
 
 
 
