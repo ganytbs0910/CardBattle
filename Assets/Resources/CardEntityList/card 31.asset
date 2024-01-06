@@ -15,6 +15,7 @@ MonoBehaviour:
   cardID: 31
   name: "\u5E3D\u5B50\u3092\u88C5\u5099\u3059\u308B"
   information: "\u6756\u3092\u88C5\u5099\u3059\u308B"
+  tiar: 1
   icon: {fileID: 1902040896, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
   weapon: {fileID: 0}
   armor: {fileID: 11400000, guid: d8ec9acba29f6e149bfd095a4fc0b8ff, type: 2}

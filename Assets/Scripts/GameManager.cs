@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        //SpawnEnemies();
+
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -64,6 +66,7 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
+
     }
 
     public void GetCoin()
@@ -260,9 +263,6 @@ public class GameManager : MonoBehaviour
         // キャラクターリストを更新
         CreateCharacterList();
     }
-
-
-
 
     //両陣営のリストとIsDeadを基準に勝敗をジャッジする
     public void CheckBattleStatus()

@@ -86,7 +86,7 @@ public class DrawCardController : MonoBehaviour
         }
     }
 
-
+    //階層ごとのカードの確率
     int CalculateTiar()
     {
         int stageHierarchy = GameManager.instance.stageHierarchy;

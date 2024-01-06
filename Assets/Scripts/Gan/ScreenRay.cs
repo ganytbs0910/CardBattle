@@ -130,11 +130,9 @@ public class ScreenRay : MonoBehaviour
             //もしレイヤーがUIなら
             if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
             {
-                /*
                 targetMarker.SetActive(false);
                 targetMarker.transform.position = result.gameObject.transform.position;
                 return;
-                */
             }
         }
 
