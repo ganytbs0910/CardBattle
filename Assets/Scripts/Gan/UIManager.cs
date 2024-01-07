@@ -214,7 +214,6 @@ public class UIManager : MonoBehaviour
         //このdropImageItemをcollectionButtonの位置まで1.5秒かけて移動させ、だんだん小さくする
         dropImageItem.rectTransform.DOMove(collectionButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
         dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
-
     }
 
 }

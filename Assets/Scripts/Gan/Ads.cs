@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ads : MonoBehaviour
 {
-    public GameObject RestoreButton;//inspectorでリストアボタンをセットする
 
     void Awake()
     {
