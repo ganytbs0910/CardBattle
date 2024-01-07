@@ -1,12 +1,15 @@
 trackSelection = true
 fetchPreview = true
 wantsMore = false
-keepOpen = false
+keepOpen = true
 queryFolder = "Assets"
 onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.8040E7BB" = "gamema"
+	"OpenInspectorPreview.8040E7BB" = "1"
+	"currentGroup.8040E7BB" = "_group_provider_Files"
 }
 providers = {
 	find = {
@@ -51,11 +54,13 @@ providers = {
 	}
 }
 recentSearches = [
+	"g"
+	"p"
 ]
 searchItemFavorites = [
 ]
 savedSearchesSortOrder = 0
-showSavedSearchPanel = false
+showSavedSearchPanel = true
 expandedQueries = [
 ]
 queryBuilder = false

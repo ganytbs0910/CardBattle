@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private RectTransform collectionContent;
+    [SerializeField] private RectTransform collectionButton;
     [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text inforText;
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
+    [SerializeField] private Image dropImage;
     public int i = 0;
     void Awake()
     {
@@ -190,6 +192,7 @@ public class UIManager : MonoBehaviour
                 Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
                 TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
                 CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i + 1));
+
                 //コレクションの情報を反映
                 itemName.text = collectionEntity.name;
                 itemInformation.text = collectionEntity.information;
@@ -202,4 +205,16 @@ public class UIManager : MonoBehaviour
     {
         coinPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
+
+    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
+    {
+        //このオブジェクトの子オブジェクトとして複製
+        Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
+        dropImageItem.sprite = itemPrefab;
+        //このdropImageItemをcollectionButtonの位置まで1.5秒かけて移動させ、だんだん小さくする
+        dropImageItem.rectTransform.DOMove(collectionButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
+        dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
+
+    }
+
 }

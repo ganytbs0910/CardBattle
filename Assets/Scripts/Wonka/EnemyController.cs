@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
 
@@ -16,7 +17,7 @@ public class EnemyController : MonoBehaviour
     public int defense;
     public int speed;
     public Weapon weapon = null;
-    
+
 
     //通常変数
     float lastAttackTime = 0f; //最後に攻撃した時間
@@ -39,6 +40,7 @@ public class EnemyController : MonoBehaviour
     private Vector3 initialPosition;
 
     [SerializeField] GameObject coinEffectPrefab;
+    [SerializeField] private Sprite dropItemPrefab;
 
     void Start()
     {
@@ -327,7 +329,39 @@ public class EnemyController : MonoBehaviour
 
         //ゲームの勝敗をチェックする
         GameManager.instance.CheckBattleStatus();
+        //ドロップ確率
+        int dropNumber = Random.Range(1, 101);
+        if (dropNumber != 1) return;
+        switch (this.gameObject.name)
+        {
+            case "8.Enemy_Skeleton":
+                PlayerPrefs.SetInt($"Collection0", 1);
+                ItemDrop();
+                break;
+            case "Boss2(Clone)":
+                PlayerPrefs.SetInt($"Collection1", 1);
+                ItemDrop();
+                break;
+            case "Boss3(Clone)":
+                PlayerPrefs.SetInt($"Collection2", 1);
+                ItemDrop();
+                break;
+            case "Boss4(Clone)":
+                PlayerPrefs.SetInt($"Collection3", 1);
+                ItemDrop();
+                break;
+            default:
+                break;
+        }
+        UIManager.instance.CollectionCardUpdate();
+    }
 
+    void ItemDrop()
+    {
+        Vector3 worldPosition = this.gameObject.transform.position;
+        //メインカメラから見た位置にする
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
+        UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
     }
 
     // 勝利アニメーションをトリガーするメソッド
