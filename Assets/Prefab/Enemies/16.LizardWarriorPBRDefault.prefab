@@ -965,7 +965,7 @@ MonoBehaviour:
   id: 16
   maxHp: 120
   attack: 30
-  attackInterval: 2
+  attackInterval: 1
   defense: 10
   speed: 0
   weapon: {fileID: 0}
@@ -977,6 +977,7 @@ MonoBehaviour:
   weaponCollider: {fileID: 9163291137544092947}
   enemyUIManager: {fileID: 5079834711965937117}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
+  dropItemPrefab: {fileID: 0}
 --- !u!1 &7512065305920264355
 GameObject:
   m_ObjectHideFlags: 0

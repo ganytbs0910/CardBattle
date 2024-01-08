@@ -13,7 +13,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     private bool _shouldCreateAccount;//アカウントを作成するか    
     private string _customID;//ログイン時に使うID
     private string _playFabId;//PlayFabのID
-    public Text signInWithAppleText;//Text型の変数「まだ連携できていません」のテキスト変更用
+    //public Text signInWithAppleText;//Text型の変数「まだ連携できていません」のテキスト変更用
 
     //課金実装で追加
     private List<CatalogItem> Catalog;//CatalogItem型のListを変数名Catalogで宣言　この中にPlayFabから呼び出したカタログのデータが入ります。
@@ -21,10 +21,10 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     private static IStoreController storeController;
     private IExtensionProvider extensionProvider;
 
-    public Text consumableText;//消費型の購入判定用
-    public Text nonConsumableText;//非消費型の購入判定用
-    public Text subscriptionText;//月額課金(定期購入課金)の購入判定用
-    public Text ProcessText;//処理の終了判定用
+    //public Text consumableText;//消費型の購入判定用
+    //public Text nonConsumableText;//非消費型の購入判定用
+    //public Text subscriptionText;//月額課金(定期購入課金)の購入判定用
+    //public Text ProcessText;//処理の終了判定用
     private string setedPurchasedProductId;//購入に使用されたアイテムID取得用
     private IAppleExtensions m_AppleExtensions;//定期購入課金確認用
 
@@ -163,7 +163,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         Debug.Log("アップルログイン成功" + result.PlayFabId);
         _playFabId = result.PlayFabId;//PlayFabiDの取得
 
-        signInWithAppleText.text = "アップルIDでログイン中";//"まだ連携できていません"のテキストを変更
+        //signInWithAppleText.text = "アップルIDでログイン中";//"まだ連携できていません"のテキストを変更
         CommonLoginSuccess();//ログイン成功後の共通処理
     }
     private void AppleLoginFailure(PlayFabError error)
@@ -189,7 +189,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     public void LinkAppleSuccess(EmptyResult result)
     {
         //アップルIDとリンク成功
-        signInWithAppleText.text = "アップルIDとリンク成功";//"まだ連携できていません"のテキストを変更
+        //signInWithAppleText.text = "アップルIDとリンク成功";//"まだ連携できていません"のテキストを変更
     }
     public void LinkAppleFailure(PlayFabError error)
     {
@@ -205,7 +205,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     //===========================================================================
     private void CommonLoginSuccess()
     {
-        ProcessText.text = "ログイン完了";
+        //ProcessText.text = "ログイン完了";
         //PlayFabのカタログからアイテム一覧を取得
         GetPfCatalog();
     }
@@ -216,7 +216,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     private void CommonLoginError()
     {
         //ここにログイン失敗時の処理を追加
-        ProcessText.text = "ログイン失敗";
+        //ProcessText.text = "ログイン失敗";
     }
 
 
@@ -232,7 +232,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     }
     private void GetCatalogSuccess(GetCatalogItemsResult result)
     {
-        ProcessText.text = "カタログデータ取得完了";
+        //ProcessText.text = "カタログデータ取得完了";
         Catalog = result.Catalog;//取得したカタログのデータをListへ入れる
 
         /*旧 確認方法
@@ -253,7 +253,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     private void GetCatalogFailure(PlayFabError error)
     {
         Debug.Log("カタログの取得失敗" + error.GenerateErrorReport());
-        ProcessText.text = "カタログデータ取得失敗";
+        //ProcessText.text = "カタログデータ取得失敗";
     }
 
 
@@ -299,7 +299,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     //UnityIAPの初期化に成功した時に呼ばれる関数(初期化が成功した時点で購入処理を行えるようになります。)
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
-        ProcessText.text = "UnityIAP初期化完了\nPlayFabID:" + _playFabId;//初期化成功表示とPlayFabIDの表示
+        //ProcessText.text = "UnityIAP初期化完了\nPlayFabID:" + _playFabId;//初期化成功表示とPlayFabIDの表示
         storeController = controller;
         extensionProvider = extensions;
 
@@ -323,7 +323,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
                     SubscriptionInfo info = p.getSubscriptionInfo();//SubscriptionInfo型の変数infoにレシートの情報を代入
 
 
-                    ProcessText.text = "info.getProductId()=" + info.getProductId() + "\ninfo.isSubscribed()=" + info.isSubscribed();
+                    //ProcessText.text = "info.getProductId()=" + info.getProductId() + "\ninfo.isSubscribed()=" + info.isSubscribed();
 
                     //定期購入が有効かを判定
                     //(定期購入のレシートを所持している時点で定期購入課金は有効と判断して良いようですが、一応info.isSubscribed()でも有効かを判定しています。)
@@ -358,7 +358,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     public void OnInitializeFailed(InitializationFailureReason error)
     {
         Debug.Log("UnityIAP 初期化失敗:" + error);
-        ProcessText.text = "UnityIAP初期化失敗" + error;
+        //ProcessText.text = "UnityIAP初期化失敗" + error;
     }
 
     //UnityIAPの初期化状態を管理します。(初期化が完了していたらtrueを返します。)
@@ -397,14 +397,14 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     {
         if (!IsInitialized)//初期化が終了していなかったら
         {
-            ProcessText.text = "UnityIAP初期化が終了していません";
+            //ProcessText.text = "UnityIAP初期化が終了していません";
             return PurchaseProcessingResult.Complete;//購入処理を即座に終了            
         }
 
         // プロダクトが不明の時
         if (e.purchasedProduct == null)
         {
-            ProcessText.text = "プロダクトが不明です";
+            //ProcessText.text = "プロダクトが不明です";
             Debug.LogWarning("Attempted to process purchase with unknown product. Ignoring");
             return PurchaseProcessingResult.Complete;//購入処理を即座に終了
         }
@@ -412,7 +412,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         // レシートがない時
         if (string.IsNullOrEmpty(e.purchasedProduct.receipt))
         {
-            ProcessText.text = "レシートがありません。";
+            //ProcessText.text = "レシートがありません。";
             Debug.LogWarning("Attempted to process purchase with no receipt: ignoring");
             return PurchaseProcessingResult.Complete;//購入処理を即座に終了
         }
@@ -447,7 +447,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
 #if UNITY_IOS
     private void ValidateIosPurchase(Product purchasedProduct)
     {
-        ProcessText.text = "レシート検証開始";
+        //ProcessText.text = "レシート検証開始";
 
         var wrapper = (Dictionary<string, object>)MiniJson.JsonDecode(purchasedProduct.receipt);
         var store = (string)wrapper["Store"];
@@ -463,7 +463,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
             ReceiptData = payload//レシートデータ
 
         }, result => {
-            ProcessText.text = "レシート検証成功";
+            //ProcessText.text = "レシート検証成功";
             Debug.Log("レシート検証成功");
 
             //purchasedProductから購入に使用されたアイテムIDを取得
@@ -481,7 +481,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
             storeController.ConfirmPendingPurchase(purchasedProduct);          
         },
            error => {
-               ProcessText.text = "レシート検証失敗" + error.GenerateErrorReport();               
+               //ProcessText.text = "レシート検証失敗" + error.GenerateErrorReport();               
                Debug.Log("レシート検証失敗: " + error.GenerateErrorReport());
                Debug.Log("エラーメッセージ: " + error.ErrorMessage);
 
@@ -489,7 +489,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
                //使用済みレシートが残っていた場合は完了扱いにする
                if (error.ErrorMessage == "Receipt already used")
                {
-                   ProcessText.text = "使用済みレシートを確認→完了扱い";
+                   //ProcessText.text = "使用済みレシートを確認→完了扱い";
                    storeController.ConfirmPendingPurchase(purchasedProduct);
                }
            }
@@ -504,7 +504,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
 #if UNITY_ANDROID
     private void ValidateAndroidPurchase(Product purchasedProduct)
     {
-        ProcessText.text = "レシート検証開始";
+        //ProcessText.text = "レシート検証開始";
 
         var googleReceipt = GooglePurchase.FromJson(purchasedProduct.receipt);
 
@@ -519,7 +519,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
             Signature = googleReceipt.PayloadData.signature//GooglePlay署名
         }, result =>
         {
-            ProcessText.text = "レシート検証成功";
+            //ProcessText.text = "レシート検証成功";
             Debug.Log("レシート検証成功");
 
             //purchasedProductから購入に使用されたアイテムIDを取得
@@ -537,7 +537,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         },
            error =>
            {               
-               ProcessText.text = "レシート検証失敗" + error.GenerateErrorReport();               
+               //ProcessText.text = "レシート検証失敗" + error.GenerateErrorReport();               
                Debug.Log("レシート検証失敗: " + error.GenerateErrorReport());
                Debug.Log("エラーメッセージ: " + error.ErrorMessage);
 
@@ -567,16 +567,16 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         switch (setedPurchasedProductId)
         {
             case "hisyouhi_jpy400a":
-                consumableText.text = "購入されました。";
+                //consumableText.text = "購入されました。";
                 PlayerPrefs.SetInt("RemoveAds", 1);//広告を削除
                 break;
 
             case "hisyouhi_jpy250a":
-                nonConsumableText.text = "購入されています。";
+                //nonConsumableText.text = "購入されています。";
                 break;
 
             case "getugaku_jpy300a":
-                subscriptionText.text = "購入されています。";
+                //subscriptionText.text = "購入されています。";
                 break;
         }
     }

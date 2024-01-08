@@ -334,7 +334,7 @@ public class EnemyController : MonoBehaviour
         if (dropNumber != 1) return;
         switch (this.gameObject.name)
         {
-            case "8.Enemy_Skeleton":
+            case "Boss1(Clone)":
                 PlayerPrefs.SetInt($"Collection0", 1);
                 ItemDrop();
                 break;
@@ -556,4 +556,3 @@ public class EnemyController : MonoBehaviour
         }
     }
 }
-
