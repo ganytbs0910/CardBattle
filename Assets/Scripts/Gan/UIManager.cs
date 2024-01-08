@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text inforText;
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
+    [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private Image dropImage;
     public int i = 0;
     void Awake()
@@ -36,6 +37,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        TutorialTextDetail("カードを選択してください");
         if (PlayerPrefs.HasKey("RemoveAds"))
         {
             adsButton.SetActive(false);
@@ -79,6 +81,7 @@ public class UIManager : MonoBehaviour
 
     IEnumerator LoadingCoroutine(int stageHierarchy)
     {
+        TutorialTextDetail("カードを用いて最深部を目指そう！");
         yield return new WaitForSeconds(3.5f);
         loadPanel.SetActive(true);
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
@@ -132,12 +135,15 @@ public class UIManager : MonoBehaviour
         loadPanel.SetActive(false);
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         GameManager.instance.battleState = false;
+        PlayerPrefs.SetInt("Tutorial", 1);
+        TutorialTextDetail("");
     }
 
     //ボタンで使用
     public void BattleStart()
     {
         GameManager.instance.battleState = true;
+        UIManager.instance.TutorialTextDetail("戦闘は自動で行われます");
     }
 
     public void WinPanel()
@@ -221,4 +227,12 @@ public class UIManager : MonoBehaviour
         dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
     }
 
+    //チュートリアル用
+    public void TutorialTextDetail(string detail)
+    {
+        if (!PlayerPrefs.HasKey("Tutorial"))
+        {
+            tutorialText.text = detail;
+        }
+    }
 }
