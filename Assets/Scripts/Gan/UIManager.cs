@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private RectTransform collectionContent;
     [SerializeField] private RectTransform collectionButton;
+    [SerializeField] private GameObject adsButton;
     [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
@@ -35,6 +36,10 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("RemoveAds"))
+        {
+            adsButton.SetActive(false);
+        }
         battleStartButton.gameObject.SetActive(false);
         // テキストの拡大と透明化アニメーション
         Sequence mySequence = DOTween.Sequence();

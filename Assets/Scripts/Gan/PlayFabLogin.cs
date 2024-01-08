@@ -476,6 +476,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
             //******ここに課金対象のアイテム付与などの処理を追加*****
             ChangeText();//購入後の処理
 
+
             //購入処理が完了したものとする
             storeController.ConfirmPendingPurchase(purchasedProduct);          
         },
@@ -565,8 +566,9 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         //アイテムIDによって処理を変更
         switch (setedPurchasedProductId)
         {
-            case "syouhi_jpy120a":
+            case "hisyouhi_jpy400a":
                 consumableText.text = "購入されました。";
+                PlayerPrefs.SetInt("RemoveAds", 1);//広告を削除
                 break;
 
             case "hisyouhi_jpy250a":
