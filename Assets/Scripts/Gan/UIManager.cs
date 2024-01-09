@@ -8,6 +8,14 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    //ローカライズ
+    public enum Language
+    {
+        Japanese,
+        English
+    }
+    public Language language = Language.Japanese;
+
     public static UIManager instance;
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
@@ -27,6 +35,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
     [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private TMP_Text collectionTitleText;
     [SerializeField] private Image dropImage;
     public int i = 0;
     void Awake()
@@ -37,11 +46,17 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        //ローカライズ
+        ChangeLanguage(PlayerPrefs.GetString("Language"));
+        InforTextDetail();
+        CollectionTitleTextDetail();
+
         TutorialTextDetail("カードを選択してください");
         if (PlayerPrefs.HasKey("RemoveAds"))
         {
             adsButton.SetActive(false);
         }
+
         battleStartButton.gameObject.SetActive(false);
         // テキストの拡大と透明化アニメーション
         Sequence mySequence = DOTween.Sequence();
@@ -60,8 +75,8 @@ public class UIManager : MonoBehaviour
         UpdateCoinText();
 
         //stageTextを更新
-        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
-        RemainingBossText.text = $"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層";
+        StageTextDetail($"階層 : {GameManager.instance.stageHierarchy}");
+        RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
     }
 
     public void MoveUI()
@@ -113,13 +128,13 @@ public class UIManager : MonoBehaviour
         int stage = 10 - GameManager.instance.stageHierarchy;
         if (stage == 0)
         {
-            RemainingBossText.text = $"ボス戦 !!";
+            RemainingBossTextDetail("ボス戦 !!");
         }
         else
         {
-            RemainingBossText.text = $"ボスまで残り:{stage}階層";
+            RemainingBossTextDetail($"ボスまで残り:{stage}階層");
         }
-        stageText.text = $"Level : {GameManager.instance.stageHierarchy}";
+        StageTextDetail($"階層 : {GameManager.instance.stageHierarchy}");
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
@@ -203,10 +218,18 @@ public class UIManager : MonoBehaviour
                 Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
                 TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
                 CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i + 1));
-
                 //コレクションの情報を反映
-                itemName.text = collectionEntity.name;
-                itemInformation.text = collectionEntity.information;
+                switch (language)
+                {
+                    case Language.Japanese:
+                        itemName.text = collectionEntity.nameJP;
+                        itemInformation.text = collectionEntity.informationJP;
+                        break;
+                    case Language.English:
+                        itemName.text = collectionEntity.nameEN;
+                        itemInformation.text = collectionEntity.informationEN;
+                        break;
+                }
                 itemIcon.sprite = collectionEntity.icon;
             }
         }
@@ -227,12 +250,196 @@ public class UIManager : MonoBehaviour
         dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
     }
 
+
+
+
+
+
+
+
+
+
+
+    //以下ローカライズ
+    public void ChangeLanguage(string language)
+    {
+        if (!PlayerPrefs.HasKey("Language"))
+        {
+            //端末の設定の言語に
+            switch (Application.systemLanguage)
+            {
+                case SystemLanguage.Japanese:
+                    this.language = Language.Japanese;
+                    PlayerPrefs.SetString("Language", "Japanese");
+                    break;
+                case SystemLanguage.English:
+                    this.language = Language.English;
+                    PlayerPrefs.SetString("Language", "English");
+                    break;
+            }
+        }
+        switch (language)
+        {
+            case "Japanese":
+                this.language = Language.Japanese;
+                PlayerPrefs.SetString("Language", "Japanese");
+                break;
+            case "English":
+                this.language = Language.English;
+                PlayerPrefs.SetString("Language", "English");
+                break;
+        }
+    }
+
     //チュートリアル用
     public void TutorialTextDetail(string detail)
     {
         if (!PlayerPrefs.HasKey("Tutorial"))
         {
+            switch (detail)
+            {
+                case "カードを選択してください":
+                    switch (language)
+                    {
+                        case Language.Japanese:
+                            detail = "カードを選択してください";
+                            break;
+                        case Language.English:
+                            detail = "Please select a card";
+                            break;
+                    }
+                    break;
+                case "自身を選択してください":
+                    switch (language)
+                    {
+                        case Language.Japanese:
+                            detail = "自身を選択してください";
+                            break;
+                        case Language.English:
+                            detail = "Please select yourself";
+                            break;
+                    }
+                    break;
+                case "敵を選択してください":
+                    switch (language)
+                    {
+                        case Language.Japanese:
+                            detail = "敵を選択してください";
+                            break;
+                        case Language.English:
+                            detail = "Please select an enemy";
+                            break;
+                    }
+                    break;
+                case "バトルを開始してください！":
+                    switch (language)
+                    {
+                        case Language.Japanese:
+                            detail = "バトルを開始してください！";
+                            break;
+                        case Language.English:
+                            detail = "Please start the battle!";
+                            break;
+                    }
+                    break;
+                case "戦闘は自動で行われます":
+                    switch (language)
+                    {
+                        case Language.Japanese:
+                            detail = "戦闘は自動で行われます";
+                            break;
+                        case Language.English:
+                            detail = "Battle is automatic";
+                            break;
+                    }
+                    break;
+                case "カードを用いて最深部を目指そう！":
+                    switch (language)
+                    {
+                        case Language.Japanese:
+                            detail = "カードを用いて最深部を目指そう！";
+                            break;
+                        case Language.English:
+                            detail = "Let's aim for the deepest part using the card!";
+                            break;
+                    }
+                    break;
+            }
             tutorialText.text = detail;
+        }
+    }
+
+    public void StageTextDetail(string detail)
+    {
+        if (detail.StartsWith("階層 :"))
+        {
+            int stage = GameManager.instance.stageHierarchy;
+            switch (language)
+            {
+                case Language.Japanese:
+                    detail = $"階層 : {stage}";
+                    break;
+                case Language.English:
+                    detail = $"Stage : {stage}";
+                    break;
+            }
+        }
+        stageText.text = detail;
+    }
+
+    public void RemainingBossTextDetail(string detail)
+    {
+        if (detail == "ボス戦 !!")
+        {
+            switch (language)
+            {
+                case Language.Japanese:
+                    detail = "ボス戦 !!";
+                    break;
+                case Language.English:
+                    detail = "Boss Battle !!";
+                    break;
+            }
+        }
+        else if (detail.StartsWith("ボスまで残り:"))
+        {
+            int remainingFloors = 10 - GameManager.instance.stageHierarchy;
+            switch (language)
+            {
+                case Language.Japanese:
+                    detail = $"ボスまで残り:{remainingFloors}階層";
+                    break;
+                case Language.English:
+                    detail = $"Remaining to Boss:{remainingFloors} floors";
+                    break;
+            }
+        }
+
+        RemainingBossText.text = detail;
+    }
+
+    public void InforTextDetail()
+    {
+        switch (language)
+        {
+            case Language.Japanese:
+                inforText.text = "タップしてスタート";
+                break;
+            case Language.English:
+                inforText.text = "Tap to start";
+                break;
+        }
+    }
+    public void CollectionTitleTextDetail()
+    {
+        switch (language)
+        {
+            case Language.Japanese:
+                collectionTitleText.text = "所持中のアイテム";
+                break;
+            case Language.English:
+                collectionTitleText.text = "Items in possession";
+                break;
         }
     }
 }

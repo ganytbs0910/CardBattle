@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "CollectionEntity", menuName = "Create ColliectionEntity")]
-
+[CreateAssetMenu(fileName = "CollectionEntity", menuName = "Create CollectionEntity")]
 public class CollectionEntity : ScriptableObject
 {
     public int collectionID;
-    public new string name;
-    public string information;
+    public string nameJP; // 日本語の名前
+    public string nameEN; // 英語の名前
+    public string informationJP; // 日本語の情報
+    public string informationEN; // 英語の情報
     public Sprite icon;
 }
