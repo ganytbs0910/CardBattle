@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Collection 5
   m_EditorClassIdentifier: 
   collectionID: 5
-  name: "\u958B\u62D3\u306E\u3064\u308B\u304E"
-  information: "\u30CF\u30FC\u30C9\u30E2\u30FC\u30C9\u306E\u6311\u6226\u6A29"
+  nameJP: "\u958B\u62D3\u306E\u3064\u308B\u304E"
+  nameEN: Sword of development
+  informationJP: "\u30CF\u30FC\u30C9\u30E2\u30FC\u30C9\u306E\u6311\u6226\u6A29"
+  informationEN: Hard mode challenge
   icon: {fileID: -2010719989, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

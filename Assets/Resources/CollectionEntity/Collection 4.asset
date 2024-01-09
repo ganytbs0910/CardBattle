@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Collection 4
   m_EditorClassIdentifier: 
   collectionID: 4
-  name: "\u899A\u9192\u306E\u77F3"
-  information: "\u4F1A\u5FC3\u306E\u4E00\u6483\u304C\u751F\u307E\u308C\u308B"
+  nameJP: "\u899A\u9192\u306E\u77F3"
+  nameEN: stone of awakening
+  informationJP: "\u4F1A\u5FC3\u306E\u4E00\u6483\u304C\u751F\u307E\u308C\u308B"
+  informationEN: A decisive blow is born
   icon: {fileID: 101905407, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}

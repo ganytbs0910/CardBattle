@@ -36,6 +36,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text RemainingBossText;
     [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private TMP_Text collectionTitleText;
+    [SerializeField] private TMP_Text giveUpText;
+    [SerializeField] private TMP_Text languageText;
+    [SerializeField] private TMP_Text howToPlayText;
+    [SerializeField] private TMP_Text reviewText;
+    [SerializeField] private TMP_Text reStoreText;
+
     [SerializeField] private Image dropImage;
     public int i = 0;
     void Awake()
@@ -48,8 +54,7 @@ public class UIManager : MonoBehaviour
     {
         //ローカライズ
         ChangeLanguage(PlayerPrefs.GetString("Language"));
-        InforTextDetail();
-        CollectionTitleTextDetail();
+        LocalizeText();
 
         TutorialTextDetail("カードを選択してください");
         if (PlayerPrefs.HasKey("RemoveAds"))
@@ -261,6 +266,13 @@ public class UIManager : MonoBehaviour
 
 
     //以下ローカライズ
+    void LocalizeUpdate()
+    {
+        TutorialTextDetail(tutorialText.text);
+        StageTextDetail(stageText.text);
+        RemainingBossTextDetail(RemainingBossText.text);
+        LocalizeText();
+    }
     public void ChangeLanguage(string language)
     {
         if (!PlayerPrefs.HasKey("Language"))
@@ -289,6 +301,7 @@ public class UIManager : MonoBehaviour
                 PlayerPrefs.SetString("Language", "English");
                 break;
         }
+        LocalizeUpdate();
     }
 
     //チュートリアル用
@@ -371,7 +384,7 @@ public class UIManager : MonoBehaviour
 
     public void StageTextDetail(string detail)
     {
-        if (detail.StartsWith("階層 :"))
+        if (detail.StartsWith("階層 :") || detail.StartsWith("Stage :"))
         {
             int stage = GameManager.instance.stageHierarchy;
             switch (language)
@@ -389,7 +402,7 @@ public class UIManager : MonoBehaviour
 
     public void RemainingBossTextDetail(string detail)
     {
-        if (detail == "ボス戦 !!")
+        if (detail == "ボス戦 !!" || detail == "Boss Battle !!")
         {
             switch (language)
             {
@@ -401,7 +414,7 @@ public class UIManager : MonoBehaviour
                     break;
             }
         }
-        else if (detail.StartsWith("ボスまで残り:"))
+        else if (detail.StartsWith("ボスまで残り:") || detail.StartsWith("Remaining to Boss:"))
         {
             int remainingFloors = 10 - GameManager.instance.stageHierarchy;
             switch (language)
@@ -418,27 +431,28 @@ public class UIManager : MonoBehaviour
         RemainingBossText.text = detail;
     }
 
-    public void InforTextDetail()
-    {
-        switch (language)
-        {
-            case Language.Japanese:
-                inforText.text = "タップしてスタート";
-                break;
-            case Language.English:
-                inforText.text = "Tap to start";
-                break;
-        }
-    }
-    public void CollectionTitleTextDetail()
+    //変更のないテキストのローカライズ
+    public void LocalizeText()
     {
         switch (language)
         {
             case Language.Japanese:
                 collectionTitleText.text = "所持中のアイテム";
+                inforText.text = "タップしてスタート";
+                giveUpText.text = "冒険を諦める";
+                languageText.text = "言語設定";
+                howToPlayText.text = "遊び方";
+                reviewText.text = "レビューを書く";
+                reStoreText.text = "購入を復元";
                 break;
             case Language.English:
                 collectionTitleText.text = "Items in possession";
+                inforText.text = "Tap to start";
+                giveUpText.text = "Give up adventure";
+                languageText.text = "Language setting";
+                howToPlayText.text = "How to play";
+                reviewText.text = "Write a review";
+                reStoreText.text = "Restore purchase";
                 break;
         }
     }
