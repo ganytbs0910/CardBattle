@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private RectTransform collectionContent;
     [SerializeField] private RectTransform collectionButton;
-    [SerializeField] private GameObject adsButton;
+    public GameObject adsButton;
     [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
@@ -82,6 +82,14 @@ public class UIManager : MonoBehaviour
         //stageTextを更新
         StageTextDetail($"階層 : {GameManager.instance.stageHierarchy}");
         RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
+    }
+    public void ShowUI(GameObject ui)
+    {
+        //DOTweenで中央からだんだん表示させる
+        ui.SetActive(true);
+        ui.transform.DOScale(0, 0);
+        ui.transform.DOScale(1, 0.5f);
+
     }
 
     public void MoveUI()

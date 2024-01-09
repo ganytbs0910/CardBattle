@@ -569,6 +569,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
             case "hisyouhi_jpy400a":
                 //consumableText.text = "購入されました。";
                 PlayerPrefs.SetInt("RemoveAds", 1);//広告を削除
+                UIManager.instance.adsButton.SetActive(false);//広告ボタンを非表示にする
                 break;
 
             case "hisyouhi_jpy250a":
