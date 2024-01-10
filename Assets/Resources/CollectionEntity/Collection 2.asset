@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Collection 2
   m_EditorClassIdentifier: 
   collectionID: 2
-  name: "\u7652\u3057\u306E\u5263\u6280"
-  information: "\u653B\u6483\u306B\u56DE\u5FA9\u52B9\u679C\u304C\u4ED8\u4E0E\u3055\u308C\u308B"
+  nameJP: "\u7652\u3057\u306E\u5263\u6280"
+  nameEN: Healing sword technique
+  informationJP: "\u653B\u6483\u306B\u56DE\u5FA9\u52B9\u679C\u304C\u4ED8\u4E0E\u3055\u308C\u308B"
+  informationEN: Adds recovery effect to attack
   icon: {fileID: -217046095, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

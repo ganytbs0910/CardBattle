@@ -697,6 +697,7 @@ MonoBehaviour:
   weaponCollider: {fileID: 6748827096418338852}
   enemyUIManager: {fileID: 5259955848770244933}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
+  dropItemPrefab: {fileID: 0}
 --- !u!1 &6928589415477418790
 GameObject:
   m_ObjectHideFlags: 0

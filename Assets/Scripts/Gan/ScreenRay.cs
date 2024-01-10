@@ -74,9 +74,9 @@ public class ScreenRay : MonoBehaviour
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
                     }
-
                     Destroy(chooseCard);
                     cardID = 0;
+                    UIManager.instance.TutorialTextDetail("バトルを開始してください！");
                 }
                 else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
@@ -84,6 +84,7 @@ public class ScreenRay : MonoBehaviour
                     collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
                     Destroy(chooseCard);
                     cardID = 0;
+                    UIManager.instance.TutorialTextDetail("バトルを開始してください！");
                 }
                 else
                 {
@@ -122,12 +123,21 @@ public class ScreenRay : MonoBehaviour
                 cardID = result.gameObject.GetComponent<CardMovement>().cardID;
                 tiar = result.gameObject.GetComponent<CardMovement>().tiar;
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
+                if (targetType == CardEntity.TargetType.Player)
+                {
+                    UIManager.instance.TutorialTextDetail("自身をタップしてください");
+                }
+                else if (targetType == CardEntity.TargetType.Enemy)
+                {
+                    UIManager.instance.TutorialTextDetail("敵をタップしてください");
+                }
+
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 weapon = result.gameObject.GetComponent<CardMovement>().weapon;
                 armor = result.gameObject.GetComponent<CardMovement>().armor;
                 return;
             }
-
+            /*
             //もしレイヤーがUIなら
             else if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
             {
@@ -136,7 +146,7 @@ public class ScreenRay : MonoBehaviour
                 targetMarker.transform.position = result.gameObject.transform.position;
                 //return;
             }
-
+            */
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -170,6 +180,7 @@ public class ScreenRay : MonoBehaviour
                 else
                 {
                     colorChangeIgnore = false;
+
                 }
             }
             //rayの当たった最終地点を取得
