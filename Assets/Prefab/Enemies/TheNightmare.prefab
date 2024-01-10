@@ -114,7 +114,8 @@ MonoBehaviour:
   attack: 12
   attackInterval: 1
   defense: 9
-  speed: 0
+  moveSpeed: 0
+  agility: 0
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0

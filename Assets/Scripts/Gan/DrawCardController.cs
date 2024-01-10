@@ -42,10 +42,6 @@ public class DrawCardController : MonoBehaviour
             Destroy(child.gameObject);
         }
         TestDrawCard(Random.Range(76, 81));
-        TestDrawCard(Random.Range(76, 81));
-        TestDrawCard(Random.Range(76, 81));
-
-
     }
 
     void Update()
