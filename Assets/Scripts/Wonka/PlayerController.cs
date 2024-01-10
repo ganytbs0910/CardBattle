@@ -204,11 +204,11 @@ public class PlayerController : MonoBehaviour
         {
             attack += 5;//素手の攻撃力
             return;
-        } 
+        }
 
         int weaponATK = currentWeapon.GetATKPoint();
         int weaponDEF = currentWeapon.GetDEFPoint();
-        print("攻撃力"+weaponATK);
+        print("攻撃力" + weaponATK);
         print("防御力" + weaponDEF);
 
         attack += weaponATK;
@@ -458,7 +458,7 @@ public class PlayerController : MonoBehaviour
         if (currentWeapon == null)
         {
             noWeaponCols.enabled = false;
-            
+
         }
         else
         {
@@ -475,8 +475,8 @@ public class PlayerController : MonoBehaviour
     public void EnableColliderWeapon()
     {
         if (currentWeapon == null)
-        { 
-             noWeaponCols.enabled = true;
+        {
+            noWeaponCols.enabled = true;
         }
         else
         {

@@ -37,12 +37,12 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         //アップルIDを登録していたらアップルIDでログイン
         if (PlayerPrefs.HasKey("APPLE_TOKEN") == true)
         {
-            Debug.Log("アップルIDでログイン");
+            //Debug.Log("アップルIDでログイン");
             AppleLogin();//アップルIDでログイン
         }
         else
         {
-            Debug.Log("カスタムIDでログイン");
+            //Debug.Log("カスタムIDでログイン");
             CustomIDLogin();//カスタムIDでログイン
         }
     }
@@ -69,7 +69,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         //アカウントを作成しようとしたのに、IDが既に使われていて、出来なかった場合
         if (_shouldCreateAccount == true && result.NewlyCreated == false)
         {
-            Debug.LogWarning("CustomId :" + _customID + "は既に使われています。");
+            //Debug.LogWarning("CustomId :" + _customID + "は既に使われています。");
             CustomIDLogin();//ログインしなおし
             return;
         }
@@ -78,19 +78,19 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         if (result.NewlyCreated == true)
         {
             SaveCustomID();//IDの保存
-            Debug.Log("新規作成成功");
+            //Debug.Log("新規作成成功");
         }
 
         _playFabId = result.PlayFabId;//PlayFabiDの取得
 
-        Debug.Log("カスタムIDでのログイン成功!!");
+        //Debug.Log("カスタムIDでのログイン成功!!");
         CommonLoginSuccess();//ログイン成功後の共通処理
     }
 
     //ログイン失敗
     private void OnLoginFailure(PlayFabError error)
     {
-        Debug.LogError("カスタムIDでのログインに失敗\n" + error.GenerateErrorReport());
+        //Debug.LogError("カスタムIDでのログインに失敗\n" + error.GenerateErrorReport());
         CommonLoginError();//ログインエラー後の共通処理
     }
 
@@ -160,7 +160,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     }
     private void AppleLoginSuccess(LoginResult result)
     {
-        Debug.Log("アップルログイン成功" + result.PlayFabId);
+        //Debug.Log("アップルログイン成功" + result.PlayFabId);
         _playFabId = result.PlayFabId;//PlayFabiDの取得
 
         //signInWithAppleText.text = "アップルIDでログイン中";//"まだ連携できていません"のテキストを変更
@@ -168,7 +168,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     }
     private void AppleLoginFailure(PlayFabError error)
     {
-        Debug.Log("アップルログインエラー" + error.GenerateErrorReport());
+        //Debug.Log("アップルログインエラー" + error.GenerateErrorReport());
         CommonLoginError();//ログインエラー後の共通処理
     }
 
@@ -194,7 +194,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     public void LinkAppleFailure(PlayFabError error)
     {
         //アップルIDとリンク失敗
-        Debug.Log("アップルIDとリンク失敗" + error.GenerateErrorReport());
+        //Debug.Log("アップルIDとリンク失敗" + error.GenerateErrorReport());
     }
 
 
@@ -236,15 +236,15 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         Catalog = result.Catalog;//取得したカタログのデータをListへ入れる
 
         /*旧 確認方法
-        Debug.Log("Catalog[0]=" + Catalog[0].ItemId);//カタログのデータからItemIdを確認できます。
-        Debug.Log("Catalog[1]=" + Catalog[1].ItemId);//カタログのデータからItemIdを確認できます。
-        Debug.Log("Catalog[2]=" + Catalog[2].ItemId);//カタログのデータからItemIdを確認できます。
+        //Debug.Log("Catalog[0]=" + Catalog[0].ItemId);//カタログのデータからItemIdを確認できます。
+        //Debug.Log("Catalog[1]=" + Catalog[1].ItemId);//カタログのデータからItemIdを確認できます。
+        //Debug.Log("Catalog[2]=" + Catalog[2].ItemId);//カタログのデータからItemIdを確認できます。
         */
 
         //カタログのデータからItemIdを一括確認
         for (int i = 0; i < Catalog.Count; i++)
         {
-            Debug.Log("Catalog[" + i + "] = " + Catalog[i].ItemId);
+            //Debug.Log("Catalog[" + i + "] = " + Catalog[i].ItemId);
         }
 
         InitializePurchasing();//UnityIAPを初期化
@@ -252,7 +252,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
 
     private void GetCatalogFailure(PlayFabError error)
     {
-        Debug.Log("カタログの取得失敗" + error.GenerateErrorReport());
+        //Debug.Log("カタログの取得失敗" + error.GenerateErrorReport());
         //ProcessText.text = "カタログデータ取得失敗";
     }
 
@@ -336,12 +336,12 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
                 }
                 else
                 {
-                    Debug.Log("the product is not a subscription product");
+                    //Debug.Log("the product is not a subscription product");
                 }
             }
             else
             {
-                Debug.Log("the product should have a valid receipt");
+                //Debug.Log("the product should have a valid receipt");
             }
         }
         //↑======================定期購入課金の処理をレシートの情報から確認して実行======================↑
@@ -357,7 +357,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     //UnityIAPの初期化に失敗した時に呼ばれる関数
     public void OnInitializeFailed(InitializationFailureReason error)
     {
-        Debug.Log("UnityIAP 初期化失敗:" + error);
+        //Debug.Log("UnityIAP 初期化失敗:" + error);
         //ProcessText.text = "UnityIAP初期化失敗" + error;
     }
 
@@ -405,7 +405,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         if (e.purchasedProduct == null)
         {
             //ProcessText.text = "プロダクトが不明です";
-            Debug.LogWarning("Attempted to process purchase with unknown product. Ignoring");
+            //Debug.LogWarning("Attempted to process purchase with unknown product. Ignoring");
             return PurchaseProcessingResult.Complete;//購入処理を即座に終了
         }
 
@@ -413,11 +413,11 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         if (string.IsNullOrEmpty(e.purchasedProduct.receipt))
         {
             //ProcessText.text = "レシートがありません。";
-            Debug.LogWarning("Attempted to process purchase with no receipt: ignoring");
+            //Debug.LogWarning("Attempted to process purchase with no receipt: ignoring");
             return PurchaseProcessingResult.Complete;//購入処理を即座に終了
         }
 
-        Debug.Log("Processing transaction: " + e.purchasedProduct.transactionID);
+        //Debug.Log("Processing transaction: " + e.purchasedProduct.transactionID);
 
 
 
@@ -464,7 +464,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
 
         }, result => {
             //ProcessText.text = "レシート検証成功";
-            Debug.Log("レシート検証成功");
+            //Debug.Log("レシート検証成功");
 
             //purchasedProductから購入に使用されたアイテムIDを取得
             //アプリ内の購入ボタンが押されたときにはこの行は不要。
@@ -482,8 +482,8 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         },
            error => {
                //ProcessText.text = "レシート検証失敗" + error.GenerateErrorReport();               
-               Debug.Log("レシート検証失敗: " + error.GenerateErrorReport());
-               Debug.Log("エラーメッセージ: " + error.ErrorMessage);
+               //Debug.Log("レシート検証失敗: " + error.GenerateErrorReport());
+               //Debug.Log("エラーメッセージ: " + error.ErrorMessage);
 
 
                //使用済みレシートが残っていた場合は完了扱いにする
@@ -520,7 +520,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         }, result =>
         {
             //ProcessText.text = "レシート検証成功";
-            Debug.Log("レシート検証成功");
+            //Debug.Log("レシート検証成功");
 
             //purchasedProductから購入に使用されたアイテムIDを取得
             //アプリ内の購入ボタンが押されたときにはこの行は不要。
@@ -538,8 +538,8 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
            error =>
            {               
                //ProcessText.text = "レシート検証失敗" + error.GenerateErrorReport();               
-               Debug.Log("レシート検証失敗: " + error.GenerateErrorReport());
-               Debug.Log("エラーメッセージ: " + error.ErrorMessage);
+               //Debug.Log("レシート検証失敗: " + error.GenerateErrorReport());
+               //Debug.Log("エラーメッセージ: " + error.ErrorMessage);
 
                //使用済みレシートが残っていた場合は完了扱いにする
                if (error.ErrorMessage == "Receipt already used")
@@ -556,7 +556,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     //課金購入が失敗した時に呼ばれる関数
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-        Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
+        //Debug.Log(string.Format("OnPurchaseFailed: FAIL. Product: '{0}', PurchaseFailureReason: {1}", product.definition.storeSpecificId, failureReason));
     }
 
 
@@ -595,7 +595,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     /// <param name="item">Item.</param>
     private void OnDeferred(Product item)
     {
-        Debug.Log("Purchase deferred: " + item.definition.id);
+        //Debug.Log("Purchase deferred: " + item.definition.id);
     }
 }
 

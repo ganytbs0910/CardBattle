@@ -37,11 +37,13 @@ public class DrawCardController : MonoBehaviour
 
         //テスト用
         //parentPanelの子要素を全削除
+        /*
         foreach (Transform child in parentPanel.transform)
         {
             Destroy(child.gameObject);
         }
         TestDrawCard(Random.Range(76, 81));
+        */
     }
 
     void Update()
