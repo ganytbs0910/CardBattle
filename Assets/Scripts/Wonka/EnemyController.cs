@@ -394,14 +394,14 @@ public class EnemyController : MonoBehaviour
     public void DisableColliderWeapon()
     {
         weaponCollider.enabled = false;
-        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
+        print(gameObject.name + "の" + weaponCollider.gameObject.name + "を無効化します");
     }
 
     //アニメイベントで使用中
     public void EnableColliderWeapon()
     {
         weaponCollider.enabled = true;
-        //print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
+        print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
     }
 
     void CheckAbnormalCondition()

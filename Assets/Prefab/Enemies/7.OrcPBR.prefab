@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 6863255269881147600}
   m_Layer: 0
   m_Name: Maul
-  m_TagString: Untagged
+  m_TagString: Weapon_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1873,7 +1873,7 @@ Animator:
   m_GameObject: {fileID: 1765397208479606}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 73d2f4319473c3948940539f22e8ae4e, type: 3}
-  m_Controller: {fileID: 9100000, guid: 340e7c7778ff6b24ebd48e32ff48a690, type: 2}
+  m_Controller: {fileID: 22100000, guid: e79f2699100654978916ecfd5235cd73, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
