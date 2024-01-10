@@ -9,6 +9,22 @@ public class EnemyAttackBehavior : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        //このアニメーションの名前を取得
+        string animName = stateInfo.shortNameHash.ToString();
+        switch (animName)
+        {
+            //アニメーション01なら
+            case "1331344109":
+
+                break;
+            //アニメーション02なら
+            case "-699145385":
+                break;
+            //その他なら
+            default:
+                break;
+        }
+
         //移動不可能
         animator.GetComponent<EnemyController>().CantMove = true;
     }
