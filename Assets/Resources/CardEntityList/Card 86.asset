@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
+  m_Name: Card 86
+  m_EditorClassIdentifier: 
+  cardID: 86
+  name: DEF+15,AGI+15,MAXMP+60
+  information: 
+  tiar: 3
+  icon: {fileID: 21300000, guid: c6e4c6a8d1464964da8415c9f312a208, type: 3}
+  weapon: {fileID: 0}
+  armor: {fileID: 11400000, guid: e15b04dd51c32c948a6766f1d461a7ae, type: 2}
+  targetType: 0

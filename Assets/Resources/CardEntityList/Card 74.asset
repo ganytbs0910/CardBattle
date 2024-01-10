@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
+  m_Name: Card 74
+  m_EditorClassIdentifier: 
+  cardID: 74
+  name: ATK+40
+  information: 
+  tiar: 4
+  icon: {fileID: 21300000, guid: 64f8c674d4fd08b48ad803beba9d4d7b, type: 3}
+  weapon: {fileID: 11400000, guid: b2ebc670c01b31a49a8ec5a3c6e23f40, type: 2}
+  armor: {fileID: 0}
+  targetType: 0
