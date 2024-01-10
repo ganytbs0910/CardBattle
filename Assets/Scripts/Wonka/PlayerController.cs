@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
                 //print("攻撃範囲内");
                 if (CanAttack()) //攻撃可能
                 {
-                    //print("攻撃");
+                    print("攻撃");
                     Attack(); // 攻撃
                 }
                 else//攻撃までのインターバル中
@@ -344,6 +344,8 @@ public class PlayerController : MonoBehaviour
 
         animator.SetTrigger("Attack");
         animator.SetInteger("AttackType", Random.Range(1, 5));
+
+        print("攻撃アニメ");
     }
 
     public void Shoot()

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class ScreenRay : MonoBehaviour
 {
@@ -24,10 +25,8 @@ public class ScreenRay : MonoBehaviour
     [SerializeField] private bool rayTarget = false;
     private RaycastHit lastRaycastHit; // 最後のRayの衝突情報を保存
     CardEntity.TargetType targetType;
-
-    [SerializeField] private int tiar;
-    [SerializeField] private Weapon weapon;
-    [SerializeField] private Armor armor;
+    public Weapon weapon;
+    public Armor armor;
 
     void Update()
     {
@@ -69,10 +68,12 @@ public class ScreenRay : MonoBehaviour
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
+                        print("武器を装備させた");
                     }
                     if (armor != null) //防具カードを装備
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
+                        print("防具を装備させた");
                     }
                     Destroy(chooseCard);
                     cardID = 0;
@@ -99,6 +100,7 @@ public class ScreenRay : MonoBehaviour
                     }
                 }
             }
+            
         }
         StartCoroutine(ToggleCheck());
         //ResetTargetColors();
@@ -128,8 +130,11 @@ public class ScreenRay : MonoBehaviour
                 chooseCard = result.gameObject;
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
                 cardID = result.gameObject.GetComponent<CardMovement>().cardID;
-                tiar = result.gameObject.GetComponent<CardMovement>().tiar;
                 targetType = result.gameObject.GetComponent<CardMovement>().targetType;
+                weapon = result.gameObject.GetComponent<CardMovement>().weapon;
+                print(weapon);
+                armor = result.gameObject.GetComponent<CardMovement>().armor;
+
                 if (targetType == CardEntity.TargetType.Player)
                 {
                     UIManager.instance.TutorialTextDetail("自身をタップしてください");
@@ -140,8 +145,7 @@ public class ScreenRay : MonoBehaviour
                 }
 
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
-                weapon = result.gameObject.GetComponent<CardMovement>().weapon;
-                armor = result.gameObject.GetComponent<CardMovement>().armor;
+
                 return;
             }
             //もしレイヤーがUIなら
@@ -219,6 +223,8 @@ public class ScreenRay : MonoBehaviour
                 cardID = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardID;
                 targetType = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().targetType;
                 debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().name;
+                weapon = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().weapon;
+                armor = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().armor;
             }
         }
     }
