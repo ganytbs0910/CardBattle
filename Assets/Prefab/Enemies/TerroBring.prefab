@@ -447,6 +447,7 @@ MonoBehaviour:
   enemyUIManager: {fileID: 114161775267045113}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
   dropItemPrefab: {fileID: 0}
+  playerChase: 1
 --- !u!136 &2711671670705241428
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -457,7 +458,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
+  m_Radius: 3.55
   m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 2.5, z: 0}

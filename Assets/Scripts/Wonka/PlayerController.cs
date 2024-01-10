@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour
     //public GameObject[] NoWeapons;
     public BoxCollider noWeaponCols;
 
+    public bool enemyChase = true;
+
     void Start()
     {
         UpdateStats();
@@ -109,6 +111,29 @@ public class PlayerController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, enemyTarget.position);
             agent.isStopped = false; // 移動を再開
 
+            if (!enemyChase)
+            {
+                //print("攻撃範囲内");
+                if (CanAttack()) //攻撃可能
+                {
+                    print("攻撃");
+                    Attack(); // 攻撃
+                }
+                else//攻撃までのインターバル中
+                {
+                    //print("防御");
+                    Defend(); // 防御
+                }
+                agent.isStopped = true;
+            }
+            else
+            {
+                agent.speed = moveSpeed;
+                //print("範囲外");
+                agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
+                Move(); // 移動アニメ
+            }
+            /*
             if (distance <= agent.stoppingDistance)
             {
                 //print("攻撃範囲内");
@@ -130,6 +155,7 @@ public class PlayerController : MonoBehaviour
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }
+            */
         }
     }
 
@@ -431,6 +457,12 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        //もしenemyTargetのオブジェクトに触れたら
+        if (other.gameObject == enemyTarget.gameObject)
+        {
+            enemyChase = false;
+        }
+
         if (IsDead)
         {
             //HPが0なら無効
@@ -449,6 +481,14 @@ public class PlayerController : MonoBehaviour
 
                 Damage(enemyWeapon.SumDamage()); //ダメージを与える
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == enemyTarget.gameObject)
+        {
+            enemyChase = true;
         }
     }
 

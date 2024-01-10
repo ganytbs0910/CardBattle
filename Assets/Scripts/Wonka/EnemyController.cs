@@ -43,6 +43,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject coinEffectPrefab;
     [SerializeField] private Sprite dropItemPrefab;
 
+    public bool playerChase = true;
+
     void Start()
     {
         hp = maxHp;
@@ -85,6 +87,31 @@ public class EnemyController : MonoBehaviour
         {
             float distance = Vector3.Distance(transform.position, playerTarget.position);
             agent.isStopped = false;
+
+            if (!playerChase)
+            {
+                //print("攻撃範囲内");
+                if (CanAttack())　//攻撃可能
+                {
+                    //print("攻撃");
+                    Attack();
+                }
+                else//攻撃までのインターバル中
+                {
+                    //print("防御");
+                    Defend();
+                }
+                agent.isStopped = true;
+            }
+            else
+            {
+                agent.speed = moveSpeed;
+                //print("範囲外");
+                agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
+                Move(); // 移動アニメ
+            }
+
+            /*
             if (distance <= agent.stoppingDistance)
             {
                 //print("攻撃範囲内");
@@ -106,6 +133,7 @@ public class EnemyController : MonoBehaviour
                 agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }
+            */
         }
     }
 
@@ -177,6 +205,10 @@ public class EnemyController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject == playerTarget.gameObject)
+        {
+            playerChase = false;
+        }
         //print(other.name);
         if (other.CompareTag("Weapon_Player"))
         {
@@ -211,6 +243,15 @@ public class EnemyController : MonoBehaviour
 
                 Damage(bomb.Attack);//ダメージを与える
             }
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        //playerTargetに触れたら
+        if (other.gameObject == playerTarget.gameObject)
+        {
+            playerChase = true;
         }
     }
 
