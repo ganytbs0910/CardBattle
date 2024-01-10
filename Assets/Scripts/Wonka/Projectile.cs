@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] GameObject hitEffect = null;
     [SerializeField] GameObject MuzzleEffect = null;
-    public int damage = 0;
+    public int damage;
     // Update is called once per frame
 
     private void Start()
@@ -38,6 +38,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            print("着弾した");
             Destroy(gameObject);
 
             if (hitEffect != null)

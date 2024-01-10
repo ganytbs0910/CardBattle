@@ -19679,7 +19679,7 @@ MonoBehaviour:
   speed: 8
   hitEffect: {fileID: 1183852268493988, guid: 4cb66867525554e448e86a665212d53b, type: 3}
   MuzzleEffect: {fileID: 1310787322710076, guid: 2bfb5c35cb55f0e41ac1571feb4944ee, type: 3}
-  damage: 10
+  damage: 0
 --- !u!54 &54378844565543512
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyGetHitBehavior : StateMachineBehaviour
 {
-    private float originalSpeed;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -14,7 +13,6 @@ public class EnemyGetHitBehavior : StateMachineBehaviour
         if (enemyController != null && enemyController.agent != null)
         {
             // 元の速度を保存し、速度を0に設定
-            originalSpeed = enemyController.agent.speed;
             enemyController.agent.speed = 0f;
             enemyController.CantMove = true;
         }
@@ -35,7 +33,7 @@ public class EnemyGetHitBehavior : StateMachineBehaviour
         if (enemyController != null && enemyController.agent != null)
         {
             // 速度を元に戻す
-            enemyController.agent.speed = originalSpeed;
+            enemyController.agent.speed = enemyController.moveSpeed;
             enemyController.CantMove = false;
         }
 

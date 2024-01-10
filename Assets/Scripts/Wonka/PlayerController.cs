@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public int attack;
     [SerializeField] private float attackInterval;//攻撃間隔
     [SerializeField] private int defense;
-    [SerializeField] private int speed;
+    public float moveSpeed; //agentSpeed
     [SerializeField] private int Agility;//回比率
 
     //通常変数
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     public Transform enemyTarget; // 敵の位置
     public NavMeshAgent agent; // NavMesh Agent
-    public float Distance;//NavMeshAgent
+    public float StopDistance;//NavMeshAgent
     private Animator animator;
 
     //public Collider weaponCollider;//武器の当たり判定
@@ -59,13 +59,17 @@ public class PlayerController : MonoBehaviour
     //public GameObject NoWeapon_l;
 
     //public GameObject[] NoWeapons;
-    public BoxCollider[] noWeaponCols;
+    public BoxCollider noWeaponCols;
 
     void Start()
     {
+        UpdateStats();
+
         hp = maxHp;
         mp = maxMp;
+
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
+        moveSpeed = agent.speed;
         // Animatorコンポーネントを取得
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -121,6 +125,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                agent.speed = moveSpeed;
                 //print("範囲外");
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
@@ -144,10 +149,13 @@ public class PlayerController : MonoBehaviour
         weaponCollider = currentWeapon.GetCollider();
 
         //武器による距離を調整
-        Distance = weapon.GetRange();
-        agent.stoppingDistance = Distance;
+        StopDistance = weapon.GetRange();
+        agent.stoppingDistance = StopDistance;
 
         print(weapon + "を装備しました");
+
+        UpdateStats();
+
     }
 
     public void EquipArmor(Armor armor)
@@ -192,10 +200,16 @@ public class PlayerController : MonoBehaviour
 
     private void AddWeaponState()
     {
-        if (currentWeapon == null) return;
+        if (currentWeapon == null)
+        {
+            attack += 5;//素手の攻撃力
+            return;
+        } 
 
         int weaponATK = currentWeapon.GetATKPoint();
         int weaponDEF = currentWeapon.GetDEFPoint();
+        print("攻撃力"+weaponATK);
+        print("防御力" + weaponDEF);
 
         attack += weaponATK;
         defense += weaponDEF;
@@ -248,7 +262,7 @@ public class PlayerController : MonoBehaviour
     {
         maxHp = 100;
         maxMp = 100;
-        attack = 10;
+        attack = 0;
         defense = 0;
         Agility = 0;//回避率
     }
@@ -443,10 +457,8 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon == null)
         {
-            foreach (BoxCollider noWeaponCol in noWeaponCols)
-            {
-                noWeaponCol.enabled = false;
-            }
+            noWeaponCols.enabled = false;
+            
         }
         else
         {
@@ -454,20 +466,17 @@ public class PlayerController : MonoBehaviour
             weaponCollider.enabled = false;
         }
 
-        if (currentWeapon == null) return;
-        weaponCollider = currentWeapon.GetCollider();
-        weaponCollider.enabled = false;
+        //if (currentWeapon == null) return;
+        //weaponCollider = currentWeapon.GetCollider();
+        //weaponCollider.enabled = false;
     }
 
     //アニメイベントで使用します
     public void EnableColliderWeapon()
     {
         if (currentWeapon == null)
-        {
-            foreach (BoxCollider noWeaponCol in noWeaponCols)
-            {
-                noWeaponCol.enabled = true;
-            }
+        { 
+             noWeaponCols.enabled = true;
         }
         else
         {
@@ -475,9 +484,9 @@ public class PlayerController : MonoBehaviour
             weaponCollider.enabled = true;
         }
 
-        if (currentWeapon == null) return;
-        weaponCollider = currentWeapon.GetCollider();
-        weaponCollider.enabled = true;
+        //if (currentWeapon == null) return;
+        //weaponCollider = currentWeapon.GetCollider();
+        //weaponCollider.enabled = true;
     }
 
     //移動

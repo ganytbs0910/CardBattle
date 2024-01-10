@@ -162,7 +162,6 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
-        GameManager.instance.battleState = false;
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
     }

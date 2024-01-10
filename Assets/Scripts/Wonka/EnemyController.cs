@@ -15,7 +15,7 @@ public class EnemyController : MonoBehaviour
     public int attack;
     public float attackInterval;
     public int defense;
-    public int speed;
+    public float moveSpeed;
     public int agility;
     public Weapon weapon = null;
 
@@ -46,13 +46,17 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         hp = maxHp;
-        agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得              
+
+        agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
+        moveSpeed = agent.speed;
+
         animator = GetComponent<Animator>();// Animatorコンポーネントを取得
         DisableColliderWeapon();//武器の当たり判定無効化
 
         enemyUIManager.Init(this);
 
         initialPosition = transform.position;
+
     }
 
     void Update()
@@ -97,6 +101,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
+                agent.speed = moveSpeed;
                 //print("範囲外");
                 agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
@@ -190,6 +195,8 @@ public class EnemyController : MonoBehaviour
             Projectile projectile = other.GetComponent<Projectile>();
             if (projectile != null)
             {
+                //Damage(playerWeapon.SumDamage()); //ダメージを与える
+
                 Damage(projectile.damage);
             }
         }
