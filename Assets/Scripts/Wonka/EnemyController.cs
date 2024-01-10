@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     public float attackInterval;
     public int defense;
     public int speed;
+    public int agility;
     public Weapon weapon = null;
 
 
@@ -252,6 +253,13 @@ public class EnemyController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
+        // 回避チェック
+        if (Random.Range(0, 100) < agility)
+        {
+            Debug.Log("攻撃を回避しました！");
+            return; // 攻撃を回避
+        }
+
         hp -= damage;
         if (hp <= 0)
         {
