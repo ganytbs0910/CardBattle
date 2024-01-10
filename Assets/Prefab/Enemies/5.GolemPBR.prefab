@@ -1505,7 +1505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   maxHp: 25
-  attack: 7
+  attack: 5
   attackInterval: 1
   defense: 3
   speed: 1
