@@ -19,4 +19,4 @@ MonoBehaviour:
   DEFPoint: 0
   AGIPoint: 0
   MAXHPAdd: 30
-  MAXMPAdd: 30
+  MAXMPAdd: 60

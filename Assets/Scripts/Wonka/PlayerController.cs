@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
         maxMp = 100;
         attack = 10;
         defense = 0;
-        Agility = 0;//回比率
+        Agility = 0;//回避率
     }
 
 
@@ -382,6 +382,13 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
+        //回避率のチェック
+        if (Random.Range(0, 100) < Agility)
+        {
+            Debug.Log("攻撃を回避");
+            return;//攻撃を回避
+        }
+
         int sumDamage;
         sumDamage = damage - defense;
         hp -= sumDamage;

@@ -15,7 +15,7 @@ MonoBehaviour:
   cardID: 55
   name: "ATK\uFF0B50"
   information: 
-  tiar: 1
+  tiar: 5
   icon: {fileID: 21300000, guid: 5a8955590e44e8a40bc1bfec87720388, type: 3}
   weapon: {fileID: 11400000, guid: 0484b2027d3ec7b41bfe5643a05df71b, type: 2}
   armor: {fileID: 0}
