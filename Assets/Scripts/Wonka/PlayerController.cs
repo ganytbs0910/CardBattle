@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        UpdateStats();
+
         hp = maxHp;
         mp = maxMp;
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
@@ -148,6 +150,9 @@ public class PlayerController : MonoBehaviour
         agent.stoppingDistance = Distance;
 
         print(weapon + "を装備しました");
+
+        UpdateStats();
+
     }
 
     public void EquipArmor(Armor armor)
@@ -192,10 +197,16 @@ public class PlayerController : MonoBehaviour
 
     private void AddWeaponState()
     {
-        if (currentWeapon == null) return;
+        if (currentWeapon == null)
+        {
+            attack += 5;//素手の攻撃力
+            return;
+        } 
 
         int weaponATK = currentWeapon.GetATKPoint();
         int weaponDEF = currentWeapon.GetDEFPoint();
+        print("攻撃力"+weaponATK);
+        print("防御力" + weaponDEF);
 
         attack += weaponATK;
         defense += weaponDEF;
@@ -248,7 +259,7 @@ public class PlayerController : MonoBehaviour
     {
         maxHp = 100;
         maxMp = 100;
-        attack = 10;
+        attack = 0;
         defense = 0;
         Agility = 0;//回避率
     }

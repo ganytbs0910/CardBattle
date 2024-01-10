@@ -24,6 +24,8 @@ public class Weapon : ScriptableObject
     const string rightWeaponName = "rightWeapon";
     const string leftWeaponName = "leftWeapon";
 
+    PlayerController playerController;
+
     public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
         if (weaponPrefab != null)
@@ -38,6 +40,8 @@ public class Weapon : ScriptableObject
 
             GameObject weapon = Instantiate(weaponPrefab, handTransform.position,handTransform.rotation,handTransform);
             //手の位置に武器を生成する
+
+            playerController = weapon.GetComponentInParent<PlayerController>();
 
             weapon.transform.localPosition = Vector3.zero;
 
@@ -263,6 +267,11 @@ public class Weapon : ScriptableObject
     public void LaunchProjectile(Transform rightHand, Transform leftHand,Animator animator)
     { 
         Projectile projectileInstance =Instantiate(projectile, GetTransform(rightHand,leftHand,animator).position,Quaternion.identity);
-        projectileInstance.damage = attackPoint;
+        if (playerController != null)
+        {
+            //PlayerControllerの攻撃値をダメージに代入
+            projectileInstance.damage = playerController.attack;
+        }
+
     }
 }

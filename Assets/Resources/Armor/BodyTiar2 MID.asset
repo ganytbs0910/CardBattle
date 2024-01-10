@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BodyTiar2 MID
   m_EditorClassIdentifier: 
   armorType: 1
-  armorPrefab: {fileID: 4409716011901741405, guid: 8152f5285cb143146ab374c58e7cd84f, type: 3}
+  armorPrefab: {fileID: 2621877933601820147, guid: 8152f5285cb143146ab374c58e7cd84f, type: 3}
   armorName: Body06
   ATKPoint: 0
   DEFPoint: 10

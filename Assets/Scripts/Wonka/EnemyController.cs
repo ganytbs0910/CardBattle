@@ -190,6 +190,8 @@ public class EnemyController : MonoBehaviour
             Projectile projectile = other.GetComponent<Projectile>();
             if (projectile != null)
             {
+                //Damage(playerWeapon.SumDamage()); //ダメージを与える
+
                 Damage(projectile.damage);
             }
         }

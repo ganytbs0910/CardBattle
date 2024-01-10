@@ -55,7 +55,7 @@ MonoBehaviour:
   speed: 8
   hitEffect: {fileID: 0}
   MuzzleEffect: {fileID: 0}
-  damage: 10
+  damage: 0
 --- !u!65 &7487745457661567338
 BoxCollider:
   m_ObjectHideFlags: 0
