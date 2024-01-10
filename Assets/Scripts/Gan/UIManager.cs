@@ -386,8 +386,12 @@ public class UIManager : MonoBehaviour
                     }
                     break;
             }
-            tutorialText.text = detail;
         }
+        else
+        {
+            detail = "";
+        }
+        tutorialText.text = detail;
     }
 
     public void StageTextDetail(string detail)

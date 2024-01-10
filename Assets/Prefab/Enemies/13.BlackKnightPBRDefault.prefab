@@ -1666,7 +1666,7 @@ GameObject:
   - component: {fileID: 871379390642500520}
   m_Layer: 0
   m_Name: AxeMesh
-  m_TagString: Untagged
+  m_TagString: Weapon_Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
