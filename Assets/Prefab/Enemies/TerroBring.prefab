@@ -2847,6 +2847,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410408}
   - component: {fileID: 1074491307513507980}
+  - component: {fileID: 3770135092035774666}
   m_Layer: 0
   m_Name: Jaw3
   m_TagString: Weapon_Enemy
@@ -2882,6 +2883,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 200, y: 200, z: 200}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3770135092035774666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b5af97cd8eeed74caebf9c95d0cb86b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &196458
 GameObject:
   m_ObjectHideFlags: 0
