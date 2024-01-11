@@ -136,11 +136,6 @@ public class ScreenRay : MonoBehaviour
                 targetMarker.transform.position = result.gameObject.transform.position;
                 chooseCard = result.gameObject;
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
-                cardID = result.gameObject.GetComponent<CardMovement>().cardID;
-                targetType = result.gameObject.GetComponent<CardMovement>().targetType;
-                weapon = result.gameObject.GetComponent<CardMovement>().weapon;
-                print(weapon);
-                armor = result.gameObject.GetComponent<CardMovement>().armor;
 
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
 

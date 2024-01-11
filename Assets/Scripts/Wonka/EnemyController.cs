@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
+using UniRx;
 
 //Distance 7以下⇒Runに移行
 //Ditstance 2以下⇒Attack移行
@@ -27,10 +28,12 @@ public class EnemyController : MonoBehaviour
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
 
+    [Header("状態異常")]
     bool poison;
     bool paralyze;
     bool sleep;
     bool freeze;
+
     public Transform playerTarget; // 敵の位置
     public NavMeshAgent agent; // NavMesh Agent
     private Animator animator;
@@ -85,6 +88,7 @@ public class EnemyController : MonoBehaviour
 
         if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
+            CheckAbnormalCondition(); //状態異常の効果を発動させる
             float distance = Vector3.Distance(transform.position, playerTarget.position);
             agent.isStopped = false;
 
@@ -110,30 +114,6 @@ public class EnemyController : MonoBehaviour
                 agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }
-
-            /*
-            if (distance <= agent.stoppingDistance)
-            {
-                //print("攻撃範囲内");
-                if (CanAttack())　//攻撃可能
-                {
-                    //print("攻撃");
-                    Attack();
-                }
-                else//攻撃までのインターバル中
-                {
-                    //print("防御");
-                    Defend();
-                }
-            }
-            else
-            {
-                agent.speed = moveSpeed;
-                //print("範囲外");
-                agent.SetDestination(playerTarget.position); // 敵に向かって移動開始
-                Move(); // 移動アニメ
-            }
-            */
         }
     }
 
@@ -452,11 +432,6 @@ public class EnemyController : MonoBehaviour
         print(gameObject.name + "の" + weaponCollider.gameObject.name + "を有効化します");
     }
 
-    void CheckAbnormalCondition()
-    {
-
-    }
-
     public void GetCardEffect(int effectNumber, int? targetNumber = null)
     {
         if (!targetNumber.HasValue)
@@ -465,78 +440,39 @@ public class EnemyController : MonoBehaviour
         }
         switch (effectNumber)
         {
-            case 1:
-                //プレイヤーがターゲット
-                break;
-            case 2:
-                //プレイヤーがターゲット
-                break;
-            case 3:
-                //プレイヤーがターゲット
-                break;
-            case 4:
-                //プレイヤーがターゲット
-                break;
-            case 5:
-                //プレイヤーがターゲット
-                break;
-            case 6:
-                //プレイヤーがターゲット
-                break;
-            case 7:
-                //プレイヤーがターゲット
-                break;
-            case 8:
-                //敵がターゲット 敵の体力-10％
-                DecreaseHealth(0.1f);
-                break;
-            case 9:
-                //敵がターゲット 敵の体力-20％
-                DecreaseHealth(0.2f);
-                break;
-            case 10:
-                //敵がターゲット 敵の体力-30％
-                DecreaseHealth(0.3f);
-                break;
-            case 11:
-                //プレイヤーがターゲット
-                break;
-            case 12:
-                //プレイヤーがターゲット
-                break;
-            case 13:
-                //プレイヤーがターゲット
-                break;
-            case 14:
-                //プレイヤーがターゲット
-                break;
-            case 15:
-                //プレイヤーがターゲット
-                break;
-            case 16:
-                //プレイヤーがターゲット
-                break;
-            case 17://敵を毒状態にする
-                Poison();
-                break;
-            case 18://敵をマヒ状態にする
-                Paralyze();
-                break;
-            case 19://敵を眠り状態にする
-                Sleep();
-                break;
-            case 20://敵をフリーズ状態にする
-                Freeze();
-                break;
-            case 21:
-                //プレイヤーがターゲット
-                break;
-            case 22:
-                //プレイヤーがターゲット
-                break;
-            case 23:
-                //プレイヤーがターゲット
-                break;
+            //プレイヤーがターゲット
+            case 1: break;
+            case 2: break;
+            case 3: break;
+            case 4: break;
+            case 5: break;
+            case 6: break;
+            case 7: break;
+            //敵がターゲット 敵の体力-10％
+            case 8: DecreaseHealth(0.1f); break;
+            //敵がターゲット 敵の体力-20％
+            case 9: DecreaseHealth(0.2f); break;
+            //敵がターゲット 敵の体力-30％
+            case 10: DecreaseHealth(0.3f); break;
+            //プレイヤーがターゲット
+            case 11: break;
+            case 12: break;
+            case 13: break;
+            case 14: break;
+            case 15: break;
+            case 16: break;
+            //敵を毒状態にする
+            case 17: Poison(); break;
+            //敵をマヒ状態にする
+            case 18: Paralyze(); break;
+            //敵を眠り状態にする
+            case 19: Sleep(); break;
+            //敵をフリーズ状態にする
+            case 20: Freeze(); break;
+            //プレイヤーがターゲット
+            case 21: break;
+            case 22: break;
+            case 23: break;
         }
     }
 
@@ -571,44 +507,59 @@ public class EnemyController : MonoBehaviour
         return players.Length > 0 ? sum / players.Length : Vector3.zero;
     }
 
+    void CheckAbnormalCondition()
+    {
+        if (poison)
+        {
+            //毒状態の処理
+            //毎秒1ダメージ
+            // Observable.Intervalを使って毎秒処理を実行
+            Observable.Interval(System.TimeSpan.FromSeconds(1))
+                .Subscribe(_ =>
+                {
+                    hp -= 1;
+                }).AddTo(this); // オブジェクト破棄時に購読を自動解除するためにAddToを使用
+        }
+        if (paralyze)
+        {
+            //マヒ状態の処理
+            //5秒間攻撃しなくなる
+            lastAttackTime = 20;
+            Observable.Timer(System.TimeSpan.FromSeconds(5))
+            .Subscribe(_ =>
+            {
+                lastAttackTime = 0;
+            }).AddTo(this); // オブジェクト破棄時に購読を自動解除
+        }
+        if (sleep)
+        {
+            //眠り状態の処理
+            //攻撃を喰らうまでなにもしない
+
+        }
+        if (freeze)
+        {
+            //フリーズ状態の処理
+            //移動速度が半分になる
+            moveSpeed /= 2;
+
+        }
+    }
+
     void Poison()
     {
         poison = true;
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を紫色にする
-        foreach (Renderer renderer in renderers)
-        {
-            renderer.material.color = Color.magenta;
-        }
     }
     void Paralyze()
     {
         paralyze = true;
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を黄色にする
-        foreach (Renderer renderer in renderers)
-        {
-            renderer.material.color = Color.yellow;
-        }
     }
     void Sleep()
     {
         sleep = true;
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を青色にする
-        foreach (Renderer renderer in renderers)
-        {
-            renderer.material.color = Color.blue;
-        }
     }
     void Freeze()
     {
         freeze = true;
-        Renderer[] renderers = GetComponentsInChildren<Renderer>();
-        //このゲームオブジェクトの全子オブジェクトを取得して、そのRendererの色を水色にする
-        foreach (Renderer renderer in renderers)
-        {
-            renderer.material.color = Color.cyan;
-        }
     }
 }

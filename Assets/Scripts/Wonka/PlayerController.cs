@@ -140,29 +140,6 @@ public class PlayerController : MonoBehaviour
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }
-            /*
-            if (distance <= agent.stoppingDistance)
-            {
-                //print("攻撃範囲内");
-                if (CanAttack()) //攻撃可能
-                {
-                    print("攻撃");
-                    Attack(); // 攻撃
-                }
-                else//攻撃までのインターバル中
-                {
-                    //print("防御");
-                    Defend(); // 防御
-                }
-            }
-            else
-            {
-                agent.speed = moveSpeed;
-                //print("範囲外");
-                agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
-                Move(); // 移動アニメ
-            }
-            */
         }
     }
 
@@ -204,15 +181,9 @@ public class PlayerController : MonoBehaviour
 
         switch (armor.armorType)
         {
-            case Armor.ArmorType.Head:
-                currentHead = armor;
-                break;
-            case Armor.ArmorType.Body:
-                currentArmor = armor;
-                break;
-            case Armor.ArmorType.BackPack:
-                currentBackpack = armor;
-                break;
+            case Armor.ArmorType.Head: currentHead = armor; break;
+            case Armor.ArmorType.Body: currentArmor = armor; break;
+            case Armor.ArmorType.BackPack: currentBackpack = armor; break;
         }
 
         UpdateStats();
@@ -447,9 +418,7 @@ public class PlayerController : MonoBehaviour
             Die();
             //print("死亡アニメに移行します");
         }
-
         playerUIManager.UpdateHP(hp);//HPSliderの更新
-
         //print(gameObject.name + "の残りHP= : " + hp);
     }
 
@@ -631,91 +600,53 @@ public class PlayerController : MonoBehaviour
         }
         switch (effectNumber)
         {
-            case 1://プレイヤーの数＋1
-                IncreasePlayers(1);
-                print("プレイヤーの数が＋１増えました");
-                break;
-            case 2://プレイヤーの数＋2
-                IncreasePlayers(2);
-                break;
-            case 3://プレイヤーの数＋3
-                IncreasePlayers(3);
-                break;
-            case 4://プレイヤーの数＋4
-                IncreasePlayers(4);
-                break;
-            case 5://プレイヤーの数＋5
-                IncreasePlayers(5);
-                break;
-            case 6://プレイヤーの数 * 2
-                IncreasePlayers(targetNumber.Value * 2);
-                break;
-            case 7://プレイヤーの数 * 3
-                IncreasePlayers(targetNumber.Value * 3);
-                break;
-            case 8:
-                //敵がターゲット
-                break;
-            case 9:
-                //敵がターゲット
-                break;
-            case 10:
-                //敵がターゲット
-                break;
-            case 11://攻撃力UP+10%
-                AttackUp(1.1f);
-                break;
-            case 12://攻撃力UP+20%
-                AttackUp(1.2f);
-                break;
-            case 13://攻撃力UP+30%
-                AttackUp(1.3f);
-                break;
-            case 14://防御力UP+10%
-                DefenceUp(1.1f);
-                break;
-            case 15://防御力UP+20%
-                DefenceUp(1.2f);
-                break;
-            case 16://防御力UP+30%
-                DefenceUp(1.3f);
-                break;
-            case 17:
-                //敵がターゲット
-                break;
-            case 18:
-                //敵がターゲット
-                break;
-            case 19:
-                //敵がターゲット
-                break;
-            case 20:
-                //敵がターゲット
-                break;
-            case 21://コインを取得する
-                GameManager.instance.GetCoin();
-                break;
-            case 22://武器を装備する
-                //EquipmentWeapon();
-                break;
-            case 23://防具を装備する
-                //EquipmentArmor();
-                break;
-            case 24:
-                //特殊スキルでScreenRay.csに記述
-                break;
-            case 25:
-                break;
-            case 26:
-                break;
-            case 27:
-                //範囲内のプレイヤーの体力を20%回復
-                Heal(20);
-                break;
-            case 28:
-                //範囲内のプレイヤーの体力を50%回復
-                Heal(50);
-                break;
+            //プレイヤーの数＋1
+            case 1: IncreasePlayers(1); break;
+            //プレイヤーの数＋2
+            case 2: IncreasePlayers(2); break;
+            //プレイヤーの数＋3
+            case 3: IncreasePlayers(3); break;
+            //プレイヤーの数＋4
+            case 4: IncreasePlayers(4); break;
+            //プレイヤーの数＋5
+            case 5: IncreasePlayers(5); break;
+            //プレイヤーの数 * 2
+            case 6: IncreasePlayers(targetNumber.Value * 2); break;
+            //プレイヤーの数 * 3
+            case 7: IncreasePlayers(targetNumber.Value * 3); break;
+            //敵がターゲット
+            case 8: break;
+            case 9: break;
+            case 10: break;
+            //攻撃力UP+10%
+            case 11: AttackUp(1.1f); break;
+            //攻撃力UP+20%
+            case 12: AttackUp(1.2f); break;
+            //攻撃力UP+30%
+            case 13: AttackUp(1.3f); break;
+            //防御力UP+10%
+            case 14: DefenceUp(1.1f); break;
+            //防御力UP+20%
+            case 15: DefenceUp(1.2f); break;
+            //防御力UP+30% 
+            case 16: DefenceUp(1.3f); break;
+            //敵がターゲット
+            case 17: break;
+            case 18: break;
+            case 19: break;
+            case 20: break;
+            //コインを取得する
+            case 21: GameManager.instance.GetCoin(); break;
+            //武器を装備する
+            case 22: break;
+            case 23: break;
+            case 24: break;
+            case 25: break;
+            case 26: break;
+            //範囲内のプレイヤーの体力を20%回復
+            case 27: Heal(20); break;
+            //範囲内のプレイヤーの体力を50%回復
+            case 28: Heal(50); break;
         }
     }
 

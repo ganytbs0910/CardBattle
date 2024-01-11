@@ -251,26 +251,16 @@ public class UIManager : MonoBehaviour
                 //コレクションの効果を反映
                 switch (i)
                 {
-                    case 0:
-                        //全ステータスが+10
-                        player.GetComponent<PlayerController>().StatusImprovementPendant();
-                        break;
-                    case 1:
-                        //攻撃に回復効果が付与される
-                        player.GetComponent<PlayerController>().HealingSwordTechnique();
-                        break;
-                    case 2:
-                        //攻撃のインターバルと移動速度が早くなる
-                        player.GetComponent<PlayerController>().TreasureOfAcceleration();
-                        break;
-                    case 3:
-                        //会心の一撃が出せるようになる
-
-                        break;
-                    case 4:
-                        //ハードモードが解放
-
-                        break;
+                    //全ステータスが+10
+                    case 0: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
+                    //攻撃に回復効果が付与される
+                    case 1: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
+                    //攻撃のインターバルと移動速度が早くなる
+                    case 2: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
+                    //会心の一撃が出せるようになる
+                    case 3: break;
+                    //ハードモードが解放
+                    case 4: break;
                     default:
 
                         break;
@@ -344,67 +334,43 @@ public class UIManager : MonoBehaviour
                 case "カードを選択してください":
                     switch (language)
                     {
-                        case Language.Japanese:
-                            detail = "カードを選択してください";
-                            break;
-                        case Language.English:
-                            detail = "Please select a card";
-                            break;
+                        case Language.Japanese: detail = "カードを選択してください"; break;
+                        case Language.English: detail = "Please select a card"; break;
                     }
                     break;
                 case "自身をタップしてください":
                     switch (language)
                     {
-                        case Language.Japanese:
-                            detail = "自身をタップしてください";
-                            break;
-                        case Language.English:
-                            detail = "Please select yourself";
-                            break;
+                        case Language.Japanese: detail = "自身をタップしてください"; break;
+                        case Language.English: detail = "Please select yourself"; break;
                     }
                     break;
                 case "敵をタップしてください":
                     switch (language)
                     {
-                        case Language.Japanese:
-                            detail = "敵をタップしてください";
-                            break;
-                        case Language.English:
-                            detail = "Please select an enemy";
-                            break;
+                        case Language.Japanese: detail = "敵をタップしてください"; break;
+                        case Language.English: detail = "Please select an enemy"; break;
                     }
                     break;
                 case "バトルを開始してください！":
                     switch (language)
                     {
-                        case Language.Japanese:
-                            detail = "バトルを開始してください！";
-                            break;
-                        case Language.English:
-                            detail = "Please start the battle!";
-                            break;
+                        case Language.Japanese: detail = "バトルを開始してください！"; break;
+                        case Language.English: detail = "Please start the battle!"; break;
                     }
                     break;
                 case "戦闘は自動で行われます":
                     switch (language)
                     {
-                        case Language.Japanese:
-                            detail = "戦闘は自動で行われます";
-                            break;
-                        case Language.English:
-                            detail = "Battle is automatic";
-                            break;
+                        case Language.Japanese: detail = "戦闘は自動で行われます"; break;
+                        case Language.English: detail = "Battle is automatic"; break;
                     }
                     break;
                 case "カードを用いて最深部を目指そう！":
                     switch (language)
                     {
-                        case Language.Japanese:
-                            detail = "カードを用いて最深部を目指そう！";
-                            break;
-                        case Language.English:
-                            detail = "Let's aim for the deepest part using the card!";
-                            break;
+                        case Language.Japanese: detail = "カードを用いて最深部を目指そう！"; break;
+                        case Language.English: detail = "Let's aim for the deepest part using the card!"; break;
                     }
                     break;
             }
@@ -423,12 +389,8 @@ public class UIManager : MonoBehaviour
             int stage = GameManager.instance.stageHierarchy;
             switch (language)
             {
-                case Language.Japanese:
-                    detail = $"階層 : {stage}";
-                    break;
-                case Language.English:
-                    detail = $"Stage : {stage}";
-                    break;
+                case Language.Japanese: detail = $"階層 : {stage}"; break;
+                case Language.English: detail = $"Stage : {stage}"; break;
             }
         }
         stageText.text = detail;
@@ -440,12 +402,8 @@ public class UIManager : MonoBehaviour
         {
             switch (language)
             {
-                case Language.Japanese:
-                    detail = "ボス戦 !!";
-                    break;
-                case Language.English:
-                    detail = "Boss Battle !!";
-                    break;
+                case Language.Japanese: detail = "ボス戦 !!"; break;
+                case Language.English: detail = "Boss Battle !!"; break;
             }
         }
         else if (detail.StartsWith("ボスまで残り:") || detail.StartsWith("Remaining to Boss:"))
@@ -453,12 +411,8 @@ public class UIManager : MonoBehaviour
             int remainingFloors = 10 - GameManager.instance.stageHierarchy;
             switch (language)
             {
-                case Language.Japanese:
-                    detail = $"ボスまで残り:{remainingFloors}階層";
-                    break;
-                case Language.English:
-                    detail = $"Remaining to Boss:{remainingFloors} floors";
-                    break;
+                case Language.Japanese: detail = $"ボスまで残り:{remainingFloors}階層"; break;
+                case Language.English: detail = $"Remaining to Boss:{remainingFloors} floors"; break;
             }
         }
 
