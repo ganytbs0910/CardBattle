@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Armor currentHead = null;
     [SerializeField] Armor currentBackpack = null;
     BoxCollider weaponCollider;
+    bool isHealingSword = false;
 
     //public GameObject NoWeapon_r;
     //public GameObject NoWeapon_l;
@@ -118,6 +119,12 @@ public class PlayerController : MonoBehaviour
                 {
                     print("攻撃");
                     Attack(); // 攻撃
+                    if (!isHealingSword) return;
+                    //回復の剣の効果
+                    if (Random.Range(0, 100) < 10)
+                    {
+                        Heal(5);
+                    }
                 }
                 else//攻撃までのインターバル中
                 {
@@ -760,5 +767,41 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Drink");
         //Sliderを修正
         playerUIManager.UpdateHP(hp);
+    }
+
+    /// <summary>
+    /// コレクションの効果一覧
+    /// </summary>
+    public void StatusImprovementPendant()
+    {
+        //全てのパラメーターが10%アップ
+        maxHp = Mathf.RoundToInt(maxHp * 1.1f);
+        maxMp = Mathf.RoundToInt(maxMp * 1.1f);
+        attack = Mathf.RoundToInt(attack * 1.1f);
+        defense = Mathf.RoundToInt(defense * 1.1f);
+        Agility = Mathf.RoundToInt(Agility * 1.1f);
+    }
+
+    public void HealingSwordTechnique()
+    {
+        //攻撃時に10%の確率で回復
+        isHealingSword = true;
+    }
+
+    public void TreasureOfAcceleration()
+    {
+        //攻撃のインターバルと移動速度が10%アップ
+        attackInterval *= 0.9f;
+        moveSpeed *= 1.1f;
+    }
+
+    public void StoneOfAwakening()
+    {
+
+    }
+
+    public void SwordOfDevelopment()
+    {
+
     }
 }

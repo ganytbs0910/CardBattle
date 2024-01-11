@@ -112,15 +112,18 @@ public class UIManager : MonoBehaviour
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         yield return new WaitForSeconds(3.5f);
         loadPanel.SetActive(true);
+
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
         yield return new WaitForSeconds(1.5f);
+
         //全てを初期化
         loadPanel.SetActive(false);
         winPanel.SetActive(false);
         losePanel.SetActive(false);
         startCheckButton.SetActive(true);
         inforText.gameObject.SetActive(true);
+
         // カメラの角度を調整
         Vector3 currentCameraRotation = camera.transform.eulerAngles;
         camera.transform.eulerAngles = new Vector3(currentCameraRotation.x + 10, currentCameraRotation.y, currentCameraRotation.z);
@@ -216,7 +219,7 @@ public class UIManager : MonoBehaviour
     }
 
     //コレクションが集まったら呼び出してほしい
-    public void CollectionCardUpdate()
+    public void CollectionCardUpdate(GameObject player = null)
     {
         //コレクションのカードを更新
         for (int i = 0; i < collectionContent.transform.childCount; i++)
@@ -243,6 +246,35 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
+                if (player == null) return;
+
+                //コレクションの効果を反映
+                switch (i)
+                {
+                    case 0:
+                        //全ステータスが+10
+                        player.GetComponent<PlayerController>().StatusImprovementPendant();
+                        break;
+                    case 1:
+                        //攻撃に回復効果が付与される
+                        player.GetComponent<PlayerController>().HealingSwordTechnique();
+                        break;
+                    case 2:
+                        //攻撃のインターバルと移動速度が早くなる
+                        player.GetComponent<PlayerController>().TreasureOfAcceleration();
+                        break;
+                    case 3:
+                        //会心の一撃が出せるようになる
+
+                        break;
+                    case 4:
+                        //ハードモードが解放
+
+                        break;
+                    default:
+
+                        break;
+                }
             }
         }
     }
@@ -262,16 +294,6 @@ public class UIManager : MonoBehaviour
         dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
     }
 
-
-
-
-
-
-
-
-
-
-
     //以下ローカライズ
     void LocalizeUpdate()
     {
@@ -280,6 +302,7 @@ public class UIManager : MonoBehaviour
         RemainingBossTextDetail(RemainingBossText.text);
         LocalizeText();
     }
+
     public void ChangeLanguage(string language)
     {
         if (!PlayerPrefs.HasKey("Language"))
@@ -329,22 +352,22 @@ public class UIManager : MonoBehaviour
                             break;
                     }
                     break;
-                case "自身を選択してください":
+                case "自身をタップしてください":
                     switch (language)
                     {
                         case Language.Japanese:
-                            detail = "自身を選択してください";
+                            detail = "自身をタップしてください";
                             break;
                         case Language.English:
                             detail = "Please select yourself";
                             break;
                     }
                     break;
-                case "敵を選択してください":
+                case "敵をタップしてください":
                     switch (language)
                     {
                         case Language.Japanese:
-                            detail = "敵を選択してください";
+                            detail = "敵をタップしてください";
                             break;
                         case Language.English:
                             detail = "Please select an enemy";

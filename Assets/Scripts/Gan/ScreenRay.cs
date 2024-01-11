@@ -100,7 +100,6 @@ public class ScreenRay : MonoBehaviour
                     }
                 }
             }
-
         }
         StartCoroutine(ToggleCheck());
         //ResetTargetColors();
@@ -113,7 +112,6 @@ public class ScreenRay : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         pointData.position = Input.mousePosition;
         EventSystem.current.RaycastAll(pointData, results);
-
         foreach (RaycastResult result in results)
         {
             if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
@@ -121,6 +119,14 @@ public class ScreenRay : MonoBehaviour
                 oneRayUpIgnore = true;
                 targetMarker.SetActive(false);
                 targetMarker.transform.position = result.gameObject.transform.position;
+                if (targetType == CardEntity.TargetType.Player)
+                {
+                    UIManager.instance.TutorialTextDetail("自身をタップしてください");
+                }
+                else if (targetType == CardEntity.TargetType.Enemy)
+                {
+                    UIManager.instance.TutorialTextDetail("敵をタップしてください");
+                }
                 return;
             }
             else if (result.gameObject.tag == "Card")
@@ -136,21 +142,11 @@ public class ScreenRay : MonoBehaviour
                 print(weapon);
                 armor = result.gameObject.GetComponent<CardMovement>().armor;
 
-                if (targetType == CardEntity.TargetType.Player)
-                {
-                    UIManager.instance.TutorialTextDetail("自身をタップしてください");
-                }
-                else if (targetType == CardEntity.TargetType.Enemy)
-                {
-                    UIManager.instance.TutorialTextDetail("敵をタップしてください");
-                }
-
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
 
                 return;
             }
             //もしレイヤーがUIなら
-
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
