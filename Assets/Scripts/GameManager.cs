@@ -56,21 +56,20 @@ public class GameManager : MonoBehaviour
             {
                 int id = stageHierarchy / 10 - 1;
                 GameObject boss = Instantiate(bossPrefab[id], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-                //boss.GetComponent<EnemyController>().maxHp = 
-                //boss.GetComponent<EnemyController>().attack = 
-                //boss.GetComponent<EnemyController>().defense = 
                 boss.transform.SetParent(GameObject.Find("Enemies").transform);
                 enemies.Add(boss.GetComponent<EnemyController>());
             }
             else
             {
-                for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
+                int enemyCount = PlayerPrefs.GetInt("EnemyCount");
+                for (int i = 0; i < enemyCount; i++)
                 {
                     int id = PlayerPrefs.GetInt($"Enemy{i}");
                     GameObject newEnemy = Instantiate(enemyPrefab[id - 1], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
-                    //newEnemy.GetComponent<EnemyController>().maxHp = 
-                    //newEnemy.GetComponent<EnemyController>().attack = 
-                    //newEnemy.GetComponent<EnemyController>().defense =
+                    //1の位によってステータスが1.1倍~1.9倍になる
+                    newEnemy.GetComponent<EnemyController>().maxHp *= stageHierarchy % 10 / 10 + 1;
+                    newEnemy.GetComponent<EnemyController>().attack *= stageHierarchy % 10 / 10 + 1;
+                    newEnemy.GetComponent<EnemyController>().defense *= stageHierarchy % 10 / 10 + 1;
                     newEnemy.transform.SetParent(GameObject.Find("Enemies").transform);
                     enemies.Add(newEnemy.GetComponent<EnemyController>());
                 }
@@ -237,29 +236,21 @@ public class GameManager : MonoBehaviour
 
                     switch (range)
                     {
-                        case 0:
-                            // 1~9の場合の処理
-                            randomIndex = UnityEngine.Random.Range(0, 5);
-                            break;
-                        case 1:
-                            // 11~19の場合の処理
-                            randomIndex = UnityEngine.Random.Range(6, 10);
-                            break;
-                        case 2:
-                            // 21~29の場合の処理
-                            randomIndex = UnityEngine.Random.Range(11, 15);
-                            break;
-                        case 3:
-                            // 31~39の場合の処理
-                            randomIndex = UnityEngine.Random.Range(16, 20);
-                            break;
+                        // 1~9の場合の処理
+                        case 0: randomIndex = UnityEngine.Random.Range(0, 5); break;
+                        // 11~19の場合の処理
+                        case 1: randomIndex = UnityEngine.Random.Range(6, 10); break;
+                        // 21~29の場合の処理
+                        case 2: randomIndex = UnityEngine.Random.Range(11, 15); break;
+                        // 31~39の場合の処理
+                        case 3: randomIndex = UnityEngine.Random.Range(16, 20); break;
                     }
 
                     // 敵のインスタンス化とステータスの調整
                     newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
-                    //newEnemy.GetComponent<EnemyController>().maxHp += stageHierarchy;
-                    //newEnemy.GetComponent<EnemyController>().attack = 
-                    //newEnemy.GetComponent<EnemyController>().defense = 
+                    newEnemy.GetComponent<EnemyController>().maxHp *= stageHierarchy % 10 / 10 + 1;
+                    newEnemy.GetComponent<EnemyController>().attack *= stageHierarchy % 10 / 10 + 1;
+                    newEnemy.GetComponent<EnemyController>().defense *= stageHierarchy % 10 / 10 + 1;
                     newEnemy.transform.SetParent(enemiesParent.transform);
                 }
                 break;
@@ -268,10 +259,6 @@ public class GameManager : MonoBehaviour
 
         if (boss != null)
         {
-            // ボスのステータス調整
-            //boss.GetComponent<EnemyController>().maxHp = 
-            //boss.GetComponent<EnemyController>().attack = 
-            //boss.GetComponent<EnemyController>().defense = 
             boss.transform.SetParent(enemiesParent.transform);
         }
 

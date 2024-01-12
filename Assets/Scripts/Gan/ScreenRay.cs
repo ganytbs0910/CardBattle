@@ -100,9 +100,9 @@ public class ScreenRay : MonoBehaviour
                     }
                 }
             }
+            ResetTargetColors();
         }
         StartCoroutine(ToggleCheck());
-        //ResetTargetColors();
     }
 
 
@@ -114,11 +114,13 @@ public class ScreenRay : MonoBehaviour
         EventSystem.current.RaycastAll(pointData, results);
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
+            if (result.gameObject.tag == "Card")
             {
                 oneRayUpIgnore = true;
                 targetMarker.SetActive(false);
                 targetMarker.transform.position = result.gameObject.transform.position;
+                chooseCard = result.gameObject;
+                result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
                 if (targetType == CardEntity.TargetType.Player)
                 {
                     UIManager.instance.TutorialTextDetail("自身をタップしてください");
@@ -127,20 +129,19 @@ public class ScreenRay : MonoBehaviour
                 {
                     UIManager.instance.TutorialTextDetail("敵をタップしてください");
                 }
+                debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 return;
             }
-            else if (result.gameObject.tag == "Card")
+
+            if (result.gameObject.layer == LayerMask.NameToLayer("UI"))
             {
                 oneRayUpIgnore = true;
                 targetMarker.SetActive(false);
                 targetMarker.transform.position = result.gameObject.transform.position;
-                chooseCard = result.gameObject;
-                result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
-
-                debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
-
                 return;
             }
+
+
             //もしレイヤーがUIなら
         }
 
@@ -152,7 +153,6 @@ public class ScreenRay : MonoBehaviour
             targetMarker.transform.position = hit.point;
             Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
             targetMarker.transform.rotation = Quaternion.Euler(0, markerRotation.eulerAngles.y, markerRotation.eulerAngles.z);
-            targetObjects.Clear();
             baseColor = true;
             Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
             foreach (Collider collider in colliders)
@@ -190,7 +190,7 @@ public class ScreenRay : MonoBehaviour
         {
             SetColor(Color.white, target);
         }
-        targetObjects.Clear(); // ターゲットリストをクリア
+        targetObjects.Clear();
     }
 
     void SetColor(Color color, GameObject target)

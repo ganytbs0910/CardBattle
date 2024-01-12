@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -9131201192101772032}
   - component: {fileID: 8521574029102324304}
   m_Layer: 0
-  m_Name: TheNightmare
+  m_Name: Boss2.TheNightmare
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  maxHp: 100
-  attack: 12
+  maxHp: 120
+  attack: 15
   attackInterval: 1
   defense: 9
   moveSpeed: 0

@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: -3889117291760148601}
   - component: {fileID: 2711671670705241428}
   m_Layer: 0
-  m_Name: TerroBring
+  m_Name: Boss3.TerroBring
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -432,7 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   maxHp: 150
-  attack: 20
+  attack: 25
   attackInterval: 1
   defense: 17
   moveSpeed: 0

@@ -1220,7 +1220,7 @@ GameObject:
   - component: {fileID: 1950056399694572281}
   - component: {fileID: 5366046694328417375}
   m_Layer: 0
-  m_Name: Usuper
+  m_Name: Boss4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
