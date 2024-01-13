@@ -156,6 +156,13 @@ public class PlayerController : MonoBehaviour
         }
         currentWeapon = weapon;
 
+        switch (currentWeapon.weaponType)
+        {
+            case Weapon.WeaponType.NoWeapon:
+            //処理を書いて
+                break;
+        }
+
         //武器を生成
         weapon.Spawn(rightHandTransform, leftHandTransform, animator);
 
@@ -282,7 +289,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="enemyTransform">現在位置を登録</param>
     public void FindClosestEnemy(Transform playerTransform)
-    {
+    { 
         EnemyController closestEnemy = null;
         float closestDistanceSqr = Mathf.Infinity;
 
@@ -658,9 +665,9 @@ public class PlayerController : MonoBehaviour
             //武器を装備する
             case 22: break;
             case 23: break;
-            case 24: break;
-            case 25: break;
-            case 26: break;
+            case 24: break;//小型爆弾
+            case 25: break;//中型爆弾
+            case 26: break;//大型爆弾
             //範囲内のプレイヤーの体力を20%回復
             case 27: HPHeal(20); break;
             //範囲内のプレイヤーの体力を50%回復

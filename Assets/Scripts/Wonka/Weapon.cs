@@ -26,6 +26,19 @@ public class Weapon : ScriptableObject
 
     PlayerController playerController;
 
+    public enum WeaponType
+    {
+        NoWeapon,
+        OneHandSword,
+        TwoHandSword,
+        Shield,
+        Spear,
+        Arrow,
+        Wand,
+    }
+
+    public WeaponType weaponType;
+
     public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
         if (weaponPrefab != null)
@@ -263,6 +276,7 @@ public class Weapon : ScriptableObject
     {
         return projectile != null;
     }
+
 
     public void LaunchProjectile(Transform rightHand, Transform leftHand,Animator animator)
     { 

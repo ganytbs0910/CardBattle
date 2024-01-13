@@ -107,7 +107,19 @@ public class ScreenRay : MonoBehaviour
                     {
                         case 24:
                             drawCardController.cardIDList.Remove(cardID);
-                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500);
+                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(1, 1, 1));
+                            Destroy(chooseCard);
+                            cardID = 0;
+                            break;
+                        case 25:
+                            drawCardController.cardIDList.Remove(cardID);
+                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(2, 2, 2));
+                            Destroy(chooseCard);
+                            cardID = 0;
+                            break;
+                        case 26:
+                            drawCardController.cardIDList.Remove(cardID);
+                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(3, 3, 3));
                             Destroy(chooseCard);
                             cardID = 0;
                             break;
@@ -266,10 +278,13 @@ public class ScreenRay : MonoBehaviour
             }
         }
     }
-    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power)
+    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power, Vector3 size)
     {
         // 弾丸をメインカメラの位置に生成
         GameObject bomb = Instantiate(throwObject, Camera.main.transform.position, Quaternion.identity);
+
+        // 弾丸のサイズを設定
+        bomb.transform.localScale = size;
 
         // メインカメラの位置からターゲットの位置への方向ベクトルを計算
         Vector3 direction = targetPos - Camera.main.transform.position;
