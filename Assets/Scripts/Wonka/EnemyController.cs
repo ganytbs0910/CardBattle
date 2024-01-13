@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
 using UniRx;
+using TMPro;
 
 //Distance 7以下⇒Runに移行
 //Ditstance 2以下⇒Attack移行
@@ -47,6 +48,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Sprite dropItemPrefab;
 
     public bool playerChase = true;
+
+    public TextMeshProUGUI missText;
 
     void Start()
     {
@@ -198,12 +201,28 @@ public class EnemyController : MonoBehaviour
                 //ダメージを与えるものにぶつかったら
                 //print(other.name + "が" + gameObject.name + "に" + playerWeapon.SumDamage() + "ダメージを与えた");
 
+                // 回避チェック
+                if (Random.Range(0, 100) < agility)
+                {
+                    Debug.Log("攻撃を回避しました！");
+                    ShowMissText();
+                    return; // 攻撃を回避
+                }
+
                 Damage(playerWeapon.SumDamage()); //ダメージを与える
             }
         }
 
         if (other.CompareTag("Projectile_Player"))
         {
+            // 回避チェック
+            if (Random.Range(0, 100) < agility)
+            {
+                Debug.Log("攻撃を回避しました！");
+                ShowMissText();
+                return; // 攻撃を回避
+            }
+
             Projectile projectile = other.GetComponent<Projectile>();
             if (projectile != null)
             {
@@ -224,6 +243,17 @@ public class EnemyController : MonoBehaviour
                 Damage(bomb.Attack);//ダメージを与える
             }
         }
+    }
+
+        //回避したときにミスを表記する
+    public void ShowMissText()
+    {
+        //missText.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2); // 敵の頭上に配置
+        missText.gameObject.SetActive(true);
+        missText.alpha = 1; // テキストの透明度を最大に設定
+
+        // フェードアウトのアニメーションを設定
+        missText.DOFade(0, 2f).OnComplete(() => missText.gameObject.SetActive(false));
     }
 
     public void OnTriggerExit(Collider other)
@@ -281,13 +311,6 @@ public class EnemyController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
-        // 回避チェック
-        if (Random.Range(0, 100) < agility)
-        {
-            Debug.Log("攻撃を回避しました！");
-            return; // 攻撃を回避
-        }
-
         hp -= damage;
         if (hp <= 0)
         {

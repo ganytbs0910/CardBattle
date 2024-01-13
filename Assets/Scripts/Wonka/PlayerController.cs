@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using DG.Tweening;
-
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     [Header("Playerのステータス")]
@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
     public BoxCollider noWeaponCols;
 
     public bool enemyChase = true;
+
+    public TextMeshProUGUI missText; //インスペクターで固定するs
 
     void Start()
     {
@@ -402,12 +404,6 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
-        //回避率のチェック
-        if (Random.Range(0, 100) < Agility)
-        {
-            Debug.Log("攻撃を回避");
-            return;//攻撃を回避
-        }
 
         int sumDamage;
         sumDamage = damage - defense;
@@ -455,9 +451,29 @@ public class PlayerController : MonoBehaviour
 
                 GetHit();//ノックバック
 
+                //回避率のチェック
+                if (Random.Range(0, 100) < Agility)
+                {
+                    Debug.Log("攻撃を回避");
+                    ShowMissText();
+
+                    return;//攻撃を回避
+                }
+
                 Damage(enemyWeapon.SumDamage()); //ダメージを与える
             }
         }
+    }
+
+    //回避したときにミスを表記する
+    public void ShowMissText()
+    {
+        missText.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2); // 敵の頭上に配置
+        missText.gameObject.SetActive(true);
+        missText.alpha = 1; // テキストの透明度を最大に設定
+
+        // フェードアウトのアニメーションを設定
+        missText.DOFade(0, 2f).OnComplete(() => missText.gameObject.SetActive(false));
     }
 
     private void OnTriggerExit(Collider other)
