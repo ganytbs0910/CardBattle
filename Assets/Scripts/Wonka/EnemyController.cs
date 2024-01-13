@@ -51,8 +51,12 @@ public class EnemyController : MonoBehaviour
 
     public TextMeshProUGUI missText;
 
+    public ParticleSystem attackEffect = null;
+    public GameObject effectCollider = null;
+
     void Start()
     {
+        StopAttackEffect();
         hp = maxHp;
 
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
@@ -584,5 +588,23 @@ public class EnemyController : MonoBehaviour
     void Freeze()
     {
         freeze = true;
+    }
+
+    public void PlayAttackEffect()
+    {
+        if (attackEffect != null)
+        {
+            effectCollider.SetActive(true);
+            attackEffect.Play();
+        }
+    }
+
+    public void StopAttackEffect()
+    {
+        if (attackEffect != null)
+        {
+            effectCollider.SetActive(false);
+            attackEffect.Stop();
+        }
     }
 }
