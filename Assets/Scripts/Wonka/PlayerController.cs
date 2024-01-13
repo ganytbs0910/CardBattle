@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, enemyTarget.position);
             agent.isStopped = false; // 移動を再開
 
+            //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
             if (!enemyChase)
             {
                 //print("攻撃範囲内");
@@ -144,6 +145,27 @@ public class PlayerController : MonoBehaviour
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }
+
+            //遠距離攻撃の場合はその場で攻撃を開始する
+            //print("攻撃範囲内");
+            if (CanAttack()) //攻撃可能
+            {
+                print("攻撃");
+                Attack(); // 攻撃
+            }
+            else//攻撃までのインターバル中
+            {
+                //print("防御");
+                Defend(); // 防御
+            }
+            agent.isStopped = true;
+        }
+        else
+        {
+            agent.speed = moveSpeed;
+            //print("範囲外");
+            agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
+            Move(); // 移動アニメ
         }
     }
 
@@ -696,8 +718,8 @@ public class PlayerController : MonoBehaviour
 
             CapsuleCollider capsule = clonePlayer.GetComponent<CapsuleCollider>();
             Vector3 particlePosition = capsule.bounds.center;
-            Instantiate(increaseEffect, particlePosition, Quaternion.identity) ;
-            
+            Instantiate(increaseEffect, particlePosition, Quaternion.identity);
+
             //clonePlayerの名前をShadowPlayerにする
             clonePlayer.name = "ShadowPlayer";
             clonePlayer.GetComponent<PlayerController>().hp /= 2;

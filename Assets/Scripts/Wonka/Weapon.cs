@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapon", menuName = "Weapon/Make New Weapon",order = 0)]
+[CreateAssetMenu(fileName = "Weapon", menuName = "Weapon/Make New Weapon", order = 0)]
 
 public class Weapon : ScriptableObject
 {
-
     [SerializeField] AnimatorOverrideController animatorOverride; //animatorの登録
     [SerializeField] AnimatorOverrideController subAnimatorOverride = null; //サブアニメーターの登録
 
@@ -45,13 +44,13 @@ public class Weapon : ScriptableObject
         {
             DestroyOldWeapon(rightHand, leftHand);//古い武器を削除する
 
-            Transform handTransform = GetTransform(rightHand, leftHand ,animator);
+            Transform handTransform = GetTransform(rightHand, leftHand, animator);
             //手の位置を取得する。
 
             // 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
             //bool shouldFlip = isRightHanded && !IsRightHandEmpty(rightHand);
 
-            GameObject weapon = Instantiate(weaponPrefab, handTransform.position,handTransform.rotation,handTransform);
+            GameObject weapon = Instantiate(weaponPrefab, handTransform.position, handTransform.rotation, handTransform);
             //手の位置に武器を生成する
 
             playerController = weapon.GetComponentInParent<PlayerController>();
@@ -86,7 +85,7 @@ public class Weapon : ScriptableObject
     }
 
     //装備する手を取得する
-    private Transform GetTransform(Transform rightHand, Transform leftHand ,Animator animator)
+    private Transform GetTransform(Transform rightHand, Transform leftHand, Animator animator)
     {
         // 両手に装備する武器で、かつプロジェクタイルがある場合、常に左手を使用
         if (TwoHandedWeapon && projectile != null)
@@ -258,7 +257,7 @@ public class Weapon : ScriptableObject
     public float GetRange()
     {
         return weaponRange;
-    }    
+    }
 
     // 左手が空かどうかを確認する
     public bool IsLeftHandEmpty(Transform leftHand)
@@ -277,10 +276,9 @@ public class Weapon : ScriptableObject
         return projectile != null;
     }
 
-
-    public void LaunchProjectile(Transform rightHand, Transform leftHand,Animator animator)
-    { 
-        Projectile projectileInstance =Instantiate(projectile, GetTransform(rightHand,leftHand,animator).position,Quaternion.identity);
+    public void LaunchProjectile(Transform rightHand, Transform leftHand, Animator animator)
+    {
+        Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand, animator).position, Quaternion.identity);
         if (playerController != null)
         {
             //PlayerControllerの攻撃値をダメージに代入

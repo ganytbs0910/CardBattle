@@ -18,6 +18,8 @@ public class DrawCardController : MonoBehaviour
     {
         instance = this;
 
+        //iPhoneかAndroidなら処理を実行
+#if UNITY_IOS || UNITY_ANDROID
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
         if (!PlayerPrefs.HasKey("CurrentStageCard"))
         {
@@ -34,6 +36,15 @@ public class DrawCardController : MonoBehaviour
                 DrawCard(PlayerPrefs.GetInt($"Card{i}"));
             }
         }
+#endif
+
+#if UNITY_EDITOR
+        for (int i = 0; i < Random.Range(5, MaxCard + 1); i++)
+        {
+            DrawCard();
+        }
+#endif
+
 
         //テスト用
         //parentPanelの子要素を全削除
