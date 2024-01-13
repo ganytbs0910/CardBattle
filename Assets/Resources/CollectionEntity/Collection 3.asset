@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Collection 3
   m_EditorClassIdentifier: 
   collectionID: 3
-  nameJP: "\u52A0\u901F\u306E\u79D8\u5B9D"
-  nameEN: Treasure of acceleration
-  informationJP: "\u653B\u6483\u306E\u30A4\u30F3\u30BF\u30FC\u30D0\u30EB\u3068\u79FB\u52D5\u901F\u5EA6\u304C\u65E9\u304F\u306A\u308B"
-  informationEN: Attack interval and movement speed become faster
-  icon: {fileID: -752552942, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  nameJP: "\u9632\u5FA1\u306E\u5C0F\u77F3"
+  nameEN: pebble of protection
+  informationJP: "\u9632\u5FA1\u529B+1"
+  informationEN: DF+1
+  icon: {fileID: -1217823496, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

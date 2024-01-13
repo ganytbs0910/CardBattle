@@ -13,11 +13,12 @@ public class CardModel
     public Action<CardModel> effect; // 効果を保存するための変数
     public CardEntity.TargetType targetType;
 
-    public Weapon weapon =null;
+    public Weapon weapon = null;
     public Armor armor = null;
 
     public ParticleSystem particle = null;
     public CardEntity.ParticlePosition particlePosition;
+
 
     public CardModel(int cardID)
     {

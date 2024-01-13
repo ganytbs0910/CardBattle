@@ -222,7 +222,7 @@ public class UIManager : MonoBehaviour
     public void CollectionCardUpdate(GameObject player = null)
     {
         //コレクションのカードを更新
-        for (int i = 0; i < collectionContent.transform.childCount; i++)
+        for (int i = 1; i < collectionContent.transform.childCount; i++)
         {
             //カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
@@ -232,7 +232,7 @@ public class UIManager : MonoBehaviour
                 TMP_Text itemName = detailPanel.transform.GetChild(0).GetComponent<TMP_Text>();
                 Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
                 TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
-                CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i + 1));
+                CollectionEntity collectionEntity = Resources.Load<CollectionEntity>("CollectionEntity/Collection " + (i));
                 //コレクションの情報を反映
                 switch (language)
                 {
@@ -252,15 +252,15 @@ public class UIManager : MonoBehaviour
                 switch (i)
                 {
                     //全ステータスが+10
-                    case 0: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
+                    case 1: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
                     //攻撃に回復効果が付与される
-                    case 1: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
+                    case 2: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
                     //攻撃のインターバルと移動速度が早くなる
-                    case 2: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
+                    case 3: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
                     //会心の一撃が出せるようになる
-                    case 3: break;
-                    //ハードモードが解放
                     case 4: break;
+                    //ハードモードが解放
+                    case 5: break;
                     default:
 
                         break;

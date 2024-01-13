@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Collection 1
   m_EditorClassIdentifier: 
   collectionID: 1
-  nameJP: "\u30B9\u30C6\u30FC\u30BF\u30B9\u5411\u4E0A\u306E\u30DA\u30F3\u30C0\u30F3\u30C8"
-  nameEN: Status improvement pendant
-  informationJP: "\u5168\u30B9\u30C6\u30FC\u30BF\u30B9\u304C+10"
-  informationEN: +10 to all stats
-  icon: {fileID: -1546808466, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  nameJP: "\u4F53\u529B\u306E\u5C0F\u77F3"
+  nameEN: pebble of health
+  informationJP: HP+5
+  informationEN: HP+5
+  icon: {fileID: 2071461693, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

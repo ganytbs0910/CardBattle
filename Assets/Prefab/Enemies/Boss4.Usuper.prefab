@@ -1314,7 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 24
   maxHp: 300
   attack: 50
   attackInterval: 1
@@ -1333,6 +1333,7 @@ MonoBehaviour:
   dropItemPrefab: {fileID: 0}
   missText: {fileID: 8276104503910601224}
   attackEffect: {fileID: 786889566107425565}
+  effectCollider: {fileID: 0}
 --- !u!136 &5366046694328417375
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0985da8d3f247da944b6a97e66a5a8, type: 3}
+  m_Name: Collection 13
+  m_EditorClassIdentifier: 
+  collectionID: 13
+  nameJP: "\u653B\u6483\u306E\u5CA9"
+  nameEN: rock of attack
+  informationJP: "\u653B\u6483+3"
+  informationEN: AT+3
+  icon: {fileID: -1034066562, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Collection 4
   m_EditorClassIdentifier: 
   collectionID: 4
-  nameJP: "\u899A\u9192\u306E\u77F3"
-  nameEN: stone of awakening
-  informationJP: "\u4F1A\u5FC3\u306E\u4E00\u6483\u304C\u51FA\u305B\u308B"
-  informationEN: Can deliver a decisive blow
-  icon: {fileID: 101905407, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  nameJP: "\u30DC\u30E0\u306E\u5C0F\u77F3"
+  nameEN: pebble of bomb
+  informationJP: "\u30DC\u30E0\u306E\u30C0\u30E1\u30FC\u30B8+10"
+  informationEN: Bomb damage +10
+  icon: {fileID: 21300000, guid: 850390017e2834efd81d6f0b95fd791f, type: 3}

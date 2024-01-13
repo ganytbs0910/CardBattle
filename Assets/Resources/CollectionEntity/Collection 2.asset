@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Collection 2
   m_EditorClassIdentifier: 
   collectionID: 2
-  nameJP: "\u7652\u3057\u306E\u5263\u6280"
-  nameEN: Healing sword technique
-  informationJP: "\u653B\u6483\u306B\u56DE\u5FA9\u52B9\u679C\u304C\u4ED8\u4E0E\u3055\u308C\u308B"
-  informationEN: Adds recovery effect to attack
-  icon: {fileID: -217046095, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  nameJP: "\u653B\u6483\u306E\u5C0F\u77F3"
+  nameEN: pebble of attack
+  informationJP: "\u653B\u6483+1"
+  informationEN: AT+1
+  icon: {fileID: 530390185, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

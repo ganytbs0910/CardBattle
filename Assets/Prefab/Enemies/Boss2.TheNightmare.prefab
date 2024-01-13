@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: 22
   maxHp: 120
   attack: 15
   attackInterval: 1
@@ -127,6 +127,8 @@ MonoBehaviour:
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
   dropItemPrefab: {fileID: 0}
   missText: {fileID: 2153948011134866968}
+  attackEffect: {fileID: 0}
+  effectCollider: {fileID: 0}
 --- !u!136 &8521574029102324304
 CapsuleCollider:
   m_ObjectHideFlags: 0

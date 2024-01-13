@@ -45,7 +45,6 @@ public class EnemyController : MonoBehaviour
     private Vector3 initialPosition;
 
     [SerializeField] GameObject coinEffectPrefab;
-    [SerializeField] private Sprite dropItemPrefab;
 
     public TextMeshProUGUI missText;
 
@@ -380,38 +379,27 @@ public class EnemyController : MonoBehaviour
 
         //ゲームの勝敗をチェックする
         GameManager.instance.CheckBattleStatus();
-        //ドロップ確率
-        int dropNumber = Random.Range(1, 101);
+
+        //コレクションがドロップするかどうかの判定
+        int dropNumber = Random.Range(1, 2);
         if (dropNumber != 1) return;
-        switch (this.gameObject.name)
-        {
-            case "Boss1(Clone)":
-                PlayerPrefs.SetInt($"Collection0", 1);
-                ItemDrop();
-                break;
-            case "Boss2(Clone)":
-                PlayerPrefs.SetInt($"Collection1", 1);
-                ItemDrop();
-                break;
-            case "Boss3(Clone)":
-                PlayerPrefs.SetInt($"Collection2", 1);
-                ItemDrop();
-                break;
-            case "Boss4(Clone)":
-                PlayerPrefs.SetInt($"Collection3", 1);
-                ItemDrop();
-                break;
-            default:
-                break;
-        }
+
+        //コレクションをドロップする
+        PlayerPrefs.SetInt($"Collection{id}", 1);
+        ItemDrop();
         UIManager.instance.CollectionCardUpdate();
     }
 
+    /// <summary>
+    /// これで動いてくれ〜〜要チェック
+    /// </summary>
     void ItemDrop()
     {
         Vector3 worldPosition = this.gameObject.transform.position;
         //メインカメラから見た位置にする
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
+        //dropItemPrefabをCollectionEnetityのid番目のiconを取得kする
+        Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
         UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
     }
 

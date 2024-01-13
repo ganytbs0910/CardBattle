@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Collection 5
   m_EditorClassIdentifier: 
   collectionID: 5
-  nameJP: "\u958B\u62D3\u306E\u3064\u308B\u304E"
-  nameEN: Sword of development
-  informationJP: "\u30CF\u30FC\u30C9\u30E2\u30FC\u30C9\u304C\u89E3\u653E"
+  nameJP: "\u5E78\u904B\u306E\u5C0F\u77F3"
+  nameEN: pebble of luck
+  informationJP: Coin drop amount +1
   informationEN: Hard mode released
-  icon: {fileID: -2010719989, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
+  icon: {fileID: -719943150, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}
