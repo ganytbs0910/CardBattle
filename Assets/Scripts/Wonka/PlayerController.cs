@@ -115,9 +115,6 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
-            float distance = Vector3.Distance(transform.position, enemyTarget.position);
-            agent.isStopped = false; // 移動を再開
-
             //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
             if (!enemyChase)
             {
@@ -142,10 +139,10 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                agent.speed = moveSpeed;
                 //print("範囲外");
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
+                agent.isStopped = false; // 移動を再開
             }
         }
     }
