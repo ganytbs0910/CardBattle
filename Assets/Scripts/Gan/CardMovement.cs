@@ -20,6 +20,10 @@ public class CardMovement : MonoBehaviour
 
     public Weapon weapon;
     public Armor armor;
+    public ParticleSystem particle;
+
+    public CardEntity.ParticlePosition particlePosition;
+
 
     private void Start()
     {
@@ -36,6 +40,9 @@ public class CardMovement : MonoBehaviour
 
         weapon = cardModel.weapon;
         armor = cardModel.armor;
+        particle = cardModel.particle;
+
+        particlePosition = cardModel.particlePosition;
     }
 
     void Update()

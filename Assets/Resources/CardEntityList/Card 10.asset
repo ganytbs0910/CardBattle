@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 10
   name: "\u6575\u306E\u4F53\u529B\u309230%\u596A\u3046"
-  information: "HP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3"
+  information: 
   tiar: 3
   icon: {fileID: -135437218, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
   weapon: {fileID: 0}
   armor: {fileID: 0}
   targetType: 1
+  particle: {fileID: 19800004, guid: 7867af58a6ec48846ae807eb4022fbaa, type: 3}
+  particlePosition: 0
