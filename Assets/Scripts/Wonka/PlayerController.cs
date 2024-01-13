@@ -60,7 +60,9 @@ public class PlayerController : MonoBehaviour
     //public GameObject NoWeapon_l;
 
     //public GameObject[] NoWeapons;
+    public Collider[] playerColliders;
     public BoxCollider noWeaponCols;
+
 
     public bool enemyChase = true;
 
@@ -145,43 +147,46 @@ public class PlayerController : MonoBehaviour
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
             }
-
-            //遠距離攻撃の場合はその場で攻撃を開始する
-            //print("攻撃範囲内");
-            if (CanAttack()) //攻撃可能
-            {
-                print("攻撃");
-                Attack(); // 攻撃
-            }
-            else//攻撃までのインターバル中
-            {
-                //print("防御");
-                Defend(); // 防御
-            }
-            agent.isStopped = true;
-        }
-        else
-        {
-            agent.speed = moveSpeed;
-            //print("範囲外");
-            agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
-            Move(); // 移動アニメ
         }
     }
 
     //武器をプレイヤーの手に装備させる
     public void EquipWeapon(Weapon weapon)
     {
+        Debug.Log("武器を装備しました！！！！！！！！！！！");
         if (weapon == null)
         {
             return;
         }
+        //playerCollidersの要素全てをenabledをfalseにする
+        for (int i = 0; i < playerColliders.Length; i++)
+        {
+            playerColliders[i].enabled = false;
+        }
+        //今装備している武器の種類によって当たり判定を変える
         currentWeapon = weapon;
-
         switch (currentWeapon.weaponType)
         {
             case Weapon.WeaponType.NoWeapon:
-            //処理を書いて
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.OneHandSword:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.TwoHandSword:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.Shield:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.Spear:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.Arrow:
+                playerColliders[1].enabled = true;
+                break;
+            case Weapon.WeaponType.Wand:
+                playerColliders[1].enabled = true;
                 break;
         }
 
@@ -198,7 +203,6 @@ public class PlayerController : MonoBehaviour
         print(weapon + "を装備しました");
 
         UpdateStats();
-
     }
 
     public void EquipArmor(Armor armor)
@@ -311,7 +315,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="enemyTransform">現在位置を登録</param>
     public void FindClosestEnemy(Transform playerTransform)
-    { 
+    {
         EnemyController closestEnemy = null;
         float closestDistanceSqr = Mathf.Infinity;
 
