@@ -18,6 +18,8 @@ public class DrawCardController : MonoBehaviour
     {
         instance = this;
 
+        //iPhoneかAndroidなら処理を実行
+#if UNITY_IOS || UNITY_ANDROID
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
         if (!PlayerPrefs.HasKey("CurrentStageCard"))
         {
@@ -34,16 +36,14 @@ public class DrawCardController : MonoBehaviour
                 DrawCard(PlayerPrefs.GetInt($"Card{i}"));
             }
         }
+#endif
 
-        //テスト用
-        //parentPanelの子要素を全削除
-        /*
-        foreach (Transform child in parentPanel.transform)
+#if UNITY_EDITOR
+        for (int i = 0; i < 8; i++)
         {
-            Destroy(child.gameObject);
+            DrawCard();
         }
-        TestDrawCard(Random.Range(76, 81));
-        */
+#endif
     }
 
     void Update()
@@ -54,56 +54,7 @@ public class DrawCardController : MonoBehaviour
     public void DrawCard(int? cardID = null)
     {
         int tiar = CalculateTiar();
-        if (parentPanel.transform.childCount > 7) return;
-
-        // カードIDが指定されていない場合、ランダムにカードを選択
-        if (cardID == null)
-        {
-            CardEntity[] cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
-            CardController card;
-            CardModel cardModel;
-
-            do
-            {
-                // ランダムにカードを選ぶ
-                cardID = Random.Range(1, cardEntities.Length + 1);
-                card = Instantiate(cardPrefab, parentPanel.transform);
-                card.name = $"Card_{cardID}";
-                card.Init(cardID.Value);
-                cardModel = card.model;
-
-                // カードのtiarが条件を満たさない場合は破棄して再試行
-                if (cardModel.tiar != tiar)
-                {
-                    Destroy(card.gameObject);
-                }
-            }
-            while (cardModel.tiar != tiar);
-
-            // 条件を満たしたカードをリストに追加
-            cardIDList.Add(cardID.Value);
-
-            // ランクに応じてアウトライン変更
-            TiarSelectOutline(card, cardModel);
-        }
-        else
-        {
-            // カードIDが指定されている場合、そのカードを生成
-            CardController card = Instantiate(cardPrefab, parentPanel.transform);
-            card.name = $"Card_{cardID}";
-            card.Init(cardID.Value);
-            cardIDList.Add(cardID.Value);
-            CardModel cardModel = card.model;
-
-            // ランクに応じてアウトライン変更
-            TiarSelectOutline(card, cardModel);
-        }
-    }
-
-    public void TestDrawCard(int? cardID = null)
-    {
-        int tiar = CalculateTiar();
-        if (parentPanel.transform.childCount > 7) return;
+        if (parentPanel.transform.childCount > 8) return;
 
         // カードIDが指定されていない場合、ランダムにカードを選択
         if (cardID == null)

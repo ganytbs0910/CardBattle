@@ -60,7 +60,9 @@ public class PlayerController : MonoBehaviour
     //public GameObject NoWeapon_l;
 
     //public GameObject[] NoWeapons;
+    public Collider[] playerColliders;
     public BoxCollider noWeaponCols;
+
 
     public bool enemyChase = true;
 
@@ -116,6 +118,7 @@ public class PlayerController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, enemyTarget.position);
             agent.isStopped = false; // 移動を再開
 
+            //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
             if (!enemyChase)
             {
                 //print("攻撃範囲内");
@@ -150,16 +153,40 @@ public class PlayerController : MonoBehaviour
     //武器をプレイヤーの手に装備させる
     public void EquipWeapon(Weapon weapon)
     {
+        Debug.Log("武器を装備しました！！！！！！！！！！！");
         if (weapon == null)
         {
             return;
         }
+        //playerCollidersの要素全てをenabledをfalseにする
+        for (int i = 0; i < playerColliders.Length; i++)
+        {
+            playerColliders[i].enabled = false;
+        }
+        //今装備している武器の種類によって当たり判定を変える
         currentWeapon = weapon;
-
         switch (currentWeapon.weaponType)
         {
             case Weapon.WeaponType.NoWeapon:
-            //処理を書いて
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.OneHandSword:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.TwoHandSword:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.Shield:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.Spear:
+                playerColliders[0].enabled = true;
+                break;
+            case Weapon.WeaponType.Arrow:
+                playerColliders[1].enabled = true;
+                break;
+            case Weapon.WeaponType.Wand:
+                playerColliders[1].enabled = true;
                 break;
         }
 
@@ -176,7 +203,6 @@ public class PlayerController : MonoBehaviour
         print(weapon + "を装備しました");
 
         UpdateStats();
-
     }
 
     public void EquipArmor(Armor armor)
@@ -289,7 +315,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="enemyTransform">現在位置を登録</param>
     public void FindClosestEnemy(Transform playerTransform)
-    { 
+    {
         EnemyController closestEnemy = null;
         float closestDistanceSqr = Mathf.Infinity;
 
@@ -696,8 +722,8 @@ public class PlayerController : MonoBehaviour
 
             CapsuleCollider capsule = clonePlayer.GetComponent<CapsuleCollider>();
             Vector3 particlePosition = capsule.bounds.center;
-            Instantiate(increaseEffect, particlePosition, Quaternion.identity) ;
-            
+            Instantiate(increaseEffect, particlePosition, Quaternion.identity);
+
             //clonePlayerの名前をShadowPlayerにする
             clonePlayer.name = "ShadowPlayer";
             clonePlayer.GetComponent<PlayerController>().hp /= 2;

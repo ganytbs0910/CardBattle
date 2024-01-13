@@ -47,8 +47,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject coinEffectPrefab;
     [SerializeField] private Sprite dropItemPrefab;
 
-    public bool playerChase = true;
-
     public TextMeshProUGUI missText;
 
     public ParticleSystem attackEffect = null;
@@ -99,7 +97,7 @@ public class EnemyController : MonoBehaviour
             float distance = Vector3.Distance(transform.position, playerTarget.position);
             agent.isStopped = false;
 
-            if (!playerChase)
+            if (distance <= agent.stoppingDistance)
             {
                 //print("攻撃範囲内");
                 if (CanAttack())　//攻撃可能
@@ -192,10 +190,6 @@ public class EnemyController : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == playerTarget.gameObject)
-        {
-            playerChase = false;
-        }
         //print(other.name);
         if (other.CompareTag("Weapon_Player"))
         {
@@ -249,7 +243,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-        //回避したときにミスを表記する
+    //回避したときにミスを表記する
     public void ShowMissText()
     {
         //missText.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2); // 敵の頭上に配置
@@ -260,14 +254,6 @@ public class EnemyController : MonoBehaviour
         missText.DOFade(0, 2f).OnComplete(() => missText.gameObject.SetActive(false));
     }
 
-    public void OnTriggerExit(Collider other)
-    {
-        //playerTargetに触れたら
-        if (other.gameObject == playerTarget.gameObject)
-        {
-            playerChase = true;
-        }
-    }
 
     //攻撃
     public void Attack()
@@ -374,6 +360,8 @@ public class EnemyController : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         //剣の当たり判定も消す
         DisableColliderWeapon();
+        //Playerを追いかけないようにする
+        agent.isStopped = true;
 
         if (coinEffectPrefab != null)
         {

@@ -22,3 +22,4 @@ MonoBehaviour:
   TwoHandedWeapon: 1
   isShield: 0
   projectile: {fileID: 9139232764144289132, guid: 6749d0f3b8379a54899acb7a121e4bcf, type: 3}
+  weaponType: 5

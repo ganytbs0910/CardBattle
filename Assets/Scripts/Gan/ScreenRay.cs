@@ -158,7 +158,7 @@ public class ScreenRay : MonoBehaviour
         Destroy(newParticle.gameObject, newParticle.main.duration);
 
         print(particle.name + "を実行します");
-        
+
     }
 
     void RayCastUI()
@@ -274,7 +274,6 @@ public class ScreenRay : MonoBehaviour
                 armor = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().armor;
                 particle = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().particle;
                 particlePosition = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().particlePosition;
-
             }
         }
     }
