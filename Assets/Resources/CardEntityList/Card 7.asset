@@ -15,8 +15,10 @@ MonoBehaviour:
   cardID: 7
   name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u6570*3"
   information: 
-  tiar: 4
+  tiar: 5
   icon: {fileID: -418132432, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
   weapon: {fileID: 0}
   armor: {fileID: 0}
   targetType: 0
+  particle: {fileID: 3034256452654335639, guid: d8a8bbe703ee8174e9754da9050b17a9, type: 3}
+  particlePosition: 1

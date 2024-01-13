@@ -26,6 +26,19 @@ public class CardEntity : ScriptableObject
         All
     }
     public TargetType targetType;
+
+    public ParticleSystem particle = null;
+
+    public enum ParticlePosition
+    { 
+        Top,
+        Center,
+        Bottom,
+    }
+    public ParticlePosition particlePosition;
+
+
+
     public void InitEffect()
     {
 

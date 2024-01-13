@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: Card 28
   m_EditorClassIdentifier: 
   cardID: 28
-  name: "\u8D85\u56DE\u5FA9\u85AC"
+  name: "HP\u309250%\u56DE\u5FA9"
   information: "\u73FE\u5728\u306E\u4F53\u529B\u304B\u308950%\u56DE\u5FA9\u3059\u308B"
-  icon: {fileID: 21300000, guid: fcc06aae25aa14f5281a60c8f00d993c, type: 3}
+  tiar: 3
+  icon: {fileID: 21300000, guid: f60e44751055a41b9a0694f031fa55ab, type: 3}
   weapon: {fileID: 0}
+  armor: {fileID: 0}
   targetType: 0
+  particle: {fileID: 2461585845580314560, guid: e747544088e0b8842a0eca8697a4f65a, type: 3}
+  particlePosition: 2

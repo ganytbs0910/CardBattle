@@ -27,6 +27,11 @@ public class ScreenRay : MonoBehaviour
     CardEntity.TargetType targetType;
     public Weapon weapon;
     public Armor armor;
+    public ParticleSystem particle;
+    CardEntity.ParticlePosition particlePosition;
+
+    Vector3 InstantPosition;
+
 
     void Update()
     {
@@ -75,6 +80,10 @@ public class ScreenRay : MonoBehaviour
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
                         print("防具を装備させた");
                     }
+                    if (particle != null) //パーティクルを発生
+                    {
+                        PlayParticleAtPosition(collider);
+                    }
                     Destroy(chooseCard);
                     cardID = 0;
                     UIManager.instance.TutorialTextDetail("バトルを開始してください！");
@@ -83,6 +92,11 @@ public class ScreenRay : MonoBehaviour
                 {
                     drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
+                    if (particle != null) //パーティクルを発生
+                    {
+                        PlayParticleAtPosition(collider);
+                    }
+
                     Destroy(chooseCard);
                     cardID = 0;
                     UIManager.instance.TutorialTextDetail("バトルを開始してください！");
@@ -105,6 +119,35 @@ public class ScreenRay : MonoBehaviour
         StartCoroutine(ToggleCheck());
     }
 
+
+    public void PlayParticleAtPosition(Collider collider)
+    {
+        //生成位置を選択
+        switch (particlePosition)
+        {
+            case CardEntity.ParticlePosition.Top:
+                InstantPosition = collider.bounds.center + new Vector3(0, collider.bounds.extents.y, 0);
+                break;
+            case CardEntity.ParticlePosition.Center:
+                InstantPosition = collider.bounds.center;
+                break;
+            case CardEntity.ParticlePosition.Bottom:
+                InstantPosition = collider.bounds.center - new Vector3(0, collider.bounds.extents.y, 0);
+                break;
+        }
+
+        // パーティクルシステムのインスタンスを生成
+        ParticleSystem newParticle = Instantiate(particle, InstantPosition, Quaternion.identity);
+
+        // パーティクルを再生
+        newParticle.Play();
+
+        // パーティクルの再生が終了したら自動的に破棄する
+        Destroy(newParticle.gameObject, newParticle.main.duration);
+
+        print(particle.name + "を実行します");
+        
+    }
 
     void RayCastUI()
     {
@@ -217,6 +260,9 @@ public class ScreenRay : MonoBehaviour
                 debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().name;
                 weapon = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().weapon;
                 armor = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().armor;
+                particle = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().particle;
+                particlePosition = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().particlePosition;
+
             }
         }
     }

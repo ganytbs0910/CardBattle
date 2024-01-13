@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Card 18
   m_EditorClassIdentifier: 
   cardID: 18
-  name: "\u9EBB\u75FA\u72B6\u614B\u306B\u3059\u308B"
-  information: 
+  name: "\u30B9\u30BF\u30F3\u72B6\u614B\u306B\u3059\u308B"
+  information: "\u6575\u3092\u4E00\u5B9A\u6642\u9593\u52D5\u3051\u306A\u304F\u3059\u308B"
+  tiar: 2
   icon: {fileID: -1111758007, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  weapon: {fileID: 0}
+  armor: {fileID: 0}
+  particle: {fileID: 1763937973439912650, guid: 525b54707b8efd2438cfd9813313e844, type: 3}
   targetType: 1

@@ -16,6 +16,9 @@ public class CardModel
     public Weapon weapon =null;
     public Armor armor = null;
 
+    public ParticleSystem particle = null;
+    public CardEntity.ParticlePosition particlePosition;
+
     public CardModel(int cardID)
     {
         CardEntity cardEntity = Resources.Load<CardEntity>("CardEntityList/Card " + cardID);
@@ -33,6 +36,8 @@ public class CardModel
 
             this.weapon = cardEntity.weapon;
             this.armor = cardEntity.armor;
+            this.particle = cardEntity.particle;
+            this.particlePosition = cardEntity.particlePosition;
         }
     }
 

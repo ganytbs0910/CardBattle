@@ -64,7 +64,9 @@ public class PlayerController : MonoBehaviour
 
     public bool enemyChase = true;
 
-    public TextMeshProUGUI missText; //インスペクターで固定するs
+    public TextMeshProUGUI missText; //インスペクターで固定する
+
+    public ParticleSystem increaseEffect;
 
     void Start()
     {
@@ -125,7 +127,7 @@ public class PlayerController : MonoBehaviour
                     //回復の剣の効果
                     if (Random.Range(0, 100) < 10)
                     {
-                        Heal(5);
+                        HPHeal(5);
                     }
                 }
                 else//攻撃までのインターバル中
@@ -468,7 +470,7 @@ public class PlayerController : MonoBehaviour
     //回避したときにミスを表記する
     public void ShowMissText()
     {
-        missText.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2); // 敵の頭上に配置
+        //missText.transform.position = Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 2); // 敵の頭上に配置
         missText.gameObject.SetActive(true);
         missText.alpha = 1; // テキストの透明度を最大に設定
 
@@ -660,9 +662,13 @@ public class PlayerController : MonoBehaviour
             case 25: break;
             case 26: break;
             //範囲内のプレイヤーの体力を20%回復
-            case 27: Heal(20); break;
+            case 27: HPHeal(20); break;
             //範囲内のプレイヤーの体力を50%回復
-            case 28: Heal(50); break;
+            case 28: HPHeal(50); break;
+            //範囲内のプレイヤーの体力を20%回復
+            case 29: MPHeal(20); break;
+            //範囲内のプレイヤーの体力を20%回復
+            case 30: MPHeal(20); break;
         }
     }
 
@@ -676,7 +682,15 @@ public class PlayerController : MonoBehaviour
         {
             float x = Random.Range(-1f, 1f);
             float z = Random.Range(-1f, 1f);
-            GameObject clonePlayer = Instantiate(playerPrefab, new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z), Quaternion.identity);
+
+            Vector3 position = new Vector3(this.gameObject.transform.position.x + x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + z);
+
+            GameObject clonePlayer = Instantiate(playerPrefab, position, Quaternion.identity);
+
+            CapsuleCollider capsule = clonePlayer.GetComponent<CapsuleCollider>();
+            Vector3 particlePosition = capsule.bounds.center;
+            Instantiate(increaseEffect, particlePosition, Quaternion.identity) ;
+            
             //clonePlayerの名前をShadowPlayerにする
             clonePlayer.name = "ShadowPlayer";
             clonePlayer.GetComponent<PlayerController>().hp /= 2;
@@ -691,17 +705,23 @@ public class PlayerController : MonoBehaviour
             }
         }
         GameManager.instance.CreateCharacterList();
+
+        print("プレイヤーの人数が" + number + "増えました");
     }
     void AttackUp(float value)
     {
         attack = Mathf.RoundToInt(attack * value);
+        print("攻撃力が" + value + "増えました");
+
     }
     void DefenceUp(float value)
     {
         defense = Mathf.RoundToInt(defense * value);
+        print("防御力が" + value + "増えました");
+
     }
 
-    void Heal(int value)
+    void HPHeal(int value)
     {
         //現在のHPをvalue%回復し、体力が100%を超えないようにする
         hp += Mathf.RoundToInt(hp * value);
@@ -709,11 +729,37 @@ public class PlayerController : MonoBehaviour
         {
             hp = maxHp;
         }
-        print("プレイヤーの体力が" + value + "回復しました");
 
-        animator.SetTrigger("Drink");
+
+        //回復アニメ
+        if (isHealingSword != true)
+        {
+            animator.SetTrigger("Drink");
+        }
         //Sliderを修正
         playerUIManager.UpdateHP(hp);
+        print("プレイヤーのHPが" + value + "回復しました");
+
+    }
+
+    void MPHeal(int value)
+    {
+        //現在のHPをvalue%回復し、体力が100%を超えないようにする
+        mp += Mathf.RoundToInt(mp * value);
+        if (mp > maxHp)
+        {
+            mp = maxHp;
+        }
+
+        //回復アニメ
+        if (isHealingSword != true)
+        {
+            animator.SetTrigger("Drink");
+        }
+        //Sliderを修正
+        playerUIManager.UpdateMP(mp);
+
+        print("プレイヤーのMPが" + value + "回復しました");
     }
 
     /// <summary>
@@ -727,12 +773,15 @@ public class PlayerController : MonoBehaviour
         attack = Mathf.RoundToInt(attack * 1.1f);
         defense = Mathf.RoundToInt(defense * 1.1f);
         Agility = Mathf.RoundToInt(Agility * 1.1f);
+
+        print("プレイヤーのすべてのパラメーターが上昇しました");
     }
 
     public void HealingSwordTechnique()
     {
         //攻撃時に10%の確率で回復
         isHealingSword = true;
+        print("回復の剣の効果が適用");
     }
 
     public void TreasureOfAcceleration()
