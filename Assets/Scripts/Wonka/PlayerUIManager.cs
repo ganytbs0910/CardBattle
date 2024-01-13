@@ -13,7 +13,11 @@ public class PlayerUIManager : MonoBehaviour
     private void Update()
     {
         //このスクリプトのオブジェクトをカメラのほうに向け続ける
-        transform.LookAt(Camera.main.transform);
+        // Camera.mainがアクティブな場合のみ実行
+        if (Camera.main != null && Camera.main.gameObject.activeInHierarchy)
+        {
+            transform.LookAt(Camera.main.transform);
+        }
     }
 
     /// <summary>
