@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionID: 19
   nameJP: "\u51B7\u9759\u306A\u5B9D\u77F3"
-  nameEN: calm jewelry
+  nameEN: calm gem
   informationJP: "\u5206\u8EAB\u306E\u9632\u5FA1\u529B\u4F4E\u4E0B\u304C\u534A\u5206\u21921/4\u306B"
   informationEN: Clone's DF decrease from half to 1/4
   icon: {fileID: -593744692, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

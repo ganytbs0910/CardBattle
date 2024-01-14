@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public int maxHp = 100;
     public int maxMp = 100;
     public int attack;
+    public int throwAttack = 0;
     [SerializeField] private float attackInterval;//攻撃間隔
     [SerializeField] private int defense;
     public float moveSpeed; //agentSpeed
@@ -795,6 +796,138 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// コレクションの効果一覧
     /// </summary>
+
+    //体力増加
+    public void HealthUp(int value)
+    {
+        maxHp += value;
+    }
+
+    //攻撃増加
+    public void AttackUp(int value)
+    {
+        attack += value;
+    }
+
+    //防御増加
+    public void DefenceUp(int value)
+    {
+        defense += value;
+    }
+
+    //爆弾威力増加
+    public void BombUp(int value)
+    {
+        throwAttack += value;
+    }
+
+    //コインのドロップ量増加
+    public void CoinUp(int value)
+    {
+
+    }
+
+    //回避率増加
+    public void PebbleOfAvoidance(int value)
+    {
+
+    }
+
+    //コレクションのドロップ率増加
+    public void DropProbabilitySlightlyIncreased(int value)
+    {
+
+    }
+
+    //体力の倍率上昇
+    public void HealthRateUp()
+    {
+
+    }
+
+    //攻撃の倍率上昇
+    public void AttackRateUp()
+    {
+
+    }
+
+    //防御の倍率上昇
+    public void DefenceRate()
+    {
+
+    }
+
+    public void StoneOfSpeed()
+    {
+
+    }
+
+    public void RockOfHealth()
+    {
+
+    }
+
+    public void RockOfAttack()
+    {
+
+    }
+
+    public void RockOfDefence()
+    {
+
+    }
+
+    public void LuckyGem()
+    {
+
+    }
+
+    public void GaleGem()
+    {
+
+    }
+
+    public void DurableGem()
+    {
+
+    }
+
+    public void AngerGem()
+    {
+
+    }
+
+    public void CalmGem()
+    {
+
+    }
+
+    public void HopeGem()
+    {
+
+    }
+
+    public void HealingGem()
+    {
+
+    }
+
+    public void BattleGem()
+    {
+
+    }
+
+    public void GreedyGem()
+    {
+
+    }
+
+    public void PioneeringGem()
+    {
+
+    }
+
+
     public void StatusImprovementPendant()
     {
         //全てのパラメーターが10%アップ

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionID: 24
   nameJP: "\u958B\u62D3\u306E\u5B9D\u77F3"
-  nameEN: gem of pioneering
+  nameEN: pioneering gem
   informationJP: "\u30CF\u30FC\u30C9\u30E2\u30FC\u30C9\u304C\u89E3\u653E"
   informationEN: Hard mode released
   icon: {fileID: 2039039722, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

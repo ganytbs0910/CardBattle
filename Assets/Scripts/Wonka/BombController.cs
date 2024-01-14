@@ -13,6 +13,9 @@ public class BombController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        //プレイヤーのボム攻撃をプラスする
+        PlayerController playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController.throwAttack += Attack;
     }
 
 

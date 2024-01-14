@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionID: 21
   nameJP: "\u7652\u3057\u306E\u5B9D\u77F3"
-  nameEN: healing jewel
+  nameEN: healing gem
   informationJP: "\u968E\u5C64\u304C\u59CB\u307E\u308B\u3068HP\u56DE\u5FA9+3"
   informationEN: HP recovery +3 when hierarchy starts
   icon: {fileID: -211323427, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectionID: 20
   nameJP: "\u5E0C\u671B\u306E\u5B9D\u77F3"
-  nameEN: jewel of hope
+  nameEN: hope gem
   informationJP: "\u5168\u3066\u306E\u30B9\u30C6\u30FC\u30BF\u30B9+5"
   informationEN: All stats +5
   icon: {fileID: -2094265247, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}
