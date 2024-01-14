@@ -21,7 +21,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
     [SerializeField] private RectTransform collectionContent;
-    [SerializeField] private RectTransform collectionButton;
+    [SerializeField] private RectTransform heroMessageButton;
+    //[SerializeField] private RectTransform collectionButton;
     public GameObject adsButton;
     [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
@@ -29,9 +30,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
     [SerializeField] private int loadTime = 1;
-    [SerializeField] private Button battleStartButton;
+
+    [SerializeField] private RectTransform battleStartButton;
+    [SerializeField] private Button shopButton;
+ 
     [SerializeField] private TMP_Text stageText;
-    [SerializeField] private TMP_Text inforText;
+    [SerializeField] private TMP_Text heroMessageText;
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
     [SerializeField] private TMP_Text tutorialText;
@@ -43,7 +47,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text reStoreText;
 
     [SerializeField] private Image dropImage;
+
+    //オプションの言語設定
+    [SerializeField] Image languageImage;
+    [SerializeField] TextMeshProUGUI currentLanguage;
+    [SerializeField] Sprite japaneseIcon;
+    [SerializeField] Sprite americanIcon;
     public int i = 0;
+
+    //文字送りテキスト
+    public float delay = 0.05f;
+
     void Awake()
     {
         if (instance == null)
@@ -56,21 +70,22 @@ public class UIManager : MonoBehaviour
         ChangeLanguage(PlayerPrefs.GetString("Language"));
         LocalizeText();
 
+        HeroMessageDetail("バトルの準備");
         TutorialTextDetail("カードを選択してください");
         if (PlayerPrefs.HasKey("RemoveAds"))
         {
             adsButton.SetActive(false);
         }
 
-        battleStartButton.gameObject.SetActive(false);
-        // テキストの拡大と透明化アニメーション
+        //battleStartButton.gameObject.SetActive(false);
+        //テキストの拡大と透明化アニメーション
         Sequence mySequence = DOTween.Sequence();
-        mySequence.Append(inforText.rectTransform.DOScale(1.15f, 1.0f));
-        mySequence.Join(inforText.DOFade(0.2f, 1.0f));
+        mySequence.Append(battleStartButton.DOScale(1.15f, 1.0f));
+        //mySequence.Join(battleStartButton.DOFade(0.2f, 1.0f));
 
         // 元のサイズと不透明度に戻すアニメーション
-        mySequence.Append(inforText.rectTransform.DOScale(1.0f, 1.0f));
-        mySequence.Join(inforText.DOFade(1.0f, 1.0f));
+        mySequence.Append(battleStartButton.DOScale(1.0f, 1.0f));
+        //mySequence.Join(battleStartButton.DOFade(1.0f, 1.0f));
 
         // 無限ループに設定
         mySequence.SetLoops(-1);
@@ -80,26 +95,104 @@ public class UIManager : MonoBehaviour
         UpdateCoinText();
 
         //stageTextを更新
-        StageTextDetail($"階層 : {GameManager.instance.stageHierarchy}");
-        RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
+        StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
+        //RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
     }
+
+    //右上の三本線ボタンを押したとき
+    public void ShowLobbyMenu(GameObject ui)
+    {
+        ui.SetActive(true);
+        RectTransform rect = ui.GetComponent<RectTransform>();
+        // X位置を1秒かけて0にアニメーション
+        rect.DOAnchorPosX(0, 0.5f);
+    }
+
+    //ロビーの×ボタンを押したとき
+    public void CloseLobbyMenu(GameObject ui)
+    {
+        RectTransform rect = ui.GetComponent<RectTransform>();
+        // X位置を1秒かけて0にアニメーション
+        rect.DOAnchorPosX(600, 0.5f).OnComplete(() =>
+        {
+            ui.SetActive(false);
+        });
+    }
+
+    public void ShowSettingPanel(GameObject ui)
+    { 
+        
+    }
+
+    //ボタンクリック時のアニメーション
+    public void AnimateButtonScale(GameObject button)
+    {
+        RectTransform rectTransform = button.GetComponent<RectTransform>();
+        // スケールを0.9にアニメーション
+        rectTransform.DOScale(0.8f, 0.1f)
+            .OnComplete(() =>
+            {
+            // スケールを1にアニメーション
+            rectTransform.DOScale(1f, 0.1f);
+            });
+    }
+
+    //消失するアニメボタン
+    public void AnimateButtonScaleFalse(GameObject button)
+    {
+        RectTransform rectTransform = button.GetComponent<RectTransform>();
+        //少し膨らませる
+        rectTransform.DOScale(1.5f, 0.2f).OnComplete(() =>
+        {
+            //スケールを０に。
+            rectTransform.DOScale(0f, 0.2f).OnComplete(()=>
+            { 
+                button.SetActive(false);
+                rectTransform.DOScale(1f, 0f);//元の大きさに
+            });
+        });
+    }
+
+
     public void ShowUI(GameObject ui)
     {
-        //DOTweenで中央からだんだん表示させる
+        Image dimed = ui.GetComponent<Image>();
+        if (dimed != null) dimed.DOFade(0, 0f);//BGの透過
+        //DOTweenで中央からやや大きくし通常サイズにさせる
         ui.SetActive(true);
         ui.transform.DOScale(0, 0);
-        ui.transform.DOScale(1, 0.5f);
-
+        ui.transform.DOScale(1.1f, 0.2f).OnComplete(() =>
+        {
+            if (dimed != null) dimed.DOFade(1, 0.2f);
+            ui.transform.DOScale(1, 0.1f);
+        });
     }
 
+    public void CloseUI(GameObject ui)
+    {
+        Image dimed = ui.GetComponent<Image>();
+
+        if (dimed != null) dimed.DOFade(0, 0.2f);
+        //DOTweenで中央から少し大きくしてそのまま小さくする
+        ui.transform.DOScale(1.1f, 0.2f).OnComplete(() =>
+        {
+            ui.transform.DOScale(0, 0.1f).OnComplete(() =>
+            {
+                ui.SetActive(false);
+            });
+        });
+    }
+
+    //最初のタップ //使用しない方向で？
     public void MoveUI()
     {
-        startCheckButton.SetActive(false);
-        inforText.gameObject.SetActive(false);
-        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
-        battleStartButton.gameObject.SetActive(true);
+        //startCheckButton.SetActive(false);
+        //heroMessageText.gameObject.SetActive(false);
+        //camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
+        //difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+        //cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
+        //battleStartButton.gameObject.SetActive(true);
+        //shopButton.gameObject.SetActive(false);
     }
 
     public void Loading(int stageHierarchy)
@@ -122,7 +215,7 @@ public class UIManager : MonoBehaviour
         winPanel.SetActive(false);
         losePanel.SetActive(false);
         startCheckButton.SetActive(true);
-        inforText.gameObject.SetActive(true);
+        heroMessageText.gameObject.SetActive(true);
 
         // カメラの角度を調整
         Vector3 currentCameraRotation = camera.transform.eulerAngles;
@@ -136,7 +229,7 @@ public class UIManager : MonoBehaviour
         cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 100);
 
 
-        battleStartButton.gameObject.SetActive(false);
+        battleStartButton.gameObject.SetActive(true);
         GameManager.instance.battleState = false;
         loadPanel.SetActive(true);
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
@@ -172,19 +265,35 @@ public class UIManager : MonoBehaviour
     //ボタンで使用
     public void BattleStart()
     {
+        HeroMessageDetail("バトル開始");
+
         GameManager.instance.battleState = true;
         UIManager.instance.TutorialTextDetail("戦闘は自動で行われます");
+
+        startCheckButton.SetActive(false);
+        //heroMessageText.gameObject.SetActive(false);
+        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
+        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
+        //battleStartButton.gameObject.SetActive(true);
+        shopButton.gameObject.SetActive(false);
+
+
     }
 
     public void WinPanel()
     {
         winPanel.SetActive(true);
         Loading(GameManager.instance.stageHierarchy);
+
+        HeroMessageDetail("勝利");
     }
 
     public void LosePanel()
     {
         losePanel.SetActive(true);
+
+        HeroMessageDetail("敗北");
     }
 
     public void GiveUpButton()
@@ -194,6 +303,8 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("StageHierarchy", 1);
         Loading(1);
+
+        HeroMessageDetail("ギブアップ");
     }
 
     public void RevivalButton()
@@ -271,7 +382,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoinText()
     {
-        coinPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
+        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
     public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
@@ -280,8 +391,10 @@ public class UIManager : MonoBehaviour
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
         dropImageItem.sprite = itemPrefab;
         //このdropImageItemをcollectionButtonの位置まで1.5秒かけて移動させ、だんだん小さくする
-        dropImageItem.rectTransform.DOMove(collectionButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
+        dropImageItem.rectTransform.DOMove(heroMessageButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
         dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
+
+        HeroMessageDetail("コレクションゲット");
     }
 
     //以下ローカライズ
@@ -315,14 +428,19 @@ public class UIManager : MonoBehaviour
             case "Japanese":
                 this.language = Language.Japanese;
                 PlayerPrefs.SetString("Language", "Japanese");
+                currentLanguage.text = "Japan";
+                languageImage.sprite = japaneseIcon;
                 break;
             case "English":
                 this.language = Language.English;
                 PlayerPrefs.SetString("Language", "English");
+                currentLanguage.text = "English";
+                languageImage.sprite = americanIcon;
                 break;
         }
         LocalizeUpdate();
     }
+
 
     //チュートリアル用
     public void TutorialTextDetail(string detail)
@@ -384,12 +502,12 @@ public class UIManager : MonoBehaviour
 
     public void StageTextDetail(string detail)
     {
-        if (detail.StartsWith("階層 :") || detail.StartsWith("Stage :"))
+        if (detail.StartsWith("ダンジョン :") || detail.StartsWith("Stage :"))
         {
             int stage = GameManager.instance.stageHierarchy;
             switch (language)
             {
-                case Language.Japanese: detail = $"階層 : {stage}"; break;
+                case Language.Japanese: detail = $"ダンジョン {stage}階"; break;
                 case Language.English: detail = $"Stage : {stage}"; break;
             }
         }
@@ -419,6 +537,96 @@ public class UIManager : MonoBehaviour
         RemainingBossText.text = detail;
     }
 
+    //チュートリアル用
+    public void HeroMessageDetail(string message)
+    {
+            switch (message)
+            {
+                case "バトルの準備":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "カードを使って魔物との戦いに備えよう……。"; break;
+                        case Language.English: message = "Prepare for battle with the monsters using your cards..."; break;
+                    }
+                    break;
+                case "コレクションゲット":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "稀少なアイテムをゲット！　\nきみは幸運の持ち主のようだね。"; break;
+                        case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
+                    }
+                    break;
+                case "ショップ":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "このゴブリンはカードを売ってくれるみたいだ。"; break;
+                        case Language.English: message = "It seems this goblin will sell us cards"; break;
+                    }
+                    break;
+                case "バトル開始":
+                    switch (language)
+                    {
+                    case Language.Japanese:
+                        string[] messagesJP = new string[]
+                        {
+                            "ボクは負けない。\nなぜならキミを信じているから！",
+                            "さぁ、戦いの時だ！　\n覚悟はいいかい？",
+                            "最後まで諦めずに戦い抜くことを誓おう。"
+                        };
+                        message = messagesJP[Random.Range(0, messagesJP.Length)];
+                        break;
+                    case Language.English:
+                        string[] messagesEN = new string[]
+                        {
+                            "I won't lose because I believe in you!",
+                            "Come on, it's time to fight!　Are you ready?",
+                            "Let us pledge to never give up and fight to the end."
+                        };
+                        message = messagesEN[Random.Range(0, messagesEN.Length)];
+                        break;
+                }
+                    break;
+                case "勝利":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "やるじゃないか！　キミのことを好きになりそうだよ！"; break;
+                        case Language.English: message = "Well done! I think I'm starting to like you!"; break;
+                    }
+                    break;
+                 case "敗北":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "おい嘘だろ？　魔物の餌になるのだけは嫌だぁ！"; break;
+                        case Language.English: message = "Hey, you're kidding, right? I don't want to be monster food!"; break;
+                    }
+                    break;
+                case "ギブアップ":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "戦略的撤退というやつさ……。\nそうだよね？"; break;
+                        case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
+                    }
+                    break;
+            default:
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "特に喋ることはないかな。\n期待させてごめんね"; break;
+                        case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
+                    }
+                break;
+            }
+            StartCoroutine(ShowMojiokuriText(message));//文字送り
+    }
+
+    public IEnumerator ShowMojiokuriText(string MojiokuriText)
+    {
+        for (int i = 0; i <= MojiokuriText.Length; i++)
+        {
+            heroMessageText.text = MojiokuriText.Substring(0, i);
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
     //変更のないテキストのローカライズ
     public void LocalizeText()
     {
@@ -426,7 +634,6 @@ public class UIManager : MonoBehaviour
         {
             case Language.Japanese:
                 collectionTitleText.text = "所持中のアイテム";
-                inforText.text = "タップしてスタート";
                 giveUpText.text = "冒険を諦める";
                 languageText.text = "言語設定";
                 howToPlayText.text = "遊び方";
@@ -435,7 +642,6 @@ public class UIManager : MonoBehaviour
                 break;
             case Language.English:
                 collectionTitleText.text = "Items in possession";
-                inforText.text = "Tap to start";
                 giveUpText.text = "Give up adventure";
                 languageText.text = "Language setting";
                 howToPlayText.text = "How to play";

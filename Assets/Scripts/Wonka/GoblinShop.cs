@@ -58,6 +58,7 @@ public class GoblinShop : MonoBehaviour
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
         {
+            ShopPanel.SetActive(true);
             ShopCamera.gameObject.SetActive(true);
             BattleCamera.gameObject.SetActive(false);
             ShopEnviloment.SetActive(true);
@@ -79,9 +80,8 @@ public class GoblinShop : MonoBehaviour
 
         sequence.AppendCallback(() =>
         {
-            ShopPanel.SetActive(true);
             LoadPanel.gameObject.SetActive(false);
-
+            UIManager.instance.HeroMessageDetail("ショップ");
         });
         sequence.Play();
     }
@@ -90,7 +90,6 @@ public class GoblinShop : MonoBehaviour
     public void LeaveShop()
     {
         animator.SetTrigger("Bye");
-        ShopPanel.SetActive(false);
 
         Sequence sequence = DOTween.Sequence();
         //フェードアウト
@@ -113,6 +112,8 @@ public class GoblinShop : MonoBehaviour
             foreach (GameObject panel in FalsePanel)
             {
                 panel.SetActive(true);
+                UIManager.instance.HeroMessageDetail("バトルの準備");
+                ShopPanel.SetActive(false);
             }
 
         });
