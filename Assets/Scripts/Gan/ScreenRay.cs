@@ -106,22 +106,20 @@ public class ScreenRay : MonoBehaviour
                     switch (cardID)
                     {
                         case 24:
+                            /*前のコード
                             drawCardController.cardIDList.Remove(cardID);
                             ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(1, 1, 1));
                             Destroy(chooseCard);
                             cardID = 0;
+                            */
+                            //新しいコード(24,25,26に適応)
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1));
                             break;
                         case 25:
-                            drawCardController.cardIDList.Remove(cardID);
-                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(2, 2, 2));
-                            Destroy(chooseCard);
-                            cardID = 0;
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(2, 2, 2));
                             break;
                         case 26:
-                            drawCardController.cardIDList.Remove(cardID);
-                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(3, 3, 3));
-                            Destroy(chooseCard);
-                            cardID = 0;
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(3, 3, 3));
                             break;
                     }
                 }
@@ -129,6 +127,14 @@ public class ScreenRay : MonoBehaviour
             ResetTargetColors();
         }
         StartCoroutine(ToggleCheck());
+    }
+
+    void ThrowBomb(int num, Vector3 targetPos, int power, Vector3 size)
+    {
+        drawCardController.cardIDList.Remove(num);
+        ThrowObject(bombPrefab, targetPos, power, size);
+        Destroy(chooseCard);
+        cardID = 0;
     }
 
 
