@@ -381,7 +381,7 @@ public class EnemyController : MonoBehaviour
         GameManager.instance.CheckBattleStatus();
 
         //コレクションがドロップするかどうかの判定
-        int dropNumber = Random.Range(1, 2);
+        int dropNumber = Random.Range(1, 10);//ごめんちょっと確率高くしちゃった
         if (dropNumber != 1) return;
 
         //コレクションをドロップする
