@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int stageHierarchy;
-    public int coin;
 
     public bool battleState; //バトル開始後==true バトル開始前==false 
     public List<GameObject> playerObjects = new List<GameObject>();
@@ -20,7 +19,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemyPrefab; // 敵のプレハブ
     public GameObject[] itemPrefab; //アイテムのプレファブ。
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
-    public List<Transform> itemSpawnPoints;　//フィールド上のアイテムオブジェのリスト
+    public List<Transform> itemSpawnPoints; //フィールド上のアイテムオブジェのリスト
 
     void Awake()
     {
@@ -82,16 +81,6 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
-
-    }
-
-    public void GetCoin()
-    {
-        //コインをnumber枚取得する
-        float randomNum = UnityEngine.Random.Range(0.8f, 2f);
-        coin += Mathf.RoundToInt(stageHierarchy * randomNum * 10);
-        PlayerPrefs.SetInt("Coin", coin);
-        UIManager.instance.UpdateCoinText();
     }
 
     //次のステージへ移行する

@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private RectTransform battleStartButton;
     [SerializeField] private Button shopButton;
- 
+
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text heroMessageText;
     [SerializeField] private TMP_Text canUseText;
@@ -120,8 +120,8 @@ public class UIManager : MonoBehaviour
     }
 
     public void ShowSettingPanel(GameObject ui)
-    { 
-        
+    {
+
     }
 
     //ボタンクリック時のアニメーション
@@ -132,8 +132,8 @@ public class UIManager : MonoBehaviour
         rectTransform.DOScale(0.8f, 0.1f)
             .OnComplete(() =>
             {
-            // スケールを1にアニメーション
-            rectTransform.DOScale(1f, 0.1f);
+                // スケールを1にアニメーション
+                rectTransform.DOScale(1f, 0.1f);
             });
     }
 
@@ -145,8 +145,8 @@ public class UIManager : MonoBehaviour
         rectTransform.DOScale(1.5f, 0.2f).OnComplete(() =>
         {
             //スケールを０に。
-            rectTransform.DOScale(0f, 0.2f).OnComplete(()=>
-            { 
+            rectTransform.DOScale(0f, 0.2f).OnComplete(() =>
+            {
                 button.SetActive(false);
                 rectTransform.DOScale(1f, 0f);//元の大きさに
             });
@@ -380,8 +380,11 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateCoinText()
+    public void UpdateCoinText(int coinValue = 0)
     {
+        int coin = PlayerPrefs.GetInt("Coin");
+        coin += coinValue;
+        PlayerPrefs.SetInt("Coin", coin);
         coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
@@ -540,32 +543,32 @@ public class UIManager : MonoBehaviour
     //チュートリアル用
     public void HeroMessageDetail(string message)
     {
-            switch (message)
-            {
-                case "バトルの準備":
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "カードを使って魔物との戦いに備えよう……。"; break;
-                        case Language.English: message = "Prepare for battle with the monsters using your cards..."; break;
-                    }
-                    break;
-                case "コレクションゲット":
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "稀少なアイテムをゲット！　\nきみは幸運の持ち主のようだね。"; break;
-                        case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
-                    }
-                    break;
-                case "ショップ":
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "このゴブリンはカードを売ってくれるみたいだ。"; break;
-                        case Language.English: message = "It seems this goblin will sell us cards"; break;
-                    }
-                    break;
-                case "バトル開始":
-                    switch (language)
-                    {
+        switch (message)
+        {
+            case "バトルの準備":
+                switch (language)
+                {
+                    case Language.Japanese: message = "カードを使って魔物との戦いに備えよう……。"; break;
+                    case Language.English: message = "Prepare for battle with the monsters using your cards..."; break;
+                }
+                break;
+            case "コレクションゲット":
+                switch (language)
+                {
+                    case Language.Japanese: message = "稀少なアイテムをゲット！　\nきみは幸運の持ち主のようだね。"; break;
+                    case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
+                }
+                break;
+            case "ショップ":
+                switch (language)
+                {
+                    case Language.Japanese: message = "このゴブリンはカードを売ってくれるみたいだ。"; break;
+                    case Language.English: message = "It seems this goblin will sell us cards"; break;
+                }
+                break;
+            case "バトル開始":
+                switch (language)
+                {
                     case Language.Japanese:
                         string[] messagesJP = new string[]
                         {
@@ -585,37 +588,37 @@ public class UIManager : MonoBehaviour
                         message = messagesEN[Random.Range(0, messagesEN.Length)];
                         break;
                 }
-                    break;
-                case "勝利":
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "やるじゃないか！　キミのことを好きになりそうだよ！"; break;
-                        case Language.English: message = "Well done! I think I'm starting to like you!"; break;
-                    }
-                    break;
-                 case "敗北":
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "おい嘘だろ？　魔物の餌になるのだけは嫌だぁ！"; break;
-                        case Language.English: message = "Hey, you're kidding, right? I don't want to be monster food!"; break;
-                    }
-                    break;
-                case "ギブアップ":
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "戦略的撤退というやつさ……。\nそうだよね？"; break;
-                        case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
-                    }
-                    break;
-            default:
-                    switch (language)
-                    {
-                        case Language.Japanese: message = "特に喋ることはないかな。\n期待させてごめんね"; break;
-                        case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
-                    }
                 break;
-            }
-            StartCoroutine(ShowMojiokuriText(message));//文字送り
+            case "勝利":
+                switch (language)
+                {
+                    case Language.Japanese: message = "やるじゃないか！　キミのことを好きになりそうだよ！"; break;
+                    case Language.English: message = "Well done! I think I'm starting to like you!"; break;
+                }
+                break;
+            case "敗北":
+                switch (language)
+                {
+                    case Language.Japanese: message = "おい嘘だろ？　魔物の餌になるのだけは嫌だぁ！"; break;
+                    case Language.English: message = "Hey, you're kidding, right? I don't want to be monster food!"; break;
+                }
+                break;
+            case "ギブアップ":
+                switch (language)
+                {
+                    case Language.Japanese: message = "戦略的撤退というやつさ……。\nそうだよね？"; break;
+                    case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
+                }
+                break;
+            default:
+                switch (language)
+                {
+                    case Language.Japanese: message = "特に喋ることはないかな。\n期待させてごめんね"; break;
+                    case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
+                }
+                break;
+        }
+        StartCoroutine(ShowMojiokuriText(message));//文字送り
     }
 
     public IEnumerator ShowMojiokuriText(string MojiokuriText)

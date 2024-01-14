@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public bool IsDead = false;
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
+    public bool isDropRateUp = false;
     public Weapon defaultWeapon = null;
     //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
@@ -113,7 +114,6 @@ public class PlayerController : MonoBehaviour
         }
 
         transform.LookAt(enemyTarget);//常に敵のほうを向く
-
         if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
         {
             //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
@@ -489,10 +489,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("攻撃を回避");
                     ShowMissText();
-
                     return;//攻撃を回避
                 }
-
                 Damage(enemyWeapon.SumDamage()); //ダメージを与える
             }
         }
@@ -685,7 +683,7 @@ public class PlayerController : MonoBehaviour
             case 19: break;
             case 20: break;
             //コインを取得する
-            case 21: GameManager.instance.GetCoin(); break;
+            case 21: UIManager.instance.UpdateCoinText(); break;
             //武器を装備する
             case 22: break;
             case 23: break;
@@ -830,13 +828,13 @@ public class PlayerController : MonoBehaviour
     //回避率増加
     public void PebbleOfAvoidance(int value)
     {
-
+        Agility += value;
     }
 
     //コレクションのドロップ率増加
     public void DropProbabilitySlightlyIncreased(int value)
     {
-
+        isDropRateUp = true;
     }
 
     //体力の倍率上昇
