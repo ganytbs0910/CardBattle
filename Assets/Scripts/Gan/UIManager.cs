@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private TMP_Text collectionTitleText;
     [SerializeField] private TMP_Text giveUpText;
-    [SerializeField] private TMP_Text languageText;
+    //[SerializeField] private TMP_Text languageText;
     [SerializeField] private TMP_Text howToPlayText;
     [SerializeField] private TMP_Text reviewText;
     [SerializeField] private TMP_Text reStoreText;
@@ -634,19 +634,17 @@ public class UIManager : MonoBehaviour
         {
             case Language.Japanese:
                 collectionTitleText.text = "所持中のアイテム";
-                giveUpText.text = "冒険を諦める";
-                languageText.text = "言語設定";
-                howToPlayText.text = "遊び方";
-                reviewText.text = "レビューを書く";
-                reStoreText.text = "購入を復元";
+                //giveUpText.text = "冒険を諦める";
+                //howToPlayText.text = "遊び方";
+                //reviewText.text = "レビューを書く";
+                //reStoreText.text = "購入を復元";
                 break;
             case Language.English:
                 collectionTitleText.text = "Items in possession";
-                giveUpText.text = "Give up adventure";
-                languageText.text = "Language setting";
-                howToPlayText.text = "How to play";
-                reviewText.text = "Write a review";
-                reStoreText.text = "Restore purchase";
+                //giveUpText.text = "Give up adventure";
+                //howToPlayText.text = "How to play";
+                //reviewText.text = "Write a review";
+                //reStoreText.text = "Restore purchase";
                 break;
         }
     }
