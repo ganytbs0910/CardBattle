@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using Cinemachine;
 
 
 public class GameManager : MonoBehaviour
@@ -20,7 +21,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] enemyPrefab; // 敵のプレハブ
     public GameObject[] itemPrefab; //アイテムのプレファブ。
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
-    public List<Transform> itemSpawnPoints;　//フィールド上のアイテムオブジェのリスト
+    public List<Transform> itemSpawnPoints; //フィールド上のアイテムオブジェのリスト
+
+    public CinemachineVirtualCamera shopCamera;
+    public CinemachineVirtualCamera battleCamera;
+    public CinemachineVirtualCamera portalCamera;
 
     void Awake()
     {
@@ -39,6 +44,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        BattleCameraChange();
+
         SpawnItems();
 
         if (PlayerPrefs.HasKey("EnemyCount"))
@@ -85,6 +92,29 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void PortalCameraChange()
+    {
+        ResetCameraPriority();
+        portalCamera.Priority = 1;
+    }
+    public void BattleCameraChange()
+    {
+        ResetCameraPriority();
+        battleCamera.Priority = 1;
+    }
+    public void ShopCameraChange()
+    {
+        ResetCameraPriority();
+        shopCamera.Priority = 1;
+    }
+
+    // 特定のVirtual CameraのPriorityを変更する
+    public void ResetCameraPriority()
+    {
+        battleCamera.Priority = 0;
+        shopCamera.Priority = 0;
+        portalCamera.Priority = 0;
+    }
     public void GetCoin()
     {
         //コインをnumber枚取得する
