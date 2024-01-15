@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using Cinemachine;
 
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int stageHierarchy;
+    public int coin;
 
     public bool battleState; //バトル開始後==true バトル開始前==false 
     public List<GameObject> playerObjects = new List<GameObject>();
@@ -20,6 +22,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] itemPrefab; //アイテムのプレファブ。
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
     public List<Transform> itemSpawnPoints; //フィールド上のアイテムオブジェのリスト
+
+    public CinemachineVirtualCamera shopCamera;
+    public CinemachineVirtualCamera battleCamera;
+    public CinemachineVirtualCamera portalCamera;
 
     void Awake()
     {
@@ -38,6 +44,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        BattleCameraChange();
+
         SpawnItems();
 
         if (PlayerPrefs.HasKey("EnemyCount"))
@@ -81,23 +89,49 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
+
     }
 
-    //ステージがスタート
-    public void StartStage()
+    public void PortalCameraChange()
     {
-        //コレクションがあればPlayerのHPを3回復
-        for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
-        {
-            drawCardController.DrawCard();
-        }
+        ResetCameraPriority();
+        portalCamera.Priority = 1;
+    }
+    public void BattleCameraChange()
+    {
+        ResetCameraPriority();
+        battleCamera.Priority = 1;
+    }
+    public void ShopCameraChange()
+    {
+        ResetCameraPriority();
+        shopCamera.Priority = 1;
+    }
+
+    // 特定のVirtual CameraのPriorityを変更する
+    public void ResetCameraPriority()
+    {
+        battleCamera.Priority = 0;
+        shopCamera.Priority = 0;
+        portalCamera.Priority = 0;
+    }
+    public void GetCoin()
+    {
+        //コインをnumber枚取得する
+        float randomNum = UnityEngine.Random.Range(0.8f, 2f);
+        coin += Mathf.RoundToInt(stageHierarchy * randomNum * 10);
+        PlayerPrefs.SetInt("Coin", coin);
+        UIManager.instance.UpdateCoinText();
     }
 
     //次のステージへ移行する
     public void NextStage()
     {
-        UIManager.instance.WinPanel();
         stageHierarchy++;
+        for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
+        {
+            drawCardController.DrawCard();
+        }
 
         // 複製したプレイヤーを削除
         for (int i = playerObjects.Count - 1; i >= 0; i--)
@@ -109,8 +143,6 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
-
     }
 
     void KeepCurrentStage()
@@ -313,6 +345,7 @@ public class GameManager : MonoBehaviour
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
         {
+            UIManager.instance.WinPanel();
             // すべてのプレイヤーが勝利アニメーションを再生
             foreach (var player in players)
             {
