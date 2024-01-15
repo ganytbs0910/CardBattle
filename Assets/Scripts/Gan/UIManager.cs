@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform cardListPanel;
     public RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
+    [SerializeField] private RectTransform settingButton;
     //[SerializeField] private RectTransform collectionButton;
     public GameObject adsButton;
     [SerializeField] private GameObject coinPanel;
@@ -41,12 +42,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
     [SerializeField] private TMP_Text tutorialText;
+    [Header("ローカライズ用のテキスト")]
+    [SerializeField] private TMP_Text startText;
     [SerializeField] private TMP_Text collectionTitleText;
-    [SerializeField] private TMP_Text giveUpText;
-    //[SerializeField] private TMP_Text languageText;
-    [SerializeField] private TMP_Text howToPlayText;
+    [SerializeField] private TMP_Text settingText;
+    [SerializeField] private TMP_Text collectionsText;
+    [SerializeField] private TMP_Text playingManualText;
     [SerializeField] private TMP_Text reviewText;
+    [SerializeField] private TMP_Text giveUpText;
     [SerializeField] private TMP_Text reStoreText;
+    [SerializeField] private TMP_Text SETTINGSText;
+    [SerializeField] private TMP_Text soundText;
+    [SerializeField] private TMP_Text musicText;
+    [SerializeField] private TMP_Text pushAlarmText;
+
 
     [SerializeField] private Image dropImage;
 
@@ -69,8 +78,22 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         //ローカライズ
-        ChangeLanguage(PlayerPrefs.GetString("Language"));
-        LocalizeText();
+        if (!PlayerPrefs.HasKey("Language"))
+        {
+            //端末の設定の言語に
+            switch (Application.systemLanguage)
+            {
+                case SystemLanguage.Japanese:
+                    this.language = Language.Japanese;
+                    PlayerPrefs.SetString("Language", "Japanese");
+                    break;
+                case SystemLanguage.English:
+                    this.language = Language.English;
+                    PlayerPrefs.SetString("Language", "English");
+                    break;
+            }
+        }
+        LocalizeUpdate();
 
         HeroMessageDetail("バトルの準備");
         TutorialTextDetail("カードを選択してください");
@@ -354,7 +377,7 @@ public class UIManager : MonoBehaviour
     /// コレクション
     /// </summary>
 
-    public void CollectionCardUpdate(GameObject player = null)
+    public void CollectionCardUpdate()
     {
         //コレクションのカードを更新
         for (int i = 1; i < collectionContent.transform.childCount; i++)
@@ -363,7 +386,7 @@ public class UIManager : MonoBehaviour
             if (PlayerPrefs.HasKey($"Collection{i}"))
             {
                 //子オブジェクトのDetailPanelを取得
-                GameObject detailPanel = collectionContent.transform.GetChild(i).GetChild(0).gameObject;
+                GameObject detailPanel = collectionContent.transform.GetChild(i - 1).GetChild(0).gameObject;
                 TMP_Text itemName = detailPanel.transform.GetChild(0).GetComponent<TMP_Text>();
                 Image itemIcon = detailPanel.transform.GetChild(2).GetComponent<Image>();
                 TMP_Text itemInformation = detailPanel.transform.GetChild(3).GetComponent<TMP_Text>();
@@ -381,7 +404,6 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
-                if (player == null) return;
             }
         }
     }
@@ -399,9 +421,14 @@ public class UIManager : MonoBehaviour
         //このオブジェクトの子オブジェクトとして複製
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
         dropImageItem.sprite = itemPrefab;
-        //このdropImageItemをcollectionButtonの位置まで1.5秒かけて移動させ、だんだん小さくする
-        dropImageItem.rectTransform.DOMove(heroMessageButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
-        dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
+
+        // 最初に0.5秒でサイズを1.2倍にする
+        dropImageItem.rectTransform.DOScale(1.2f, 0.5f).OnComplete(() =>
+        {
+            // その後、1.5秒かけてcollectionButtonの位置に移動し、サイズを縮小する
+            dropImageItem.rectTransform.DOMove(settingButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
+            dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
+        });
 
         HeroMessageDetail("コレクションゲット", collectionName);
     }
@@ -411,44 +438,41 @@ public class UIManager : MonoBehaviour
     /// </summary>
     void LocalizeUpdate()
     {
-        TutorialTextDetail(tutorialText.text);
-        StageTextDetail(stageText.text);
-        RemainingBossTextDetail(RemainingBossText.text);
-        LocalizeText();
-    }
-
-    public void ChangeLanguage(string language)
-    {
-        if (!PlayerPrefs.HasKey("Language"))
-        {
-            //端末の設定の言語に
-            switch (Application.systemLanguage)
-            {
-                case SystemLanguage.Japanese:
-                    this.language = Language.Japanese;
-                    PlayerPrefs.SetString("Language", "Japanese");
-                    break;
-                case SystemLanguage.English:
-                    this.language = Language.English;
-                    PlayerPrefs.SetString("Language", "English");
-                    break;
-            }
-        }
-        switch (language)
+        switch (PlayerPrefs.GetString("Language"))
         {
             case "Japanese":
+                Debug.Log("Japaneseになりました");
                 this.language = Language.Japanese;
                 PlayerPrefs.SetString("Language", "Japanese");
                 currentLanguage.text = "Japan";
                 languageImage.sprite = japaneseIcon;
                 break;
             case "English":
+                Debug.Log("Englishになりました");
                 this.language = Language.English;
                 PlayerPrefs.SetString("Language", "English");
                 currentLanguage.text = "English";
                 languageImage.sprite = americanIcon;
                 break;
         }
+        TutorialTextDetail(tutorialText.text);
+        StageTextDetail(stageText.text);
+        RemainingBossTextDetail(RemainingBossText.text);
+        HeroMessageDetail(message: heroMessageText.text);
+        NoChangeLocalizeText();
+    }
+
+    public void ChangeLanguage(/*３ヶ国語以上になると必要string language = null*/)
+    {
+        if (PlayerPrefs.GetString("Language") == "Japanese")
+        {
+            PlayerPrefs.SetString("Language", "English");
+        }
+        else if (PlayerPrefs.GetString("Language") == "English")
+        {
+            PlayerPrefs.SetString("Language", "Japanese");
+        }
+        //言語の変更を反映
         LocalizeUpdate();
     }
 
@@ -514,13 +538,13 @@ public class UIManager : MonoBehaviour
 
     public void StageTextDetail(string detail)
     {
-        if (detail.StartsWith("ダンジョン :") || detail.StartsWith("Stage :"))
+        if (detail.StartsWith("ダンジョン") || detail.StartsWith("Stage"))
         {
             int stage = GameManager.instance.stageHierarchy;
             switch (language)
             {
                 case Language.Japanese: detail = $"ダンジョン {stage}階"; break;
-                case Language.English: detail = $"Stage : {stage}"; break;
+                case Language.English: detail = $"Stage {stage}"; break;
             }
         }
         stageText.text = detail;
@@ -535,6 +559,7 @@ public class UIManager : MonoBehaviour
                 case Language.Japanese: detail = "ボス戦 !!"; break;
                 case Language.English: detail = "Boss Battle !!"; break;
             }
+            HeroMessageDetail("ボス戦");
         }
         else if (detail.StartsWith("ボスまで残り:") || detail.StartsWith("Remaining to Boss:"))
         {
@@ -557,7 +582,7 @@ public class UIManager : MonoBehaviour
             case "バトルの準備":
                 switch (language)
                 {
-                    case Language.Japanese: message = "カードを使って魔物との戦いに備えよう……。"; break;
+                    case Language.Japanese: message = "カードを使って魔物との戦いに\n備えよう……。"; break;
                     case Language.English: message = "Prepare for battle with the monsters using your cards..."; break;
                 }
                 break;
@@ -581,7 +606,7 @@ public class UIManager : MonoBehaviour
                     case Language.Japanese:
                         string[] messagesJP = new string[]
                         {
-                            "ボクは負けない。\nなぜならキミを信じているから！",
+                            "ボクは負けない。\nキミを信じているからね！",
                             "さぁ、戦いの時だ！　\n覚悟はいいかい？",
                             "最後まで諦めずに戦い抜くことを誓おう。"
                         };
@@ -596,6 +621,13 @@ public class UIManager : MonoBehaviour
                         };
                         message = messagesEN[Random.Range(0, messagesEN.Length)];
                         break;
+                }
+                break;
+            case "ボス戦":
+                switch (language)
+                {
+                    case Language.Japanese: message = "ボス戦だ！　\n強敵だから気をつけて！"; break;
+                    case Language.English: message = "Boss battle! Be careful!"; break;
                 }
                 break;
             case "勝利":
@@ -654,23 +686,37 @@ public class UIManager : MonoBehaviour
     }
 
     //変更のないテキストのローカライズ
-    public void LocalizeText()
+    public void NoChangeLocalizeText()
     {
         switch (language)
         {
             case Language.Japanese:
+                startText.text = "スタート";
                 collectionTitleText.text = "所持中のアイテム";
-                //giveUpText.text = "冒険を諦める";
-                //howToPlayText.text = "遊び方";
-                //reviewText.text = "レビューを書く";
-                //reStoreText.text = "購入を復元";
+                settingText.text = "設定";
+                collectionsText.text = "コレクション";
+                playingManualText.text = "遊び方";
+                reviewText.text = "レビューを書く";
+                giveUpText.text = "ギブアップ";
+                reStoreText.text = "復元";
+                SETTINGSText.text = "設定";
+                soundText.text = "サウンド";
+                musicText.text = "音楽";
+                pushAlarmText.text = "プッシュ通知";
                 break;
             case Language.English:
+                startText.text = "Start";
                 collectionTitleText.text = "Items in possession";
-                //giveUpText.text = "Give up adventure";
-                //howToPlayText.text = "How to play";
-                //reviewText.text = "Write a review";
-                //reStoreText.text = "Restore purchase";
+                settingText.text = "Settings";
+                collectionsText.text = "Collections";
+                playingManualText.text = "Manual";
+                reviewText.text = "Review";
+                giveUpText.text = "Give up";
+                reStoreText.text = "Restore";
+                SETTINGSText.text = "SETTINGS";
+                soundText.text = "Sound";
+                musicText.text = "Music";
+                pushAlarmText.text = "Push Alarm";
                 break;
         }
     }

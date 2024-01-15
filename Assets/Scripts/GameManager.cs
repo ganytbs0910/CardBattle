@@ -198,7 +198,7 @@ public class GameManager : MonoBehaviour
                 //最も近いプレイヤーを探してターゲットにする
             }
         }
-        print("すべての敵とプレイヤーのターゲットを更新しました");
+        //print("すべての敵とプレイヤーのターゲットを更新しました");
     }
 
     /// <summary>
