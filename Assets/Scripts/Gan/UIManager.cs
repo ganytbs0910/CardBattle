@@ -309,7 +309,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
 
-        GameManager.instance.DungeonCameraChange(); 
+        GameManager.instance.DungeonCameraChange();
     }
 
     //ボタンで使用
@@ -389,8 +389,8 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// コレクション
     /// </summary>
-
-    public void CollectionCardUpdate()
+    //コレクションが集まったら呼び出してほしい
+    public void CollectionCardUpdate(GameObject player = null)
     {
         //コレクションのカードを更新
         for (int i = 1; i < collectionContent.transform.childCount; i++)
@@ -417,6 +417,7 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
+                if (player == null) return;
             }
         }
     }
@@ -426,10 +427,10 @@ public class UIManager : MonoBehaviour
         int coin = PlayerPrefs.GetInt("Coin");
         coin += value;
         PlayerPrefs.SetInt("Coin", coin);
-        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = coin.ToString();
+        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
-    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition, string collectionName)
+    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
     {
         //このオブジェクトの子オブジェクトとして複製
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
@@ -443,11 +444,11 @@ public class UIManager : MonoBehaviour
             dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
         });
 
-        HeroMessageDetail("コレクションゲット", collectionName);
+        HeroMessageDetail("コレクションゲット");
     }
 
     //UIのOnOff
-    public void ActiveToggle(GameObject ui) 
+    public void ActiveToggle(GameObject ui)
     {
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
         ui.SetActive(!ui.activeSelf);
@@ -497,9 +498,8 @@ public class UIManager : MonoBehaviour
         LocalizeUpdate();
     }
 
-    /// <summary>
-    /// チュートリアル用
-    /// </summary>
+
+    //チュートリアル用
     public void TutorialTextDetail(string detail)
     {
         if (!PlayerPrefs.HasKey("Tutorial"))

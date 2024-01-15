@@ -407,7 +407,7 @@ public class EnemyController : MonoBehaviour
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
         //dropItemPrefabをCollectionEnetityのid番目のiconを取得kする
         Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
-       // UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
+        UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
     }
 
     // 勝利アニメーションをトリガーするメソッド
