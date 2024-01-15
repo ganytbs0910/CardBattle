@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Cinemachine;
+using MoreMountains.Feedbacks;
 
 public class GoblinShop : MonoBehaviour
 {
@@ -10,9 +12,6 @@ public class GoblinShop : MonoBehaviour
     Animator animator;
     public GameObject Goblin;
     public GameObject ShopEnviloment;
-
-    public Camera ShopCamera;
-    public Camera BattleCamera;
 
     public Transform InitPoint;
     public Transform SpawnPoint;
@@ -23,6 +22,8 @@ public class GoblinShop : MonoBehaviour
 
     public GameObject ShopButton;
     public GameObject DungeonButton;
+
+    public MMFeedbacks JumpFeedback;
 
     private void Awake()
     {
@@ -37,13 +38,18 @@ public class GoblinShop : MonoBehaviour
 
         animator = Goblin.GetComponent<Animator>();
         ShopEnviloment.SetActive(false);
-        ShopCamera.gameObject.SetActive(false); 
+        //ShopCamera.gameObject.SetActive(false); 
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void GoblinJunp()
+    {
+        JumpFeedback?.PlayFeedbacks();
     }
 
     //ショップに向かう
@@ -59,12 +65,12 @@ public class GoblinShop : MonoBehaviour
         sequence.AppendCallback(() =>
         {
             ShopPanel.SetActive(true);
-            ShopCamera.gameObject.SetActive(true);
-            BattleCamera.gameObject.SetActive(false);
+            GameManager.instance.ShopCameraChange();
             ShopEnviloment.SetActive(true);
             animator.SetTrigger("Spawn");
             // DoTweenを使用してゴブリンを移動させる
-            Goblin.transform.DOMove(SpawnPoint.position, 1.0f);
+            Goblin.transform.DOMove(SpawnPoint.position, 1.0f).OnComplete(()=>
+            { GoblinJunp(); });
 
             ShopButton.SetActive(false);
             DungeonButton.SetActive(true);
@@ -99,8 +105,8 @@ public class GoblinShop : MonoBehaviour
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
         {
-            ShopCamera.gameObject.SetActive(false);
-            BattleCamera.gameObject.SetActive(true);
+            GameManager.instance.BattleCameraChange();
+
             ShopEnviloment.SetActive(false);
 
             // DoTweenを使用してゴブリンを移動させる
