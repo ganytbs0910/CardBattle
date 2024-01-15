@@ -13,7 +13,7 @@ public class BreaksOnTouch : MonoBehaviour
     public MMFeedbacks ShakeFeedback;
 
     public enum ItemType
-    { 
+    {
         GiftBox,
         Chest,
         Jug,
@@ -62,7 +62,7 @@ public class BreaksOnTouch : MonoBehaviour
 
     public void RandomDropItem()
     {
-        int randomIndex = Random.Range(0,2);
+        int randomIndex = Random.Range(0, 2);
         switch (randomIndex)
         {
             case 0:
@@ -85,7 +85,7 @@ public class BreaksOnTouch : MonoBehaviour
     public void DropCoin()
     {
         Instantiate(CoinEffect, transform.position, Quaternion.identity);
-        GameManager.instance.GetCoin();
+        UIManager.instance.UpdateCoinText(3);
     }
 
     public void DropCard()
@@ -100,14 +100,13 @@ public class BreaksOnTouch : MonoBehaviour
     }
 
     public void PoisonEffect()
-    { 
+    {
         print("毒の範囲攻撃");
     }
 
     public void AddMPEffect()
-    { 
+    {
         print("MPの回復");
 
     }
 }
- 

@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     public int defense;
     public float moveSpeed;
     public int agility;
+    public int coin;
+    public int dropRate = 100;
     public Weapon weapon = null;
 
 
@@ -66,6 +68,9 @@ public class EnemyController : MonoBehaviour
 
         initialPosition = transform.position;
 
+
+        //ドロップ率が低下するコレクションの影響
+        dropRate -= 5;
     }
 
     void Update()
@@ -357,8 +362,10 @@ public class EnemyController : MonoBehaviour
         IsDead = true;
         //このゲームオブジェクトについている当たり判定が消える
         GetComponent<Collider>().enabled = false;
+
         //剣の当たり判定も消す
         DisableColliderWeapon();
+
         //Playerを追いかけないようにする
         agent.isStopped = true;
 
@@ -369,7 +376,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //コインを入手
-        GameManager.instance.GetCoin();
+        UIManager.instance.UpdateCoinText(coin + PlayerPrefs.GetInt("DropCoin"));
 
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemoveEnemyFromList(this);
@@ -381,7 +388,7 @@ public class EnemyController : MonoBehaviour
         GameManager.instance.CheckBattleStatus();
 
         //コレクションがドロップするかどうかの判定
-        int dropNumber = Random.Range(1, 10);//ごめんちょっと確率高くしちゃった
+        int dropNumber = Random.Range(1, dropRate);//ごめんちょっと確率高くしちゃった
         if (dropNumber != 1) return;
 
         //コレクションをドロップする
