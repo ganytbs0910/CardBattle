@@ -12,6 +12,9 @@ public class PlayerController : MonoBehaviour
     public int maxMp = 100;
     public int attack;
     public int throwAttack = 0;
+    int cloneHpRate = 2;
+    int cloneAttackRate = 2;
+    int cloneDefenceRate = 2;
     [SerializeField] private float attackInterval;//攻撃間隔
     [SerializeField] private int defense;
     public float moveSpeed; //agentSpeed
@@ -27,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking = false;//攻撃中かどうかの判定
     public bool CantMove = false;//移動できない状態の判定
     public bool isDropRateUp = false;
+    public bool battleStartHeal = false;
     public Weapon defaultWeapon = null;
     //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
@@ -91,6 +95,66 @@ public class PlayerController : MonoBehaviour
 
         EquipWeapon(defaultWeapon);
 
+        //コレクションの効果を反映
+        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
+        {
+            //カードを所持していたら...以下の処理を行う
+            if (PlayerPrefs.HasKey($"Collection{i}"))
+            {
+                switch (i)
+                {
+                    //HP+5
+                    case 1: HealthUp(5); break;
+                    //Attack+1
+                    case 2: AttackUp(1); break;
+                    //Defence+1
+                    case 3: DefenceUp(1); break;
+                    //ボムダメージ+10
+                    case 4: BombDamageUp(10); break;
+                    //コインドロップ+1
+                    case 5: CoinDropUp(1); break;
+                    //回避率2%UP
+                    case 6: AvoidanceUp(2); break;
+                    //コレクションのドロップ率が1/100→1/(100-value)に
+                    case 7: CollectionDropRateUp(1); break;
+                    //HP1.1倍
+                    case 8: HealthRateUp(1.1f); break;
+                    //攻撃1.1倍
+                    case 9: AttackRateUp(1.1f); break;
+                    //防御1.1倍
+                    case 10: DefenceRate(1.1f); break;
+                    //移動速度+1
+                    case 11: MoveSpeedUp(1); break;
+                    //HP+25
+                    case 12: HealthUp(25); break;
+                    //Attack+3
+                    case 13: AttackUp(3); break;
+                    //Defence+3
+                    case 14: DefenceUp(3); break;
+                    //コインを100所持した状態でスタート
+                    case 15: StartCoinHave(100); break;
+                    //攻撃のインターバルが短縮
+                    case 16: AttackIntervalUp(0.1f); break;
+                    //分身のHPが1/2→1/3
+                    case 17: CloneHPUp(3); break;
+                    //分身の攻撃力が1/2→1/3
+                    case 18: CloneAttackUp(3); break;
+                    //分身の防御力が1/2→1/3
+                    case 19: CloneDefenceUp(3); break;
+                    //全てのステータス+5
+                    case 20: AllStatusUp(5); break;
+                    //階層が始まるとHP回復+3
+                    case 21: StartHierarchyHeal(3); break;
+                    //攻撃に回復効果が付与
+                    case 22: AttackHealAdd(); break;
+                    //カードの最低ドロー枚数が+1
+                    case 23: MinDrawCardNumberAdd(1); break;
+                    //カードの最大ドロー枚数が+1
+                    case 24: MaxDrawCardNumberAdd(1); break;
+                }
+
+            }
+        }
     }
 
     void Update()
@@ -151,7 +215,6 @@ public class PlayerController : MonoBehaviour
     //武器をプレイヤーの手に装備させる
     public void EquipWeapon(Weapon weapon)
     {
-        Debug.Log("武器を装備しました！！！！！！！！！！！");
         if (weapon == null)
         {
             return;
@@ -722,10 +785,9 @@ public class PlayerController : MonoBehaviour
 
             //clonePlayerの名前をShadowPlayerにする
             clonePlayer.name = "ShadowPlayer";
-            clonePlayer.GetComponent<PlayerController>().hp /= 2;
-            clonePlayer.GetComponent<PlayerController>().mp /= 2;
-            clonePlayer.GetComponent<PlayerController>().attack /= 2;
-            clonePlayer.GetComponent<PlayerController>().defense /= 2;
+            clonePlayer.GetComponent<PlayerController>().hp /= cloneHpRate;
+            clonePlayer.GetComponent<PlayerController>().attack /= cloneAttackRate;
+            clonePlayer.GetComponent<PlayerController>().defense /= cloneDefenceRate;
             Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
 
             foreach (Renderer renderer in renderers)
@@ -737,20 +799,21 @@ public class PlayerController : MonoBehaviour
 
         print("プレイヤーの人数が" + number + "増えました");
     }
+    //体力増加
+    void HealthUp(int value)
+    {
+        maxHp += value;
+    }
     void AttackUp(float value)
     {
         attack = Mathf.RoundToInt(attack * value);
-        print("攻撃力が" + value + "増えました");
-
     }
     void DefenceUp(float value)
     {
         defense = Mathf.RoundToInt(defense * value);
-        print("防御力が" + value + "増えました");
-
     }
 
-    void HPHeal(int value)
+    public void HPHeal(int value)
     {
         //現在のHPをvalue%回復し、体力が100%を超えないようにする
         hp += Mathf.RoundToInt(hp * value);
@@ -758,7 +821,6 @@ public class PlayerController : MonoBehaviour
         {
             hp = maxHp;
         }
-
 
         //回復アニメ
         if (isHealingSword != true)
@@ -795,170 +857,106 @@ public class PlayerController : MonoBehaviour
     /// コレクションの効果一覧
     /// </summary>
 
-    //体力増加
-    public void HealthUp(int value)
-    {
-        maxHp += value;
-    }
-
-    //攻撃増加
-    public void AttackUp(int value)
-    {
-        attack += value;
-    }
-
-    //防御増加
-    public void DefenceUp(int value)
-    {
-        defense += value;
-    }
-
     //爆弾威力増加
-    public void BombUp(int value)
+    void BombDamageUp(int value)
     {
         throwAttack += value;
     }
 
     //コインのドロップ量増加
-    public void CoinUp(int value)
+    void CoinDropUp(int value)
     {
-
+        PlayerPrefs.SetInt("DropCoin", value);
     }
 
     //回避率増加
-    public void PebbleOfAvoidance(int value)
+    void AvoidanceUp(int value)
     {
         Agility += value;
     }
 
     //コレクションのドロップ率増加
-    public void DropProbabilitySlightlyIncreased(int value)
+    void CollectionDropRateUp(int value)
     {
         isDropRateUp = true;
     }
 
     //体力の倍率上昇
-    public void HealthRateUp()
+    void HealthRateUp(float value)
     {
-
+        maxHp = (int)(maxHp * value);
     }
 
     //攻撃の倍率上昇
-    public void AttackRateUp()
+    void AttackRateUp(float value)
     {
-
+        attack = (int)(attack * value);
     }
 
     //防御の倍率上昇
-    public void DefenceRate()
+    void DefenceRate(float value)
     {
-
+        defense = (int)(defense * value);
     }
 
-    public void StoneOfSpeed()
+    void MoveSpeedUp(int value)
     {
-
+        moveSpeed += value;
     }
 
-    public void RockOfHealth()
+    //コインを100所持してスタート
+    void StartCoinHave(int value)
     {
-
+        PlayerPrefs.SetInt("StartCoin", value);
     }
 
-    public void RockOfAttack()
+    void AttackIntervalUp(float value)
     {
-
-    }
-
-    public void RockOfDefence()
-    {
-
-    }
-
-    public void LuckyGem()
-    {
-
-    }
-
-    public void GaleGem()
-    {
-
-    }
-
-    public void DurableGem()
-    {
-
-    }
-
-    public void AngerGem()
-    {
-
-    }
-
-    public void CalmGem()
-    {
-
-    }
-
-    public void HopeGem()
-    {
-
-    }
-
-    public void HealingGem()
-    {
-
-    }
-
-    public void BattleGem()
-    {
-
-    }
-
-    public void GreedyGem()
-    {
-
-    }
-
-    public void PioneeringGem()
-    {
-
+        attackInterval -= value;
     }
 
 
-    public void StatusImprovementPendant()
+    void CloneHPUp(int value)
     {
-        //全てのパラメーターが10%アップ
-        maxHp = Mathf.RoundToInt(maxHp * 1.1f);
-        maxMp = Mathf.RoundToInt(maxMp * 1.1f);
-        attack = Mathf.RoundToInt(attack * 1.1f);
-        defense = Mathf.RoundToInt(defense * 1.1f);
-        Agility = Mathf.RoundToInt(Agility * 1.1f);
-
-        print("プレイヤーのすべてのパラメーターが上昇しました");
+        cloneHpRate = value;
     }
 
-    public void HealingSwordTechnique()
+    void CloneAttackUp(int value)
     {
-        //攻撃時に10%の確率で回復
+        cloneAttackRate = value;
+    }
+
+    void CloneDefenceUp(int value)
+    {
+        cloneDefenceRate = value;
+    }
+
+    void AllStatusUp(int value)
+    {
+        HealthUp(value);
+        AttackUp(value);
+        DefenceUp(value);
+    }
+
+    //階層が始まるとHPが3回復
+    void StartHierarchyHeal(int value)
+    {
+        battleStartHeal = true;
+    }
+
+    //攻撃に回復効果が付与
+    void AttackHealAdd()
+    {
         isHealingSword = true;
-        print("回復の剣の効果が適用");
     }
 
-    public void TreasureOfAcceleration()
+    void MinDrawCardNumberAdd(int value)
     {
-        //攻撃のインターバルと移動速度が10%アップ
-        attackInterval *= 0.9f;
-        moveSpeed *= 1.1f;
+        PlayerPrefs.SetInt("MinDrawCard", value);
     }
 
-    public void StoneOfAwakening()
+    void MaxDrawCardNumberAdd(int value)
     {
-
-    }
-
-    public void SwordOfDevelopment()
-    {
-
+        PlayerPrefs.SetInt("MaxDrawCard", value);
     }
 }

@@ -362,8 +362,10 @@ public class EnemyController : MonoBehaviour
         IsDead = true;
         //このゲームオブジェクトについている当たり判定が消える
         GetComponent<Collider>().enabled = false;
+
         //剣の当たり判定も消す
         DisableColliderWeapon();
+
         //Playerを追いかけないようにする
         agent.isStopped = true;
 
@@ -374,7 +376,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //コインを入手
-        UIManager.instance.UpdateCoinText(coin);
+        UIManager.instance.UpdateCoinText(coin + PlayerPrefs.GetInt("DropCoin"));
 
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemoveEnemyFromList(this);

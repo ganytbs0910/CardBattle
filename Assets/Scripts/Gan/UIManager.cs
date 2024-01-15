@@ -20,8 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
-    [SerializeField] private RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
+    public RectTransform collectionContent;
     //[SerializeField] private RectTransform collectionButton;
     public GameObject adsButton;
     [SerializeField] private GameObject coinPanel;
@@ -260,6 +260,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
+        GameManager.instance.StartStage();
     }
 
     //ボタンで使用
@@ -303,8 +304,8 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("StageHierarchy", 1);
         Loading(1);
-
         HeroMessageDetail("ギブアップ");
+        UIManager.instance.UpdateCoinText(PlayerPrefs.GetInt("StartCoin"));
     }
 
     public void RevivalButton()
@@ -333,7 +334,7 @@ public class UIManager : MonoBehaviour
     public void CollectionCardUpdate(GameObject player = null)
     {
         //コレクションのカードを更新
-        for (int i = 1; i < collectionContent.transform.childCount; i++)
+        for (int i = 1; i <= collectionContent.transform.childCount; i++)
         {
             //カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
@@ -359,23 +360,7 @@ public class UIManager : MonoBehaviour
                 itemIcon.sprite = collectionEntity.icon;
                 if (player == null) return;
 
-                //コレクションの効果を反映
-                switch (i)
-                {
-                    //全ステータスが+10
-                    case 1: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
-                    //攻撃に回復効果が付与される
-                    case 2: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
-                    //攻撃のインターバルと移動速度が早くなる
-                    case 3: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
-                    //会心の一撃が出せるようになる
-                    case 4: break;
-                    //ハードモードが解放
-                    case 5: break;
-                    default:
 
-                        break;
-                }
             }
         }
     }
@@ -555,7 +540,7 @@ public class UIManager : MonoBehaviour
             case "コレクションゲット":
                 switch (language)
                 {
-                    case Language.Japanese: message = "稀少なアイテムをゲット！　\nきみは幸運の持ち主のようだね。"; break;
+                    case Language.Japanese: message = "稀少なアイテムをゲット！ \nきみは幸運の持ち主のようだね。"; break;
                     case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
                 }
                 break;
@@ -573,7 +558,7 @@ public class UIManager : MonoBehaviour
                         string[] messagesJP = new string[]
                         {
                             "ボクは負けない。\nなぜならキミを信じているから！",
-                            "さぁ、戦いの時だ！　\n覚悟はいいかい？",
+                            "さぁ、戦いの時だ！ \n覚悟はいいかい？",
                             "最後まで諦めずに戦い抜くことを誓おう。"
                         };
                         message = messagesJP[Random.Range(0, messagesJP.Length)];
@@ -606,8 +591,8 @@ public class UIManager : MonoBehaviour
             case "ギブアップ":
                 switch (language)
                 {
-                    case Language.Japanese: message = "戦略的撤退というやつさ……。\nそうだよね？"; break;
-                    case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
+                    case Language.Japanese: message = "戦略的撤退というやつさ...。\nそうだよね？"; break;
+                    case Language.English: message = "It's called strategic retreat... Right?"; break;
                 }
                 break;
             default:
