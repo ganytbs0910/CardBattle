@@ -33,9 +33,6 @@ public class GoblinShop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShopButton.SetActive(true);
-        DungeonButton.SetActive(false);
-
         animator = Goblin.GetComponent<Animator>();
         ShopEnviloment.SetActive(false);
         //ShopCamera.gameObject.SetActive(false); 

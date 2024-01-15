@@ -20,8 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
+    [SerializeField] private RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
-    public RectTransform collectionContent;
     //[SerializeField] private RectTransform collectionButton;
     public GameObject adsButton;
     [SerializeField] private GameObject coinPanel;
@@ -32,8 +32,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int loadTime = 1;
 
     [SerializeField] private RectTransform battleStartButton;
-    [SerializeField] private Button shopButton;
+    [SerializeField] private RectTransform[] PortalChangeButton;
 
+    [SerializeField] private Button shopButton;
+ 
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text heroMessageText;
     [SerializeField] private TMP_Text canUseText;
@@ -90,6 +92,8 @@ public class UIManager : MonoBehaviour
         // 無限ループに設定
         mySequence.SetLoops(-1);
 
+        AnimeScaleLoopButton(PortalChangeButton);
+
 
         CollectionCardUpdate();
         UpdateCoinText();
@@ -97,6 +101,23 @@ public class UIManager : MonoBehaviour
         //stageTextを更新
         StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
         //RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
+    }
+
+    public void AnimeScaleLoopButton(RectTransform[] Button)
+    {
+        foreach (RectTransform button in Button)
+        {
+            //battleStartButton.gameObject.SetActive(false);
+            //テキストの拡大と透明化アニメーション
+            Sequence mySequence = DOTween.Sequence();
+            mySequence.Append(button.DOScale(1.15f, 1.0f));
+
+            // 元のサイズと不透明度に戻すアニメーション
+            mySequence.Append(button.DOScale(1.0f, 1.0f));
+
+            // 無限ループに設定
+            mySequence.SetLoops(-1);
+        }
     }
 
     //右上の三本線ボタンを押したとき
@@ -120,8 +141,8 @@ public class UIManager : MonoBehaviour
     }
 
     public void ShowSettingPanel(GameObject ui)
-    {
-
+    { 
+        
     }
 
     //ボタンクリック時のアニメーション
@@ -132,8 +153,8 @@ public class UIManager : MonoBehaviour
         rectTransform.DOScale(0.8f, 0.1f)
             .OnComplete(() =>
             {
-                // スケールを1にアニメーション
-                rectTransform.DOScale(1f, 0.1f);
+            // スケールを1にアニメーション
+            rectTransform.DOScale(1f, 0.1f);
             });
     }
 
@@ -145,8 +166,8 @@ public class UIManager : MonoBehaviour
         rectTransform.DOScale(1.5f, 0.2f).OnComplete(() =>
         {
             //スケールを０に。
-            rectTransform.DOScale(0f, 0.2f).OnComplete(() =>
-            {
+            rectTransform.DOScale(0f, 0.2f).OnComplete(()=>
+            { 
                 button.SetActive(false);
                 rectTransform.DOScale(1f, 0f);//元の大きさに
             });
@@ -260,7 +281,6 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
-        GameManager.instance.StartStage();
     }
 
     //ボタンで使用
@@ -304,8 +324,8 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.DeleteAll();
         PlayerPrefs.SetInt("StageHierarchy", 1);
         Loading(1);
+
         HeroMessageDetail("ギブアップ");
-        UIManager.instance.UpdateCoinText(PlayerPrefs.GetInt("StartCoin"));
     }
 
     public void RevivalButton()
@@ -334,7 +354,7 @@ public class UIManager : MonoBehaviour
     public void CollectionCardUpdate(GameObject player = null)
     {
         //コレクションのカードを更新
-        for (int i = 1; i <= collectionContent.transform.childCount; i++)
+        for (int i = 1; i < collectionContent.transform.childCount; i++)
         {
             //カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
@@ -360,16 +380,29 @@ public class UIManager : MonoBehaviour
                 itemIcon.sprite = collectionEntity.icon;
                 if (player == null) return;
 
+                //コレクションの効果を反映
+                switch (i)
+                {
+                    //全ステータスが+10
+                    case 1: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
+                    //攻撃に回復効果が付与される
+                    case 2: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
+                    //攻撃のインターバルと移動速度が早くなる
+                    case 3: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
+                    //会心の一撃が出せるようになる
+                    case 4: break;
+                    //ハードモードが解放
+                    case 5: break;
+                    default:
 
+                        break;
+                }
             }
         }
     }
 
-    public void UpdateCoinText(int coinValue = 0)
+    public void UpdateCoinText()
     {
-        int coin = PlayerPrefs.GetInt("Coin");
-        coin += coinValue;
-        PlayerPrefs.SetInt("Coin", coin);
         coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
@@ -528,37 +561,37 @@ public class UIManager : MonoBehaviour
     //チュートリアル用
     public void HeroMessageDetail(string message)
     {
-        switch (message)
-        {
-            case "バトルの準備":
-                switch (language)
-                {
-                    case Language.Japanese: message = "カードを使って魔物との戦いに備えよう……。"; break;
-                    case Language.English: message = "Prepare for battle with the monsters using your cards..."; break;
-                }
-                break;
-            case "コレクションゲット":
-                switch (language)
-                {
-                    case Language.Japanese: message = "稀少なアイテムをゲット！ \nきみは幸運の持ち主のようだね。"; break;
-                    case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
-                }
-                break;
-            case "ショップ":
-                switch (language)
-                {
-                    case Language.Japanese: message = "このゴブリンはカードを売ってくれるみたいだ。"; break;
-                    case Language.English: message = "It seems this goblin will sell us cards"; break;
-                }
-                break;
-            case "バトル開始":
-                switch (language)
-                {
+            switch (message)
+            {
+                case "バトルの準備":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "カードを使って魔物との戦いに備えよう……。"; break;
+                        case Language.English: message = "Prepare for battle with the monsters using your cards..."; break;
+                    }
+                    break;
+                case "コレクションゲット":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "稀少なアイテムをゲット！　\nきみは幸運の持ち主のようだね。"; break;
+                        case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
+                    }
+                    break;
+                case "ショップ":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "このゴブリンはカードを売ってくれるみたいだ。"; break;
+                        case Language.English: message = "It seems this goblin will sell us cards"; break;
+                    }
+                    break;
+                case "バトル開始":
+                    switch (language)
+                    {
                     case Language.Japanese:
                         string[] messagesJP = new string[]
                         {
                             "ボクは負けない。\nなぜならキミを信じているから！",
-                            "さぁ、戦いの時だ！ \n覚悟はいいかい？",
+                            "さぁ、戦いの時だ！　\n覚悟はいいかい？",
                             "最後まで諦めずに戦い抜くことを誓おう。"
                         };
                         message = messagesJP[Random.Range(0, messagesJP.Length)];
@@ -573,37 +606,51 @@ public class UIManager : MonoBehaviour
                         message = messagesEN[Random.Range(0, messagesEN.Length)];
                         break;
                 }
-                break;
-            case "勝利":
-                switch (language)
-                {
-                    case Language.Japanese: message = "やるじゃないか！　キミのことを好きになりそうだよ！"; break;
-                    case Language.English: message = "Well done! I think I'm starting to like you!"; break;
-                }
-                break;
-            case "敗北":
-                switch (language)
-                {
-                    case Language.Japanese: message = "おい嘘だろ？　魔物の餌になるのだけは嫌だぁ！"; break;
-                    case Language.English: message = "Hey, you're kidding, right? I don't want to be monster food!"; break;
-                }
-                break;
-            case "ギブアップ":
-                switch (language)
-                {
-                    case Language.Japanese: message = "戦略的撤退というやつさ...。\nそうだよね？"; break;
-                    case Language.English: message = "It's called strategic retreat... Right?"; break;
-                }
-                break;
+                    break;
+                case "勝利":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "やるじゃないか！　キミのことを好きになりそうだよ！"; break;
+                        case Language.English: message = "Well done! I think I'm starting to like you!"; break;
+                    }
+                    break;
+                 case "敗北":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "おい嘘だろ？　魔物の餌になるのだけは嫌だぁ！"; break;
+                        case Language.English: message = "Hey, you're kidding, right? I don't want to be monster food!"; break;
+                    }
+                    break;
+                case "ギブアップ":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "戦略的撤退というやつさ……。\nそうだよね？"; break;
+                        case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
+                    }
+                    break;
+                case "ポータル":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "挑戦したい階層を選択しよう！"; break;
+                        case Language.English: message = "Select the hierarchy you wish to challenge!"; break;
+                    }
+                    break;
+                case "未開放ポータル":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "このポータルはまだ使用できないようだ。"; break;
+                        case Language.English: message = "This portal does not appear to be available yet."; break;
+                    }
+                    break;
             default:
-                switch (language)
-                {
-                    case Language.Japanese: message = "特に喋ることはないかな。\n期待させてごめんね"; break;
-                    case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
-                }
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "特に喋ることはないかな。\n期待させてごめんね"; break;
+                        case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
+                    }
                 break;
-        }
-        StartCoroutine(ShowMojiokuriText(message));//文字送り
+            }
+            StartCoroutine(ShowMojiokuriText(message));//文字送り
     }
 
     public IEnumerator ShowMojiokuriText(string MojiokuriText)

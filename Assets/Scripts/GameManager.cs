@@ -44,7 +44,11 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        BattleCameraChange();
+        //デバック用
+        //BattleCameraChange();
+        //ShopCameraChange();
+        PortalCameraChange();
+
 
         SpawnItems();
 
@@ -96,16 +100,19 @@ public class GameManager : MonoBehaviour
     {
         ResetCameraPriority();
         portalCamera.Priority = 1;
+        CameraController.instance.CutInChange();
     }
     public void BattleCameraChange()
     {
         ResetCameraPriority();
         battleCamera.Priority = 1;
+        CameraController.instance.CutInChange();
     }
     public void ShopCameraChange()
     {
         ResetCameraPriority();
         shopCamera.Priority = 1;
+        CameraController.instance.CutInChange();
     }
 
     // 特定のVirtual CameraのPriorityを変更する
@@ -124,21 +131,14 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateCoinText();
     }
 
-    //ステージがスタート
-    public void StartStage()
-    {
-        //コレクションがあればPlayerのHPを3回復
-        for (int i = 0; i < UnityEngine.Random.Range(2, 4); i++)
-        {
-            drawCardController.DrawCard();
-        }
-    }
-
     //次のステージへ移行する
     public void NextStage()
     {
-        UIManager.instance.WinPanel();
         stageHierarchy++;
+        for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
+        {
+            drawCardController.DrawCard();
+        }
 
         // 複製したプレイヤーを削除
         for (int i = playerObjects.Count - 1; i >= 0; i--)
@@ -150,8 +150,6 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
-
     }
 
     void KeepCurrentStage()
@@ -354,6 +352,7 @@ public class GameManager : MonoBehaviour
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
         {
+            UIManager.instance.WinPanel();
             // すべてのプレイヤーが勝利アニメーションを再生
             foreach (var player in players)
             {
