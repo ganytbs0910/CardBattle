@@ -101,58 +101,8 @@ public class PlayerController : MonoBehaviour
             //カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
             {
-                switch (i)
-                {
-                    //HP+5
-                    case 1: HealthUp(5); break;
-                    //Attack+1
-                    case 2: AttackUp(1); break;
-                    //Defence+1
-                    case 3: DefenceUp(1); break;
-                    //ボムダメージ+10
-                    case 4: BombDamageUp(10); break;
-                    //コインドロップ+1
-                    case 5: CoinDropUp(1); break;
-                    //回避率2%UP
-                    case 6: AvoidanceUp(2); break;
-                    //コレクションのドロップ率が1/100→1/(100-value)に
-                    case 7: CollectionDropRateUp(1); break;
-                    //HP1.1倍
-                    case 8: HealthRateUp(1.1f); break;
-                    //攻撃1.1倍
-                    case 9: AttackRateUp(1.1f); break;
-                    //防御1.1倍
-                    case 10: DefenceRate(1.1f); break;
-                    //移動速度+1
-                    case 11: MoveSpeedUp(1); break;
-                    //HP+25
-                    case 12: HealthUp(25); break;
-                    //Attack+3
-                    case 13: AttackUp(3); break;
-                    //Defence+3
-                    case 14: DefenceUp(3); break;
-                    //コインを100所持した状態でスタート
-                    case 15: StartCoinHave(100); break;
-                    //攻撃のインターバルが短縮
-                    case 16: AttackIntervalUp(0.1f); break;
-                    //分身のHPが1/2→1/3
-                    case 17: CloneHPUp(3); break;
-                    //分身の攻撃力が1/2→1/3
-                    case 18: CloneAttackUp(3); break;
-                    //分身の防御力が1/2→1/3
-                    case 19: CloneDefenceUp(3); break;
-                    //全てのステータス+5
-                    case 20: AllStatusUp(5); break;
-                    //階層が始まるとHP回復+3
-                    case 21: StartHierarchyHeal(3); break;
-                    //攻撃に回復効果が付与
-                    case 22: AttackHealAdd(); break;
-                    //カードの最低ドロー枚数が+1
-                    case 23: MinDrawCardNumberAdd(1); break;
-                    //カードの最大ドロー枚数が+1
-                    case 24: MaxDrawCardNumberAdd(1); break;
-                }
-
+                //コレクションの効果を反映
+                CollectionEffect(i);
             }
         }
     }
@@ -407,6 +357,7 @@ public class PlayerController : MonoBehaviour
     //位置とアニメを初期状態にリセットする
     public void ResetToInitialPosition()
     {
+        enemyChase = true;
         transform.position = initialPosition;
         animator.SetTrigger("Idle");
         // その他のリセット処理（必要に応じて）
@@ -511,7 +462,7 @@ public class PlayerController : MonoBehaviour
             //print("死亡アニメに移行します");
         }
         playerUIManager.UpdateHP(hp);//HPSliderの更新
-        //print(gameObject.name + "の残りHP= : " + hp);
+                                     //print(gameObject.name + "の残りHP= : " + hp);
     }
 
     ////プレイヤーの基礎攻撃力＋武器ダメージを返す
@@ -753,7 +704,7 @@ public class PlayerController : MonoBehaviour
             case 24: break;//小型爆弾
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
-            //範囲内のプレイヤーの体力を20%回復
+                           //範囲内のプレイヤーの体力を20%回復
             case 27: HPHeal(20); break;
             //範囲内のプレイヤーの体力を50%回復
             case 28: HPHeal(50); break;
@@ -857,6 +808,60 @@ public class PlayerController : MonoBehaviour
     /// コレクションの効果一覧
     /// </summary>
 
+    public void CollectionEffect(int num)
+    {
+        switch (num)
+        {
+            //HP+5
+            case 1: HealthUp(5); break;
+            //Attack+1
+            case 2: AttackUp(1); break;
+            //Defence+1
+            case 3: DefenceUp(1); break;
+            //ボムダメージ+10
+            case 4: BombDamageUp(10); break;
+            //コインドロップ+1
+            case 5: CoinDropUp(1); break;
+            //回避率2%UP
+            case 6: AvoidanceUp(2); break;
+            //コレクションのドロップ率が1/100→1/(100-value)に
+            case 7: CollectionDropRateUp(1); break;
+            //HP1.1倍
+            case 8: HealthRateUp(1.1f); break;
+            //攻撃1.1倍
+            case 9: AttackRateUp(1.1f); break;
+            //防御1.1倍
+            case 10: DefenceRate(1.1f); break;
+            //移動速度+1
+            case 11: MoveSpeedUp(1); break;
+            //HP+25
+            case 12: HealthUp(25); break;
+            //Attack+3
+            case 13: AttackUp(3); break;
+            //Defence+3
+            case 14: DefenceUp(3); break;
+            //コインを100所持した状態でスタート
+            case 15: StartCoinHave(100); break;
+            //攻撃のインターバルが短縮
+            case 16: AttackIntervalUp(0.1f); break;
+            //分身のHPが1/2→1/3
+            case 17: CloneHPUp(3); break;
+            //分身の攻撃力が1/2→1/3
+            case 18: CloneAttackUp(3); break;
+            //分身の防御力が1/2→1/3
+            case 19: CloneDefenceUp(3); break;
+            //全てのステータス+5
+            case 20: AllStatusUp(5); break;
+            //階層が始まるとHP回復+3
+            case 21: StartHierarchyHeal(3); break;
+            //攻撃に回復効果が付与
+            case 22: AttackHealAdd(); break;
+            //カードの最低ドロー枚数が+1
+            case 23: MinDrawCardNumberAdd(1); break;
+            //カードの最大ドロー枚数が+1
+            case 24: MaxDrawCardNumberAdd(1); break;
+        }
+    }
     //爆弾威力増加
     void BombDamageUp(int value)
     {
@@ -907,6 +912,7 @@ public class PlayerController : MonoBehaviour
     //コインを100所持してスタート
     void StartCoinHave(int value)
     {
+        if (GameManager.instance.stageHierarchy != 1) return;
         PlayerPrefs.SetInt("StartCoin", value);
     }
 

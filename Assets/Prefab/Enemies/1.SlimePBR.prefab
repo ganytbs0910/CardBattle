@@ -604,6 +604,8 @@ MonoBehaviour:
   defense: 1
   moveSpeed: 0
   agility: 0
+  coin: 0
+  dropRate: 30
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0
@@ -613,9 +615,9 @@ MonoBehaviour:
   weaponCollider: {fileID: 1168371685}
   enemyUIManager: {fileID: 3328785395550827044}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  dropItemPrefab: {fileID: 0}
-  playerChase: 1
   missText: {fileID: 7512417083285215507}
+  attackEffect: {fileID: 0}
+  effectCollider: {fileID: 0}
 --- !u!1 &630422239694531192
 GameObject:
   m_ObjectHideFlags: 0
