@@ -36,3 +36,6 @@ Debug/
 
 # Unity Logs (追加)
 Logs/
+
+# Layoutの変更をしないようにする
+UserSettings/Layouts/default/-2021.dwlt
