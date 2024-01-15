@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int loadTime = 1;
 
     [SerializeField] private RectTransform battleStartButton;
+    [SerializeField] private RectTransform[] PortalChangeButton;
+
     [SerializeField] private Button shopButton;
  
     [SerializeField] private TMP_Text stageText;
@@ -90,6 +92,8 @@ public class UIManager : MonoBehaviour
         // 無限ループに設定
         mySequence.SetLoops(-1);
 
+        AnimeScaleLoopButton(PortalChangeButton);
+
 
         CollectionCardUpdate();
         UpdateCoinText();
@@ -97,6 +101,23 @@ public class UIManager : MonoBehaviour
         //stageTextを更新
         StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
         //RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
+    }
+
+    public void AnimeScaleLoopButton(RectTransform[] Button)
+    {
+        foreach (RectTransform button in Button)
+        {
+            //battleStartButton.gameObject.SetActive(false);
+            //テキストの拡大と透明化アニメーション
+            Sequence mySequence = DOTween.Sequence();
+            mySequence.Append(button.DOScale(1.15f, 1.0f));
+
+            // 元のサイズと不透明度に戻すアニメーション
+            mySequence.Append(button.DOScale(1.0f, 1.0f));
+
+            // 無限ループに設定
+            mySequence.SetLoops(-1);
+        }
     }
 
     //右上の三本線ボタンを押したとき
@@ -605,6 +626,20 @@ public class UIManager : MonoBehaviour
                     {
                         case Language.Japanese: message = "戦略的撤退というやつさ……。\nそうだよね？"; break;
                         case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
+                    }
+                    break;
+                case "ポータル":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "挑戦したい階層を選択しよう！"; break;
+                        case Language.English: message = "Select the hierarchy you wish to challenge!"; break;
+                    }
+                    break;
+                case "未開放ポータル":
+                    switch (language)
+                    {
+                        case Language.Japanese: message = "このポータルはまだ使用できないようだ。"; break;
+                        case Language.English: message = "This portal does not appear to be available yet."; break;
                     }
                     break;
             default:

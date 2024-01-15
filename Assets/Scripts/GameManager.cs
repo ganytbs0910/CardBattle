@@ -44,7 +44,11 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        BattleCameraChange();
+        //デバック用
+        //BattleCameraChange();
+        //ShopCameraChange();
+        PortalCameraChange();
+
 
         SpawnItems();
 
@@ -96,16 +100,19 @@ public class GameManager : MonoBehaviour
     {
         ResetCameraPriority();
         portalCamera.Priority = 1;
+        CameraController.instance.CutInChange();
     }
     public void BattleCameraChange()
     {
         ResetCameraPriority();
         battleCamera.Priority = 1;
+        CameraController.instance.CutInChange();
     }
     public void ShopCameraChange()
     {
         ResetCameraPriority();
         shopCamera.Priority = 1;
+        CameraController.instance.CutInChange();
     }
 
     // 特定のVirtual CameraのPriorityを変更する
