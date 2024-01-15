@@ -394,6 +394,7 @@ public class EnemyController : MonoBehaviour
         //コレクションをドロップする
         if (PlayerPrefs.HasKey($"Collection{id}")) return;
         PlayerPrefs.SetInt($"Collection{id}", 1);
+        Debug.Log();
 
         //コレクションの効果を反映
         playerTarget.GetComponent<PlayerController>().CollectionEffect(id);
