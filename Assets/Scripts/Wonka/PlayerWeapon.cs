@@ -15,7 +15,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         if (player.currentWeapon == null) return player.attack;
 
-        int weaponDamage = player.attack;
+        int weaponDamage = (int)(player.attack * player.addAttackRate);
 
         return weaponDamage;
     }

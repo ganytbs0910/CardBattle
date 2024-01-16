@@ -12,6 +12,10 @@ public class PlayerController : MonoBehaviour
     public int maxMp = 100;
     public int attack;
     public int throwAttack = 0;
+    public float addHealthRate = 1;
+    public float addAttackRate = 1;
+    public float addDefenceRate = 1;
+
     int cloneHpRate = 2;
     int cloneAttackRate = 2;
     int cloneDefenceRate = 2;
@@ -80,6 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("HP"))
         {
+            maxHp = (int)(maxHp * addHealthRate);
             hp = maxHp;
             mp = maxMp;
         }
@@ -477,7 +482,7 @@ public class PlayerController : MonoBehaviour
     {
 
         int sumDamage;
-        sumDamage = damage - defense;
+        sumDamage = damage - (int)(defense * addDefenceRate);
         hp -= sumDamage;
         if (hp <= 0)
         {
@@ -913,19 +918,19 @@ public class PlayerController : MonoBehaviour
     //体力の倍率上昇
     void HealthRateUp(float value)
     {
-        maxHp = (int)(maxHp * value);
+        addHealthRate = value;
     }
 
     //攻撃の倍率上昇
     void AttackRateUp(float value)
     {
-        attack = (int)(attack * value);
+        addAttackRate = value;
     }
 
     //防御の倍率上昇
     void DefenceRate(float value)
     {
-        defense = (int)(defense * value);
+        addDefenceRate = value;
     }
 
     void MoveSpeedUp(int value)
