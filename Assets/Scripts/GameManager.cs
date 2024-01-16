@@ -147,7 +147,6 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(playerObjects[i]);
                 playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
-
             }
         }
     }

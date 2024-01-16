@@ -42,6 +42,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
     [SerializeField] private TMP_Text tutorialText;
+
     [Header("ローカライズ用のテキスト")]
     [SerializeField] private TMP_Text startText;
     [SerializeField] private TMP_Text collectionTitleText;

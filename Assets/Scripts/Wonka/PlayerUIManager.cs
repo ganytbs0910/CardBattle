@@ -37,15 +37,15 @@ public class PlayerUIManager : MonoBehaviour
     /// PlayerControllerから呼ばれる
     /// </summary>
     /// <param name="hp">現在のHPをいれる</param>
-    public void UpdateHP(int hp)
+    public void UpdateHP(int maxHp, int hp)
     {
+        hpSlider.maxValue = maxHp;
         hpSlider.DOValue(hp, 0.2f);
-        //一つ目に最終的な値、二つ目に時間を入れる。
     }
 
-    public void UpdateMP(int mp)
+    public void UpdateMP(int maxMp, int mp)
     {
+        mpSlider.maxValue = maxMp;
         mpSlider.DOValue(mp, 0.2f);
-        //一つ目に最終的な値、二つ目に時間を入れる。
     }
 }

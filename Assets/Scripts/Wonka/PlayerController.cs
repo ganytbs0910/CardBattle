@@ -78,10 +78,17 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        if (!PlayerPrefs.HasKey("HP"))
+        {
+            hp = maxHp;
+            mp = maxMp;
+        }
+        else
+        {
+            hp = PlayerPrefs.GetInt("HP");
+            mp = PlayerPrefs.GetInt("MP");
+        }
         UpdateStats();
-
-        hp = maxHp;
-        mp = maxMp;
 
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
         moveSpeed = agent.speed;
@@ -105,6 +112,32 @@ public class PlayerController : MonoBehaviour
                 CollectionEffect(i);
             }
         }
+        SaveStatus();
+        LoadStatus();
+    }
+
+    public void SaveStatus()
+    {
+        PlayerPrefs.SetInt("HP", hp);
+        PlayerPrefs.SetInt("MP", mp);
+        PlayerPrefs.SetInt("Attack", attack);
+        PlayerPrefs.SetInt("Defense", defense);
+        PlayerPrefs.SetInt("Agility", Agility);
+        PlayerPrefs.SetInt("MaxHP", maxHp);
+        PlayerPrefs.SetInt("MaxMP", maxMp);
+    }
+
+    void LoadStatus()
+    {
+        hp = PlayerPrefs.GetInt("HP");
+        playerUIManager.UpdateHP(maxHp, hp);
+        mp = PlayerPrefs.GetInt("MP");
+        playerUIManager.UpdateMP(maxMp, mp);
+        attack = PlayerPrefs.GetInt("Attack");
+        defense = PlayerPrefs.GetInt("Defense");
+        Agility = PlayerPrefs.GetInt("Agility");
+        maxHp = PlayerPrefs.GetInt("MaxHP");
+        maxMp = PlayerPrefs.GetInt("MaxMP");
     }
 
     void Update()
@@ -165,10 +198,7 @@ public class PlayerController : MonoBehaviour
     //武器をプレイヤーの手に装備させる
     public void EquipWeapon(Weapon weapon)
     {
-        if (weapon == null)
-        {
-            return;
-        }
+        if (weapon == null) return;
         //playerCollidersの要素全てをenabledをfalseにする
         for (int i = 0; i < playerColliders.Length; i++)
         {
@@ -241,9 +271,12 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateStats()
     {
-        //初期値に戻す
-        ResetStatus();
-
+        //前回の装備のステータスを引く
+        if (currentWeapon != null)
+        {
+            attack -= currentWeapon.GetATKPoint();
+            defense -= currentWeapon.GetDEFPoint();
+        }
         //武器と防具量を加算
         AddWeaponState();
         AddArmorState();
@@ -252,6 +285,7 @@ public class PlayerController : MonoBehaviour
 
     private void AddWeaponState()
     {
+        //装備の攻撃を追加
         if (currentWeapon == null)
         {
             attack += 5;//素手の攻撃力
@@ -310,17 +344,6 @@ public class PlayerController : MonoBehaviour
         maxMp += armorMAXMP;
     }
 
-    void ResetStatus()
-    {
-        maxHp = 100;
-        maxMp = 100;
-        attack = 0;
-        defense = 0;
-        Agility = 0;//回避率
-    }
-
-
-
     /// <summary>
     /// 現在の位置から最も近くにいるプレイヤーを探す
     /// </summary>
@@ -365,6 +388,7 @@ public class PlayerController : MonoBehaviour
         // 敵グループの平均位置に向く
         Vector3 averageEnemyPosition = GetAveragePositionOfEnemies();
         LookTowards(averageEnemyPosition);
+        SaveStatus();
     }
 
     // NavMeshAgentのターゲットを更新するメソッド
@@ -434,7 +458,7 @@ public class PlayerController : MonoBehaviour
         if (mp >= UseMp)
         {
             mp -= UseMp;
-            playerUIManager.UpdateMP(mp);//HPSliderの更新
+            playerUIManager.UpdateMP(maxMp, mp);//HPSliderの更新
             animator.SetTrigger("Attack04");
             //print(gameObject.name + "の残りMP= : " + mp);
         }
@@ -461,8 +485,8 @@ public class PlayerController : MonoBehaviour
             Die();
             //print("死亡アニメに移行します");
         }
-        playerUIManager.UpdateHP(hp);//HPSliderの更新
-                                     //print(gameObject.name + "の残りHP= : " + hp);
+        playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
+                                            //print(gameObject.name + "の残りHP= : " + hp);
     }
 
     ////プレイヤーの基礎攻撃力＋武器ダメージを返す
@@ -779,7 +803,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Drink");
         }
         //Sliderを修正
-        playerUIManager.UpdateHP(hp);
+        playerUIManager.UpdateHP(maxHp, hp);
         print("プレイヤーのHPが" + value + "回復しました");
 
     }
@@ -799,7 +823,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Drink");
         }
         //Sliderを修正
-        playerUIManager.UpdateMP(mp);
+        playerUIManager.UpdateMP(maxMp, mp);
 
         print("プレイヤーのMPが" + value + "回復しました");
     }
