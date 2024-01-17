@@ -50,6 +50,7 @@ public class AudioManager : MonoBehaviour
         YouLose,
         YouWin,
         WinTheBoss,
+        GoblinLanding,
     }
 
     public AudioClip[] voiceList;
@@ -68,6 +69,11 @@ public class AudioManager : MonoBehaviour
         audioSourceBGM.Play();
     }
 
+    public void StopBGM()
+    {
+        audioSourceBGM.Stop();
+    }
+
     //効果音を鳴らす
     public void PlaySE(SE se)
     {
@@ -82,5 +88,13 @@ public class AudioManager : MonoBehaviour
         int index = (int)voice;
         AudioClip clip = voiceList[index];
         audioSourceVoice.PlayOneShot(clip);
+    }
+
+    //効果音の長さを取得する
+    public float GetSELength(SE se)
+    {
+        int index = (int)se;
+        AudioClip clip = seList[index];
+        return clip.length;
     }
 }

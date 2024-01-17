@@ -74,6 +74,7 @@ public class GoblinShop : MonoBehaviour
             {
                 GoblinJunp();
                 AudioManager.instance.PlayVoice(AudioManager.Voice.Welcome);
+                AudioManager.instance.PlaySE(AudioManager.SE.GoblinLanding);
             });
 
             ShopButton.SetActive(false);
