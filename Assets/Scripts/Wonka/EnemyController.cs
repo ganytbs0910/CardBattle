@@ -388,23 +388,26 @@ public class EnemyController : MonoBehaviour
         GameManager.instance.CheckBattleStatus();
 
         //コレクションがドロップするかどうかの判定
-        int dropNumber = Random.Range(1, 2);//ごめんちょっと確率高くしちゃった
+        int dropNumber = Random.Range(1, dropRate);//ごめんちょっと確率高くしちゃった
         if (dropNumber != 1) return;
 
         //コレクションをドロップする
-        if (PlayerPrefs.HasKey($"Collection{id}")) return;
         PlayerPrefs.SetInt($"Collection{id}", 1);
-
-        //コレクションの効果を反映
-        playerTarget.GetComponent<PlayerController>().CollectionEffect(id);
-
-        //コレクションをドロップするアニメーション
-        Vector3 worldPosition = this.gameObject.transform.position;
-        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
-        Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
-        string itemName = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").nameJP;
-        UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition, itemName);
+        ItemDrop();
         UIManager.instance.CollectionCardUpdate();
+    }
+
+    /// <summary>
+    /// これで動いてくれ〜〜要チェック
+    /// </summary>
+    void ItemDrop()
+    {
+        Vector3 worldPosition = this.gameObject.transform.position;
+        //メインカメラから見た位置にする
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
+        //dropItemPrefabをCollectionEnetityのid番目のiconを取得kする
+        Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
+       // UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
     }
 
     // 勝利アニメーションをトリガーするメソッド
