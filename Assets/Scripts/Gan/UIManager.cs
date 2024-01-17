@@ -455,9 +455,7 @@ public class UIManager : MonoBehaviour
         print(ui + "のトグルを切り替えます");
     }
 
-    /// <summary>
-    /// 以下ローカライズ
-    /// </summary>
+    //以下ローカライズ
     void LocalizeUpdate()
     {
         switch (PlayerPrefs.GetString("Language"))
