@@ -36,8 +36,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform battleStartButton;
     [SerializeField] private RectTransform[] PortalChangeButton;
 
-    [SerializeField] private Button shopButton;
-
     [SerializeField] private TMP_Text stageText;
     [SerializeField] private TMP_Text heroMessageText;
     [SerializeField] private TMP_Text canUseText;
@@ -46,6 +44,8 @@ public class UIManager : MonoBehaviour
 
     [Header("ローカライズ用のテキスト")]
     [SerializeField] private TMP_Text startText;
+    [SerializeField] private TMP_Text shopText;
+    [SerializeField] private TMP_Text dungeonText;
     [SerializeField] private TMP_Text collectionTitleText;
     [SerializeField] private TMP_Text settingText;
     [SerializeField] private TMP_Text collectionsText;
@@ -54,9 +54,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text giveUpText;
     [SerializeField] private TMP_Text reStoreText;
     [SerializeField] private TMP_Text SETTINGSText;
-    [SerializeField] private TMP_Text soundText;
+    [SerializeField] private TMP_Text masterText;
     [SerializeField] private TMP_Text musicText;
-    [SerializeField] private TMP_Text pushAlarmText;
+    [SerializeField] private TMP_Text seText;
+    [SerializeField] private TMP_Text voiceText;
 
 
     [SerializeField] private Image dropImage;
@@ -145,6 +146,22 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    bool toggle;
+    //ロビーの出し入れ
+    public void LobbyToggle(GameObject ui)
+    {
+        toggle = !toggle;
+        if (toggle)
+        {
+            ShowLobbyMenu(ui);
+        }
+        else
+        {
+            CloseLobbyMenu(ui);
+        }
+
+    }
+
     //右上の三本線ボタンを押したとき
     public void ShowLobbyMenu(GameObject ui)
     {
@@ -163,7 +180,7 @@ public class UIManager : MonoBehaviour
 
         RectTransform rect = ui.GetComponent<RectTransform>();
         // X位置を1秒かけて0にアニメーション
-        rect.DOAnchorPosX(600, 0.5f).OnComplete(() =>
+        rect.DOAnchorPosX(170, 0.5f).OnComplete(() =>
         {
             ui.SetActive(false);
         });
@@ -334,7 +351,7 @@ public class UIManager : MonoBehaviour
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
         //battleStartButton.gameObject.SetActive(true);
-        shopButton.gameObject.SetActive(false);
+        //shopButton.gameObject.SetActive(false);
     }
 
     public void NextStageButton()
@@ -747,29 +764,35 @@ public class UIManager : MonoBehaviour
                 startText.text = "スタート";
                 collectionTitleText.text = "所持中のアイテム";
                 settingText.text = "設定";
-                collectionsText.text = "コレクション";
+                shopText.text = "ショップ";
+                dungeonText.text = "dungeon";
+                collectionsText.text = "バッグ";
                 playingManualText.text = "遊び方";
-                reviewText.text = "レビューを書く";
+                reviewText.text = "レビュー";
                 giveUpText.text = "ギブアップ";
                 reStoreText.text = "復元";
                 SETTINGSText.text = "設定";
-                soundText.text = "サウンド";
+                masterText.text = "マスター";
                 musicText.text = "音楽";
-                //pushAlarmText.text = "プッシュ通知";
+                seText.text = "効果音";
+                voiceText.text = "ボイス";
                 break;
             case Language.English:
                 startText.text = "Start";
                 collectionTitleText.text = "Items in possession";
                 settingText.text = "Settings";
-                collectionsText.text = "Collections";
+                shopText.text = "Shop";
+                dungeonText.text = "dungeon";
+                collectionsText.text = "bag";
                 playingManualText.text = "Manual";
                 reviewText.text = "Review";
                 giveUpText.text = "Give up";
                 reStoreText.text = "Restore";
                 SETTINGSText.text = "SETTINGS";
-                soundText.text = "Sound";
+                masterText.text = "Master";
                 musicText.text = "Music";
-                //pushAlarmText.text = "Push Alarm";
+                seText.text = "Sound";
+                voiceText.text = "Voice";
                 break;
         }
     }
