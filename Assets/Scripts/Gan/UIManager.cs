@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
-    public RectTransform collectionContent;
+    [SerializeField] private RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
     [SerializeField] private RectTransform settingButton;
     //[SerializeField] private RectTransform collectionButton;
@@ -377,8 +377,8 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// コレクション
     /// </summary>
-
-    public void CollectionCardUpdate()
+    //コレクションが集まったら呼び出してほしい
+    public void CollectionCardUpdate(GameObject player = null)
     {
         //コレクションのカードを更新
         for (int i = 1; i < collectionContent.transform.childCount; i++)
@@ -405,19 +405,35 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
+                if (player == null) return;
+
+                //コレクションの効果を反映
+                switch (i)
+                {
+                    //全ステータスが+10
+                    case 1: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
+                    //攻撃に回復効果が付与される
+                    case 2: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
+                    //攻撃のインターバルと移動速度が早くなる
+                    case 3: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
+                    //会心の一撃が出せるようになる
+                    case 4: break;
+                    //ハードモードが解放
+                    case 5: break;
+                    default:
+
+                        break;
+                }
             }
         }
     }
 
-    public void UpdateCoinText(int value = 0)
+    public void UpdateCoinText()
     {
-        int coin = PlayerPrefs.GetInt("Coin");
-        coin += value;
-        PlayerPrefs.SetInt("Coin", coin);
-        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = coin.ToString();
+        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
-    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition, string collectionName)
+    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
     {
         //このオブジェクトの子オブジェクトとして複製
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
@@ -431,12 +447,10 @@ public class UIManager : MonoBehaviour
             dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
         });
 
-        HeroMessageDetail("コレクションゲット", collectionName);
+        HeroMessageDetail("コレクションゲット");
     }
 
-    /// <summary>
-    /// 以下ローカライズ
-    /// </summary>
+    //以下ローカライズ
     void LocalizeUpdate()
     {
         switch (PlayerPrefs.GetString("Language"))
@@ -477,9 +491,8 @@ public class UIManager : MonoBehaviour
         LocalizeUpdate();
     }
 
-    /// <summary>
-    /// チュートリアル用
-    /// </summary>
+
+    //チュートリアル用
     public void TutorialTextDetail(string detail)
     {
         if (!PlayerPrefs.HasKey("Tutorial"))
