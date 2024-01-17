@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -389,8 +389,8 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// コレクション
     /// </summary>
-    //コレクションが集まったら呼び出してほしい
-    public void CollectionCardUpdate(GameObject player = null)
+
+    public void CollectionCardUpdate()
     {
         //コレクションのカードを更新
         for (int i = 1; i < collectionContent.transform.childCount; i++)
@@ -430,7 +430,7 @@ public class UIManager : MonoBehaviour
         coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
-    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
+    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition, string collectionName)
     {
         //このオブジェクトの子オブジェクトとして複製
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
@@ -444,7 +444,7 @@ public class UIManager : MonoBehaviour
             dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
         });
 
-        HeroMessageDetail("コレクションゲット");
+        HeroMessageDetail("コレクションゲット", collectionName);
     }
 
     //UIのOnOff
@@ -455,7 +455,9 @@ public class UIManager : MonoBehaviour
         print(ui + "のトグルを切り替えます");
     }
 
-    //以下ローカライズ
+    /// <summary>
+    /// 以下ローカライズ
+    /// </summary>
     void LocalizeUpdate()
     {
         switch (PlayerPrefs.GetString("Language"))
@@ -496,8 +498,9 @@ public class UIManager : MonoBehaviour
         LocalizeUpdate();
     }
 
-
-    //チュートリアル用
+    /// <summary>
+    /// チュートリアル用
+    /// </summary>
     public void TutorialTextDetail(string detail)
     {
         if (!PlayerPrefs.HasKey("Tutorial"))
