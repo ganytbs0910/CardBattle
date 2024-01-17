@@ -52,6 +52,8 @@ public class PortalController : MonoBehaviour
 
     public void RightPortalButton()
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.ArrowClick);
+
         currentPortal++;
 
         if (currentPortal > 4)
@@ -65,6 +67,8 @@ public class PortalController : MonoBehaviour
 
     public void LeftPortalButton()
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.ArrowClick);
+
         currentPortal--;
 
         if (currentPortal < 1)
@@ -124,7 +128,7 @@ public class PortalController : MonoBehaviour
             case 1:
                 if (levelClear[0])
                 { 
-                  LeavePortal();
+                    LeavePortal();
                 }
                 else
                 { UIManager.instance.HeroMessageDetail("未開放ポータル"); }
@@ -199,6 +203,8 @@ public class PortalController : MonoBehaviour
     //ショップを離れる
     public void LeavePortal()
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.GoPortal);
+
         Sequence sequence = DOTween.Sequence();
         //フェードアウト
         LoadPanel.gameObject.SetActive(true);
@@ -207,7 +213,7 @@ public class PortalController : MonoBehaviour
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
         {
-            GameManager.instance.BattleCameraChange();
+            GameManager.instance.DungeonCameraChange();
 
             PortalEnviloment.SetActive(false);
             PortalPanel.SetActive(false);

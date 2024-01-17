@@ -27,6 +27,17 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera battleCamera;
     public CinemachineVirtualCamera portalCamera;
 
+    public enum Location
+    {
+        PortalWorld,
+        Dungeon,
+        NormalBattle,
+        BossBattle,
+        GoblinShop,
+    }
+
+    public Location currentLocation;
+
     void Awake()
     {
         if (instance == null)
@@ -42,13 +53,35 @@ public class GameManager : MonoBehaviour
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
         CreateCharacterList(); //プレイヤーと敵のリストを更新
     }
+
+    public void UpdateLocation()
+    {
+        switch (currentLocation)
+        {
+            case Location.PortalWorld:
+                AudioManager.instance.PlayBGM(AudioManager.BGM.PortalWorld);
+                break;
+            case Location.Dungeon:
+                AudioManager.instance.PlayBGM(AudioManager.BGM.Dungeon);
+                break;
+            case Location.NormalBattle:
+                AudioManager.instance.PlayBGM(AudioManager.BGM.NormalBattle);
+                break;
+            case Location.BossBattle:
+                AudioManager.instance.PlayBGM(AudioManager.BGM.BossBattle);
+                break;
+
+            case Location.GoblinShop:
+                AudioManager.instance.PlayBGM(AudioManager.BGM.GoblinShop);
+                break;
+        }
+    }
     void Start()
     {
         //デバック用
         //BattleCameraChange();
         //ShopCameraChange();
         PortalCameraChange();
-
 
         SpawnItems();
 
@@ -65,6 +98,10 @@ public class GameManager : MonoBehaviour
             // ボスの場合   
             if (stageHierarchy % 10 == 0)
             {
+                //ボス部屋のアップデート
+                currentLocation = Location.BossBattle;
+                UpdateLocation();
+
                 int id = stageHierarchy / 10 - 1;
                 GameObject boss = Instantiate(bossPrefab[id], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
                 boss.transform.SetParent(GameObject.Find("Enemies").transform);
@@ -96,23 +133,38 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void BattleStart()
+    {
+        currentLocation = Location.NormalBattle;
+        UpdateLocation();
+    }
+
     public void PortalCameraChange()
     {
         ResetCameraPriority();
         portalCamera.Priority = 1;
         CameraController.instance.CutInChange();
+
+        currentLocation = Location.PortalWorld;
+        UpdateLocation();
     }
-    public void BattleCameraChange()
+    public void DungeonCameraChange()
     {
         ResetCameraPriority();
         battleCamera.Priority = 1;
         CameraController.instance.CutInChange();
+
+        currentLocation = Location.Dungeon;
+        UpdateLocation();
     }
     public void ShopCameraChange()
     {
         ResetCameraPriority();
         shopCamera.Priority = 1;
         CameraController.instance.CutInChange();
+
+        currentLocation = Location.GoblinShop;
+        UpdateLocation();
     }
 
     // 特定のVirtual CameraのPriorityを変更する
@@ -131,25 +183,7 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateCoinText();
     }
 
-    //次のステージへ移行する
-    public void NextStage()
-    {
-        stageHierarchy++;
-        for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
-        {
-            drawCardController.DrawCard();
-        }
 
-        // 複製したプレイヤーを削除
-        for (int i = playerObjects.Count - 1; i >= 0; i--)
-        {
-            if (playerObjects[i].name == "ShadowPlayer")
-            {
-                Destroy(playerObjects[i]);
-                playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
-            }
-        }
-    }
 
     void KeepCurrentStage()
     {
@@ -352,12 +386,33 @@ public class GameManager : MonoBehaviour
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
         {
             UIManager.instance.WinPanel();
+
             // すべてのプレイヤーが勝利アニメーションを再生
             foreach (var player in players)
             {
                 player.Victory();
             }
-            NextStage();
+
+        }
+    }
+
+    //次のステージへ移行する
+    public void NextStage()
+    {
+        stageHierarchy++;
+        for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
+        {
+            drawCardController.DrawCard();
+        }
+
+        // 複製したプレイヤーを削除
+        for (int i = playerObjects.Count - 1; i >= 0; i--)
+        {
+            if (playerObjects[i].name == "ShadowPlayer")
+            {
+                Destroy(playerObjects[i]);
+                playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
+            }
         }
     }
 

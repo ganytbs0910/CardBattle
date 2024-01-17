@@ -52,6 +52,8 @@ public class GoblinShop : MonoBehaviour
     //ショップに向かう
     public void GoShop()
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+
         Sequence sequence = DOTween.Sequence();
         LoadPanel.gameObject.SetActive(true);
 
@@ -67,7 +69,11 @@ public class GoblinShop : MonoBehaviour
             animator.SetTrigger("Spawn");
             // DoTweenを使用してゴブリンを移動させる
             Goblin.transform.DOMove(SpawnPoint.position, 1.0f).OnComplete(()=>
-            { GoblinJunp(); });
+            { GoblinJunp();
+                AudioManager.instance.PlayVoice(AudioManager.Voice.Welcome);
+            });
+
+
 
             ShopButton.SetActive(false);
             DungeonButton.SetActive(true);
@@ -92,6 +98,10 @@ public class GoblinShop : MonoBehaviour
     //ショップを離れる
     public void LeaveShop()
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+
+        AudioManager.instance.PlayVoice(AudioManager.Voice.ByeBye);
+
         animator.SetTrigger("Bye");
 
         Sequence sequence = DOTween.Sequence();
@@ -102,7 +112,7 @@ public class GoblinShop : MonoBehaviour
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
         {
-            GameManager.instance.BattleCameraChange();
+            GameManager.instance.DungeonCameraChange();
 
             ShopEnviloment.SetActive(false);
 
@@ -136,5 +146,8 @@ public class GoblinShop : MonoBehaviour
     public void SelectCard()
     {
         animator.SetTrigger("Thanks");
+        AudioManager.instance.PlayVoice(AudioManager.Voice.Thanks);
+
+        AudioManager.instance.PlaySE(AudioManager.SE.BuyCard);
     }
 }
