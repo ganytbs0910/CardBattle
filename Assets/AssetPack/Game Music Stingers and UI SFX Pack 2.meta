@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/AssetPack/Game Music Stingers and UI SFX Pack 2.meta
 guid: 44aa3c0baf68b2749be1c520a933979d
 folderAsset: yes
 DefaultImporter:
+========
+guid: 0317a2885bebf4ef5b72b6397ab02902
+PrefabImporter:
+>>>>>>>> main:Assets/Prefab/Button_Pay.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -309,7 +309,7 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
 
-        GameManager.instance.DungeonCameraChange(); 
+        GameManager.instance.DungeonCameraChange();
     }
 
     //ボタンで使用
@@ -417,6 +417,7 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
+                if (player == null) return;
             }
         }
     }
@@ -426,7 +427,7 @@ public class UIManager : MonoBehaviour
         int coin = PlayerPrefs.GetInt("Coin");
         coin += value;
         PlayerPrefs.SetInt("Coin", coin);
-        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = coin.ToString();
+        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
     public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition, string collectionName)
@@ -447,7 +448,7 @@ public class UIManager : MonoBehaviour
     }
 
     //UIのOnOff
-    public void ActiveToggle(GameObject ui) 
+    public void ActiveToggle(GameObject ui)
     {
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
         ui.SetActive(!ui.activeSelf);

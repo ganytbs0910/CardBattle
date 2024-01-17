@@ -70,12 +70,11 @@ public class GoblinShop : MonoBehaviour
             ShopEnviloment.SetActive(true);
             animator.SetTrigger("Spawn");
             // DoTweenを使用してゴブリンを移動させる
-            Goblin.transform.DOMove(SpawnPoint.position, 1.0f).OnComplete(()=>
-            { GoblinJunp();
+            Goblin.transform.DOMove(SpawnPoint.position, 1.0f).OnComplete(() =>
+            {
+                GoblinJunp();
                 AudioManager.instance.PlayVoice(AudioManager.Voice.Welcome);
             });
-
-
 
             ShopButton.SetActive(false);
             DungeonButton.SetActive(true);

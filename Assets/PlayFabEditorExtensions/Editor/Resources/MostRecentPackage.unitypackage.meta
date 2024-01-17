@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/AssetPack/BaykalArts.meta
+guid: d818ae92f371b48e8b741d50661999c5
+folderAsset: yes
+========
 guid: f24780807608c48cd8647b9440d94947
+>>>>>>>> main:Assets/PlayFabEditorExtensions/Editor/Resources/MostRecentPackage.unitypackage.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
