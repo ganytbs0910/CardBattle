@@ -130,7 +130,6 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
-
     }
 
     public void BattleStart()
@@ -282,19 +281,10 @@ public class GameManager : MonoBehaviour
         switch (stageHierarchy)
         {
             // 以降ボス戦
-            case 10:
-                boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-                break;
-            case 20:
-                boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-                break;
-            case 30:
-                boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-                break;
-            case 40:
-                boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
-                break;
-
+            case 10: boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
+            case 20: boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
+            case 30: boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
+            case 40: boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
             default:
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10;
@@ -365,9 +355,6 @@ public class GameManager : MonoBehaviour
             availableSpawnPoints.RemoveAt(randomPositionIndex);
         }
     }
-
-
-
 
     //両陣営のリストとIsDeadを基準に勝敗をジャッジする
     public void CheckBattleStatus()
@@ -476,4 +463,41 @@ public class GameManager : MonoBehaviour
         }
         return true; // すべての敵が死んでいる
     }
+
+    /// <summary>
+    /// 現在の階層によってTiarを決める
+    /// </summary>
+    public int CalculateTiar()
+    {
+        // 確率を格納する配列
+        float[] probabilities;
+
+        // Stage 1~10の確率
+        if (stageHierarchy <= 10) probabilities = new float[] { 0.6f, 0.2f, 0.18f, 0.1f, 0.05f, 0.02f };
+        // Stage 11~20の確率
+        else if (stageHierarchy <= 20) probabilities = new float[] { 0.4f, 0.2f, 0.2f, 0.1f, 0.05f, 0.05f };
+        // Stage 21~30までの確率
+        else if (stageHierarchy <= 30) probabilities = new float[] { 0.2f, 0.2f, 0.2f, 0.2f, 0.1f, 0.1f };
+        // Stage 31~40までの確率
+        else if (stageHierarchy <= 40) probabilities = new float[] { 0.1f, 0.15f, 0.2f, 0.25f, 0.1f, 0.2f };
+        // デフォルトの確率（必要に応じて設定）
+        else probabilities = new float[] { 0.1f, 0.2f, 0.3f, 0.2f, 0.1f, 0.1f };
+
+        // 乱数を生成してtiarを決定
+        float randomValue = UnityEngine.Random.value;
+        float cumulativeProbability = 0.0f;
+        for (int tiar = 1; tiar <= probabilities.Length; tiar++)
+        {
+            cumulativeProbability += probabilities[tiar - 1];
+            if (randomValue < cumulativeProbability)
+            {
+                return tiar;
+            }
+        }
+        return 1; // 万が一、どの条件にも当てはまらない場合は最低値を返す
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
 }

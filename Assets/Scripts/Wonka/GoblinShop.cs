@@ -15,6 +15,7 @@ public class GoblinShop : MonoBehaviour
 
     public Transform InitPoint;
     public Transform SpawnPoint;
+
     public CanvasGroup LoadPanel;
 
     public GameObject[] FalsePanel;
@@ -24,6 +25,7 @@ public class GoblinShop : MonoBehaviour
     public GameObject DungeonButton;
 
     public MMFeedbacks JumpFeedback;
+
 
     private void Awake()
     {
@@ -41,7 +43,7 @@ public class GoblinShop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void GoblinJunp()
