@@ -438,6 +438,7 @@ public class PlayerController : MonoBehaviour
         transform.position = initialPosition;
         animator.SetTrigger("Idle");
         // その他のリセット処理（必要に応じて）
+        enemyChase = true;
 
         // 敵グループの平均位置に向く
         Vector3 averageEnemyPosition = GetAveragePositionOfEnemies();
