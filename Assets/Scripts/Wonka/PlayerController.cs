@@ -10,8 +10,12 @@ public class PlayerController : MonoBehaviour
     [Header("Playerのステータス")]
     public int maxHp = 100;
     public int maxMp = 100;
-    public int attack;
+    public int attack = 5;
+    public float attackInterval = 1;//攻撃間隔
     public int throwAttack = 0;
+    public int defense = 0;
+    public int Agility;//回比率
+    public float moveSpeed;
     public float addHealthRate = 1;
     public float addAttackRate = 1;
     public float addDefenceRate = 1;
@@ -19,10 +23,6 @@ public class PlayerController : MonoBehaviour
     int cloneHpRate = 2;
     int cloneAttackRate = 2;
     int cloneDefenceRate = 2;
-    [SerializeField] private float attackInterval;//攻撃間隔
-    [SerializeField] private int defense;
-    public float moveSpeed; //agentSpeed
-    [SerializeField] private int Agility;//回比率
 
     //通常変数
     int hp;
@@ -107,6 +107,13 @@ public class PlayerController : MonoBehaviour
 
         EquipWeapon(defaultWeapon);
 
+        CollectionFirstEffect();
+        SaveStatus();
+        LoadStatus();
+    }
+
+    void CollectionFirstEffect()
+    {
         //コレクションの効果を反映
         for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
         {
@@ -164,11 +171,50 @@ public class PlayerController : MonoBehaviour
                     //カードの最大ドロー枚数が+1
                     case 24: MaxDrawCardNumberAdd(1); break;
                 }
-
             }
         }
-        SaveStatus();
-        LoadStatus();
+    }
+
+    public void GameReset()
+    {
+        PlayerPrefs.DeleteKey("HP");
+        PlayerPrefs.DeleteKey("MP");
+        PlayerPrefs.DeleteKey("Attack");
+        PlayerPrefs.DeleteKey("Defence");
+        PlayerPrefs.DeleteKey("Agility");
+        PlayerPrefs.DeleteKey("MaxHP");
+        PlayerPrefs.DeleteKey("MaxMP");
+        PlayerPrefs.Save();
+
+        maxHp = 100;
+        hp = maxHp;
+        maxMp = 100;
+        mp = maxMp;
+        attack = 5;
+        attackInterval = 1;
+        throwAttack = 0;
+        defense = 0;
+        Agility = 0;
+        moveSpeed = 3.5f;
+        addHealthRate = 1;
+        addAttackRate = 1;
+        addDefenceRate = 1;
+        cloneHpRate = 2;
+        cloneAttackRate = 2;
+        cloneDefenceRate = 2;
+        lastAttackTime = 0f;
+        IsDead = false;
+        isAttacking = false;
+        CantMove = false;
+        isDropRateUp = false;
+        battleStartHeal = false;
+        defaultWeapon = null;
+        currentArmor = null;
+        currentHead = null;
+        currentBackpack = null;
+        isHealingSword = false;
+        enemyChase = true;
+        EquipWeapon(defaultWeapon);
     }
 
     public void SaveStatus()

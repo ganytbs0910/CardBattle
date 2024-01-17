@@ -126,7 +126,6 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-
     /// <summary>
     /// 現在の位置から最も近くにいるプレイヤーを探す
     /// </summary>

@@ -376,21 +376,44 @@ public class UIManager : MonoBehaviour
 
     public void GiveUpButton()
     {
+        StartCoroutine(GiveUpCoroutine());
+    }
+    public IEnumerator GiveUpCoroutine()
+    {
         GameManager.instance.battleState = false;
         losePanel.SetActive(true);
-        PlayerPrefs.DeleteAll();
+        //階層を1に戻す
         PlayerPrefs.SetInt("StageHierarchy", 1);
-        Loading(1);
-
-        GameManager.instance.GiveUp();
-
+        GameManager.instance.GameReset();
         HeroMessageDetail("ギブアップ");
-
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
-
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
+
+        yield return new WaitForSeconds(2);
+        //コインを30%に減らす
+        PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
+
+        //プレイヤーのステータスを元に戻す
+        PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController.GameReset();
+
+        //カードをリセットする
+        //cardListPanelの子オブジェクトを全て破棄
+        foreach (Transform child in cardListPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        //敵を全て破壊する
+
+
+        //UIを調整する
+        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
+        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
+        Loading(1);
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)
@@ -399,8 +422,11 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.PlayBGM(AudioManager.BGM.GameOverTheme);
     }
 
-    public void RevivalButton()
+    public void AdsRevivalButton()
     {
+        /// <summary>
+        /// ここに広告を表示
+        /// </summary>
         GameManager.instance.battleState = true;
         losePanel.SetActive(false);
         //敵とキャラクターとカードをリセット
