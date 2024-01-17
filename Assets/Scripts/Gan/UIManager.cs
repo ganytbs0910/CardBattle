@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject loadPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    [SerializeField] private GameObject Hukidashi;
     [SerializeField] private int loadTime = 1;
 
     [SerializeField] private RectTransform battleStartButton;
@@ -247,6 +248,8 @@ public class UIManager : MonoBehaviour
 
     IEnumerator LoadingCoroutine(int stageHierarchy)
     {
+        GameManager.instance.NextStage();
+        print("バグった");
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         yield return new WaitForSeconds(3.5f);
         loadPanel.SetActive(true);
@@ -305,11 +308,17 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
+
+        GameManager.instance.DungeonCameraChange();
     }
 
     //ボタンで使用
-    public void BattleStart()
+    public void BattleStartButton()
     {
+        GameManager.instance.BattleStart();
+
+        AudioManager.instance.PlaySE(AudioManager.SE.StartButton);
+
         HeroMessageDetail("バトル開始");
 
         GameManager.instance.battleState = true;
@@ -322,14 +331,17 @@ public class UIManager : MonoBehaviour
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
         //battleStartButton.gameObject.SetActive(true);
         shopButton.gameObject.SetActive(false);
+    }
 
-
+    public void NextStageButton()
+    {
+        //読み込みを行う
+        Loading(GameManager.instance.stageHierarchy);
     }
 
     public void WinPanel()
     {
         winPanel.SetActive(true);
-        Loading(GameManager.instance.stageHierarchy);
 
         HeroMessageDetail("勝利");
     }
@@ -405,6 +417,7 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
+                if (player == null) return;
             }
         }
     }
@@ -414,7 +427,7 @@ public class UIManager : MonoBehaviour
         int coin = PlayerPrefs.GetInt("Coin");
         coin += value;
         PlayerPrefs.SetInt("Coin", coin);
-        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = coin.ToString();
+        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
     public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
@@ -432,6 +445,14 @@ public class UIManager : MonoBehaviour
         });
 
         HeroMessageDetail("コレクションゲット");
+    }
+
+    //UIのOnOff
+    public void ActiveToggle(GameObject ui)
+    {
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+        ui.SetActive(!ui.activeSelf);
+        print(ui + "のトグルを切り替えます");
     }
 
     //以下ローカライズ
