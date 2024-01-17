@@ -132,6 +132,31 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameReset()
+    {
+        UIManager.instance.LosePanel();
+        // すべての敵が勝利アニメーションを再生
+        foreach (var enemy in enemies)
+        {
+            enemy.Victory();
+        }
+        stageHierarchy = 1;
+        //playerのリストをリセット
+        players.Clear();
+        //playerのオブジェクトを全て破棄
+        foreach (var player in players)
+        {
+            Destroy(player.gameObject);
+        }
+        //enemiesのリストをリセット
+        enemies.Clear();
+        //enemiesのオブジェクトを全て破棄
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy.gameObject);
+        }
+    }
+
     public void BattleStart()
     {
         currentLocation = Location.NormalBattle;
@@ -385,38 +410,20 @@ public class GameManager : MonoBehaviour
             JudgementBGM(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme);
         }
     }
-    
+
     //勝敗が決したときに鳴らす効果音とそのあとに流れるBGM
-    public void JudgementBGM(AudioManager.SE se,AudioManager.BGM bgm)
-    { 
+    public void JudgementBGM(AudioManager.SE se, AudioManager.BGM bgm)
+    {
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(se);
 
         //効果音の長さぶんだけ待ってからBGMを再生
-        StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(se),bgm));
+        StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(se), bgm));
     }
-    private IEnumerator WaitAndPlayBGM(float delay,AudioManager.BGM bgm)
+    private IEnumerator WaitAndPlayBGM(float delay, AudioManager.BGM bgm)
     {
         yield return new WaitForSeconds(delay);
         AudioManager.instance.PlayBGM(bgm);
-    }
-
-    public void GiveUp()
-    {
-        UIManager.instance.LosePanel();
-        // すべての敵が勝利アニメーションを再生
-        foreach (var enemy in enemies)
-        {
-            enemy.Victory();
-        }
-
-        UIManager.instance.WinPanel();
-
-        // すべてのプレイヤーが勝利アニメーションを再生
-        foreach (var player in players)
-        {
-            player.Victory();
-        }
     }
 
     //次のステージへ移行する
