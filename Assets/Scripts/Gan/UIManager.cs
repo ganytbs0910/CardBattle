@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
-    [SerializeField] private RectTransform cardListPanel;
+    public RectTransform cardListPanel;
     public RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
     [SerializeField] private RectTransform settingButton;
@@ -684,6 +684,20 @@ public class UIManager : MonoBehaviour
                 {
                     case Language.Japanese: message = "このポータルはまだ使用できないようだ。"; break;
                     case Language.English: message = "This portal does not appear to be available yet."; break;
+                }
+                break;
+            case "コインが足りません":
+                switch (language)
+                {
+                    case Language.Japanese: message = "コインが不足しているよ！"; break;
+                    case Language.English: message = "You don't have enough coins！"; break;
+                }
+                break;
+            case "カードが満タンだ":
+                switch (language)
+                {
+                    case Language.Japanese: message = "カードが満タンだよ！"; break;
+                    case Language.English: message = "Your card is full!"; break;
                 }
                 break;
             default:

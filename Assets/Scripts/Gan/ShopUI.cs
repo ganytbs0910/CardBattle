@@ -11,10 +11,17 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private Button payButton;
     [SerializeField] private CardController cardPrefab;
     CardEntity[] cardEntities;
+    int cardID;
 
-    // 購入されたアイテムのリファレンスを保持するためのリスト
-    public List<GameObject> createdCards = new List<GameObject>();
-    public List<GameObject> createdButtons = new List<GameObject>();
+    private struct CardUI
+    {
+        public GameObject cardObject;
+        public Button payButton;
+        public int cardID;
+        public int price;
+    }
+
+    private List<CardUI> cardUIList = new List<CardUI>();
 
     void Start()
     {
@@ -22,14 +29,10 @@ public class ShopUI : MonoBehaviour
         SetCardToShop();
     }
 
-    void Update()
-    {
-
-    }
-
-    // カードをショップに並べる
     public void SetCardToShop()
     {
+        ClearShop();
+
         for (int i = 0; i < 3; i++)
         {
             int tiar = GameManager.instance.CalculateTiar();
@@ -37,13 +40,12 @@ public class ShopUI : MonoBehaviour
             CardModel cardModel;
             do
             {
-                int cardID = Random.Range(1, cardEntities.Length + 1);
+                cardID = Random.Range(1, cardEntities.Length + 1);
                 card = Instantiate(cardPrefab, itemsParentPanel.transform);
                 card.name = $"Card_{cardID}";
                 card.Init(cardID);
                 cardModel = card.model;
 
-                // カードのtiarが条件を満たさない場合は破棄して再試行
                 if (cardModel.tiar != tiar)
                 {
                     Destroy(card.gameObject);
@@ -51,61 +53,53 @@ public class ShopUI : MonoBehaviour
             }
             while (cardModel.tiar != tiar);
 
-            // カードのリファレンスをリストに追加
-            //cardのToggleをオフにする
-            card.GetComponent<Toggle>().isOn = false;
-            createdCards.Add(card.gameObject);
-
-
-            // 支払いボタンを複製して設定
             GameObject payButtonClone = Instantiate(payButton.gameObject, payPanel.transform);
             payButtonClone.transform.GetChild(0).GetComponent<TMP_Text>().text = (tiar * 100).ToString();
-            createdButtons.Add(payButtonClone); // ボタンのリファレンスをリストに追加
 
-            // ボタンにクリックイベントリスナーを設定
             Button button = payButtonClone.GetComponent<Button>();
-            int itemID = i;
             int price = tiar * 100;
-            button.onClick.AddListener(() => PurchaseItem(itemID, price));
 
-            // ランクに応じてアウトライン変更
+            cardUIList.Add(new CardUI { cardObject = card.gameObject, payButton = button, cardID = cardID, price = price });
+
             DrawCardController.instance.TiarSelectOutline(card, cardModel);
         }
+        BuyButtonAddListener();
     }
 
-    // アイテムを購入するメソッド
-    void PurchaseItem(int itemID, int price)
+    void ClearShop()
     {
-        //if (PlayerPrefs.GetInt("Coin") < price) Debug.Log("コインが足りません"); return;
-        // ここでアイテムの購入処理を行う
-        if (DrawCardController.instance.parentPanel.transform.childCount - 1 < DrawCardController.instance.maximumCardNumber)
+        foreach (var cardUI in cardUIList)
         {
-            // アイテムを購入したらコインを減らす
-            PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") - price);
-            //なんでこれが呼ばれないの...........???????!?!?!?!?!?!?!?!
-            DrawCardController.instance.DrawCard(itemID);
-            // 購入したアイテムを削除
-            RemovePurchasedItem(itemID);
+            if (cardUI.cardObject != null) Destroy(cardUI.cardObject);
+            if (cardUI.payButton != null) Destroy(cardUI.payButton.gameObject);
         }
-        else
+        cardUIList.Clear();
+    }
+
+    void BuyButtonAddListener()
+    {
+        for (int i = 0; i < cardUIList.Count; i++)
         {
-            Debug.Log("カードがいっぱいです");
+            int index = i; // インデックスの値を保持する
+            cardUIList[index].payButton.onClick.RemoveAllListeners();
+            cardUIList[index].payButton.onClick.AddListener(() => PurchaseItem(index));
         }
     }
 
-    // 購入されたアイテムの削除
-    void RemovePurchasedItem(int itemID)
+    void PurchaseItem(int index)
     {
-        if (itemID < createdCards.Count)
-        {
-            Destroy(createdCards[itemID]);
-            createdCards.RemoveAt(itemID);
-        }
+        if (PlayerPrefs.GetInt("Coin") < cardUIList[index].price) UIManager.instance.HeroMessageDetail("コインが足りません"); return;
+        if (DrawCardController.instance.parentPanel.transform.childCount == DrawCardController.instance.maximumCardNumber) UIManager.instance.HeroMessageDetail("カードが満タンだ"); return;
+        if (index < 0 || index >= cardUIList.Count) return;
 
-        if (itemID < createdButtons.Count)
-        {
-            Destroy(createdButtons[itemID]);
-            createdButtons.RemoveAt(itemID);
-        }
+        var cardUI = cardUIList[index];
+        UIManager.instance.cardListPanel.gameObject.SetActive(true);
+        PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") - cardUI.price);
+        DrawCardController.instance.DrawCard(cardUI.cardID);
+        GoblinShop.instance.BuyCardGoblinEffect();
+        UIManager.instance.AnimateButtonScaleFalse(cardUI.cardObject);
+        cardUI.cardObject.SetActive(false);
+        cardUI.payButton.gameObject.SetActive(false);
+        UIManager.instance.cardListPanel.gameObject.SetActive(false);
     }
 }

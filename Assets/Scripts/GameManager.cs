@@ -387,7 +387,7 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         stageHierarchy++;
-        for (int i = 0; i < UnityEngine.Random.Range(4, 8); i++)
+        for (int i = 0; i < UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
         {
             drawCardController.DrawCard();
         }
