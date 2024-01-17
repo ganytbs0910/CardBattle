@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -417,7 +417,6 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
-                if (player == null) return;
             }
         }
     }
@@ -430,7 +429,7 @@ public class UIManager : MonoBehaviour
         coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
     }
 
-    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition, string collectionName)
+    public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition, string collectionName = null)
     {
         //このオブジェクトの子オブジェクトとして複製
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
