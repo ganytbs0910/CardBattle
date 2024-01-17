@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
     [SerializeField] private RectTransform cardListPanel;
-    [SerializeField] private RectTransform collectionContent;
+    public RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
     [SerializeField] private RectTransform settingButton;
     //[SerializeField] private RectTransform collectionButton;
@@ -405,32 +405,16 @@ public class UIManager : MonoBehaviour
                         break;
                 }
                 itemIcon.sprite = collectionEntity.icon;
-                if (player == null) return;
-
-                //コレクションの効果を反映
-                switch (i)
-                {
-                    //全ステータスが+10
-                    case 1: player.GetComponent<PlayerController>().StatusImprovementPendant(); break;
-                    //攻撃に回復効果が付与される
-                    case 2: player.GetComponent<PlayerController>().HealingSwordTechnique(); break;
-                    //攻撃のインターバルと移動速度が早くなる
-                    case 3: player.GetComponent<PlayerController>().TreasureOfAcceleration(); break;
-                    //会心の一撃が出せるようになる
-                    case 4: break;
-                    //ハードモードが解放
-                    case 5: break;
-                    default:
-
-                        break;
-                }
             }
         }
     }
 
-    public void UpdateCoinText()
+    public void UpdateCoinText(int value = 0)
     {
-        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = PlayerPrefs.GetInt("Coin").ToString();
+        int coin = PlayerPrefs.GetInt("Coin");
+        coin += value;
+        PlayerPrefs.SetInt("Coin", coin);
+        coinPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = coin.ToString();
     }
 
     public void ItemDropEffect(Sprite itemPrefab, Vector3 dropPosition)
