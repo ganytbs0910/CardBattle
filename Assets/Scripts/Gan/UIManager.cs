@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
     [SerializeField] private Camera camera;
     [SerializeField] private RectTransform difficultyPanel;
-    [SerializeField] private RectTransform cardListPanel;
+    public RectTransform cardListPanel;
     public RectTransform collectionContent;
     [SerializeField] private RectTransform heroMessageButton;
     [SerializeField] private RectTransform settingButton;
@@ -253,14 +253,13 @@ public class UIManager : MonoBehaviour
     IEnumerator LoadingCoroutine(int stageHierarchy)
     {
         GameManager.instance.NextStage();
-        print("バグった");
         TutorialTextDetail("カードを用いて最深部を目指そう！");
-        yield return new WaitForSeconds(3.5f);
         loadPanel.SetActive(true);
-
+        loadPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
-        yield return new WaitForSeconds(1.5f);
+
+        yield return new WaitForSeconds(0.5f);
 
         //全てを初期化
         loadPanel.SetActive(false);
@@ -307,6 +306,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
 
+        loadPanel.GetComponent<CanvasGroup>().DOFade(0, 1f);
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
@@ -702,6 +702,20 @@ public class UIManager : MonoBehaviour
                 {
                     case Language.Japanese: message = "このポータルはまだ使用できないようだ。"; break;
                     case Language.English: message = "This portal does not appear to be available yet."; break;
+                }
+                break;
+            case "コインが足りません":
+                switch (language)
+                {
+                    case Language.Japanese: message = "コインが不足しているよ！"; break;
+                    case Language.English: message = "You don't have enough coins！"; break;
+                }
+                break;
+            case "カードが満タンだ":
+                switch (language)
+                {
+                    case Language.Japanese: message = "カードが満タンだよ！"; break;
+                    case Language.English: message = "Your card is full!"; break;
                 }
                 break;
             default:

@@ -145,7 +145,7 @@ public class GoblinShop : MonoBehaviour
     }
 
     //カードを購入する
-    public void SelectCard()
+    public void BuyCardGoblinEffect()
     {
         animator.SetTrigger("Thanks");
         AudioManager.instance.PlayVoice(AudioManager.Voice.Thanks);
