@@ -148,6 +148,8 @@ public class UIManager : MonoBehaviour
     //右上の三本線ボタンを押したとき
     public void ShowLobbyMenu(GameObject ui)
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+
         ui.SetActive(true);
         RectTransform rect = ui.GetComponent<RectTransform>();
         // X位置を1秒かけて0にアニメーション
@@ -157,6 +159,8 @@ public class UIManager : MonoBehaviour
     //ロビーの×ボタンを押したとき
     public void CloseLobbyMenu(GameObject ui)
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.BackButton);
+
         RectTransform rect = ui.GetComponent<RectTransform>();
         // X位置を1秒かけて0にアニメーション
         rect.DOAnchorPosX(600, 0.5f).OnComplete(() =>
@@ -165,10 +169,6 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void ShowSettingPanel(GameObject ui)
-    {
-
-    }
 
     //ボタンクリック時のアニメーション
     public void AnimateButtonScale(GameObject button)
@@ -202,6 +202,8 @@ public class UIManager : MonoBehaviour
 
     public void ShowUI(GameObject ui)
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+
         Image dimed = ui.GetComponent<Image>();
         if (dimed != null) dimed.DOFade(0, 0f);//BGの透過
         //DOTweenで中央からやや大きくし通常サイズにさせる
@@ -216,6 +218,8 @@ public class UIManager : MonoBehaviour
 
     public void CloseUI(GameObject ui)
     {
+        AudioManager.instance.PlaySE(AudioManager.SE.BackButton);
+
         Image dimed = ui.GetComponent<Image>();
 
         if (dimed != null) dimed.DOFade(0, 0.2f);
@@ -361,7 +365,21 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", 1);
         Loading(1);
 
+        GameManager.instance.GiveUp();
+
         HeroMessageDetail("ギブアップ");
+
+        AudioManager.instance.StopBGM();
+        AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
+
+        //効果音の長さぶんだけ待ってからBGMを再生
+        StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
+    }
+
+    private IEnumerator WaitAndPlayBGM(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AudioManager.instance.PlayBGM(AudioManager.BGM.GameOverTheme);
     }
 
     public void RevivalButton()
@@ -737,7 +755,7 @@ public class UIManager : MonoBehaviour
                 SETTINGSText.text = "設定";
                 soundText.text = "サウンド";
                 musicText.text = "音楽";
-                pushAlarmText.text = "プッシュ通知";
+                //pushAlarmText.text = "プッシュ通知";
                 break;
             case Language.English:
                 startText.text = "Start";
@@ -751,7 +769,7 @@ public class UIManager : MonoBehaviour
                 SETTINGSText.text = "SETTINGS";
                 soundText.text = "Sound";
                 musicText.text = "Music";
-                pushAlarmText.text = "Push Alarm";
+                //pushAlarmText.text = "Push Alarm";
                 break;
         }
     }
