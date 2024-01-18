@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 5156510568625990870}
   m_Layer: 0
   m_Name: Jug
-  m_TagString: Untagged
+  m_TagString: itemObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,4 +354,4 @@ MonoBehaviour:
   EffectScale: 1
   CoinEffect: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
   ShakeFeedback: {fileID: 8742116443165863824}
-  itemType: 2
+  itemType: 1

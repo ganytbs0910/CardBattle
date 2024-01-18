@@ -32,6 +32,9 @@ public class ScreenRay : MonoBehaviour
 
     Vector3 InstantPosition;
 
+    //効果音用
+    bool cardSelect = false;
+
 
     void Update()
     {
@@ -52,6 +55,9 @@ public class ScreenRay : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
+            //効果音用
+            cardSelect = false;
+
             if (oneRayUpIgnore)
             {
                 oneRayUpIgnore = false;
@@ -74,11 +80,14 @@ public class ScreenRay : MonoBehaviour
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
                         print("武器を装備させた");
+                        AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
                     }
                     if (armor != null) //防具カードを装備
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
                         print("防具を装備させた");
+                        AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
+
                     }
                     if (particle != null) //パーティクルを発生
                     {
@@ -113,13 +122,13 @@ public class ScreenRay : MonoBehaviour
                             cardID = 0;
                             */
                             //新しいコード(24,25,26に適応)
-                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1));
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1),2f);
                             break;
                         case 25:
-                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(2, 2, 2));
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(2, 2, 2),4f);
                             break;
                         case 26:
-                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(3, 3, 3));
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(3, 3, 3),6f);
                             break;
                     }
                 }
@@ -129,10 +138,10 @@ public class ScreenRay : MonoBehaviour
         StartCoroutine(ToggleCheck());
     }
 
-    void ThrowBomb(int num, Vector3 targetPos, int power, Vector3 size)
+    void ThrowBomb(int num, Vector3 targetPos, int power, Vector3 size,float radius)
     {
         drawCardController.cardIDList.Remove(num);
-        ThrowObject(bombPrefab, targetPos, power, size);
+        ThrowObject(bombPrefab, targetPos, power, size,radius);
         Destroy(chooseCard);
         cardID = 0;
     }
@@ -169,6 +178,8 @@ public class ScreenRay : MonoBehaviour
 
     void RayCastUI()
     {
+        if (cardSelect) return;
+
         PointerEventData pointData = new PointerEventData(EventSystem.current);
         List<RaycastResult> results = new List<RaycastResult>();
         pointData.position = Input.mousePosition;
@@ -177,6 +188,9 @@ public class ScreenRay : MonoBehaviour
         {
             if (result.gameObject.tag == "Card")
             {
+                cardSelect = true;
+                AudioManager.instance.PlaySE(AudioManager.SE.CardSelect);
+
                 oneRayUpIgnore = true;
                 targetMarker.SetActive(false);
                 targetMarker.transform.position = result.gameObject.transform.position;
@@ -201,9 +215,6 @@ public class ScreenRay : MonoBehaviour
                 targetMarker.transform.position = result.gameObject.transform.position;
                 return;
             }
-
-
-            //もしレイヤーがUIなら
         }
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -283,13 +294,17 @@ public class ScreenRay : MonoBehaviour
             }
         }
     }
-    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power, Vector3 size)
+    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power, Vector3 size,float radius)
     {
         // 弾丸をメインカメラの位置に生成
         GameObject bomb = Instantiate(throwObject, Camera.main.transform.position, Quaternion.identity);
 
         // 弾丸のサイズを設定
         bomb.transform.localScale = size;
+
+        BombController bombctl = bomb.GetComponent<BombController>();
+
+        bombctl.BombRadius = radius;
 
         // メインカメラの位置からターゲットの位置への方向ベクトルを計算
         Vector3 direction = targetPos - Camera.main.transform.position;
@@ -298,5 +313,9 @@ public class ScreenRay : MonoBehaviour
         bomb.GetComponent<Rigidbody>().AddForce(direction.normalized * power);
 
         Debug.Log($"ターゲットの場所は{targetPos}でカメラの位置は{Camera.main.transform.position}です");
+
+        AudioManager.instance.PlaySE(AudioManager.SE.ThrowObject);
+
+        print("投射物を投げました");
     }
 }

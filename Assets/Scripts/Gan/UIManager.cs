@@ -72,6 +72,8 @@ public class UIManager : MonoBehaviour
     //文字送りテキスト
     public float delay = 0.05f;
 
+    public GameObject[] LobbyButtons;
+
     void Awake()
     {
         if (instance == null)
@@ -186,6 +188,45 @@ public class UIManager : MonoBehaviour
         });
     }
 
+    public void LobbyButtonActive()
+    {
+        LobbyButtonAllActive();
+
+        switch (GameManager.instance.currentLocation)
+        {
+            case GameManager.Location.PortalWorld:
+                LobbyButtons[0].SetActive(false);
+                LobbyButtons[1].SetActive(false);
+                LobbyButtons[5].SetActive(false);
+                break;
+            case GameManager.Location.GoblinShop:
+                LobbyButtons[0].SetActive(false);
+                LobbyButtons[3].SetActive(false);
+                LobbyButtons[5].SetActive(false);
+                break;
+            case GameManager.Location.Dungeon:
+                LobbyButtons[1].SetActive(false);
+                break;
+            case GameManager.Location.NormalBattle:
+                LobbyButtons[0].SetActive(false);
+                LobbyButtons[1].SetActive(false);
+                break;
+            case GameManager.Location.BossBattle:
+                LobbyButtons[0].SetActive(false);
+                LobbyButtons[1].SetActive(false);
+                break;
+        }
+    }
+
+    public void LobbyButtonAllActive()
+    {
+        foreach (GameObject buttons in LobbyButtons)
+        {
+            buttons.SetActive(true);
+        }
+    }
+
+
 
     //ボタンクリック時のアニメーション
     public void AnimateButtonScale(GameObject button)
@@ -285,6 +326,10 @@ public class UIManager : MonoBehaviour
         startCheckButton.SetActive(true);
         heroMessageText.gameObject.SetActive(true);
 
+        //地面に置かれたアイテムを消す
+        GameManager.instance.DestroyAllItemWithTag("itemObj");
+        GameManager.instance.DungeonCameraChange();
+
         // カメラの角度を調整
         Vector3 currentCameraRotation = camera.transform.eulerAngles;
         camera.transform.eulerAngles = new Vector3(currentCameraRotation.x + 10, currentCameraRotation.y, currentCameraRotation.z);
@@ -329,8 +374,6 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
         PlayerPrefs.SetInt("Tutorial", 1);
         TutorialTextDetail("");
-
-        GameManager.instance.DungeonCameraChange();
     }
 
     //ボタンで使用
@@ -358,6 +401,8 @@ public class UIManager : MonoBehaviour
     {
         //読み込みを行う
         Loading(GameManager.instance.stageHierarchy);
+
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
     }
 
     public void WinPanel()
@@ -791,7 +836,7 @@ public class UIManager : MonoBehaviour
                 collectionTitleText.text = "所持中のアイテム";
                 settingText.text = "設定";
                 shopText.text = "ショップ";
-                dungeonText.text = "dungeon";
+                dungeonText.text = "ダンジョン";
                 collectionsText.text = "バッグ";
                 playingManualText.text = "遊び方";
                 reviewText.text = "レビュー";

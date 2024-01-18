@@ -12,6 +12,8 @@ TagManager:
   - Projectile_Player
   - UI
   - Armor
+  - FxTemporaire
+  - itemObj
   layers:
   - Default
   - TransparentFX

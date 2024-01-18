@@ -40,17 +40,28 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] seList;
     public enum SE
     { 
-        ButtonClick,
-        ArrowClick,
-        BackButton,
-        StartButton,
-        ItemGet,
-        GoPortal,
-        BuyCard,
-        YouLose,
-        YouWin,
-        WinTheBoss,
-        GoblinLanding,
+        ButtonClick,//0
+        ArrowClick,//1
+        BackButton,//2
+        StartButton,//3
+        ItemGet,//4
+        GoPortal,//5
+        BuyCard,//6
+        YouLose,//7
+        YouWin,//8
+        WinTheBoss,//9
+        GoblinLanding,//10
+        DropCoin,//11
+        BreakBox,//12
+        BreakGlass,//13
+        CardSelect,//14
+        BombExprosion,//15
+        ThrowObject,//16
+        Equipment,//17
+        PlayerIncrease,//18
+        Regeneration,//19
+        PowerUp,//20
+        PowerDown,//21
     }
 
     public AudioClip[] voiceList;
@@ -59,6 +70,8 @@ public class AudioManager : MonoBehaviour
         Welcome,//ゴブリン
         Thanks,//ゴブリン
         ByeBye,//ゴブリン
+        Win,//Player
+        Lose,//Player
     }
 
     //BGMを鳴らす

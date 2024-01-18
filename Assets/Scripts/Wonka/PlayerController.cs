@@ -874,19 +874,27 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.CreateCharacterList();
 
         print("プレイヤーの人数が" + number + "増えました");
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PlayerIncrease);
     }
     //体力増加
     void HealthUp(int value)
     {
         maxHp += value;
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
+        
     }
     void AttackUp(float value)
     {
         attack = Mathf.RoundToInt(attack * value);
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
     void DefenceUp(float value)
     {
         defense = Mathf.RoundToInt(defense * value);
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     public void HPHeal(int value)
@@ -906,6 +914,8 @@ public class PlayerController : MonoBehaviour
         //Sliderを修正
         playerUIManager.UpdateHP(maxHp, hp);
         print("プレイヤーのHPが" + value + "回復しました");
+
+        AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
 
     }
 
@@ -927,6 +937,9 @@ public class PlayerController : MonoBehaviour
         playerUIManager.UpdateMP(maxMp, mp);
 
         print("プレイヤーのMPが" + value + "回復しました");
+
+        AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
+
     }
 
     /// <summary>
@@ -949,6 +962,8 @@ public class PlayerController : MonoBehaviour
     void AvoidanceUp(int value)
     {
         Agility += value;
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //コレクションのドロップ率増加
@@ -961,23 +976,31 @@ public class PlayerController : MonoBehaviour
     void HealthRateUp(float value)
     {
         addHealthRate = value;
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //攻撃の倍率上昇
     void AttackRateUp(float value)
     {
         addAttackRate = value;
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //防御の倍率上昇
     void DefenceRate(float value)
     {
         addDefenceRate = value;
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     void MoveSpeedUp(int value)
     {
         moveSpeed += value;
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //コインを100所持してスタート
@@ -1012,6 +1035,8 @@ public class PlayerController : MonoBehaviour
         HealthUp(value);
         AttackUp(value);
         DefenceUp(value);
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //階層が始まるとHPが3回復
