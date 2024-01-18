@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 1541008930064766114}
   m_Layer: 0
   m_Name: Pumpkin
-  m_TagString: Untagged
+  m_TagString: itemObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

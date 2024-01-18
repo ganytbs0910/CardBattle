@@ -33,9 +33,9 @@ public class EnemyController : MonoBehaviour
 
     [Header("状態異常")]
     bool poison;
-    bool paralyze;
+    bool stan;
     bool sleep;
-    bool freeze;
+    bool charm;
 
     public Transform playerTarget; // 敵の位置
     public NavMeshAgent agent; // NavMesh Agent
@@ -407,6 +407,8 @@ public class EnemyController : MonoBehaviour
         //dropItemPrefabをCollectionEnetityのid番目のiconを取得kする
         Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
         UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
+
+        AudioManager.instance.PlaySE(AudioManager.SE.DropCoin);
     }
 
     // 勝利アニメーションをトリガーするメソッド
@@ -473,11 +475,11 @@ public class EnemyController : MonoBehaviour
             //敵を毒状態にする
             case 17: Poison(); break;
             //敵をマヒ状態にする
-            case 18: Paralyze(); break;
+            case 18: Stan(); break;
             //敵を眠り状態にする
             case 19: Sleep(); break;
             //敵をフリーズ状態にする
-            case 20: Freeze(); break;
+            case 20: Charm(); break;
             //プレイヤーがターゲット
             case 21: break;
             case 22: break;
@@ -494,6 +496,8 @@ public class EnemyController : MonoBehaviour
         hp -= (int)(hp * value);
         enemyUIManager.UpdateHP(hp);//HPSliderの更新
         print("敵に" + hp * value + "ダメージを与えました");
+
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
     }
 
     //
@@ -529,7 +533,7 @@ public class EnemyController : MonoBehaviour
                     hp -= 1;
                 }).AddTo(this); // オブジェクト破棄時に購読を自動解除するためにAddToを使用
         }
-        if (paralyze)
+        if (stan)
         {
             //マヒ状態の処理
             //5秒間攻撃しなくなる
@@ -546,7 +550,7 @@ public class EnemyController : MonoBehaviour
             //攻撃を喰らうまでなにもしない
 
         }
-        if (freeze)
+        if (charm)
         {
             //フリーズ状態の処理
             //移動速度が半分になる
@@ -555,22 +559,106 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Poison()
+
+
+    public void Poison()
     {
-        poison = true;
+        if (!poison)
+        {
+            poison = true;
+            StartCoroutine(PoisonEffect(10f, 1f)); 
+            AudioManager.instance.PlaySE(AudioManager.SE.PowerDown); 
+        }
     }
-    void Paralyze()
+
+    IEnumerator PoisonEffect(float duration, float damageInterval)
     {
-        paralyze = true;
+        float timer = 0;
+        while (timer < duration)
+        {
+            hp -= maxHp / 20; 
+            enemyUIManager.UpdateHP(hp);
+            if (hp <= 0)
+            {
+                Die();
+                yield break;
+            }
+            yield return new WaitForSeconds(damageInterval);
+            timer += damageInterval;
+        }
+        poison = false;
     }
-    void Sleep()
+    public void Stan()
     {
-        sleep = true;
+        if (!stan)
+        {
+            stan = true;
+            StartCoroutine(StanEffect(5f)); 
+            AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
+        }
     }
-    void Freeze()
+
+    IEnumerator StanEffect(float duration)
     {
-        freeze = true;
+        CantMove = true;
+        isAttacking = false;
+        yield return new WaitForSeconds(duration);
+        CantMove = false;
+        stan = false;
     }
+
+    public void Sleep()
+    {
+        if (!sleep)
+        {
+            sleep = true;
+            StartCoroutine(SleepEffect());
+            AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
+        }
+    }
+
+    IEnumerator SleepEffect()
+    {
+        CantMove = true;
+        isAttacking = false;
+        // Wait until the enemy takes damage to wake up
+        while (sleep)
+        {
+            yield return null;
+        }
+    }
+
+    public void Charm()
+    {
+        if (!charm)
+        {
+            charm = true;
+            StartCoroutine(CharmEffect(10f)); 
+            AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
+        }
+    }
+
+    IEnumerator CharmEffect(float duration)
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        Transform newTarget = null;
+
+        if (enemies.Length > 0)
+        {
+            // Optionally, you can add logic here to choose a specific enemy
+            newTarget = enemies[Random.Range(0, enemies.Length)].transform;
+        }
+
+        if (newTarget != null)
+        {
+            Transform originalTarget = playerTarget;
+            playerTarget = newTarget;
+            yield return new WaitForSeconds(duration);
+            playerTarget = originalTarget;
+        }
+        charm = false;
+    }
+
 
     public void PlayAttackEffect()
     {

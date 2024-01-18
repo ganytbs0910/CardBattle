@@ -14,12 +14,12 @@ public class BreaksOnTouch : MonoBehaviour
 
     public enum ItemType
     {
-        GiftBox,
+        //GiftBox,
         Chest,
         Jug,
-        Pumpkin,
-        Diamond,
-        Mashroom,
+        //Pumpkin,
+        //Diamond,
+        //Mashroom,
     }
 
     public ItemType itemType;
@@ -38,24 +38,28 @@ public class BreaksOnTouch : MonoBehaviour
     {
         switch (itemType)
         {
-            case ItemType.GiftBox:
-                RandomDropItem();
-                break;
+            //case ItemType.GiftBox:
+            //    RandomDropItem();
+            //    break;
             case ItemType.Chest:
                 RandomDropItem();
+                AudioManager.instance.PlaySE(AudioManager.SE.BreakBox);
+                print("チェストを破壊しました");
                 break;
             case ItemType.Jug:
                 DropCoin();
+                AudioManager.instance.PlaySE(AudioManager.SE.BreakGlass);
+                print("ジャグを破壊しました");
                 break;
-            case ItemType.Pumpkin:
-                ParalysisEffect();
-                break;
-            case ItemType.Diamond:
-                AddMPEffect();
-                break;
-            case ItemType.Mashroom:
-                PoisonEffect();
-                break;
+            //case ItemType.Pumpkin:
+            //    ParalysisEffect();
+            //    break;
+            //case ItemType.Diamond:
+            //    AddMPEffect();
+            //    break;
+            //case ItemType.Mashroom:
+            //    PoisonEffect();
+                //break;
 
         }
     }
@@ -70,9 +74,6 @@ public class BreaksOnTouch : MonoBehaviour
                 break;
             case 1:
                 DropCard();
-                break;
-            case 2:
-                NoDrop();
                 break;
         }
     }

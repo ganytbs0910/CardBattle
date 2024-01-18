@@ -27,6 +27,13 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera battleCamera;
     public CinemachineVirtualCamera portalCamera;
 
+    //エリアごとのパネル
+    public GameObject mainPanel;
+    public GameObject battlePanel;
+    public GameObject shopPanel;
+    public GameObject portalPanel;
+
+
     public enum Location
     {
         PortalWorld,
@@ -60,22 +67,37 @@ public class GameManager : MonoBehaviour
         {
             case Location.PortalWorld:
                 AudioManager.instance.PlayBGM(AudioManager.BGM.PortalWorld);
+                ActivePanel(portalPanel);
                 break;
             case Location.Dungeon:
                 AudioManager.instance.PlayBGM(AudioManager.BGM.Dungeon);
+                ActivePanel(battlePanel);
                 break;
             case Location.NormalBattle:
                 AudioManager.instance.PlayBGM(AudioManager.BGM.NormalBattle);
+                ActivePanel(battlePanel);
                 break;
             case Location.BossBattle:
                 AudioManager.instance.PlayBGM(AudioManager.BGM.BossBattle);
+                ActivePanel(battlePanel);
                 break;
-
             case Location.GoblinShop:
                 AudioManager.instance.PlayBGM(AudioManager.BGM.GoblinShop);
+                ActivePanel(shopPanel);
                 break;
         }
+
+        UIManager.instance.LobbyButtonActive();
     }
+
+    public void ActivePanel(GameObject activePanel)
+    {
+        battlePanel.SetActive(false);
+        shopPanel.SetActive(false);
+        portalPanel.SetActive(false);
+        activePanel.SetActive(true);
+    }
+
     void Start()
     {
         //デバック用
@@ -154,6 +176,17 @@ public class GameManager : MonoBehaviour
         foreach (var enemy in enemies)
         {
             Destroy(enemy.gameObject);
+        }
+
+        DestroyAllItemWithTag("itemObj");
+    }
+
+    public void DestroyAllItemWithTag(string tag)
+    {
+        GameObject[] items = GameObject.FindGameObjectsWithTag(tag);
+        foreach (GameObject item in items)
+        {
+            Destroy(item);
         }
     }
 
@@ -394,7 +427,7 @@ public class GameManager : MonoBehaviour
                 enemy.Victory();
             }
 
-            JudgementBGM(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme);
+            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme,AudioManager.Voice.Lose);
         }
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
@@ -407,15 +440,16 @@ public class GameManager : MonoBehaviour
                 player.Victory();
             }
 
-            JudgementBGM(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme);
+            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme,AudioManager.Voice.Win);
         }
     }
 
-    //勝敗が決したときに鳴らす効果音とそのあとに流れるBGM
-    public void JudgementBGM(AudioManager.SE se, AudioManager.BGM bgm)
+    //勝敗が決したときに鳴らす効果音とそのあとに流れるサウンド
+    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm,AudioManager.Voice voice)
     {
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(se);
+        AudioManager.instance.PlayVoice(voice);
 
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(se), bgm));
@@ -423,7 +457,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitAndPlayBGM(float delay, AudioManager.BGM bgm)
     {
         yield return new WaitForSeconds(delay);
-        AudioManager.instance.PlayBGM(bgm);
+        if (!AudioManager.instance.audioSourceBGM.isPlaying)
+        {
+            AudioManager.instance.PlayBGM(bgm);
+        }
     }
 
     //次のステージへ移行する

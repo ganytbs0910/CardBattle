@@ -21,9 +21,6 @@ public class GoblinShop : MonoBehaviour
     public GameObject[] FalsePanel;
     public GameObject ShopPanel;
 
-    public GameObject ShopButton;
-    public GameObject DungeonButton;
-
     public MMFeedbacks JumpFeedback;
 
 
@@ -77,9 +74,6 @@ public class GoblinShop : MonoBehaviour
                 AudioManager.instance.PlaySE(AudioManager.SE.GoblinLanding);
             });
 
-            ShopButton.SetActive(false);
-            DungeonButton.SetActive(true);
-
             foreach (GameObject panel in FalsePanel)
             {
                 panel.SetActive(false);
@@ -120,9 +114,6 @@ public class GoblinShop : MonoBehaviour
 
             // DoTweenを使用してゴブリンを移動させる
             Goblin.transform.DOMove(InitPoint.position, 1.0f);
-
-            ShopButton.SetActive(true);
-            DungeonButton.SetActive(false);
 
             foreach (GameObject panel in FalsePanel)
             {
