@@ -427,7 +427,7 @@ public class GameManager : MonoBehaviour
                 enemy.Victory();
             }
 
-            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme,AudioManager.Voice.Lose);
+            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme,AudioManager.instance.randomLoseClip);
         }
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
@@ -440,16 +440,17 @@ public class GameManager : MonoBehaviour
                 player.Victory();
             }
 
-            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme,AudioManager.Voice.Win);
+            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme,AudioManager.instance.randomVictoryClip);
         }
     }
 
     //勝敗が決したときに鳴らす効果音とそのあとに流れるサウンド
-    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm,AudioManager.Voice voice)
+    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm,AudioClip[] clips)
     {
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(se);
-        AudioManager.instance.PlayVoice(voice);
+        AudioManager.instance.RandomVoice(clips);
+        //AudioManager.instance.PlayVoice(voice);
 
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(se), bgm));

@@ -20,6 +20,9 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    public float low = .95f;
+    public float high = 1.05f;
+
     public AudioSource audioSourceBGM;
     public AudioSource audioSourceSE;
     public AudioSource audioSourceVoice;
@@ -74,6 +77,9 @@ public class AudioManager : MonoBehaviour
         Lose,//Player
     }
 
+    public AudioClip[] randomVictoryClip;
+    public AudioClip[] randomLoseClip;
+
     //BGMを鳴らす
     public void PlayBGM(BGM bgm)
     {
@@ -101,6 +107,20 @@ public class AudioManager : MonoBehaviour
         int index = (int)voice;
         AudioClip clip = voiceList[index];
         audioSourceVoice.PlayOneShot(clip);
+    }
+
+    public void RandomVoice(params AudioClip[] clips)
+    //paramsは引数の数は同じだが渡す数が決まってないときに使う
+    {
+        int randomIndex = Random.Range(0, clips.Length);
+        //クリップをランダムに選ぶ。
+        float randomPitch = Random.Range(low, high);
+        //ピッチをランダムに選ぶ。
+
+        audioSourceVoice.pitch = randomPitch;
+        audioSourceVoice.clip = clips[randomIndex];
+
+        audioSourceVoice.Play();
     }
 
     //効果音の長さを取得する
