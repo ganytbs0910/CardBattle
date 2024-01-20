@@ -177,24 +177,24 @@ public class PlayerController : MonoBehaviour
 
     public void GameReset()
     {
-        PlayerPrefs.DeleteKey("HP");
-        PlayerPrefs.DeleteKey("MP");
-        PlayerPrefs.DeleteKey("Attack");
-        PlayerPrefs.DeleteKey("Defence");
-        PlayerPrefs.DeleteKey("Agility");
-        PlayerPrefs.DeleteKey("MaxHP");
-        PlayerPrefs.DeleteKey("MaxMP");
-        PlayerPrefs.Save();
-
         maxHp = 100;
+        PlayerPrefs.SetInt("MaxHP", maxHp);
         hp = maxHp;
+        PlayerPrefs.SetInt("HP", hp);
+        playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
         maxMp = 100;
+        PlayerPrefs.SetInt("MaxMP", maxMp);
         mp = maxMp;
+        PlayerPrefs.SetInt("MP", mp);
+        playerUIManager.UpdateMP(maxMp, mp);//MPSliderの更新
         attack = 5;
+        PlayerPrefs.SetInt("Attack", attack);
         attackInterval = 1;
         throwAttack = 0;
         defense = 0;
+        PlayerPrefs.SetInt("Defense", defense);
         Agility = 0;
+        PlayerPrefs.SetInt("Agility", Agility);
         moveSpeed = 3.5f;
         addHealthRate = 1;
         addAttackRate = 1;
@@ -215,6 +215,7 @@ public class PlayerController : MonoBehaviour
         isHealingSword = false;
         enemyChase = true;
         EquipWeapon(defaultWeapon);
+        PlayerPrefs.Save();
     }
 
     public void SaveStatus()
@@ -226,6 +227,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("Agility", Agility);
         PlayerPrefs.SetInt("MaxHP", maxHp);
         PlayerPrefs.SetInt("MaxMP", maxMp);
+        PlayerPrefs.Save();
     }
 
     void LoadStatus()
@@ -750,7 +752,6 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetTrigger("Victory");
                 transform.LookAt(Camera.main.transform);
-
             });
         }
     }
@@ -882,7 +883,7 @@ public class PlayerController : MonoBehaviour
     {
         maxHp += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
-        
+
     }
     void AttackUp(float value)
     {

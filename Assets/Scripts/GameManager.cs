@@ -157,27 +157,29 @@ public class GameManager : MonoBehaviour
     public void GameReset()
     {
         UIManager.instance.LosePanel();
+
         // すべての敵が勝利アニメーションを再生
         foreach (var enemy in enemies)
         {
-            enemy.Victory();
+            if (enemy != null)
+            {
+                enemy.Victory();
+            }
         }
-        stageHierarchy = 1;
-        //playerのリストをリセット
-        players.Clear();
-        //playerのオブジェクトを全て破棄
-        foreach (var player in players)
-        {
-            Destroy(player.gameObject);
-        }
-        //enemiesのリストをリセット
-        enemies.Clear();
+        PlayerPrefs.SetInt("StageHierarchy", 1);
+        stageHierarchy = 0;
+
         //enemiesのオブジェクトを全て破棄
         foreach (var enemy in enemies)
         {
-            Destroy(enemy.gameObject);
+            if (enemy != null)
+            {
+                Destroy(enemy.gameObject);
+            }
         }
 
+        //enemiesのリストをリセット
+        enemies.Clear();
         DestroyAllItemWithTag("itemObj");
     }
 
@@ -239,8 +241,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Coin", coin);
         UIManager.instance.UpdateCoinText();
     }
-
-
 
     void KeepCurrentStage()
     {
@@ -351,7 +351,6 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
                     int range = stageHierarchy / 10;
-
                     switch (range)
                     {
                         // 1~9の場合の処理
@@ -373,7 +372,6 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
-
 
         if (boss != null)
         {
@@ -427,7 +425,7 @@ public class GameManager : MonoBehaviour
                 enemy.Victory();
             }
 
-            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme,AudioManager.instance.randomLoseClip);
+            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme, AudioManager.instance.randomLoseClip);
         }
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
@@ -440,12 +438,12 @@ public class GameManager : MonoBehaviour
                 player.Victory();
             }
 
-            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme,AudioManager.instance.randomVictoryClip);
+            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme, AudioManager.instance.randomVictoryClip);
         }
     }
 
     //勝敗が決したときに鳴らす効果音とそのあとに流れるサウンド
-    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm,AudioClip[] clips)
+    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm, AudioClip[] clips)
     {
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(se);
@@ -468,6 +466,7 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         stageHierarchy++;
+        PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         for (int i = 0; i < UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
         {
             drawCardController.DrawCard();

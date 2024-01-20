@@ -17,7 +17,11 @@ public class DrawCardController : MonoBehaviour
     void Awake()
     {
         instance = this;
-
+        if (!PlayerPrefs.HasKey("MinDrawCard"))
+        {
+            PlayerPrefs.SetInt("MinDrawCard", 1);
+            PlayerPrefs.SetInt("MaxDrawCard", 4);
+        }
         //iPhoneかAndroidなら処理を実行
 #if UNITY_IOS || UNITY_ANDROID
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
@@ -50,7 +54,19 @@ public class DrawCardController : MonoBehaviour
 
     }
 
-
+    public void GameReset()
+    {
+        PlayerPrefs.DeleteKey("CurrentStageCard");
+        cardIDList.Clear();
+        foreach (Transform child in parentPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        for (int i = 0; i < Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
+        {
+            DrawCard();
+        }
+    }
 
     public void DrawCard(int? cardID = null)
     {
