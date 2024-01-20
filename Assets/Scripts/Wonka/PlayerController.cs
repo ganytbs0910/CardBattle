@@ -395,8 +395,8 @@ public class PlayerController : MonoBehaviour
 
         int weaponATK = currentWeapon.GetATKPoint();
         int weaponDEF = currentWeapon.GetDEFPoint();
-        print("攻撃力" + weaponATK);
-        print("防御力" + weaponDEF);
+        //print("攻撃力" + weaponATK);
+        //print("防御力" + weaponDEF);
 
         attack += weaponATK;
         defense += weaponDEF;

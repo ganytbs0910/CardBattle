@@ -354,9 +354,9 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            RemainingBossTextDetail($"ボスまで残り:{stage}階層");
+            RemainingBossTextDetail($"ボスまで残り:{stage}階");
         }
-        StageTextDetail($"階層 : {GameManager.instance.stageHierarchy}");
+        StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
@@ -425,40 +425,48 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator GiveUpCoroutine()
     {
-        GameManager.instance.battleState = false;
-        losePanel.SetActive(true);
-        //階層を1に戻す
+        if (GameManager.instance.battleState)
+        {
+            camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x + 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
+            difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y - 500, 0.8f);
+            cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y + 100, 1.0f);
+        }
+        GameManager.instance.stageHierarchy = 1;
         PlayerPrefs.SetInt("StageHierarchy", 1);
-        GameManager.instance.GameReset();
+        //敗北が決定した瞬間よぶもの
+        LosePanel();
         HeroMessageDetail("ギブアップ");
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
-
         yield return new WaitForSeconds(2);
+        //敗北が決定してだんだん画面が暗くなる処理
+        Loading(1);
+        yield return new WaitForSeconds(1f);
+
+        //ロード中の画面が真っ暗画面にする処理
+        //敵を破棄して階層をリセットして
+        GameManager.instance.GameReset();
         //コインを30%に減らす
         PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
-
         //プレイヤーのステータスを元に戻す
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.GameReset();
-
         //カードをリセットする
+
         //cardListPanelの子オブジェクトを全て破棄
         foreach (Transform child in cardListPanel.transform)
         {
             Destroy(child.gameObject);
         }
-
         //敵を全て破壊する
-
 
         //UIを調整する
         camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
-        Loading(1);
+        //Loadが終わって画面が晴れたらする処理
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)
@@ -568,14 +576,12 @@ public class UIManager : MonoBehaviour
         switch (PlayerPrefs.GetString("Language"))
         {
             case "Japanese":
-                Debug.Log("Japaneseになりました");
                 this.language = Language.Japanese;
                 PlayerPrefs.SetString("Language", "Japanese");
                 currentLanguage.text = "Japan";
                 languageImage.sprite = japaneseIcon;
                 break;
             case "English":
-                Debug.Log("Englishになりました");
                 this.language = Language.English;
                 PlayerPrefs.SetString("Language", "English");
                 currentLanguage.text = "English";

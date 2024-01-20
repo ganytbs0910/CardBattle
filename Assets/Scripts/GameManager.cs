@@ -156,20 +156,9 @@ public class GameManager : MonoBehaviour
 
     public void GameReset()
     {
-        UIManager.instance.LosePanel();
-        // すべての敵が勝利アニメーションを再生
-        foreach (var enemy in enemies)
-        {
-            enemy.Victory();
-        }
+        battleState = false;
         stageHierarchy = 1;
-        //playerのリストをリセット
-        players.Clear();
-        //playerのオブジェクトを全て破棄
-        foreach (var player in players)
-        {
-            Destroy(player.gameObject);
-        }
+        PlayerPrefs.SetInt("StageHierarchy", 1);
         //enemiesのリストをリセット
         enemies.Clear();
         //enemiesのオブジェクトを全て破棄
@@ -179,6 +168,15 @@ public class GameManager : MonoBehaviour
         }
 
         DestroyAllItemWithTag("itemObj");
+        for (int i = playerObjects.Count - 1; i >= 0; i--)
+        {
+            if (playerObjects[i].name == "ShadowPlayer")
+            {
+                Destroy(playerObjects[i]);
+                playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
+            }
+        }
+        ResetCharacters();
     }
 
     public void DestroyAllItemWithTag(string tag)
@@ -427,7 +425,7 @@ public class GameManager : MonoBehaviour
                 enemy.Victory();
             }
 
-            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme,AudioManager.instance.randomLoseClip);
+            JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme, AudioManager.instance.randomLoseClip);
         }
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか
@@ -440,12 +438,12 @@ public class GameManager : MonoBehaviour
                 player.Victory();
             }
 
-            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme,AudioManager.instance.randomVictoryClip);
+            JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme, AudioManager.instance.randomVictoryClip);
         }
     }
 
     //勝敗が決したときに鳴らす効果音とそのあとに流れるサウンド
-    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm,AudioClip[] clips)
+    public void JudgementSound(AudioManager.SE se, AudioManager.BGM bgm, AudioClip[] clips)
     {
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(se);
