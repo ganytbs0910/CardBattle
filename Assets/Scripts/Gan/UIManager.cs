@@ -303,20 +303,21 @@ public class UIManager : MonoBehaviour
         //shopButton.gameObject.SetActive(false);
     }
 
-    public void Loading(int stageHierarchy)
+    public void Loading()
     {
-        StartCoroutine(LoadingCoroutine(stageHierarchy));
+        Debug.Log("Loading");
+        StartCoroutine(LoadingCoroutine());
     }
 
-    IEnumerator LoadingCoroutine(int stageHierarchy)
+    IEnumerator LoadingCoroutine()
     {
         GameManager.instance.NextStage();
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         loadPanel.SetActive(true);
         loadPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
-
         yield return new WaitForSeconds(0.5f);
 
         //全てを初期化
@@ -341,13 +342,13 @@ public class UIManager : MonoBehaviour
         Vector2 cardListPanelPosition = cardListPanel.anchoredPosition;
         cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 100);
 
-
         battleStartButton.gameObject.SetActive(true);
         GameManager.instance.battleState = false;
         loadPanel.SetActive(true);
+
         //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
         loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
-        int stage = 10 - GameManager.instance.stageHierarchy;
+        int stage = 10 - PlayerPrefs.GetInt("StageHierarchy");
         if (stage == 0)
         {
             RemainingBossTextDetail("ボス戦 !!");
@@ -356,7 +357,10 @@ public class UIManager : MonoBehaviour
         {
             RemainingBossTextDetail($"ボスまで残り:{stage}階");
         }
-        StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
+
+        PlayerPrefs.SetInt("Tutorial", 1);
+        StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
+        TutorialTextDetail("");
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
@@ -367,13 +371,9 @@ public class UIManager : MonoBehaviour
         GameManager.instance.ResetCharacters();//位置とアニメをリセット
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
-
         loadPanel.GetComponent<CanvasGroup>().DOFade(0, 1f);
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
-        PlayerPrefs.SetInt("StageHierarchy", GameManager.instance.stageHierarchy);
-        PlayerPrefs.SetInt("Tutorial", 1);
-        TutorialTextDetail("");
     }
 
     //ボタンで使用
@@ -400,7 +400,7 @@ public class UIManager : MonoBehaviour
     public void NextStageButton()
     {
         //読み込みを行う
-        Loading(GameManager.instance.stageHierarchy);
+        Loading();
 
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
     }
@@ -425,16 +425,19 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator GiveUpCoroutine()
     {
-        if (GameManager.instance.battleState)
+        //UIを調整する
+        if (GameManager.instance.battleState == false)
         {
-            camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x + 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-            difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y - 500, 0.8f);
-            cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y + 100, 1.0f);
+            camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
+            difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
+            cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
         }
-        GameManager.instance.stageHierarchy = 1;
-        PlayerPrefs.SetInt("StageHierarchy", 1);
-        //敗北が決定した瞬間よぶもの
-        LosePanel();
+        GameManager.instance.battleState = false;
+        losePanel.SetActive(true);
+        StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
+
+        //敵を全て破壊する
+        GameManager.instance.GameReset();
         HeroMessageDetail("ギブアップ");
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
@@ -453,20 +456,10 @@ public class UIManager : MonoBehaviour
         //プレイヤーのステータスを元に戻す
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.GameReset();
-        //カードをリセットする
 
-        //cardListPanelの子オブジェクトを全て破棄
-        foreach (Transform child in cardListPanel.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        //敵を全て破壊する
-
-        //UIを調整する
-        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
-        //Loadが終わって画面が晴れたらする処理
+        //カードのデータをリセットする
+        DrawCardController.instance.GameReset();
+        Loading();
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)
@@ -699,7 +692,7 @@ public class UIManager : MonoBehaviour
             int remainingFloors = 10 - GameManager.instance.stageHierarchy;
             switch (language)
             {
-                case Language.Japanese: detail = $"ボスまで残り:{remainingFloors}階層"; break;
+                case Language.Japanese: detail = $"ボスまで残り:{remainingFloors}階"; break;
                 case Language.English: detail = $"Remaining to Boss:{remainingFloors} floors"; break;
             }
         }
@@ -798,6 +791,14 @@ public class UIManager : MonoBehaviour
                     case Language.English: message = "This portal does not appear to be available yet."; break;
                 }
                 break;
+            case "ポータル移動完了":
+                switch (language)
+                {
+                    case Language.Japanese: message = "敵が出現したぞ！戦闘準備を怠るな！"; break;
+                    case Language.English: message = "Enemies have appeared! Don't neglect your battle preparations!"; break;
+                }
+                break;
+
             case "コインが足りません":
                 switch (language)
                 {
@@ -832,7 +833,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //変更のないテキストのローカライズ
+    //静的テキストのローカライズ
     public void NoChangeLocalizeText()
     {
         switch (language)

@@ -434,9 +434,11 @@ MonoBehaviour:
   maxHp: 150
   attack: 25
   attackInterval: 1
-  defense: 17
+  defense: 10
   moveSpeed: 0
   agility: 0
+  coin: 50
+  dropRate: 50
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0
@@ -446,7 +448,6 @@ MonoBehaviour:
   weaponCollider: {fileID: 1074491307513507980}
   enemyUIManager: {fileID: 114161775267045113}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  dropItemPrefab: {fileID: 0}
   missText: {fileID: 4573170359623430934}
   attackEffect: {fileID: 0}
   effectCollider: {fileID: 0}

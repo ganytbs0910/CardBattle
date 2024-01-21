@@ -498,7 +498,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -534,11 +534,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   maxHp: 20
-  attack: 25
+  attack: 6
   attackInterval: 1
   defense: 5
   moveSpeed: 0
   agility: 0
+  coin: 5
+  dropRate: 40
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0
@@ -548,9 +550,9 @@ MonoBehaviour:
   weaponCollider: {fileID: 7807575366225951120}
   enemyUIManager: {fileID: 1567354348502721719}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  dropItemPrefab: {fileID: 0}
-  playerChase: 1
   missText: {fileID: 1615881850251838276}
+  attackEffect: {fileID: 0}
+  effectCollider: {fileID: 0}
 --- !u!1 &1217098102103856
 GameObject:
   m_ObjectHideFlags: 0

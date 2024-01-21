@@ -1505,11 +1505,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   maxHp: 25
-  attack: 5
+  attack: 3
   attackInterval: 1
   defense: 3
   moveSpeed: 0
   agility: 0
+  coin: 3
+  dropRate: 30
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0
@@ -1519,9 +1521,9 @@ MonoBehaviour:
   weaponCollider: {fileID: 3053927201588970853}
   enemyUIManager: {fileID: 5986764716961027156}
   coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  dropItemPrefab: {fileID: 0}
-  playerChase: 1
   missText: {fileID: 7085599508924181732}
+  attackEffect: {fileID: 0}
+  effectCollider: {fileID: 0}
 --- !u!1 &1713691074708414
 GameObject:
   m_ObjectHideFlags: 0

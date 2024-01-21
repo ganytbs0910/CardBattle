@@ -156,17 +156,30 @@ public class GameManager : MonoBehaviour
 
     public void GameReset()
     {
-        battleState = false;
-        stageHierarchy = 1;
+        UIManager.instance.LosePanel();
+
+        // すべての敵が勝利アニメーションを再生
+        foreach (var enemy in enemies)
+        {
+            if (enemy != null)
+            {
+                enemy.Victory();
+            }
+        }
         PlayerPrefs.SetInt("StageHierarchy", 1);
-        //enemiesのリストをリセット
-        enemies.Clear();
+        stageHierarchy = 0;
+
         //enemiesのオブジェクトを全て破棄
         foreach (var enemy in enemies)
         {
-            Destroy(enemy.gameObject);
+            if (enemy != null)
+            {
+                Destroy(enemy.gameObject);
+            }
         }
 
+        //enemiesのリストをリセット
+        enemies.Clear();
         DestroyAllItemWithTag("itemObj");
         for (int i = playerObjects.Count - 1; i >= 0; i--)
         {
@@ -237,8 +250,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("Coin", coin);
         UIManager.instance.UpdateCoinText();
     }
-
-
 
     void KeepCurrentStage()
     {
@@ -349,7 +360,6 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
                     int range = stageHierarchy / 10;
-
                     switch (range)
                     {
                         // 1~9の場合の処理
@@ -371,7 +381,6 @@ public class GameManager : MonoBehaviour
                 }
                 break;
         }
-
 
         if (boss != null)
         {
@@ -418,13 +427,7 @@ public class GameManager : MonoBehaviour
         //敵が勝利したパターン
         if (AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
         {
-            UIManager.instance.LosePanel();
-            // すべての敵が勝利アニメーションを再生
-            foreach (var enemy in enemies)
-            {
-                enemy.Victory();
-            }
-
+            UIManager.instance.GiveUpButton();
             JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme, AudioManager.instance.randomLoseClip);
         }
         //プレイヤーが勝利したパターン
@@ -466,6 +469,7 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         stageHierarchy++;
+        PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         for (int i = 0; i < UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
         {
             drawCardController.DrawCard();
