@@ -443,16 +443,12 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
-        yield return new WaitForSeconds(2);
-        //敗北が決定してだんだん画面が暗くなる処理
-        Loading(1);
-        yield return new WaitForSeconds(1f);
+        HeroMessageDetail("ポータル移動完了");
 
-        //ロード中の画面が真っ暗画面にする処理
-        //敵を破棄して階層をリセットして
-        GameManager.instance.GameReset();
+        yield return new WaitForSeconds(2);
         //コインを30%に減らす
         PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
+
         //プレイヤーのステータスを元に戻す
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.GameReset();
