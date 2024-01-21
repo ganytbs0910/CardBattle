@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 5
   nameJP: "\u5E78\u904B\u306E\u5C0F\u77F3"
   nameEN: pebble of luck
-  informationJP: Coin drop amount +1
-  informationEN: Hard mode released
+  informationJP: "\u30B3\u30A4\u30F3\u306E\u30C9\u30ED\u30C3\u30D7\u91CF+1"
+  informationEN: Coin drop amount +1
   icon: {fileID: -719943150, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

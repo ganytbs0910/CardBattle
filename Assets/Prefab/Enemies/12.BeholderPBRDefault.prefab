@@ -2019,7 +2019,7 @@ MonoBehaviour:
   defense: 0
   moveSpeed: 0
   agility: 0
-  coin: 0
+  coin: 6
   dropRate: 60
   weapon: {fileID: 0}
   IsDead: 0
