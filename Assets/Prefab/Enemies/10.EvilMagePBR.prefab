@@ -534,13 +534,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 10
   maxHp: 20
-  attack: 25
+  attack: 6
   attackInterval: 1
   defense: 5
   moveSpeed: 0
   agility: 0
   coin: 0
-  dropRate: 100
+  dropRate: 40
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0

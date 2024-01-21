@@ -418,14 +418,10 @@ public class GameManager : MonoBehaviour
         //敵が勝利したパターン
         if (AreAllPlayersDead()) // すべてのプレイヤーが倒れたか
         {
-            UIManager.instance.LosePanel();
-            // すべての敵が勝利アニメーションを再生
-            foreach (var enemy in enemies)
-            {
-                enemy.Victory();
-            }
-
+            UIManager.instance.GiveUpButton();
             JudgementSound(AudioManager.SE.YouLose, AudioManager.BGM.GameOverTheme, AudioManager.instance.randomLoseClip);
+
+
         }
         //プレイヤーが勝利したパターン
         else if (AreAllEnemiesDead()) // すべての敵が倒れたか

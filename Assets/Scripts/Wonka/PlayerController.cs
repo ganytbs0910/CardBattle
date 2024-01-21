@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public int attack = 5;
     public float attackInterval = 1;//攻撃間隔
     public int throwAttack = 0;
-    public int defense = 0;
+    public int defense = 1;
     public int Agility;//回比率
     public float moveSpeed;
     public float addHealthRate = 1;
@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("Attack", attack);
         attackInterval = 1;
         throwAttack = 0;
-        defense = 0;
+        defense = 1;
         PlayerPrefs.SetInt("Defense", defense);
         Agility = 0;
         PlayerPrefs.SetInt("Agility", Agility);
@@ -727,6 +727,7 @@ public class PlayerController : MonoBehaviour
         IsDead = true;
         //このゲームオブジェクトについている当たり判定が消える
         GetComponent<Collider>().enabled = false;
+
         //剣の当たり判定も消す
         DisableColliderWeapon();
 

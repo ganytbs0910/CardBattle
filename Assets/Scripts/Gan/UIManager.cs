@@ -443,6 +443,7 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
+        HeroMessageDetail("ポータル移動完了");
 
         yield return new WaitForSeconds(2);
         //コインを30%に減らす
@@ -786,6 +787,14 @@ public class UIManager : MonoBehaviour
                     case Language.English: message = "This portal does not appear to be available yet."; break;
                 }
                 break;
+            case "ポータル移動完了":
+                switch (language)
+                {
+                    case Language.Japanese: message = "敵が出現したぞ！戦闘準備を怠るな！"; break;
+                    case Language.English: message = "Enemies have appeared! Don't neglect your battle preparations!"; break;
+                }
+                break;
+
             case "コインが足りません":
                 switch (language)
                 {
@@ -820,7 +829,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    //変更のないテキストのローカライズ
+    //静的テキストのローカライズ
     public void NoChangeLocalizeText()
     {
         switch (language)

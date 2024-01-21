@@ -9,7 +9,7 @@ public class PortalController : MonoBehaviour
 {
     public GameObject[] falseUI;
 
-    public int currentPortal =1;
+    public int currentPortal = 1;
 
     public GameObject rightButton;
     public GameObject leftButton;
@@ -32,8 +32,8 @@ public class PortalController : MonoBehaviour
     }
 
     public void GateDeactive()
-    { 
-        foreach(ParticleSystem gate in portalGate)
+    {
+        foreach (ParticleSystem gate in portalGate)
         {
             gate.Stop();
         }
@@ -62,7 +62,7 @@ public class PortalController : MonoBehaviour
         }
         CameraController.instance.HardOutChange();
         PortalUpdate();
-        
+
     }
 
     public void LeftPortalButton()
@@ -102,7 +102,7 @@ public class PortalController : MonoBehaviour
                 break;
             case 4:
                 leftButton.SetActive(true);
-                rightButton.SetActive(false) ;
+                rightButton.SetActive(false);
                 portalCamera[3].Priority = 1;
                 break;
         }
@@ -127,7 +127,7 @@ public class PortalController : MonoBehaviour
         {
             case 1:
                 if (levelClear[0])
-                { 
+                {
                     LeavePortal();
                 }
                 else
@@ -151,14 +151,13 @@ public class PortalController : MonoBehaviour
                 break;
             case 4:
                 if (levelClear[3])
-                { 
+                {
                     LeavePortal();
                 }
                 else
                 { UIManager.instance.HeroMessageDetail("未開放ポータル"); }
                 break;
         }
-
     }
 
     public void GoPortal()
@@ -233,6 +232,7 @@ public class PortalController : MonoBehaviour
         });
 
         sequence.Play();
+        UIManager.instance.HeroMessageDetail("ポータル移動完了");
     }
 
 
