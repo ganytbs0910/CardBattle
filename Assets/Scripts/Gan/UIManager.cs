@@ -444,17 +444,17 @@ public class UIManager : MonoBehaviour
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
         HeroMessageDetail("ポータル移動完了");
-
-        yield return new WaitForSeconds(2);
         //コインを30%に減らす
         PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
-
         //プレイヤーのステータスを元に戻す
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.GameReset();
-
         //カードのデータをリセットする
         DrawCardController.instance.GameReset();
+
+        yield return new WaitForSeconds(2);
+
+
         Loading();
     }
 
