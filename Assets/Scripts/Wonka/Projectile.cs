@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
+        //damage = 
         if (MuzzleEffect != null)
         {
             Instantiate(MuzzleEffect, transform.position, transform.rotation);

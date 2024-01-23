@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
   m_Name: Card 26
   m_EditorClassIdentifier: 
-  cardID: 24
+  cardID: 26
   name: "\u5927\u578B\u7206\u5F3E\u3092\u6295\u3052\u308B"
   information: 
   tiar: 5

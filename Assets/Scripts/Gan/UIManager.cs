@@ -73,6 +73,7 @@ public class UIManager : MonoBehaviour
     public float delay = 0.05f;
 
     public GameObject[] LobbyButtons;
+    [SerializeField] private PortalController portalController;
 
     void Awake()
     {
@@ -305,7 +306,6 @@ public class UIManager : MonoBehaviour
 
     public void Loading()
     {
-        Debug.Log("Loading");
         StartCoroutine(LoadingCoroutine());
     }
 
@@ -446,16 +446,17 @@ public class UIManager : MonoBehaviour
         HeroMessageDetail("ポータル移動完了");
         //コインを30%に減らす
         PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
-        //プレイヤーのステータスを元に戻す
-        PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        playerController.GameReset();
         //カードのデータをリセットする
         DrawCardController.instance.GameReset();
 
         yield return new WaitForSeconds(2);
 
+        //プレイヤーのステータスを元に戻す
+        PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        playerController.GameReset();
 
         Loading();
+        portalController.GoPortal();
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)
@@ -697,6 +698,7 @@ public class UIManager : MonoBehaviour
     }
 
     //チュートリアル用
+    private Coroutine activeCoroutine = null; // アクティブなコルーチンを追跡
     public void HeroMessageDetail(string message, string dropCollectionName = null)
     {
         switch (message)
@@ -817,6 +819,11 @@ public class UIManager : MonoBehaviour
                 }
                 break;
         }
+        if (activeCoroutine != null)
+        {
+            StopCoroutine(activeCoroutine); // 前のコルーチンを停止
+        }
+        activeCoroutine = StartCoroutine(ShowMojiokuriText(message)); // 新しいコルーチンを開始
         StartCoroutine(ShowMojiokuriText(message));//文字送り
     }
 
@@ -827,6 +834,7 @@ public class UIManager : MonoBehaviour
             heroMessageText.text = MojiokuriText.Substring(0, i);
             yield return new WaitForSeconds(delay);
         }
+        activeCoroutine = null; // コルーチンが終了したらnullに設定
     }
 
     //静的テキストのローカライズ

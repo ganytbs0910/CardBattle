@@ -51,7 +51,10 @@ public class DrawCardController : MonoBehaviour
 
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ReDrawCardList(10);
+        }
     }
 
     public void GameReset()
@@ -63,6 +66,21 @@ public class DrawCardController : MonoBehaviour
             Destroy(child.gameObject);
         }
         for (int i = 0; i < Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
+        {
+            DrawCard();
+        }
+    }
+
+    public void ReDrawCardList(int num = 0)
+    {
+        if (num == 0) num = parentPanel.transform.childCount;
+        PlayerPrefs.DeleteKey("CurrentStageCard");
+        cardIDList.Clear();
+        foreach (Transform child in parentPanel.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        for (int i = 0; i < num; i++)
         {
             DrawCard();
         }

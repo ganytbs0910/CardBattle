@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
+  m_Name: card 34
+  m_EditorClassIdentifier: 
+  cardID: 34
+  name: "MP\u309280%\u56DE\u5FA9"
+  information: "MP\u309220%\u56DE\u5FA9"
+  tiar: 5
+  icon: {fileID: 21300000, guid: 660f70af7a74a4d549a19578a3bdbc09, type: 3}
+  weapon: {fileID: 0}
+  armor: {fileID: 0}
+  targetType: 0
+  particle: {fileID: 2240579614878158332, guid: 4bd478362f68efb408a451724241045e, type: 3}
+  particlePosition: 2

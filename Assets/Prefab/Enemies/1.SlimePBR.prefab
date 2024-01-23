@@ -600,7 +600,7 @@ MonoBehaviour:
   id: 1
   maxHp: 25
   attack: 2
-  attackInterval: 1
+  attackInterval: 1.4
   defense: 1
   moveSpeed: 0
   agility: 0

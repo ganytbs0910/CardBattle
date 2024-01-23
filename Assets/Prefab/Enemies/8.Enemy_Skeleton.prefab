@@ -348,7 +348,7 @@ MonoBehaviour:
   id: 8
   maxHp: 45
   attack: 7
-  attackInterval: 1
+  attackInterval: 1.4
   defense: 0
   moveSpeed: 0
   agility: 0

@@ -380,8 +380,8 @@ public class EnemyController : MonoBehaviour
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemoveEnemyFromList(this);
 
-        //// ディレイののち、オブジェクトを2秒かけて縮小
-        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+        //// ディレイののち、オブジェクトを1秒かけて縮小
+        transform.DOScale(Vector3.zero, 1f).SetDelay(1.2f).OnComplete(() => Destroy(gameObject));
 
         //ゲームの勝敗をチェックする
         GameManager.instance.CheckBattleStatus();
@@ -566,8 +566,8 @@ public class EnemyController : MonoBehaviour
         if (!poison)
         {
             poison = true;
-            StartCoroutine(PoisonEffect(10f, 1f)); 
-            AudioManager.instance.PlaySE(AudioManager.SE.PowerDown); 
+            StartCoroutine(PoisonEffect(10f, 1f));
+            AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }
 
@@ -576,7 +576,7 @@ public class EnemyController : MonoBehaviour
         float timer = 0;
         while (timer < duration)
         {
-            hp -= maxHp / 20; 
+            hp -= maxHp / 20;
             enemyUIManager.UpdateHP(hp);
             if (hp <= 0)
             {
@@ -593,7 +593,7 @@ public class EnemyController : MonoBehaviour
         if (!stan)
         {
             stan = true;
-            StartCoroutine(StanEffect(5f)); 
+            StartCoroutine(StanEffect(5f));
             AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }
@@ -633,7 +633,7 @@ public class EnemyController : MonoBehaviour
         if (!charm)
         {
             charm = true;
-            StartCoroutine(CharmEffect(10f)); 
+            StartCoroutine(CharmEffect(10f));
             AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }

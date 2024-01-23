@@ -491,15 +491,20 @@ public class GameManager : MonoBehaviour
     {
         foreach (var player in players)
         {
-            player.ResetToInitialPosition();
-            //プレイヤーの位置とアニメを初期設定に戻す
+            if (player != null) // nullチェックを追加
+            {
+                player.ResetToInitialPosition(); // プレイヤーの位置とアニメを初期設定に戻す
+            }
         }
 
         foreach (var enemy in enemies)
         {
-            enemy.ResetToInitialPosition();
-            //敵の位置とアニメを初期設定に戻す
+            if (enemy != null) // nullチェックを追加
+            {
+                enemy.ResetToInitialPosition(); // 敵の位置とアニメを初期設定に戻す
+            }
         }
+
 
         //print("プレイヤーとエネミーの位置とアニメをリセットします");
     }
@@ -562,7 +567,7 @@ public class GameManager : MonoBehaviour
         // Stage 21~30までの確率
         else if (stageHierarchy <= 30) probabilities = new float[] { 0.2f, 0.2f, 0.2f, 0.2f, 0.1f, 0.1f };
         // Stage 31~40までの確率
-        else if (stageHierarchy <= 40) probabilities = new float[] { 0.1f, 0.15f, 0.2f, 0.25f, 0.1f, 0.2f };
+        else if (stageHierarchy <= 40) probabilities = new float[] { 0.1f, 0.15f, 0.2f, 0.25f, 0.15f, 0.15f };
         // デフォルトの確率（必要に応じて設定）
         else probabilities = new float[] { 0.1f, 0.2f, 0.3f, 0.2f, 0.1f, 0.1f };
 

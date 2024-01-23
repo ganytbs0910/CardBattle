@@ -2015,7 +2015,7 @@ MonoBehaviour:
   id: 12
   maxHp: 50
   attack: 10
-  attackInterval: 1
+  attackInterval: 1.4
   defense: 0
   moveSpeed: 0
   agility: 0

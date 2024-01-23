@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public float attackInterval = 1;//攻撃間隔
     public int throwAttack = 0;
     public int defense = 1;
-    public int Agility;//回比率
+    public int Agility = 5;//回比率
     public float moveSpeed;
     public float addHealthRate = 1;
     public float addAttackRate = 1;
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
         throwAttack = 0;
         defense = 1;
         PlayerPrefs.SetInt("Defense", defense);
-        Agility = 0;
+        Agility = 5;
         PlayerPrefs.SetInt("Agility", Agility);
         moveSpeed = 3.5f;
         addHealthRate = 1;
@@ -831,14 +831,24 @@ public class PlayerController : MonoBehaviour
             case 24: break;//小型爆弾
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
-            //範囲内のプレイヤーの体力を20%回復
+            //範囲内のプレイヤーのHPを20%回復
             case 27: HPHeal(20); break;
-            //範囲内のプレイヤーの体力を50%回復
-            case 28: HPHeal(50); break;
-            //範囲内のプレイヤーの体力を20%回復
-            case 29: MPHeal(20); break;
-            //範囲内のプレイヤーの体力を20%回復
-            case 30: MPHeal(20); break;
+            //範囲内のプレイヤーのHPを30%回復
+            case 28: HPHeal(30); break;
+            //範囲内のプレイヤーのHPを50%回復
+            case 29: MPHeal(50); break;
+            //範囲内のプレイヤーのHPを80%回復
+            case 30: MPHeal(80); break;
+            //範囲内のプレイヤーのMPを20%回復
+            case 31: MPHeal(20); break;
+            //範囲内のプレイヤーのMPを30%回復
+            case 32: MPHeal(30); break;
+            //範囲内のプレイヤーのMPを50%回復
+            case 33: MPHeal(50); break;
+            //範囲内のプレイヤーのMPを80%回復
+            case 34: MPHeal(80); break;
+            //カードを全て一新する
+            case 35: ResetCards(); break;
         }
     }
 
@@ -883,6 +893,7 @@ public class PlayerController : MonoBehaviour
     void HealthUp(int value)
     {
         maxHp += value;
+        hp += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
 
     }
@@ -899,10 +910,11 @@ public class PlayerController : MonoBehaviour
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
+    /// <param name="value">最大HPのvalue%回復する</param >
     public void HPHeal(int value)
     {
-        //現在のHPをvalue%回復し、体力が100%を超えないようにする
-        hp += Mathf.RoundToInt(hp * value);
+        //現在のHPを最大HPのvalue%回復し、体力が100%を超えないようにする
+        hp += Mathf.RoundToInt(maxHp * value * 0.01f);
         if (hp > maxHp)
         {
             hp = maxHp;
@@ -924,7 +936,7 @@ public class PlayerController : MonoBehaviour
     void MPHeal(int value)
     {
         //現在のHPをvalue%回復し、体力が100%を超えないようにする
-        mp += Mathf.RoundToInt(mp * value);
+        mp += Mathf.RoundToInt(maxMp * value);
         if (mp > maxHp)
         {
             mp = maxHp;
@@ -941,7 +953,11 @@ public class PlayerController : MonoBehaviour
         print("プレイヤーのMPが" + value + "回復しました");
 
         AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
+    }
 
+    void ResetCards()
+    {
+        DrawCardController.instance.ReDrawCardList();
     }
 
     /// <summary>

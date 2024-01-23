@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: Card 30
+  m_Name: card 30
   m_EditorClassIdentifier: 
   cardID: 30
-  name: "MP\u309250%\u56DE\u5FA9"
-  information: "MP\u3092100\u56DE\u5FA9"
-  tiar: 1
-  icon: {fileID: 21300000, guid: 660f70af7a74a4d549a19578a3bdbc09, type: 3}
+  name: "HP\u309280%\u56DE\u5FA9"
+  information: "\u73FE\u5728\u306E\u4F53\u529B\u304B\u308950%\u56DE\u5FA9\u3059\u308B"
+  tiar: 5
+  icon: {fileID: 21300000, guid: f60e44751055a41b9a0694f031fa55ab, type: 3}
   weapon: {fileID: 0}
   armor: {fileID: 0}
   targetType: 0
-  particle: {fileID: 2240579614878158332, guid: 4bd478362f68efb408a451724241045e, type: 3}
+  particle: {fileID: 2461585845580314560, guid: e747544088e0b8842a0eca8697a4f65a, type: 3}
   particlePosition: 2
