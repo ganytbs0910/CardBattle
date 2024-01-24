@@ -302,6 +302,15 @@ public class PlayerController : MonoBehaviour
     public void EquipWeapon(Weapon weapon)
     {
         if (weapon == null) return;
+        //前回の装備のステータスを引く
+        if (currentWeapon != null)
+        {
+            attack -= currentWeapon.GetATKPoint();
+            defense -= currentWeapon.GetDEFPoint();
+            Debug.Log("前回の武器の攻撃力" + currentWeapon.GetATKPoint());
+            Debug.Log("前回の武器の防御力" + currentWeapon.GetDEFPoint());
+        }
+
         //playerCollidersの要素全てをenabledをfalseにする
         for (int i = 0; i < playerColliders.Length; i++)
         {
@@ -374,12 +383,6 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateStats()
     {
-        //前回の装備のステータスを引く
-        if (currentWeapon != null)
-        {
-            attack -= currentWeapon.GetATKPoint();
-            defense -= currentWeapon.GetDEFPoint();
-        }
         //武器と防具量を加算
         AddWeaponState();
         AddArmorState();
@@ -396,9 +399,9 @@ public class PlayerController : MonoBehaviour
         }
 
         int weaponATK = currentWeapon.GetATKPoint();
+        Debug.Log("武器の攻撃力" + weaponATK);
         int weaponDEF = currentWeapon.GetDEFPoint();
-        //print("攻撃力" + weaponATK);
-        //print("防御力" + weaponDEF);
+        Debug.Log("武器の防御力" + weaponDEF);
 
         attack += weaponATK;
         defense += weaponDEF;

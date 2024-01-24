@@ -436,7 +436,7 @@ MonoBehaviour:
   attackInterval: 1
   defense: 10
   moveSpeed: 0
-  agility: 0
+  agility: 7
   coin: 50
   dropRate: 50
   weapon: {fileID: 0}

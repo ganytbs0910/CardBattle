@@ -17,7 +17,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 8948217134056584158, guid: 2e9bb2ed6310d784183eeae5c660a63b, type: 3}
   weaponRange: 1
   attackPoint: 4
-  defendPoint: 10
+  defendPoint: 2
   isRightHanded: 0
   TwoHandedWeapon: 0
   isShield: 1
