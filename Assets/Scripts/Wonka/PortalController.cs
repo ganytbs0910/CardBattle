@@ -171,6 +171,7 @@ public class PortalController : MonoBehaviour
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
         {
+            UIManager.instance.HeroMessageDetail("ポータル");
             GameManager.instance.PortalCameraChange();
 
             PortalEnviloment.SetActive(true);
@@ -193,7 +194,6 @@ public class PortalController : MonoBehaviour
         sequence.AppendCallback(() =>
         {
             LoadPanel.gameObject.SetActive(false);
-            UIManager.instance.HeroMessageDetail("ポータル");
         });
 
         sequence.Play();
@@ -222,6 +222,7 @@ public class PortalController : MonoBehaviour
             {
                 falseUI.SetActive(true);
             }
+            UIManager.instance.HeroMessageDetail("ポータル移動完了");
         });
 
         // フェードイン
@@ -233,7 +234,6 @@ public class PortalController : MonoBehaviour
         });
 
         sequence.Play();
-        UIManager.instance.HeroMessageDetail("ポータル移動完了");
         if (PlayerPrefs.HasKey("Tutorial")) return;
         UIManager.instance.TutorialAnimation(1);
     }

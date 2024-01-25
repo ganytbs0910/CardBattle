@@ -108,8 +108,6 @@ public class UIManager : MonoBehaviour
         }
         LocalizeUpdate();
 
-        HeroMessageDetail("バトルの準備");
-
         if (PlayerPrefs.HasKey("RemoveAds"))
         {
             adsButton.SetActive(false);
@@ -379,6 +377,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
         loadPanel.GetComponent<CanvasGroup>().DOFade(0, 1f);
+        HeroMessageDetail("バトルの準備");
         yield return new WaitForSeconds(1);
         loadPanel.SetActive(false);
     }
@@ -408,7 +407,6 @@ public class UIManager : MonoBehaviour
     {
         //読み込みを行う
         Loading();
-
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
     }
 
@@ -450,7 +448,6 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
-        HeroMessageDetail("ポータル移動完了");
         //コインを30%に減らす
         PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
         //カードのデータをリセットする
@@ -868,7 +865,7 @@ public class UIManager : MonoBehaviour
             case "ポータル移動完了":
                 switch (language)
                 {
-                    case Language.Japanese: message = "敵が出現したぞ！戦闘準備を怠るな！"; break;
+                    case Language.Japanese: message = "敵が出現したぞ！ \n戦闘の準備を怠るな！"; break;
                     case Language.English: message = "Enemies have appeared! Don't neglect your battle preparations!"; break;
                 }
                 break;
@@ -897,10 +894,11 @@ public class UIManager : MonoBehaviour
             case "敵弱体化":
                 switch (language)
                 {
-                    case Language.Japanese: message = $"敵が{otherMessage}を受けた！ \nもう倒せるかな！？"; break;
+                    case Language.Japanese: message = $"{otherMessage}！ \nもう敵を倒せるかな！？"; break;
                     case Language.English: message = $"The enemy received {otherMessage}! \nCan I beat it!?"; break;
                 }
                 break;
+                /*
             default:
                 switch (language)
                 {
@@ -908,6 +906,7 @@ public class UIManager : MonoBehaviour
                     case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
                 }
                 break;
+                */
         }
         if (activeCoroutine != null)
         {
