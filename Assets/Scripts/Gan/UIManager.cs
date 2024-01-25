@@ -59,21 +59,24 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text seText;
     [SerializeField] private TMP_Text voiceText;
 
-
     [SerializeField] private Image dropImage;
 
-    //オプションの言語設定
+    [Header("オプションの言語設定")]
     [SerializeField] Image languageImage;
     [SerializeField] TextMeshProUGUI currentLanguage;
     [SerializeField] Sprite japaneseIcon;
     [SerializeField] Sprite americanIcon;
     public int i = 0;
 
-    //文字送りテキスト
+    [Header("文字送りテキスト")]
     public float delay = 0.05f;
 
     public GameObject[] LobbyButtons;
     [SerializeField] private PortalController portalController;
+
+    [Header("チュートリアル用")]
+    [SerializeField] private Image arrowImage;
+
 
     void Awake()
     {
@@ -83,6 +86,10 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        if (PlayerPrefs.HasKey("RemoveAds"))
+        {
+            adsButton.SetActive(false);
+        }
         //ローカライズ
         if (!PlayerPrefs.HasKey("Language"))
         {
@@ -102,7 +109,7 @@ public class UIManager : MonoBehaviour
         LocalizeUpdate();
 
         HeroMessageDetail("バトルの準備");
-        TutorialTextDetail("カードを選択してください");
+
         if (PlayerPrefs.HasKey("RemoveAds"))
         {
             adsButton.SetActive(false);
@@ -646,7 +653,7 @@ public class UIManager : MonoBehaviour
                 case "カードを用いて最深部を目指そう！":
                     switch (language)
                     {
-                        case Language.Japanese: detail = "カードを用いて最深部を目指そう！"; break;
+                        case Language.Japanese: detail = "これでチュートリアルは終わりだよ！\nカードを用いて最深部を目指そう！"; break;
                         case Language.English: detail = "Let's aim for the deepest part using the card!"; break;
                     }
                     break;
@@ -658,6 +665,75 @@ public class UIManager : MonoBehaviour
         }
         tutorialText.text = detail;
     }
+    public void TutorialAnimation(int value)
+    {
+        if (PlayerPrefs.HasKey("Tutorial")) return;
+        startCheckButton.SetActive(false);
+        arrowImage.gameObject.SetActive(true);
+        for (int i = 0; i < cardListPanel.childCount; i++)
+        {
+            cardListPanel.GetChild(i).GetComponent<CanvasGroup>().blocksRaycasts = false;
+        }
+        switch (value)
+        {
+            case 1:
+                TutorialTextDetail("カードを選択してください");
+                cardListPanel.GetChild(1).GetComponent<CanvasGroup>().blocksRaycasts = true;
+                Image cloneArrowImage = Instantiate(arrowImage, cardListPanel.GetChild(1)).GetComponent<Image>();
+                //cloneArrowImage.rectTransform.anchoredPositionを(0, 250, 0)にしたい
+                cloneArrowImage.rectTransform.anchoredPosition = new Vector3(0, 250, 0);
+
+                cloneArrowImage.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
+
+                //cardListPanel.GetChild(1).GetComponent<Toggle>()がオンになったら出力
+                cardListPanel.GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener((bool value) =>
+                {
+                    if (value)
+                    {
+                        TutorialTextDetail("自身をタップしてください");
+                        cloneArrowImage.rectTransform.anchoredPosition = new Vector3(-30, 450, 0);
+                    }
+                });
+                break;
+            case 2:
+                TutorialTextDetail("敵をタップしてください");
+                cardListPanel.GetChild(0).GetComponent<CanvasGroup>().blocksRaycasts = true;
+                Image cloneArrowImage2 = Instantiate(arrowImage, cardListPanel.GetChild(0)).GetComponent<Image>();
+                cloneArrowImage2.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
+                cloneArrowImage2.rectTransform.anchoredPosition = new Vector3(0, 900, 0);
+                break;
+            case 3:
+                TutorialTextDetail("バトルを開始してください！");
+                startCheckButton.SetActive(true);
+                break;
+
+        }
+    }
+
+    public void TutorialDetail(int useCardNum, Vector3 arrowPos, Vector3 targetPos, string tutorialTextDetail)
+    {
+        cardListPanel.GetChild(useCardNum).GetComponent<CanvasGroup>().blocksRaycasts = true;
+        Image cloneArroImage = Instantiate(arrowImage, cardListPanel.GetChild(useCardNum));
+        cloneArroImage.transform.localPosition = arrowPos;
+        cloneArroImage.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
+
+        //cardListPanel.GetChild(1).GetComponent<Toggle>()がオンになったら出力
+        cardListPanel.GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener((bool value) =>
+        {
+            if (value)
+            {
+                TutorialTextDetail(tutorialTextDetail);
+                //arrowImageのRectTransformの位置を(0, 600, 0)にする
+                cloneArroImage.transform.localPosition = targetPos;
+            }
+        });
+        //もしcardListPanelの子要素がなければ
+        if (cardListPanel.childCount == 0)
+        {
+            TutorialTextDetail("バトルを開始してください！");
+        }
+    }
+
 
     public void StageTextDetail(string detail)
     {
@@ -697,9 +773,9 @@ public class UIManager : MonoBehaviour
         RemainingBossText.text = detail;
     }
 
-    //チュートリアル用
     private Coroutine activeCoroutine = null; // アクティブなコルーチンを追跡
-    public void HeroMessageDetail(string message, string dropCollectionName = null)
+    private bool isCoroutineCanceled = false;
+    public void HeroMessageDetail(string message, string otherMessage = null)
     {
         switch (message)
         {
@@ -713,7 +789,7 @@ public class UIManager : MonoBehaviour
             case "コレクションゲット":
                 switch (language)
                 {
-                    case Language.Japanese: message = $"{dropCollectionName}をゲット！ \nきみは幸運の持ち主のようだね。"; break;
+                    case Language.Japanese: message = $"{otherMessage}をゲット！ \nきみは幸運の持ち主のようだね。"; break;
                     case Language.English: message = "You got a rare item! You seem to be a lucky person"; break;
                 }
                 break;
@@ -811,6 +887,20 @@ public class UIManager : MonoBehaviour
                     case Language.English: message = "Your card is full!"; break;
                 }
                 break;
+            case "自身強化":
+                switch (language)
+                {
+                    case Language.Japanese: message = $"{otherMessage}効果発動！ \n強くなった気がする！"; break;
+                    case Language.English: message = $"You were {otherMessage}! \nI feel stronger!"; break;
+                }
+                break;
+            case "敵弱体化":
+                switch (language)
+                {
+                    case Language.Japanese: message = $"敵が{otherMessage}を受けた！ \nもう倒せるかな！？"; break;
+                    case Language.English: message = $"The enemy received {otherMessage}! \nCan I beat it!?"; break;
+                }
+                break;
             default:
                 switch (language)
                 {
@@ -821,20 +911,27 @@ public class UIManager : MonoBehaviour
         }
         if (activeCoroutine != null)
         {
-            StopCoroutine(activeCoroutine); // 前のコルーチンを停止
+            isCoroutineCanceled = true; // コルーチンをキャンセル
+            StopCoroutine(activeCoroutine);
         }
-        activeCoroutine = StartCoroutine(ShowMojiokuriText(message)); // 新しいコルーチンを開始
-        StartCoroutine(ShowMojiokuriText(message));//文字送り
+
+        isCoroutineCanceled = false; // 新しいコルーチン用にフラグをリセット
+        activeCoroutine = StartCoroutine(ShowMojiokuriText(message));
     }
 
     public IEnumerator ShowMojiokuriText(string MojiokuriText)
     {
         for (int i = 0; i <= MojiokuriText.Length; i++)
         {
+            if (isCoroutineCanceled) // キャンセルフラグチェック
+            {
+                yield break; // キャンセルされた場合、コルーチンを終了
+            }
+
             heroMessageText.text = MojiokuriText.Substring(0, i);
             yield return new WaitForSeconds(delay);
         }
-        activeCoroutine = null; // コルーチンが終了したらnullに設定
+        activeCoroutine = null;
     }
 
     //静的テキストのローカライズ

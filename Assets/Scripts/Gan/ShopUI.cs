@@ -42,6 +42,8 @@ public class ShopUI : MonoBehaviour
             {
                 cardID = Random.Range(1, cardEntities.Length + 1);
                 card = Instantiate(cardPrefab, itemsParentPanel.transform);
+                //cardのToggleの機能を廃止
+                card.GetComponent<Toggle>().enabled = false;
                 card.name = $"Card_{cardID}";
                 card.Init(cardID);
                 cardModel = card.model;

@@ -234,6 +234,8 @@ public class PortalController : MonoBehaviour
 
         sequence.Play();
         UIManager.instance.HeroMessageDetail("ポータル移動完了");
+        if (PlayerPrefs.HasKey("Tutorial")) return;
+        UIManager.instance.TutorialAnimation(1);
     }
 
 

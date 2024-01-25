@@ -4,12 +4,14 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Collections.Generic;
 using UnityEngine.Purchasing;
 
 
 public class PlayFabLogin : MonoBehaviour, IStoreListener
 {
+    //public TMP_Text testText;
     private bool _shouldCreateAccount;//アカウントを作成するか    
     private string _customID;//ログイン時に使うID
     private string _playFabId;//PlayFabのID
@@ -491,6 +493,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
                {
                    //ProcessText.text = "使用済みレシートを確認→完了扱い";
                    storeController.ConfirmPendingPurchase(purchasedProduct);
+                   RemoveAds();
                }
            }
         );
@@ -567,9 +570,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         switch (setedPurchasedProductId)
         {
             case "hisyouhi_jpy400a":
-                //consumableText.text = "購入されました。";
-                PlayerPrefs.SetInt("RemoveAds", 1);//広告を削除
-                UIManager.instance.adsButton.SetActive(false);//広告ボタンを非表示にする
+                RemoveAds();
                 break;
 
             case "hisyouhi_jpy250a":
@@ -596,6 +597,13 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     private void OnDeferred(Product item)
     {
         //Debug.Log("Purchase deferred: " + item.definition.id);
+    }
+    public void RemoveAds()
+    {
+        Debug.Log("広告削除が呼ばれたよ！！");
+        PlayerPrefs.SetInt("RemoveAds", 1);//広告を削除
+        AdMobBanner.instance.BannerDestroy();
+        UIManager.instance.adsButton.SetActive(false);//広告ボタンを非表示にする
     }
 }
 

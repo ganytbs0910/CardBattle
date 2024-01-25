@@ -74,6 +74,7 @@ public class ScreenRay : MonoBehaviour
                 //もしPlayerタグを持っているオブジェクトに当たったら
                 if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
+                    UIManager.instance.HeroMessageDetail("自身強化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
                     if (weapon != null) //武器カードだったら直接ここで装備させる
@@ -95,20 +96,20 @@ public class ScreenRay : MonoBehaviour
                     }
                     Destroy(chooseCard);
                     cardID = 0;
-                    UIManager.instance.TutorialTextDetail("バトルを開始してください！");
+                    UIManager.instance.TutorialAnimation(2);
                 }
                 else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
+                    UIManager.instance.HeroMessageDetail("敵弱体化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
                     if (particle != null) //パーティクルを発生
                     {
                         PlayParticleAtPosition(collider);
                     }
-
                     Destroy(chooseCard);
                     cardID = 0;
-                    UIManager.instance.TutorialTextDetail("バトルを開始してください！");
+                    UIManager.instance.TutorialAnimation(3);
                 }
                 else
                 {
@@ -122,13 +123,13 @@ public class ScreenRay : MonoBehaviour
                             cardID = 0;
                             */
                             //新しいコード(24,25,26に適応)
-                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1),2f);
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1), 2f);
                             break;
                         case 25:
-                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(2, 2, 2),4f);
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(2, 2, 2), 4f);
                             break;
                         case 26:
-                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(3, 3, 3),6f);
+                            ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(3, 3, 3), 6f);
                             break;
                     }
                 }
@@ -138,10 +139,10 @@ public class ScreenRay : MonoBehaviour
         StartCoroutine(ToggleCheck());
     }
 
-    void ThrowBomb(int num, Vector3 targetPos, int power, Vector3 size,float radius)
+    void ThrowBomb(int num, Vector3 targetPos, int power, Vector3 size, float radius)
     {
         drawCardController.cardIDList.Remove(num);
-        ThrowObject(bombPrefab, targetPos, power, size,radius);
+        ThrowObject(bombPrefab, targetPos, power, size, radius);
         Destroy(chooseCard);
         cardID = 0;
     }
@@ -294,7 +295,7 @@ public class ScreenRay : MonoBehaviour
             }
         }
     }
-    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power, Vector3 size,float radius)
+    void ThrowObject(GameObject throwObject, Vector3 targetPos, int power, Vector3 size, float radius)
     {
         // 弾丸をメインカメラの位置に生成
         GameObject bomb = Instantiate(throwObject, Camera.main.transform.position, Quaternion.identity);

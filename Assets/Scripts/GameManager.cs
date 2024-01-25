@@ -440,7 +440,10 @@ public class GameManager : MonoBehaviour
             {
                 player.Victory();
             }
-
+            if (!PlayerPrefs.HasKey("Tutorial"))
+            {
+                UIManager.instance.TutorialTextDetail("カードを用いて最深部を目指そう！");
+            }
             JudgementSound(AudioManager.SE.YouWin, AudioManager.BGM.GameClearTheme, AudioManager.instance.randomVictoryClip);
         }
     }

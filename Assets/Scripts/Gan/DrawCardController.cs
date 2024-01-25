@@ -22,6 +22,15 @@ public class DrawCardController : MonoBehaviour
             PlayerPrefs.SetInt("MinDrawCard", 1);
             PlayerPrefs.SetInt("MaxDrawCard", 4);
         }
+        //もしチュートリアルなら処理を実行
+        if (!PlayerPrefs.HasKey("Tutorial"))
+        {
+            //敵のHPダウン
+            DrawCard(9); ;
+            //複製カード
+            DrawCard(1);
+            return;
+        }
         //iPhoneかAndroidなら処理を実行
 #if UNITY_IOS || UNITY_ANDROID
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く

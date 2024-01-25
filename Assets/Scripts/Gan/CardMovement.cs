@@ -28,6 +28,8 @@ public class CardMovement : MonoBehaviour
     private void Start()
     {
         toggle.group = GetComponentInParent<ToggleGroup>();
+        //Toggleをオフにする
+        toggle.isOn = false;
         toggle.onValueChanged.AddListener(OnToggleChanged);
 
         //プレイヤーに使えるか
