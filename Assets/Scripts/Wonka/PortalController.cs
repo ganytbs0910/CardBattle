@@ -42,19 +42,19 @@ public class PortalController : MonoBehaviour
     private void Update()
     {
         if (GameManager.instance.reachingStage < 11)
-        { 
-            levelClear[0] = true; 
+        {
+            levelClear[0] = true;
         }
         if (10 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 21)
         {
             levelClear[1] = true;
         }
         if (20 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 31)
-        { 
+        {
             levelClear[2] = true;
         }
         if (30 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 41)
-        { 
+        {
             levelClear[3] = true;
         }
     }
@@ -242,8 +242,11 @@ public class PortalController : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
         //フェードアウト
+        UIManager.instance.Loading();
+        /*
         LoadPanel.gameObject.SetActive(true);
         sequence.Append(LoadPanel.DOFade(1, 1.0f)); // 1秒かけて暗転
+        */
 
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
@@ -261,23 +264,17 @@ public class PortalController : MonoBehaviour
         });
 
         // フェードイン
+        /*
         sequence.Append(LoadPanel.DOFade(0, 1.0f)); // 1秒かけて明転
-
         sequence.AppendCallback(() =>
         {
             LoadPanel.gameObject.SetActive(false);
         });
-
         sequence.Play();
+        */
 
         GameManager.instance.SpawnEnemies();
-
         GameManager.instance.SpawnPlayer();
-
-        if (PlayerPrefs.HasKey("Tutorial")) return;
-        UIManager.instance.TutorialAnimation(1);
-
-
     }
 
 

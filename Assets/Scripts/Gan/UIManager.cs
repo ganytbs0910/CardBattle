@@ -135,6 +135,11 @@ public class UIManager : MonoBehaviour
         //stageTextを更新
         StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
         //RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
+        UIManager.instance.HeroMessageDetail("ポータル移動完了");
+        if (!PlayerPrefs.HasKey("Tutorial"))
+        {
+            UIManager.instance.TutorialAnimation(1);
+        }
     }
 
     public void AnimeScaleLoopButton(RectTransform[] Button)
@@ -415,7 +420,10 @@ public class UIManager : MonoBehaviour
     public void WinPanel()
     {
         winPanel.SetActive(true);
-
+        //winPanelの透明度を0にする
+        winPanel.GetComponent<CanvasGroup>().alpha = 0;
+        //winPanelの透明度をだんだん1にする
+        winPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
         HeroMessageDetail("勝利");
     }
 

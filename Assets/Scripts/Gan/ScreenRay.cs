@@ -197,14 +197,6 @@ public class ScreenRay : MonoBehaviour
                 targetMarker.transform.position = result.gameObject.transform.position;
                 chooseCard = result.gameObject;
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
-                if (targetType == CardEntity.TargetType.Player)
-                {
-                    UIManager.instance.TutorialTextDetail("自身をタップしてください");
-                }
-                else if (targetType == CardEntity.TargetType.Enemy)
-                {
-                    UIManager.instance.TutorialTextDetail("敵をタップしてください");
-                }
                 debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
                 return;
             }

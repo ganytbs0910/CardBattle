@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.battleState = false;
         agent.enabled = true;
         PlayerPrefs.Save();
-
+        //プレイヤーを移動させないように
 
     }
 
