@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
     public List<PlayerController> players;
     public List<EnemyController> enemies;
     [SerializeField] private DrawCardController drawCardController;
+    public GameObject playerPrefab;
     public GameObject[] bossPrefab;
     public GameObject[] enemyPrefab; // 敵のプレハブ
     public GameObject[] itemPrefab; //アイテムのプレファブ。
+    public Transform playerSpawnPoint;//プレイヤーのスポーンポイント
     public List<Transform> enemySpawnPoints; // 敵のスポーン位置のリスト
     public List<Transform> itemSpawnPoints; //フィールド上のアイテムオブジェのリスト
 
@@ -111,6 +113,8 @@ public class GameManager : MonoBehaviour
         DungeonCameraChange();
 
         SpawnItems();
+
+        SpawnPlayer();
 
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
@@ -343,6 +347,32 @@ public class GameManager : MonoBehaviour
         {
             playerObjects.Remove(removePlayer.gameObject);
         }
+    }
+
+    public void SpawnPlayer()
+    {
+        // "Player" という名前のオブジェクトをヒエラルキーで探す
+        GameObject existingPlayer = GameObject.Find("Player");
+
+        // "Player" というオブジェクトが存在しない場合にのみ新しいプレイヤーを作成
+        if (existingPlayer == null)
+        {
+            GameObject playersParent = GameObject.Find("Players");
+
+            // "Players" という親オブジェクトが存在しない場合は新しく作成
+            if (playersParent == null)
+            {
+                playersParent = new GameObject("Players");
+            }
+
+            // プレイヤーをインスタンス化し、"Players" に子として追加
+            GameObject newPlayer = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
+            newPlayer.name = "Player"; // インスタンス化したオブジェクトに "Player" という名前を設定
+            newPlayer.transform.SetParent(playersParent.transform);
+        }
+
+        // キャラクターリストを更新
+        CreateCharacterList();
     }
 
     // 敵をスポーンする
