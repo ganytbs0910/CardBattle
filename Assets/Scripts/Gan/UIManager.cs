@@ -135,6 +135,11 @@ public class UIManager : MonoBehaviour
         //stageTextを更新
         StageTextDetail($"ダンジョン : {GameManager.instance.stageHierarchy}階");
         //RemainingBossTextDetail($"ボスまで残り:{10 - GameManager.instance.stageHierarchy}階層");
+        UIManager.instance.HeroMessageDetail("ポータル移動完了");
+        if (!PlayerPrefs.HasKey("Tutorial"))
+        {
+            UIManager.instance.TutorialAnimation(1);
+        }
     }
 
     public void AnimeScaleLoopButton(RectTransform[] Button)

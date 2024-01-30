@@ -42,19 +42,19 @@ public class PortalController : MonoBehaviour
     private void Update()
     {
         if (GameManager.instance.reachingStage < 11)
-        { 
-            levelClear[0] = true; 
+        {
+            levelClear[0] = true;
         }
         if (10 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 21)
         {
             levelClear[1] = true;
         }
         if (20 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 31)
-        { 
+        {
             levelClear[2] = true;
         }
         if (30 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 41)
-        { 
+        {
             levelClear[3] = true;
         }
     }
@@ -274,8 +274,6 @@ public class PortalController : MonoBehaviour
 
         GameManager.instance.SpawnPlayer();
 
-        if (PlayerPrefs.HasKey("Tutorial")) return;
-        UIManager.instance.TutorialAnimation(1);
 
 
     }
