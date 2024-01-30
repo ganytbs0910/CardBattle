@@ -865,9 +865,9 @@ public class PlayerController : MonoBehaviour
             //範囲内のプレイヤーのHPを30%回復
             case 28: HPHeal(30); break;
             //範囲内のプレイヤーのHPを50%回復
-            case 29: MPHeal(50); break;
+            case 29: HPHeal(50); break;
             //範囲内のプレイヤーのHPを80%回復
-            case 30: MPHeal(80); break;
+            case 30: HPHeal(80); break;
             //範囲内のプレイヤーのMPを20%回復
             case 31: MPHeal(20); break;
             //範囲内のプレイヤーのMPを30%回復

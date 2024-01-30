@@ -272,7 +272,7 @@ public class PortalController : MonoBehaviour
         sequence.Play();
 
 
-        GameManager.instance.SpawnEnemies();
+        //GameManager.instance.SpawnEnemies();
         GameManager.instance.SpawnPlayer();
     }
 
