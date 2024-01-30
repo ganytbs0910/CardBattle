@@ -420,7 +420,10 @@ public class UIManager : MonoBehaviour
     public void WinPanel()
     {
         winPanel.SetActive(true);
-
+        //winPanelの透明度を0にする
+        winPanel.GetComponent<CanvasGroup>().alpha = 0;
+        //winPanelの透明度をだんだん1にする
+        winPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
         HeroMessageDetail("勝利");
     }
 
