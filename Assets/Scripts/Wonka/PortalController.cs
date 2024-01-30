@@ -272,6 +272,8 @@ public class PortalController : MonoBehaviour
 
         GameManager.instance.SpawnEnemies();
 
+        GameManager.instance.SpawnPlayer();
+
         if (PlayerPrefs.HasKey("Tutorial")) return;
         UIManager.instance.TutorialAnimation(1);
 
