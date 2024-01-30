@@ -16,7 +16,7 @@ MonoBehaviour:
   armorPrefab: {fileID: 8482664987026994312, guid: c0d42430471c3ad47bc5c08ec01dcedb, type: 3}
   armorName: Body16
   ATKPoint: 0
-  DEFPoint: 25
+  DEFPoint: 6
   AGIPoint: 25
   MAXHPAdd: 0
   MAXMPAdd: 100

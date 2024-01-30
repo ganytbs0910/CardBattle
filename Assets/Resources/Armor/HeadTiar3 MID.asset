@@ -17,6 +17,6 @@ MonoBehaviour:
   armorName: 
   ATKPoint: 0
   DEFPoint: 0
-  AGIPoint: 15
+  AGIPoint: 10
   MAXHPAdd: 0
   MAXMPAdd: 30

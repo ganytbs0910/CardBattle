@@ -18,5 +18,5 @@ MonoBehaviour:
   ATKPoint: 0
   DEFPoint: 0
   AGIPoint: 0
-  MAXHPAdd: 30
+  MAXHPAdd: 25
   MAXMPAdd: 60

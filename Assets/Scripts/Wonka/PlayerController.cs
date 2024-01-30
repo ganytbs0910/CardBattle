@@ -878,6 +878,10 @@ public class PlayerController : MonoBehaviour
             case 34: MPHeal(80); break;
             //カードを全て一新する
             case 35: ResetCards(); break;
+            //カードを2枚引く
+            case 36: TwoDrowCard(); break;
+            //プレイヤーの位置を移動させる
+            case 37: Warp(); break;
         }
     }
 
@@ -1106,5 +1110,14 @@ public class PlayerController : MonoBehaviour
     void MaxDrawCardNumberAdd(int value)
     {
         PlayerPrefs.SetInt("MaxDrawCard", value);
+    }
+    void TwoDrowCard()
+    {
+        DrawCardController.instance.DrawCard();
+        DrawCardController.instance.DrawCard();
+    }
+    void Warp()
+    {
+        transform.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
     }
 }

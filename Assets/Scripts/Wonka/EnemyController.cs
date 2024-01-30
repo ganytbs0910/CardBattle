@@ -487,9 +487,9 @@ public class EnemyController : MonoBehaviour
             //敵をフリーズ状態にする
             case 20: Charm(); break;
             //プレイヤーがターゲット
-            case 21: break;
-            case 22: break;
-            case 23: break;
+            case 21: AttackLower(3); break;
+            case 22: DefenceLower(3); break;
+            case 23: AvoidanceLower(5); break;
         }
     }
 
@@ -682,5 +682,22 @@ public class EnemyController : MonoBehaviour
             effectCollider.SetActive(false);
             attackEffect.Stop();
         }
+    }
+
+    public void AttackLower(int value)
+    {
+        //攻撃力を下げる
+        attack -= value;
+    }
+    public void DefenceLower(int value)
+    {
+        //防御力を下げる
+        defense -= value;
+    }
+
+    public void AvoidanceLower(int value)
+    {
+        //回避率を下げる
+        agility -= value;
     }
 }
