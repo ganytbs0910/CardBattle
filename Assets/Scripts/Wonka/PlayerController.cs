@@ -216,6 +216,7 @@ public class PlayerController : MonoBehaviour
         enemyChase = true;
         EquipWeapon(defaultWeapon);
         PlayerPrefs.Save();
+        //プレイヤーを移動させないように
     }
 
     public void SaveStatus()
