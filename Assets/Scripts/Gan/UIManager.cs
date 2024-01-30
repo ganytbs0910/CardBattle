@@ -493,6 +493,7 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         //Loading();
         PortalController.instance.GoPortal();
+        losePanel.SetActive(false);
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)
