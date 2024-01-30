@@ -39,6 +39,26 @@ public class PortalController : MonoBehaviour
         //GoPortal();
     }
 
+    private void Update()
+    {
+        if (GameManager.instance.reachingStage < 11)
+        { 
+            levelClear[0] = true; 
+        }
+        if (10 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 21)
+        {
+            levelClear[1] = true;
+        }
+        if (20 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 31)
+        { 
+            levelClear[2] = true;
+        }
+        if (30 < GameManager.instance.reachingStage && GameManager.instance.reachingStage < 41)
+        { 
+            levelClear[3] = true;
+        }
+    }
+
     public void GateDeactive()
     {
         foreach (ParticleSystem gate in portalGate)
@@ -49,13 +69,14 @@ public class PortalController : MonoBehaviour
 
     public void GateActive()
     {
-        for (int i = 0; i < levelClear.Length; i++)
-        {
-            if (levelClear[i])
-            {
-                portalGate[i].Play();
-            }
-        }
+        if (levelClear[0])
+        { portalGate[0].Play(); }
+        if (levelClear[1])
+        { portalGate[1].Play(); }
+        if (levelClear[2])
+        { portalGate[2].Play(); }
+        if (levelClear[3])
+        { portalGate[3].Play(); }
     }
 
     public void RightPortalButton()
@@ -90,6 +111,7 @@ public class PortalController : MonoBehaviour
     public void PortalUpdate()
     {
         PortalCameraPriorityReset();
+        GateActive();
 
         switch (currentPortal)
         {
@@ -103,16 +125,19 @@ public class PortalController : MonoBehaviour
                 leftButton.SetActive(true);
                 rightButton.SetActive(true);
                 portalCamera[1].Priority = 1;
+                GameManager.instance.stageHierarchy = 11;
                 break;
             case 3:
                 leftButton.SetActive(true);
                 rightButton.SetActive(true);
                 portalCamera[2].Priority = 1;
+                GameManager.instance.stageHierarchy = 21;
                 break;
             case 4:
                 leftButton.SetActive(true);
                 rightButton.SetActive(false);
                 portalCamera[3].Priority = 1;
+                GameManager.instance.stageHierarchy = 31;
                 break;
         }
 
@@ -244,8 +269,13 @@ public class PortalController : MonoBehaviour
         });
 
         sequence.Play();
+
+        GameManager.instance.SpawnEnemies();
+
         if (PlayerPrefs.HasKey("Tutorial")) return;
         UIManager.instance.TutorialAnimation(1);
+
+
     }
 
 
