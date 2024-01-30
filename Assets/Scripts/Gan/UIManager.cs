@@ -471,7 +471,7 @@ public class UIManager : MonoBehaviour
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
 
         //敵を全て破壊する
-        GameManager.instance.GameReset();
+
         HeroMessageDetail("ギブアップ");
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
@@ -484,13 +484,25 @@ public class UIManager : MonoBehaviour
         //カードのデータをリセットする
         DrawCardController.instance.GameReset();
 
-        yield return new WaitForSeconds(2);
-        //プレイヤーのステータスを元に戻す
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-        playerController.GameReset();
+
+        playerController.GiveUpAnime();
+
+        playerController.agent.enabled = false;
+
+        yield return new WaitForSeconds(2);
         //Loading();
         PortalController.instance.GoPortal();
+
+
+        yield return new WaitForSeconds(1f);
+
+        //プレイヤーのステータスを元に戻す
+        GameManager.instance.GameReset();
+        playerController.GameReset();
         losePanel.SetActive(false);
+
+
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)

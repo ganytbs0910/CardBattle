@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
 
     public void GameReset()
     {
-        UIManager.instance.LosePanel();
+        //UIManager.instance.LosePanel();
 
         // すべての敵が勝利アニメーションを再生
         foreach (var enemy in enemies)
