@@ -341,17 +341,17 @@ public class UIManager : MonoBehaviour
         GameManager.instance.DestroyAllItemWithTag("itemObj");
         GameManager.instance.DungeonCameraChange();
 
+        /*
         // カメラの角度を調整
         Vector3 currentCameraRotation = camera.transform.eulerAngles;
         camera.transform.eulerAngles = new Vector3(currentCameraRotation.x + 10, currentCameraRotation.y, currentCameraRotation.z);
-
         // UIパネルの位置を調整
         Vector2 difficultyPanelPosition = difficultyPanel.anchoredPosition;
         difficultyPanel.anchoredPosition = new Vector2(difficultyPanelPosition.x, difficultyPanelPosition.y - 500);
 
         Vector2 cardListPanelPosition = cardListPanel.anchoredPosition;
         cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 100);
-
+        */
         battleStartButton.gameObject.SetActive(true);
         GameManager.instance.battleState = false;
         loadPanel.SetActive(true);
@@ -401,9 +401,11 @@ public class UIManager : MonoBehaviour
 
         startCheckButton.SetActive(false);
         //heroMessageText.gameObject.SetActive(false);
+        /*
         camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
         difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
         cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
+        */
         //battleStartButton.gameObject.SetActive(true);
         //shopButton.gameObject.SetActive(false);
     }
@@ -440,39 +442,14 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator GiveUpCoroutine()
     {
-        // GameManager.instanceのnullチェック
-        if (GameManager.instance == null)
-        {
-            Debug.LogError("GiveUpCoroutineエラー: GameManager.instanceがnullです");
-            yield break;
-        }
-
-        // cameraのnullチェック
-        if (camera == null)
-        {
-            Debug.LogError("GiveUpCoroutineエラー: cameraがnullです");
-            yield break;
-        }
-
-        // difficultyPanelのnullチェック
-        if (difficultyPanel == null)
-        {
-            Debug.LogError("GiveUpCoroutineエラー: difficultyPanelがnullです");
-            yield break;
-        }
-
-        // cardListPanelのnullチェック
-        if (cardListPanel == null)
-        {
-            Debug.LogError("GiveUpCoroutineエラー: cardListPanelがnullです");
-            yield break;
-        }
         //UIを調整する
         if (GameManager.instance.battleState == false)
         {
+            /*
             camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
             difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
             cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
+            */
         }
         GameManager.instance.battleState = false;
         losePanel.SetActive(true);

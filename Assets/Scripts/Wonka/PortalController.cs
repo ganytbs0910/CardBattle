@@ -242,11 +242,10 @@ public class PortalController : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence();
         //フェードアウト
-        UIManager.instance.Loading();
-        /*
+
         LoadPanel.gameObject.SetActive(true);
         sequence.Append(LoadPanel.DOFade(1, 1.0f)); // 1秒かけて暗転
-        */
+
 
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
@@ -264,14 +263,14 @@ public class PortalController : MonoBehaviour
         });
 
         // フェードイン
-        /*
+
         sequence.Append(LoadPanel.DOFade(0, 1.0f)); // 1秒かけて明転
         sequence.AppendCallback(() =>
         {
             LoadPanel.gameObject.SetActive(false);
         });
         sequence.Play();
-        */
+
 
         GameManager.instance.SpawnEnemies();
         GameManager.instance.SpawnPlayer();
