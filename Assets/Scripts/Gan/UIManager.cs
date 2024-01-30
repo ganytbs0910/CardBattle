@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
     public float delay = 0.05f;
 
     public GameObject[] LobbyButtons;
-   // [SerializeField] private PortalController portalController;
+    // [SerializeField] private PortalController portalController;
 
     [Header("チュートリアル用")]
     [SerializeField] private Image arrowImage;
@@ -475,22 +475,19 @@ public class UIManager : MonoBehaviour
         HeroMessageDetail("ギブアップ");
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
+
         //効果音の長さぶんだけ待ってからBGMを再生
         StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
+
         //コインを30%に減らす
         PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
         //カードのデータをリセットする
         DrawCardController.instance.GameReset();
 
         yield return new WaitForSeconds(2);
-
         //プレイヤーのステータスを元に戻す
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.GameReset();
-
-
-
-        yield return new WaitForSeconds(2);
         //Loading();
         PortalController.instance.GoPortal();
         losePanel.SetActive(false);
