@@ -72,7 +72,7 @@ public class UIManager : MonoBehaviour
     public float delay = 0.05f;
 
     public GameObject[] LobbyButtons;
-    [SerializeField] private PortalController portalController;
+   // [SerializeField] private PortalController portalController;
 
     [Header("チュートリアル用")]
     [SerializeField] private Image arrowImage;
@@ -408,6 +408,8 @@ public class UIManager : MonoBehaviour
         //読み込みを行う
         Loading();
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+
+
     }
 
     public void WinPanel()
@@ -459,14 +461,20 @@ public class UIManager : MonoBehaviour
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         playerController.GameReset();
 
-        Loading();
-        portalController.GoPortal();
+
+
+        yield return new WaitForSeconds(2);
+        //Loading();
+        PortalController.instance.GoPortal();
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)
     {
         yield return new WaitForSeconds(delay);
-        AudioManager.instance.PlayBGM(AudioManager.BGM.GameOverTheme);
+        if (!AudioManager.instance.audioSourceBGM.isPlaying)
+        {
+            AudioManager.instance.PlayBGM(AudioManager.BGM.GameOverTheme);
+        }
     }
 
     public void AdsRevivalButton()

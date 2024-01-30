@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int stageHierarchy;
+    public int reachingStage;//最高到達ステージを記録する変数
     public int coin;
 
     public bool battleState; //バトル開始後==true バトル開始前==false 
@@ -58,6 +59,9 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("StageHierarchy", 1);
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
+
+        reachingStage = PlayerPrefs.GetInt("ReachingStage", 1);
+
         CreateCharacterList(); //プレイヤーと敵のリストを更新
     }
 
@@ -103,7 +107,8 @@ public class GameManager : MonoBehaviour
         //デバック用
         //BattleCameraChange();
         //ShopCameraChange();
-        PortalCameraChange();
+        //PortalCameraChange();
+        DungeonCameraChange();
 
         SpawnItems();
 
@@ -190,9 +195,20 @@ public class GameManager : MonoBehaviour
             }
         }
         ResetCharacters();
+
+        UpdateStage();
     }
 
-    public void DestroyAllItemWithTag(string tag)
+    public void UpdateStage()
+    {
+        if (stageHierarchy > reachingStage)
+        {
+            reachingStage = stageHierarchy;
+            PlayerPrefs.SetInt("ReachingStage", reachingStage);
+        }
+    }
+
+        public void DestroyAllItemWithTag(string tag)
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag(tag);
         foreach (GameObject item in items)
@@ -487,6 +503,8 @@ public class GameManager : MonoBehaviour
                 playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
             }
         }
+
+        UpdateStage();
     }
 
     //プレイヤーとエネミーを初期位置と初期アニメに戻す

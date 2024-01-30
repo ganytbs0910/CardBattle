@@ -25,11 +25,18 @@ public class PortalController : MonoBehaviour
     public CanvasGroup LoadPanel;
     public GameObject PortalEnviloment;
 
+    public static PortalController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         //ポータルは一番最初とゲームオーバーになった時に選択可能にする
         //UIManager
-        GoPortal();
+        //GoPortal();
     }
 
     public void GateDeactive()
@@ -90,6 +97,7 @@ public class PortalController : MonoBehaviour
                 leftButton.SetActive(false);
                 rightButton.SetActive(true);
                 portalCamera[0].Priority = 1;
+                GameManager.instance.stageHierarchy = 1;
                 break;
             case 2:
                 leftButton.SetActive(true);
@@ -186,6 +194,8 @@ public class PortalController : MonoBehaviour
 
             GateDeactive();
             GateActive();
+
+            PortalUpdate();
         });
 
         // フェードイン
