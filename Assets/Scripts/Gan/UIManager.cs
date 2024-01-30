@@ -432,6 +432,33 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator GiveUpCoroutine()
     {
+        // GameManager.instanceのnullチェック
+        if (GameManager.instance == null)
+        {
+            Debug.LogError("GiveUpCoroutineエラー: GameManager.instanceがnullです");
+            yield break;
+        }
+
+        // cameraのnullチェック
+        if (camera == null)
+        {
+            Debug.LogError("GiveUpCoroutineエラー: cameraがnullです");
+            yield break;
+        }
+
+        // difficultyPanelのnullチェック
+        if (difficultyPanel == null)
+        {
+            Debug.LogError("GiveUpCoroutineエラー: difficultyPanelがnullです");
+            yield break;
+        }
+
+        // cardListPanelのnullチェック
+        if (cardListPanel == null)
+        {
+            Debug.LogError("GiveUpCoroutineエラー: cardListPanelがnullです");
+            yield break;
+        }
         //UIを調整する
         if (GameManager.instance.battleState == false)
         {

@@ -73138,7 +73138,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.9
+  - time: 0.76666665
     functionName: DisableColliderWeapon
     data: 
     objectReferenceParameter: {fileID: 0}

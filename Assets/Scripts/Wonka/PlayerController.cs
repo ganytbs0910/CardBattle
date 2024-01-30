@@ -581,9 +581,12 @@ public class PlayerController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
-
         int sumDamage;
         sumDamage = damage - (int)(defense * addDefenceRate);
+        if (sumDamage <= 0)
+        {
+            sumDamage = 0;
+        }
         hp -= sumDamage;
         if (hp <= 0)
         {
@@ -607,7 +610,7 @@ public class PlayerController : MonoBehaviour
     public void OnTriggerEnter(Collider other)
     {
         //もしenemyTargetのオブジェクトに触れたら
-        if (other.gameObject == enemyTarget.gameObject)
+        if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
         {
             enemyChase = false;
         }
@@ -665,12 +668,14 @@ public class PlayerController : MonoBehaviour
         if (currentWeapon == null)
         {
             noWeaponCols.enabled = false;
-
         }
         else
         {
             weaponCollider = currentWeapon.GetCollider();
-            weaponCollider.enabled = false;
+            if (weaponCollider != null)
+            {
+                weaponCollider.enabled = false;
+            }
         }
 
         //if (currentWeapon == null) return;

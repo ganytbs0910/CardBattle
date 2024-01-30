@@ -304,7 +304,13 @@ public class EnemyController : MonoBehaviour
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
-        hp -= damage;
+        int sumDamage;
+        sumDamage = damage - defense;
+        if (sumDamage <= 0)
+        {
+            sumDamage = 1;
+        }
+        hp -= sumDamage;
         if (hp <= 0)
         {
             hp = 0;
