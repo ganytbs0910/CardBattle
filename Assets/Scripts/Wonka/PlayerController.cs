@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [Header("Playerの状態")]
     public bool IsDead = false;
     public bool isAttacking = false;//攻撃中かどうかの判定
-    public bool CantMove = false;//移動できない状態の判定
+    public bool CantMove = true;//移動できない状態の判定
     public bool isDropRateUp = false;
     public bool battleStartHeal = false;
     public Weapon defaultWeapon = null;
@@ -205,7 +205,7 @@ public class PlayerController : MonoBehaviour
         lastAttackTime = 0f;
         IsDead = false;
         isAttacking = false;
-        CantMove = false;
+        CantMove = true;
         isDropRateUp = false;
         battleStartHeal = false;
         defaultWeapon = null;
@@ -215,6 +215,8 @@ public class PlayerController : MonoBehaviour
         isHealingSword = false;
         enemyChase = true;
         EquipWeapon(defaultWeapon);
+        GameManager.instance.battleState = false;
+        agent.enabled = true;
         PlayerPrefs.Save();
         //プレイヤーを移動させないように
 
@@ -247,6 +249,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         //死亡中とバトル状態じゃないときはリターン
         if (IsDead || GameManager.instance.battleState == false)
         {
@@ -292,6 +295,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                CantMove = false;
                 //print("範囲外");
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
@@ -749,6 +753,21 @@ public class PlayerController : MonoBehaviour
 
         //ゲームの勝敗をチェックする
         GameManager.instance.CheckBattleStatus();
+    }
+
+    public void GiveUpAnime()
+    {
+        AllResetAnime();
+        animator.SetTrigger("Die");
+    }
+
+    public void AllResetAnime()
+    {
+        animator.ResetTrigger("Idle");
+        animator.ResetTrigger("Move");
+        animator.ResetTrigger("Attack");
+        animator.ResetTrigger("Defend");
+        animator.ResetTrigger("GetHit");
     }
 
     public void Victory()
