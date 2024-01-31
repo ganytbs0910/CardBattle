@@ -35,8 +35,8 @@ public class PortalController : MonoBehaviour
     private void Start()
     {
         //ポータルは一番最初とゲームオーバーになった時に選択可能にする
-        //UIManager
-        GoPortal();
+        //UIManager)
+        //GoPortal();
     }
 
     private void Update()

@@ -21,6 +21,7 @@ public class DrawCardController : MonoBehaviour
         {
             PlayerPrefs.SetInt("MinDrawCard", 1);
             PlayerPrefs.SetInt("MaxDrawCard", 4);
+            PlayerPrefs.Save();
         }
         //もしチュートリアルなら処理を実行
         if (!PlayerPrefs.HasKey("Tutorial"))

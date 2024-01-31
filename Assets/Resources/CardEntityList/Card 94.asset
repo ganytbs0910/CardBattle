@@ -20,3 +20,5 @@ MonoBehaviour:
   weapon: {fileID: 0}
   armor: {fileID: 11400000, guid: 9d8c3a1b781b1364fbad7461cfb3f54d, type: 2}
   targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0

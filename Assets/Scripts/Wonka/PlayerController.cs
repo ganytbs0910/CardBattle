@@ -283,7 +283,7 @@ public class PlayerController : MonoBehaviour
                     //回復の剣の効果
                     if (Random.Range(0, 100) < 10)
                     {
-                        HPHeal(5);
+                        HPHeal(1);
                     }
                 }
                 else//攻撃までのインターバル中

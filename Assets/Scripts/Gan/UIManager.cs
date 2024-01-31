@@ -474,11 +474,9 @@ public class UIManager : MonoBehaviour
         playerController.GiveUpAnime();
 
         playerController.agent.enabled = false;
-
         yield return new WaitForSeconds(2);
         //Loading();
         PortalController.instance.GoPortal();
-
 
         yield return new WaitForSeconds(1f);
 
@@ -486,8 +484,14 @@ public class UIManager : MonoBehaviour
         GameManager.instance.GameReset();
         playerController.GameReset();
         losePanel.SetActive(false);
-
-
+        GameManager.instance.SpawnEnemies();
+        yield return new WaitForSeconds(1f);
+        //GameManager.instance.enemiesの一つ目の要素以外をリストから外す
+        PlayerPrefs.SetInt("EnemyCount", 1);
+        for (int i = 1; i < GameManager.instance.enemies.Count; i++)
+        {
+            GameManager.instance.enemies.Remove(GameManager.instance.enemies[i]);
+        }
     }
 
     private IEnumerator WaitAndPlayBGM(float delay)

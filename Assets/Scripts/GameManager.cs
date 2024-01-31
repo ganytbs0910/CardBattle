@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("StageHierarchy"))
         {
             PlayerPrefs.SetInt("StageHierarchy", 1);
+            PlayerPrefs.Save();
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
 
@@ -115,7 +116,6 @@ public class GameManager : MonoBehaviour
         SpawnItems();
 
         SpawnPlayer();
-
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
             }
         }
         PlayerPrefs.SetInt("StageHierarchy", 1);
+        PlayerPrefs.Save();
         stageHierarchy = 0;
 
         //enemiesのオブジェクトを全て破棄
@@ -186,9 +187,12 @@ public class GameManager : MonoBehaviour
                 Destroy(enemy.gameObject);
             }
         }
+        for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
+        {
+            PlayerPrefs.DeleteKey($"Enemy{i}");
+        }
+        PlayerPrefs.DeleteKey("EnemyCount");
 
-        //enemiesのリストをリセット
-        enemies.Clear();
         DestroyAllItemWithTag("itemObj");
         for (int i = playerObjects.Count - 1; i >= 0; i--)
         {
@@ -209,10 +213,11 @@ public class GameManager : MonoBehaviour
         {
             reachingStage = stageHierarchy;
             PlayerPrefs.SetInt("ReachingStage", reachingStage);
+            PlayerPrefs.Save();
         }
     }
 
-        public void DestroyAllItemWithTag(string tag)
+    public void DestroyAllItemWithTag(string tag)
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag(tag);
         foreach (GameObject item in items)
@@ -268,6 +273,7 @@ public class GameManager : MonoBehaviour
         float randomNum = UnityEngine.Random.Range(0.8f, 2f);
         coin += Mathf.RoundToInt(stageHierarchy * randomNum * 10);
         PlayerPrefs.SetInt("Coin", coin);
+        PlayerPrefs.Save();
         UIManager.instance.UpdateCoinText();
     }
 
@@ -284,6 +290,7 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt($"Enemy{i}", enemies[i].GetComponent<EnemyController>().id);
         }
+        PlayerPrefs.Save();
     }
 
     //キャラクターのリストを作成する。あるいはリストをリフレッシュするする。
@@ -402,7 +409,10 @@ public class GameManager : MonoBehaviour
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10;
                 int enemiesToSpawn = remainder / 2 + 1;
+                Debug.Log($"敵の数: {PlayerPrefs.GetInt("EnemyCount")}");
                 PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
+                Debug.Log($"敵の数: {PlayerPrefs.GetInt("EnemyCount")}");
+                PlayerPrefs.Save();
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
                     int range = stageHierarchy / 10;
