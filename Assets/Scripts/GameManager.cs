@@ -543,8 +543,12 @@ public class GameManager : MonoBehaviour
                 playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
             }
         }
-
         UpdateStage();
+        if (stageHierarchy == 41)
+        {
+            UIManager.instance.gameClearPanel.SetActive(true);
+            AudioManager.instance.PlayBGM(AudioManager.BGM.GameClearTheme);
+        }
     }
 
     //プレイヤーとエネミーを初期位置と初期アニメに戻す

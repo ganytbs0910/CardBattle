@@ -1118,6 +1118,6 @@ public class PlayerController : MonoBehaviour
     }
     void Warp()
     {
-        transform.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+        transform.position = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 10));
     }
 }

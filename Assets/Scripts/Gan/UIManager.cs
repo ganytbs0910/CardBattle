@@ -30,9 +30,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject loadPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject losePanel;
+    public GameObject gameClearPanel;
     [SerializeField] private GameObject Hukidashi;
     [SerializeField] private int loadTime = 1;
 
+    [SerializeField] private Image dropImage;
     [SerializeField] private RectTransform battleStartButton;
     [SerializeField] private RectTransform[] PortalChangeButton;
 
@@ -59,7 +61,23 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text seText;
     [SerializeField] private TMP_Text voiceText;
 
-    [SerializeField] private Image dropImage;
+    [Header("ゲームクリアの画面")]
+    [SerializeField] private TMP_Text clearTitleText;
+    [SerializeField] private TMP_Text clearDetailText;
+
+    [Header("遊び方のテキスト")]
+    [SerializeField] private TMP_Text howToPlayHeadText;
+    [SerializeField] private TMP_Text howToPlayTitleText;
+    [SerializeField] private TMP_Text howToPlayDetailText;
+    [SerializeField] private TMP_Text howToPlayTitleText2;
+    [SerializeField] private TMP_Text howToPlayDetailText2;
+    [SerializeField] private TMP_Text howToPlayTitleText3;
+    [SerializeField] private TMP_Text howToPlayDetailText3;
+    [SerializeField] private TMP_Text howToPlayTitleText4;
+    [SerializeField] private TMP_Text howToPlayDetailText4;
+    [SerializeField] private TMP_Text howToPlayTitleText5;
+    [SerializeField] private TMP_Text howToPlayDetailText5;
+
 
     [Header("オプションの言語設定")]
     [SerializeField] Image languageImage;
@@ -988,6 +1006,19 @@ public class UIManager : MonoBehaviour
                 musicText.text = "音楽";
                 seText.text = "効果音";
                 voiceText.text = "ボイス";
+                howToPlayHeadText.text = "遊び方";
+                howToPlayTitleText.text = "・何するゲーム？";
+                howToPlayDetailText.text = "毎階層獲得できるカードを用いて<color=#ff0000>地下40階層</color>を目指すゲームです。\n死んでしまうとカードや装備などは失われますが、<color=#ff0000>コイン</color>や<color=#ff0000>ドロップアイテム</color>は引き継がれます。";
+                howToPlayTitleText2.text = "・ゲームのコツは？";
+                howToPlayDetailText2.text = "カードは<color=#ff0000>最大8枚</color>しか持てません。\n10階層ごとに<color=#ff0000>ボス</color>が出現するので、強いカードを残しておこう！";
+                howToPlayTitleText3.text = "・全然進めなくなった！";
+                howToPlayDetailText3.text = "敵から低確率で<color=#ff0000>レアドロップアイテム</color>があります。\nもし<color=#ff0000>ボス</color>からドロップすれば....";
+                howToPlayTitleText4.text = "・戦闘はどうするの？";
+                howToPlayDetailText4.text = "戦闘は<color=#ff0000>自動</color>で行われます。\n戦闘中でもスキルが使えますが、HPとスキルカードは<color=#ff0000>次回の階層に引き継がれる</color>ので注意しましょう。";
+                howToPlayTitleText5.text = "・カードのレアリティ";
+                howToPlayDetailText5.text = "カードには<color=#ff0000>レアリティ</color>があります。\nレアリティが高いほど、カードの効果が強力になります。\nレアリティは<color=#ff0000>ノーマル</color>、<color=#ff0000>レア</color>、<color=#ff0000>スーパーレア</color>、<color=#ff0000>ウルトラレア</color>の4種類があります。\nレアリティが高いほど、カードの効果が強力になります。";
+                clearTitleText.text = "ゲームクリア！";
+                clearDetailText.text = "まさかクリアする者が現れるとはな。\n君はなかなか猛者だな。\n\n我々はさらなる階層と新たな敵、スキルカードを追求するための開発中である。\n\n今後の発展のためにレビューで応援やSNSでの拡散で我々の開発のコストとモチベーションの向上をお願いしたい。\n\nまた別のゲームでも会おうではないか。\n\n君のさらなる活躍には期待しているもんだよ。\n\nさらばだ。";
                 break;
             case Language.English:
                 startText.text = "Start";
@@ -1005,6 +1036,19 @@ public class UIManager : MonoBehaviour
                 musicText.text = "Music";
                 seText.text = "Sound";
                 voiceText.text = "Voice";
+                howToPlayHeadText.text = "How to play";
+                howToPlayTitleText.text = "・What to do?";
+                howToPlayDetailText.text = "This is a game where you aim for <color=#ff0000>the 40th floor underground</color> using cards that can be obtained on each floor.\nIf you die, you will lose cards and equipment, but <color=#ff0000>coins</color> and <color=#ff0000>drop items</color> will be carried over.";
+                howToPlayTitleText2.text = "・What's the trick to the game?";
+                howToPlayDetailText2.text = "You can only have <color=#ff0000>up to 8 cards</color>.\nA <color=#ff0000>Boss</color> appears every 10 floors, so keep strong cards!";
+                howToPlayTitleText3.text = "・I can't make any progress!";
+                howToPlayDetailText3.text = "There is a <color=#ff0000>rare drop item</color> with a low probability from the enemy.\nIf you drop it from the <color=#ff0000>Boss</color>...";
+                howToPlayTitleText4.text = "・How do you fight?";
+                howToPlayDetailText4.text = "The battle is <color=#ff0000>automatic</color>.\nYou can use skills even during battle, but be careful as HP and skill cards will be <color=#ff0000>carried over to the next floor</color>.";
+                howToPlayTitleText5.text = "・Card rarity";
+                howToPlayDetailText5.text = "Cards have <color=#ff0000>rarity</color>.\nThe higher the rarity, the more powerful the effect of the card.\nThere are four types of rarity: <color=#ff0000>Normal</color>, <color=#ff0000>Rare</color>, <color=#ff0000>Super Rare</color>, and <color=#ff0000>Ultra Rare</color>.";
+                clearTitleText.text = "Game Clear!";
+                clearDetailText.text = "I can't believe someone has cleared it.\nYou're quite a fighter.\n\nWe are developing further hierarchies, new enemies, and skill cards.\n\nWe would like to ask for your support in the form of reviews and spreading the word on SNS to improve our development costs and motivation.\n\nLet's meet again in another game.\n\nI'm looking forward to your further success.\n\nGoodbye.";
                 break;
         }
     }
