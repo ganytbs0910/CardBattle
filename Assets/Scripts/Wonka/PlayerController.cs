@@ -60,8 +60,8 @@ public class PlayerController : MonoBehaviour
 
     public Weapon currentWeapon = null;
 
-    [SerializeField] Armor currentArmor = null;
     [SerializeField] Armor currentHead = null;
+    [SerializeField] Armor currentArmor = null;
     [SerializeField] Armor currentBackpack = null;
     BoxCollider weaponCollider;
     bool isHealingSword = false;
@@ -82,24 +82,6 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        LoadStatus();
-        if (PlayerPrefs.HasKey("Weapon"))
-        {
-            EquipWeapon(Resources.Load<Weapon>($"Weapon/{PlayerPrefs.GetString("Weapon")}"));
-        }
-        if (PlayerPrefs.HasKey("Armor"))
-        {
-            EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Armor")}"));
-        }
-        if (PlayerPrefs.HasKey("Head"))
-        {
-            EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Head")}"));
-        }
-        if (PlayerPrefs.HasKey("BackPack"))
-        {
-            EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
-        }
-
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
         moveSpeed = agent.speed;
         // Animatorコンポーネントを取得
@@ -109,11 +91,42 @@ public class PlayerController : MonoBehaviour
 
         playerUIManager.Init(this);//スライダーの初期化
         initialPosition = transform.position;
-
-        EquipWeapon(defaultWeapon);
+        if (defaultWeapon != null)
+        {
+            EquipWeapon(defaultWeapon);
+        }
 
         CollectionFirstEffect();
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
+
+        //1秒後に
+        DOVirtual.DelayedCall(0.5f, () =>
+        {
+            if (PlayerPrefs.HasKey("Weapon"))
+            {
+                Weapon[] weapon = Resources.LoadAll<Weapon>("Weapon");
+                foreach (var item in weapon)
+                {
+                    if (item.name == PlayerPrefs.GetString("Weapon"))
+                    {
+                        EquipWeapon(item);
+                    }
+                }
+            }
+            if (PlayerPrefs.HasKey("Armor"))
+            {
+                EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Armor")}"));
+            }
+            if (PlayerPrefs.HasKey("Head"))
+            {
+                EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Head")}"));
+            }
+            if (PlayerPrefs.HasKey("BackPack"))
+            {
+                EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
+            }
+            LoadStatus();
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
+        });
     }
 
     void CollectionFirstEffect()
@@ -247,8 +260,6 @@ public class PlayerController : MonoBehaviour
     }
     public void SaveStatus()
     {
-        Debug.Log("セーブしました");
-        Debug.Log($"HP={hp}, MP={mp}, Attack={attack}, Defense={defense}, Agility={Agility}, MaxHP={maxHp}, MaxMP={maxMp}");
         PlayerPrefs.SetInt("HP", hp);
         PlayerPrefs.SetInt("MP", mp);
         PlayerPrefs.SetInt("Attack", attack);
@@ -299,6 +310,7 @@ public class PlayerController : MonoBehaviour
             Agility = 5;
         }
 
+        /*
         //装備のステータス強化分は差し引く
         if (currentWeapon != null)
         {
@@ -332,6 +344,7 @@ public class PlayerController : MonoBehaviour
             defense -= currentBackpack.GetDEFPoint();
             Agility -= currentBackpack.GetAGIPoint();
         }
+        */
         playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
     }
 
@@ -435,10 +448,15 @@ public class PlayerController : MonoBehaviour
         //武器による距離を調整
         StopDistance = weapon.GetRange();
         agent.stoppingDistance = StopDistance;
-        //weaponをセーブしておく
 
+        //装備のバフを追加
+        if (currentWeapon == null)
+        {
+            return;
+        }
 
-        UpdateStats();
+        attack += currentWeapon.GetATKPoint(); ;
+        defense += currentWeapon.GetDEFPoint(); ;
     }
 
     public void EquipArmor(Armor armor)
@@ -484,75 +502,40 @@ public class PlayerController : MonoBehaviour
         //防具を生成
         armor.Spawn(headTransform, bodyTransform, backPackTransform);
 
-        UpdateStats();
-
-        print("防具を装備した");
-    }
-
-    private void UpdateStats()
-    {
-        //武器と防具量を加算
-        AddWeaponState();
-        AddArmorState();
-    }
-
-
-    private void AddWeaponState()
-    {
-        //装備の攻撃を追加
-        if (currentWeapon == null)
+        //防具のバフ
+        switch (armor.armorType)
         {
-            return;
+            case Armor.ArmorType.Head:
+                if (currentHead != null)
+                {
+                    maxHp += currentHead.GetAddMAXHP();
+                    maxMp += currentHead.GetAddMAXMP();
+                    attack += currentHead.GetATKPoint();
+                    defense += currentHead.GetDEFPoint();
+                    Agility += currentHead.GetAGIPoint();
+                }
+                break;
+            case Armor.ArmorType.Body:
+                if (currentArmor != null)
+                {
+                    maxHp += currentArmor.GetAddMAXHP();
+                    maxMp += currentArmor.GetAddMAXMP();
+                    attack += currentArmor.GetATKPoint();
+                    defense += currentArmor.GetDEFPoint();
+                    Agility += currentArmor.GetAGIPoint();
+                }
+                break;
+            case Armor.ArmorType.BackPack:
+                if (currentBackpack != null)
+                {
+                    maxHp += currentBackpack.GetAddMAXHP();
+                    maxMp += currentBackpack.GetAddMAXMP();
+                    attack += currentBackpack.GetATKPoint();
+                    defense += currentBackpack.GetDEFPoint();
+                    Agility += currentBackpack.GetAGIPoint();
+                }
+                break;
         }
-
-        int weaponATK = currentWeapon.GetATKPoint();
-        int weaponDEF = currentWeapon.GetDEFPoint();
-
-        attack += weaponATK;
-        defense += weaponDEF;
-    }
-
-    private void AddArmorState()
-    {
-        int armorATK = 0;
-        int armorDEF = 0;
-        int armorAGI = 0;
-        int armorMAXHP = 0;
-        int armorMAXMP = 0;
-
-        if (currentArmor != null)
-        {
-            armorATK += currentArmor.GetATKPoint();
-            armorDEF += currentArmor.GetDEFPoint();
-            armorAGI += currentArmor.GetAGIPoint();
-            armorMAXHP += currentArmor.GetAddMAXHP();
-            armorMAXMP += currentArmor.GetAddMAXMP();
-        }
-
-        if (currentHead != null)
-        {
-            armorATK += currentHead.GetATKPoint();
-            armorDEF += currentHead.GetDEFPoint();
-            armorAGI += currentHead.GetAGIPoint();
-            armorMAXHP += currentHead.GetAddMAXHP();
-            armorMAXMP += currentHead.GetAddMAXMP();
-        }
-
-        if (currentBackpack != null)
-        {
-            armorATK += currentBackpack.GetATKPoint();
-            armorDEF += currentBackpack.GetDEFPoint();
-            armorAGI += currentBackpack.GetAGIPoint();
-            armorMAXHP += currentBackpack.GetAddMAXHP();
-            armorMAXMP += currentBackpack.GetAddMAXMP();
-        }
-
-
-        attack += armorATK;
-        defense += armorDEF;
-        Agility += armorAGI;
-        maxHp += armorMAXHP;
-        maxMp += armorMAXMP;
     }
 
     /// <summary>
@@ -1016,8 +999,6 @@ public class PlayerController : MonoBehaviour
         }
         GameManager.instance.CreateCharacterList();
 
-        print("プレイヤーの人数が" + number + "増えました");
-
         AudioManager.instance.PlaySE(AudioManager.SE.PlayerIncrease);
     }
     //体力増加
@@ -1058,7 +1039,6 @@ public class PlayerController : MonoBehaviour
         }
         //Sliderを修正
         playerUIManager.UpdateHP(maxHp, hp);
-        print("プレイヤーのHPが" + value + "回復しました");
 
         AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
 
@@ -1080,8 +1060,6 @@ public class PlayerController : MonoBehaviour
         }
         //Sliderを修正
         playerUIManager.UpdateMP(maxMp, mp);
-
-        print("プレイヤーのMPが" + value + "回復しました");
 
         AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
     }

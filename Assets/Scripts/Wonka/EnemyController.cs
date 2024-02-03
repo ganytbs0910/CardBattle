@@ -501,8 +501,6 @@ public class EnemyController : MonoBehaviour
         //hpをvalue%分減らす
         hp -= (int)(hp * value);
         enemyUIManager.UpdateHP(hp);//HPSliderの更新
-        print("敵に" + hp * value + "ダメージを与えました");
-
         AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
     }
 

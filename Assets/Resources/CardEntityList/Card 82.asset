@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Card 82
   m_EditorClassIdentifier: 
   cardID: 82
-  name: MAXHP+30
+  name: DFE+2,MAXMP+10
   information: 
-  tiar: 3
-  icon: {fileID: 21300000, guid: 130447600079d564e98f58488e47ec8d, type: 3}
+  tiar: 2
+  icon: {fileID: 21300000, guid: 8f21701e0ed6f4e409f238f0ea6bf232, type: 3}
   weapon: {fileID: 0}
-  armor: {fileID: 11400000, guid: eafa38c67789ad64ca016f4692342afd, type: 2}
+  armor: {fileID: 11400000, guid: b85853073ae6a0947985490ebabac941, type: 2}
   targetType: 0
   particle: {fileID: 0}
   particlePosition: 0

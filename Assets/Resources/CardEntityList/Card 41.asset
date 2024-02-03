@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: Card 96
+  m_Name: Card 41
   m_EditorClassIdentifier: 
-  cardID: 96
-  name: AGI+10,MAXMP+20
+  cardID: 41
+  name: "ATK\uFF0B10"
   information: 
-  tiar: 3
-  icon: {fileID: 21300000, guid: 6cc4b88d9feec3049815c67ecb6cbaa8, type: 3}
-  weapon: {fileID: 0}
-  armor: {fileID: 11400000, guid: 6618a63c8a626aa4b829780fecbaad93, type: 2}
+  tiar: 4
+  icon: {fileID: 21300000, guid: e69715bde1269504db60651554a50ac1, type: 3}
+  weapon: {fileID: 11400000, guid: 62e730b3421e54c4a839d62f35f2128d, type: 2}
+  armor: {fileID: 0}
   targetType: 0
   particle: {fileID: 0}
   particlePosition: 0

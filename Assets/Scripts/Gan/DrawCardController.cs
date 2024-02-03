@@ -61,9 +61,9 @@ public class DrawCardController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            ReDrawCardList(10);
+            ReDrawCardList(8);
         }
     }
 
@@ -86,6 +86,7 @@ public class DrawCardController : MonoBehaviour
         if (num == 0) num = parentPanel.transform.childCount;
         PlayerPrefs.DeleteKey("CurrentStageCard");
         cardIDList.Clear();
+        //parentPanelの子オブジェクトを一括で全て削除
         foreach (Transform child in parentPanel.transform)
         {
             Destroy(child.gameObject);

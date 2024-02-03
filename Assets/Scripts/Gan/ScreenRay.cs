@@ -114,12 +114,6 @@ public class ScreenRay : MonoBehaviour
                     switch (cardID)
                     {
                         case 24:
-                            /*前のコード
-                            drawCardController.cardIDList.Remove(cardID);
-                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(1, 1, 1));
-                            Destroy(chooseCard);
-                            cardID = 0;
-                            */
                             //新しいコード(24,25,26に適応)
                             ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1), 2f);
                             break;
@@ -170,9 +164,6 @@ public class ScreenRay : MonoBehaviour
 
         // パーティクルの再生が終了したら自動的に破棄する
         Destroy(newParticle.gameObject, newParticle.main.duration);
-
-        print(particle.name + "を実行します");
-
     }
 
     void RayCastUI()

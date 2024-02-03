@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Card 59
   m_EditorClassIdentifier: 
   cardID: 59
-  name: ATK+8 DEF+3
+  name: ATK+3
   information: 
-  tiar: 4
-  icon: {fileID: 21300000, guid: f768ab4172d035b488c57e02cbd2b5e5, type: 3}
-  weapon: {fileID: 11400000, guid: 17dd48474f8ff3840ba9eece68238811, type: 2}
+  tiar: 2
+  icon: {fileID: 21300000, guid: bc9f77a90e0d7ee4993fb47a5a9372ab, type: 3}
+  weapon: {fileID: 11400000, guid: fe8436f259b544746b853e80057e51d9, type: 2}
   armor: {fileID: 0}
   targetType: 0
   particle: {fileID: 0}

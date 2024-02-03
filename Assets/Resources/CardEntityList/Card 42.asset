@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: Card 102
+  m_Name: Card 42
   m_EditorClassIdentifier: 
-  cardID: 102
-  name: DEF+20,MAXHP+40
+  cardID: 42
+  name: "ATK\uFF0B15"
   information: 
-  tiar: 4
-  icon: {fileID: 21300000, guid: 9ecf0e662cc1e9649a4a2dd2d9b0d967, type: 3}
-  weapon: {fileID: 0}
-  armor: {fileID: 11400000, guid: 8882c2d504f56d44fb9dff4075feffb0, type: 2}
+  tiar: 5
+  icon: {fileID: 21300000, guid: 5a8955590e44e8a40bc1bfec87720388, type: 3}
+  weapon: {fileID: 11400000, guid: 0484b2027d3ec7b41bfe5643a05df71b, type: 2}
+  armor: {fileID: 0}
   targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0
