@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text canUseText;
     [SerializeField] private TMP_Text RemainingBossText;
     [SerializeField] private TMP_Text tutorialText;
+    [SerializeField] private TMP_Text statusCheckText;
 
     [Header("ローカライズ用のテキスト")]
     [SerializeField] private TMP_Text startText;
@@ -593,17 +594,24 @@ public class UIManager : MonoBehaviour
     {
         //このオブジェクトの子オブジェクトとして複製
         Image dropImageItem = Instantiate(dropImage, dropPosition, Quaternion.identity, transform);
-        dropImageItem.sprite = itemPrefab;
+        //dropImageItemの子オブジェクトを取得
+        dropImageItem.rectTransform.GetChild(0).GetComponent<Image>().sprite = itemPrefab;
 
         // 最初に0.5秒でサイズを1.2倍にする
-        dropImageItem.rectTransform.DOScale(1.2f, 0.5f).OnComplete(() =>
+        dropImageItem.rectTransform.DOScale(1.35f, 1f).OnComplete(() =>
         {
             // その後、1.5秒かけてcollectionButtonの位置に移動し、サイズを縮小する
-            dropImageItem.rectTransform.DOMove(settingButton.position, 1.5f).OnComplete(() => Destroy(dropImageItem.gameObject));
-            dropImageItem.rectTransform.DOScale(0.5f, 1.5f);
+            dropImageItem.rectTransform.DOMove(settingButton.position, 2f).OnComplete(() => Destroy(dropImageItem.gameObject));
+            dropImageItem.rectTransform.DOScale(0.5f, 2f);
         });
 
         HeroMessageDetail("コレクションゲット", collectionName);
+    }
+
+    //ステータスの確認
+    public void StatusCheckUpdate(int hp, int attack, int defense, int avoidance)
+    {
+        statusCheckText.text = $"HP:{hp}\nAttack:{attack}\nDefense:{defense}\nSpeed:{avoidance}";
     }
 
     //UIのOnOff

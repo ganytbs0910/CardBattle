@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
         CollectionFirstEffect();
         SaveStatus();
         LoadStatus();
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
     }
 
     void CollectionFirstEffect()
@@ -883,6 +884,7 @@ public class PlayerController : MonoBehaviour
             //プレイヤーの位置を移動させる
             case 37: Warp(); break;
         }
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
     }
 
     /// <summary>

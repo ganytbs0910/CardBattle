@@ -59,7 +59,7 @@ public class ShopUI : MonoBehaviour
             payButtonClone.transform.GetChild(0).GetComponent<TMP_Text>().text = (tiar * 100).ToString();
 
             Button button = payButtonClone.GetComponent<Button>();
-            int price = tiar * 100;
+            int price = tiar * 50;
 
             cardUIList.Add(new CardUI { cardObject = card.gameObject, payButton = button, cardID = cardID, price = price });
 
