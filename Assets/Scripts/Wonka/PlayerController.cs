@@ -82,18 +82,23 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        if (!PlayerPrefs.HasKey("HP"))
+        LoadStatus();
+        if (PlayerPrefs.HasKey("Weapon"))
         {
-            maxHp = (int)(maxHp * addHealthRate);
-            hp = maxHp;
-            mp = maxMp;
+            EquipWeapon(Resources.Load<Weapon>($"Weapon/{PlayerPrefs.GetString("Weapon")}"));
         }
-        else
+        if (PlayerPrefs.HasKey("Armor"))
         {
-            hp = PlayerPrefs.GetInt("HP");
-            mp = PlayerPrefs.GetInt("MP");
+            EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Armor")}"));
         }
-        UpdateStats();
+        if (PlayerPrefs.HasKey("Head"))
+        {
+            EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Head")}"));
+        }
+        if (PlayerPrefs.HasKey("BackPack"))
+        {
+            EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
+        }
 
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
         moveSpeed = agent.speed;
@@ -108,8 +113,6 @@ public class PlayerController : MonoBehaviour
         EquipWeapon(defaultWeapon);
 
         CollectionFirstEffect();
-        SaveStatus();
-        LoadStatus();
         UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
     }
 
@@ -222,9 +225,30 @@ public class PlayerController : MonoBehaviour
         //プレイヤーを移動させないように
 
     }
-
+    public void SaveEquipment()
+    {
+        if (currentWeapon != null)
+        {
+            PlayerPrefs.SetString("Weapon", currentWeapon.name);
+        }
+        if (currentArmor != null)
+        {
+            PlayerPrefs.SetString("Armor", currentArmor.name);
+        }
+        if (currentHead != null)
+        {
+            PlayerPrefs.SetString("Head", currentHead.name);
+        }
+        if (currentBackpack != null)
+        {
+            PlayerPrefs.SetString("BackPack", currentBackpack.name);
+        }
+        PlayerPrefs.Save();
+    }
     public void SaveStatus()
     {
+        Debug.Log("セーブしました");
+        Debug.Log($"HP={hp}, MP={mp}, Attack={attack}, Defense={defense}, Agility={Agility}, MaxHP={maxHp}, MaxMP={maxMp}");
         PlayerPrefs.SetInt("HP", hp);
         PlayerPrefs.SetInt("MP", mp);
         PlayerPrefs.SetInt("Attack", attack);
@@ -237,20 +261,83 @@ public class PlayerController : MonoBehaviour
 
     void LoadStatus()
     {
+        maxHp = PlayerPrefs.GetInt("MaxHP");
+        maxMp = PlayerPrefs.GetInt("MaxMP");
         hp = PlayerPrefs.GetInt("HP");
         playerUIManager.UpdateHP(maxHp, hp);
         mp = PlayerPrefs.GetInt("MP");
-        playerUIManager.UpdateMP(maxMp, mp);
+        //playerUIManager.UpdateMP(maxMp, mp);
         attack = PlayerPrefs.GetInt("Attack");
         defense = PlayerPrefs.GetInt("Defense");
         Agility = PlayerPrefs.GetInt("Agility");
-        maxHp = PlayerPrefs.GetInt("MaxHP");
-        maxMp = PlayerPrefs.GetInt("MaxMP");
+        if (!PlayerPrefs.HasKey("MaxHP"))
+        {
+            maxHp = 100;
+        }
+        if (!PlayerPrefs.HasKey("MaxMP"))
+        {
+            maxMp = 100;
+        }
+        if (!PlayerPrefs.HasKey("HP"))
+        {
+            hp = maxHp;
+        }
+        if (!PlayerPrefs.HasKey("MP"))
+        {
+            mp = maxMp;
+        }
+        if (!PlayerPrefs.HasKey("Attack"))
+        {
+            attack = 5;
+        }
+        if (!PlayerPrefs.HasKey("Defense"))
+        {
+            defense = 1;
+        }
+        if (!PlayerPrefs.HasKey("Agility"))
+        {
+            Agility = 5;
+        }
+
+        //装備のステータス強化分は差し引く
+        if (currentWeapon != null)
+        {
+            //maxHp -= currentWeapon.GetAddMAXHP();
+            //maxMp -= currentWeapon.GetAddMAXMP();
+            attack -= currentWeapon.GetATKPoint();
+            defense -= currentWeapon.GetDEFPoint();
+            //Agility -= currentWeapon.GetAGIPoint();
+        }
+        if (currentArmor != null)
+        {
+            maxHp -= currentArmor.GetAddMAXHP();
+            maxMp -= currentArmor.GetAddMAXMP();
+            attack -= currentArmor.GetATKPoint();
+            defense -= currentArmor.GetDEFPoint();
+            Agility -= currentArmor.GetAGIPoint();
+        }
+        if (currentHead != null)
+        {
+            maxHp -= currentHead.GetAddMAXHP();
+            maxMp -= currentHead.GetAddMAXMP();
+            attack -= currentHead.GetATKPoint();
+            defense -= currentHead.GetDEFPoint();
+            Agility -= currentHead.GetAGIPoint();
+        }
+        if (currentBackpack != null)
+        {
+            maxHp -= currentBackpack.GetAddMAXHP();
+            maxMp -= currentBackpack.GetAddMAXMP();
+            attack -= currentBackpack.GetATKPoint();
+            defense -= currentBackpack.GetDEFPoint();
+            Agility -= currentBackpack.GetAGIPoint();
+        }
+        playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
     }
 
     void Update()
     {
-
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
         //死亡中とバトル状態じゃないときはリターン
         if (IsDead || GameManager.instance.battleState == false)
         {
@@ -312,10 +399,11 @@ public class PlayerController : MonoBehaviour
         //前回の装備のステータスを引く
         if (currentWeapon != null)
         {
+            //maxHp -= currentWeapon.GetAddMAXHP();
+            //maxMp -= currentWeapon.GetAddMAXMP();
             attack -= currentWeapon.GetATKPoint();
             defense -= currentWeapon.GetDEFPoint();
-            Debug.Log("前回の武器の攻撃力" + currentWeapon.GetATKPoint());
-            Debug.Log("前回の武器の防御力" + currentWeapon.GetDEFPoint());
+            //Agility -= currentWeapon.GetAGIPoint();
         }
 
         //playerCollidersの要素全てをenabledをfalseにする
@@ -327,26 +415,14 @@ public class PlayerController : MonoBehaviour
         currentWeapon = weapon;
         switch (currentWeapon.weaponType)
         {
-            case Weapon.WeaponType.NoWeapon:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.OneHandSword:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.TwoHandSword:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.Shield:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.Spear:
-                playerColliders[0].enabled = true;
-                break;
             case Weapon.WeaponType.Arrow:
                 playerColliders[1].enabled = true;
                 break;
             case Weapon.WeaponType.Wand:
                 playerColliders[1].enabled = true;
+                break;
+            default:
+                playerColliders[0].enabled = true;
                 break;
         }
 
@@ -359,29 +435,54 @@ public class PlayerController : MonoBehaviour
         //武器による距離を調整
         StopDistance = weapon.GetRange();
         agent.stoppingDistance = StopDistance;
+        //weaponをセーブしておく
 
-        print(weapon + "を装備しました");
 
         UpdateStats();
     }
 
     public void EquipArmor(Armor armor)
     {
-        if (armor == null)
+        if (armor == null) return;
+        switch (armor.armorType)
         {
-            return;
+            case Armor.ArmorType.Head:
+                if (currentHead != null)
+                {
+                    maxHp -= currentHead.GetAddMAXHP();
+                    maxMp -= currentHead.GetAddMAXMP();
+                    attack -= currentHead.GetATKPoint();
+                    defense -= currentHead.GetDEFPoint();
+                    Agility -= currentHead.GetAGIPoint();
+                }
+                currentHead = armor;
+                break;
+            case Armor.ArmorType.Body:
+                if (currentArmor != null)
+                {
+                    maxHp -= currentArmor.GetAddMAXHP();
+                    maxMp -= currentArmor.GetAddMAXMP();
+                    attack -= currentArmor.GetATKPoint();
+                    defense -= currentArmor.GetDEFPoint();
+                    Agility -= currentArmor.GetAGIPoint();
+                }
+                currentArmor = armor;
+                break;
+            case Armor.ArmorType.BackPack:
+                if (currentBackpack != null)
+                {
+                    maxHp -= currentBackpack.GetAddMAXHP();
+                    maxMp -= currentBackpack.GetAddMAXMP();
+                    attack -= currentBackpack.GetATKPoint();
+                    defense -= currentBackpack.GetDEFPoint();
+                    Agility -= currentBackpack.GetAGIPoint();
+                }
+                currentBackpack = armor;
+                break;
         }
 
         //防具を生成
         armor.Spawn(headTransform, bodyTransform, backPackTransform);
-
-
-        switch (armor.armorType)
-        {
-            case Armor.ArmorType.Head: currentHead = armor; break;
-            case Armor.ArmorType.Body: currentArmor = armor; break;
-            case Armor.ArmorType.BackPack: currentBackpack = armor; break;
-        }
 
         UpdateStats();
 
@@ -401,14 +502,11 @@ public class PlayerController : MonoBehaviour
         //装備の攻撃を追加
         if (currentWeapon == null)
         {
-            attack += 5;//素手の攻撃力
             return;
         }
 
         int weaponATK = currentWeapon.GetATKPoint();
-        Debug.Log("武器の攻撃力" + weaponATK);
         int weaponDEF = currentWeapon.GetDEFPoint();
-        Debug.Log("武器の防御力" + weaponDEF);
 
         attack += weaponATK;
         defense += weaponDEF;
@@ -501,7 +599,6 @@ public class PlayerController : MonoBehaviour
         // 敵グループの平均位置に向く
         Vector3 averageEnemyPosition = GetAveragePositionOfEnemies();
         LookTowards(averageEnemyPosition);
-        SaveStatus();
     }
 
     // NavMeshAgentのターゲットを更新するメソッド
@@ -884,7 +981,6 @@ public class PlayerController : MonoBehaviour
             //プレイヤーの位置を移動させる
             case 37: Warp(); break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
     }
 
     /// <summary>

@@ -256,8 +256,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
-
     //ボタンクリック時のアニメーション
     public void AnimateButtonScale(GameObject button)
     {
@@ -611,7 +609,7 @@ public class UIManager : MonoBehaviour
     //ステータスの確認
     public void StatusCheckUpdate(int hp, int attack, int defense, int avoidance)
     {
-        statusCheckText.text = $"HP:{hp}\nAttack:{attack}\nDefense:{defense}\nSpeed:{avoidance}";
+        statusCheckText.text = $"HP:{hp}\nAttack:{attack}\nDefense:{defense}\nAvoidance:{avoidance}";
     }
 
     //UIのOnOff

@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
         SpawnItems();
 
         SpawnPlayer();
+
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -187,11 +188,13 @@ public class GameManager : MonoBehaviour
                 Destroy(enemy.gameObject);
             }
         }
+        /*
         for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
         {
             PlayerPrefs.DeleteKey($"Enemy{i}");
         }
         PlayerPrefs.DeleteKey("EnemyCount");
+        */
 
         DestroyAllItemWithTag("itemObj");
         for (int i = playerObjects.Count - 1; i >= 0; i--)
@@ -285,11 +288,14 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt($"Card{i}", drawCardController.cardIDList[i]);
         }
+        /*
         PlayerPrefs.SetInt("EnemyCount", enemies.Count);
         for (int i = 0; i < enemies.Count; i++)
         {
             PlayerPrefs.SetInt($"Enemy{i}", enemies[i].GetComponent<EnemyController>().id);
         }
+        */
+
         PlayerPrefs.Save();
     }
 
@@ -409,9 +415,7 @@ public class GameManager : MonoBehaviour
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10;
                 int enemiesToSpawn = remainder / 2 + 1;
-                Debug.Log($"敵の数: {PlayerPrefs.GetInt("EnemyCount")}");
-                PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
-                Debug.Log($"敵の数: {PlayerPrefs.GetInt("EnemyCount")}");
+                //PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
                 PlayerPrefs.Save();
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
@@ -543,6 +547,9 @@ public class GameManager : MonoBehaviour
                 playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
             }
         }
+        PlayerController player = playerObjects[0].GetComponent<PlayerController>();
+        player.SaveStatus();
+        player.SaveEquipment();
         UpdateStage();
         if (stageHierarchy == 41)
         {

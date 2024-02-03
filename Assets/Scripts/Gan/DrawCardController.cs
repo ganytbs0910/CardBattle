@@ -61,7 +61,7 @@ public class DrawCardController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             ReDrawCardList(10);
         }

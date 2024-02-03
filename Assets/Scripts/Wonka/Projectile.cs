@@ -39,7 +39,6 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            print("着弾した");
             Destroy(gameObject);
 
             if (hitEffect != null)

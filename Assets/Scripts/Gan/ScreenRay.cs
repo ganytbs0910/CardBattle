@@ -80,13 +80,11 @@ public class ScreenRay : MonoBehaviour
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
-                        print("武器を装備させた");
                         AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
                     }
                     if (armor != null) //防具カードを装備
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
-                        print("防具を装備させた");
                         AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
 
                     }
