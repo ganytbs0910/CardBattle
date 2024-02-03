@@ -46,6 +46,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text statusCheckText;
 
     [Header("ローカライズ用のテキスト")]
+    [SerializeField] private TMP_Text statusText;
     [SerializeField] private TMP_Text startText;
     [SerializeField] private TMP_Text shopText;
     [SerializeField] private TMP_Text dungeonText;
@@ -607,9 +608,17 @@ public class UIManager : MonoBehaviour
     }
 
     //ステータスの確認
-    public void StatusCheckUpdate(int hp, int attack, int defense, int avoidance)
+    public void StatusCheckUpdate(int hp, int attack, float attackRate, int defense, float defenseRate, int avoidance)
     {
-        statusCheckText.text = $"HP:{hp}\nAttack:{attack}\nDefense:{defense}\nAvoidance:{avoidance}";
+        switch (PlayerPrefs.GetString("Language"))
+        {
+            case "Japanese":
+                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\nHP : {hp}\n\nAttack : {attack}\n\nAttackRate : {attackRate}倍\n\nDefense : {defense}\n\nDefenseRate : {defenseRate}倍\n\nAvoidance : {avoidance}%";
+                break;
+            case "English":
+                statusCheckText.text = $"Current stage : {PlayerPrefs.GetInt("StageHierarchy")}F\n\nHP : {hp}\n\nAttack : {attack}\n\nAttackRate : {attackRate}times\n\nDefense : {defense}\n\nDefenseRate : {defenseRate}times\n\nAvoidance : {avoidance}%";
+                break;
+        }
     }
 
     //UIのOnOff
@@ -997,6 +1006,7 @@ public class UIManager : MonoBehaviour
         switch (language)
         {
             case Language.Japanese:
+                statusText.text = "ステータス";
                 startText.text = "スタート";
                 collectionTitleText.text = "所持中のアイテム";
                 settingText.text = "設定";
@@ -1027,6 +1037,7 @@ public class UIManager : MonoBehaviour
                 clearDetailText.text = "まさかクリアする者が現れるとはな。\n君はなかなか猛者だな。\n\n我々はさらなる階層と新たな敵、スキルカードを追求するための開発中である。\n\n今後の発展のためにレビューで応援やSNSでの拡散で我々の開発のコストとモチベーションの向上をお願いしたい。\n\nまた別のゲームでも会おうではないか。\n\n君のさらなる活躍には期待しているもんだよ。\n\nさらばだ。";
                 break;
             case Language.English:
+                statusText.text = "Status";
                 startText.text = "Start";
                 collectionTitleText.text = "Items in possession";
                 settingText.text = "Settings";

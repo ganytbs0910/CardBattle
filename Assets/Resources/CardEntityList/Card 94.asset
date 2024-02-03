@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
+  m_Name: Card 94
+  m_EditorClassIdentifier: 
+  cardID: 94
+  name: "\u4F53\u529B\u304C5\u5897\u52A0"
+  information: 
+  tiar: 1
+  icon: {fileID: 21300000, guid: 5a8bce58c7a464789ab2cb9af114422a, type: 3}
+  weapon: {fileID: 0}
+  armor: {fileID: 0}
+  targetType: 0
+  particle: {fileID: 5697101180579792180, guid: 5f95cf4020a7cb94893e1a3690b46b1e, type: 3}
+  particlePosition: 2

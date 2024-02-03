@@ -18,11 +18,11 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     public float addHealthRate = 1;
     public float addAttackRate = 1;
-    public float addDefenceRate = 1;
+    public float addDefenseRate = 1;
 
     int cloneHpRate = 2;
     int cloneAttackRate = 2;
-    int cloneDefenceRate = 2;
+    int cloneDefenseRateUp = 2;
 
     //通常変数
     int hp;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
                 EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
             }
             LoadStatus();
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
         });
     }
 
@@ -144,7 +144,7 @@ public class PlayerController : MonoBehaviour
                     //Attack+1
                     case 2: AttackUp(1); break;
                     //Defence+1
-                    case 3: DefenceUp(1); break;
+                    case 3: DefenseUp(1); break;
                     //ボムダメージ+10
                     case 4: BombDamageUp(10); break;
                     //コインドロップ+1
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
                     //攻撃1.1倍
                     case 9: AttackRateUp(1.1f); break;
                     //防御1.1倍
-                    case 10: DefenceRate(1.1f); break;
+                    case 10: DefenseRateUp(1.1f); break;
                     //移動速度+1
                     case 11: MoveSpeedUp(1); break;
                     //HP+25
@@ -166,7 +166,7 @@ public class PlayerController : MonoBehaviour
                     //Attack+3
                     case 13: AttackUp(3); break;
                     //Defence+3
-                    case 14: DefenceUp(3); break;
+                    case 14: DefenseUp(3); break;
                     //コインを100所持した状態でスタート
                     case 15: StartCoinHave(100); break;
                     //攻撃のインターバルが短縮
@@ -176,7 +176,7 @@ public class PlayerController : MonoBehaviour
                     //分身の攻撃力が1/2→1/3
                     case 18: CloneAttackUp(3); break;
                     //分身の防御力が1/2→1/3
-                    case 19: CloneDefenceUp(3); break;
+                    case 19: CloneDefenseUp(3); break;
                     //全てのステータス+5
                     case 20: AllStatusUp(5); break;
                     //階層が始まるとHP回復+3
@@ -215,10 +215,10 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 3.5f;
         addHealthRate = 1;
         addAttackRate = 1;
-        addDefenceRate = 1;
+        addDefenseRate = 1;
         cloneHpRate = 2;
         cloneAttackRate = 2;
-        cloneDefenceRate = 2;
+        cloneDefenseRateUp = 2;
         lastAttackTime = 0f;
         IsDead = false;
         isAttacking = false;
@@ -235,6 +235,7 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.battleState = false;
         agent.enabled = true;
         PlayerPrefs.Save();
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
         //プレイヤーを移動させないように
 
     }
@@ -350,7 +351,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, defense, Agility);
         //死亡中とバトル状態じゃないときはリターン
         if (IsDead || GameManager.instance.battleState == false)
         {
@@ -455,8 +455,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        attack += currentWeapon.GetATKPoint(); ;
-        defense += currentWeapon.GetDEFPoint(); ;
+        attack += currentWeapon.GetATKPoint();
+        defense += currentWeapon.GetDEFPoint();
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
     }
 
     public void EquipArmor(Armor armor)
@@ -536,6 +537,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
     }
 
     /// <summary>
@@ -668,7 +670,7 @@ public class PlayerController : MonoBehaviour
     void Damage(int damage)
     {
         int sumDamage;
-        sumDamage = damage - (int)(defense * addDefenceRate);
+        sumDamage = damage - (int)(defense * addDefenseRate);
         if (sumDamage <= 0)
         {
             sumDamage = 0;
@@ -916,17 +918,17 @@ public class PlayerController : MonoBehaviour
             case 9: break;
             case 10: break;
             //攻撃力UP+10%
-            case 11: AttackUp(1.1f); break;
+            case 11: AttackRateUp(1.1f); break;
             //攻撃力UP+20%
-            case 12: AttackUp(1.2f); break;
+            case 12: AttackRateUp(1.2f); break;
             //攻撃力UP+30%
-            case 13: AttackUp(1.3f); break;
+            case 13: AttackRateUp(1.3f); break;
             //防御力UP+10%
-            case 14: DefenceUp(1.1f); break;
+            case 14: DefenseRateUp(1.1f); break;
             //防御力UP+20%
-            case 15: DefenceUp(1.2f); break;
+            case 15: DefenseRateUp(1.2f); break;
             //防御力UP+30% 
-            case 16: DefenceUp(1.3f); break;
+            case 16: DefenseRateUp(1.3f); break;
             //敵がターゲット
             case 17: break;
             case 18: break;
@@ -962,7 +964,18 @@ public class PlayerController : MonoBehaviour
             case 36: TwoDrowCard(); break;
             //プレイヤーの位置を移動させる
             case 37: Warp(); break;
+            //攻撃2UP
+            case 91: AttackUp(2); break;
+            case 92: AttackUp(4); break;
+            case 93: AttackUp(6); break;
+            case 94: HealthUp(5); break;
+            case 95: HealthUp(10); break;
+            case 96: HealthUp(15); break;
+            case 97: DefenseUp(1); break;
+            case 98: DefenseUp(2); break;
+            case 99: DefenseUp(3); break;
         }
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
     }
 
     /// <summary>
@@ -988,7 +1001,7 @@ public class PlayerController : MonoBehaviour
             clonePlayer.name = "ShadowPlayer";
             clonePlayer.GetComponent<PlayerController>().hp /= cloneHpRate;
             clonePlayer.GetComponent<PlayerController>().attack /= cloneAttackRate;
-            clonePlayer.GetComponent<PlayerController>().defense /= cloneDefenceRate;
+            clonePlayer.GetComponent<PlayerController>().defense /= cloneDefenseRateUp;
             Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
 
             foreach (Renderer renderer in renderers)
@@ -1006,18 +1019,15 @@ public class PlayerController : MonoBehaviour
         maxHp += value;
         hp += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
-
     }
-    void AttackUp(float value)
+    void AttackUp(int value)
     {
-        attack = Mathf.RoundToInt(attack * value);
-
+        attack += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
-    void DefenceUp(float value)
+    void DefenseUp(int value)
     {
-        defense = Mathf.RoundToInt(defense * value);
-
+        defense = value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
@@ -1101,31 +1111,27 @@ public class PlayerController : MonoBehaviour
     //体力の倍率上昇
     void HealthRateUp(float value)
     {
-        addHealthRate = value;
-
+        addHealthRate += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //攻撃の倍率上昇
     void AttackRateUp(float value)
     {
-        addAttackRate = value;
-
+        addAttackRate += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //防御の倍率上昇
-    void DefenceRate(float value)
+    void DefenseRateUp(float value)
     {
-        addDefenceRate = value;
-
+        addDefenseRate += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     void MoveSpeedUp(int value)
     {
         moveSpeed += value;
-
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
@@ -1151,16 +1157,16 @@ public class PlayerController : MonoBehaviour
         cloneAttackRate = value;
     }
 
-    void CloneDefenceUp(int value)
+    void CloneDefenseUp(int value)
     {
-        cloneDefenceRate = value;
+        cloneDefenseRateUp = value;
     }
 
     void AllStatusUp(int value)
     {
         HealthUp(value);
         AttackUp(value);
-        DefenceUp(value);
+        DefenseUp(value);
 
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
