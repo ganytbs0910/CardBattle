@@ -829,6 +829,9 @@ public class PlayerController : MonoBehaviour
 
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemovePlayerFromList(this);
+        //もし死んだのが本体の場合
+        if (gameObject.name != "Player") return;
+        UIManager.instance.GiveUpButton();
 
         //// ディレイののち、オブジェクトを2秒かけて縮小
         transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
@@ -854,6 +857,7 @@ public class PlayerController : MonoBehaviour
 
     public void Victory()
     {
+        if (gameObject.name != "Player") return;
         if (!IsDead && GameManager.instance.battleState == true)
         {
             //print("勝利した");
