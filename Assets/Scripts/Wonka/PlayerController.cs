@@ -638,7 +638,6 @@ public class PlayerController : MonoBehaviour
         if (currentWeapon.HasProjectile())
         {
             currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, animator);
-            print("矢を撃ちました");
         }
     }
 
