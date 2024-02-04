@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 76
   m_EditorClassIdentifier: 
   cardID: 76
-  name: DEF+4,MAXHP+60
+  name: "\u653B\u6483+3, \u9632\u5FA1+2"
   information: 
   tiar: 1
   icon: {fileID: 21300000, guid: 52cc0dea732655e43a30d9c1ac2ea876, type: 3}

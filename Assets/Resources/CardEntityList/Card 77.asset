@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 77
   m_EditorClassIdentifier: 
   cardID: 77
-  name: DEF+4 AGI+25 MAXHP+100
+  name: "HP+10, \u653B\u6483+6, \u9632\u5FA1+4"
   information: 
   tiar: 2
   icon: {fileID: 21300000, guid: 26726598593dc6348a1f91f081246df1, type: 3}

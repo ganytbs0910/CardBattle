@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 44
   m_EditorClassIdentifier: 
   cardID: 44
-  name: ATK+4 DEF+2
+  name: "\u653B\u6483+3, \u9632\u5FA1+4"
   information: 
   tiar: 2
   icon: {fileID: 21300000, guid: 9b4f259d53de24e4db72fbc4c385e84f, type: 3}
