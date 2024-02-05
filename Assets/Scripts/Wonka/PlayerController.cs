@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     public int throwAttack = 0;
     public int defense = 1;
     public int Agility = 5;//回比率
-    public float moveSpeed;
+    public float moveSpeed = 3.5f;
     public float addHealthRate = 1;
     public float addAttackRate = 1;
     public float addDefenseRate = 1;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
                 EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
             }
             LoadStatus();
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
         });
     }
 
@@ -139,8 +139,8 @@ public class PlayerController : MonoBehaviour
             {
                 switch (i)
                 {
-                    //HP+5
-                    case 1: HealthUp(5); break;
+                    //HP+10
+                    case 1: HealthUp(10); break;
                     //Attack+1
                     case 2: AttackUp(1); break;
                     //Defence+1
@@ -154,17 +154,17 @@ public class PlayerController : MonoBehaviour
                     //コレクションのドロップ率が1/100→1/(100-value)に
                     case 7: CollectionDropRateUp(1); break;
                     //HP1.1倍
-                    case 8: HealthRateUp(1.1f); break;
+                    case 8: HealthRateUp(0.1f); break;
                     //攻撃1.1倍
-                    case 9: AttackRateUp(1.1f); break;
+                    case 9: AttackRateUp(0.1f); break;
                     //防御1.1倍
-                    case 10: DefenseRateUp(1.1f); break;
+                    case 10: DefenseRateUp(0.1f); break;
                     //移動速度+1
                     case 11: MoveSpeedUp(1); break;
-                    //HP+25
-                    case 12: HealthUp(25); break;
-                    //Attack+3
-                    case 13: AttackUp(3); break;
+                    //HP+30
+                    case 12: HealthUp(40); break;
+                    //Attack+4
+                    case 13: AttackUp(4); break;
                     //Defence+3
                     case 14: DefenseUp(3); break;
                     //コインを100所持した状態でスタート
@@ -235,7 +235,7 @@ public class PlayerController : MonoBehaviour
         GameManager.instance.battleState = false;
         agent.enabled = true;
         PlayerPrefs.Save();
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
         //プレイヤーを移動させないように
 
     }
@@ -266,6 +266,8 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("Attack", attack);
         PlayerPrefs.SetInt("Defense", defense);
         PlayerPrefs.SetInt("Agility", Agility);
+        PlayerPrefs.SetFloat("MoveSpeed", moveSpeed);
+
         PlayerPrefs.SetInt("MaxHP", maxHp);
         PlayerPrefs.SetInt("MaxMP", maxMp);
         PlayerPrefs.Save();
@@ -282,6 +284,7 @@ public class PlayerController : MonoBehaviour
         attack = PlayerPrefs.GetInt("Attack");
         defense = PlayerPrefs.GetInt("Defense");
         Agility = PlayerPrefs.GetInt("Agility");
+        moveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
         if (!PlayerPrefs.HasKey("MaxHP"))
         {
             maxHp = 100;
@@ -375,11 +378,9 @@ public class PlayerController : MonoBehaviour
             //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
             if (!enemyChase)
             {
-                //print("攻撃範囲内");
                 if (CanAttack()) //攻撃可能
                 {
-                    //print("攻撃");
-                    Attack(); // 攻撃
+                    Attack();
                     if (!isHealingSword) return;
                     //回復の剣の効果
                     if (Random.Range(0, 100) < 10)
@@ -389,7 +390,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else//攻撃までのインターバル中
                 {
-                    //print("防御");
                     Defend(); // 防御
                 }
                 agent.isStopped = true;
@@ -397,7 +397,6 @@ public class PlayerController : MonoBehaviour
             else
             {
                 CantMove = false;
-                //print("範囲外");
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
                 agent.isStopped = false; // 移動を再開
@@ -457,7 +456,7 @@ public class PlayerController : MonoBehaviour
 
         attack += currentWeapon.GetATKPoint();
         defense += currentWeapon.GetDEFPoint();
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }
 
     public void EquipArmor(Armor armor)
@@ -537,7 +536,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }
 
     /// <summary>
@@ -670,6 +669,8 @@ public class PlayerController : MonoBehaviour
     void Damage(int damage)
     {
         int sumDamage;
+        //damegeが0.9~1.2倍になる（不要なら外す）
+        damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
         if (sumDamage <= 0)
         {
@@ -694,15 +695,16 @@ public class PlayerController : MonoBehaviour
     //    return weaponDamage;
     //}
 
-
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        //もしenemyTargetのオブジェクトに触れたら
         if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
         {
             enemyChase = false;
         }
+    }
 
+    public void OnTriggerExit(Collider other)
+    {
         if (IsDead)
         {
             //HPが0なら無効
@@ -722,7 +724,6 @@ public class PlayerController : MonoBehaviour
                 //回避率のチェック
                 if (Random.Range(0, 100) < Agility)
                 {
-                    Debug.Log("攻撃を回避");
                     ShowMissText();
                     return;//攻撃を回避
                 }
@@ -740,14 +741,6 @@ public class PlayerController : MonoBehaviour
 
         // フェードアウトのアニメーションを設定
         missText.DOFade(0, 2f).OnComplete(() => missText.gameObject.SetActive(false));
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject == enemyTarget.gameObject)
-        {
-            enemyChase = true;
-        }
     }
 
     //アニメイベントで使用します
@@ -922,17 +915,17 @@ public class PlayerController : MonoBehaviour
             case 9: break;
             case 10: break;
             //攻撃力UP+10%
-            case 11: AttackRateUp(1.1f); break;
+            case 11: AttackRateUp(0.1f); break;
             //攻撃力UP+20%
-            case 12: AttackRateUp(1.2f); break;
+            case 12: AttackRateUp(0.2f); break;
             //攻撃力UP+30%
-            case 13: AttackRateUp(1.3f); break;
+            case 13: AttackRateUp(0.3f); break;
             //防御力UP+10%
-            case 14: DefenseRateUp(1.1f); break;
+            case 14: DefenseRateUp(0.1f); break;
             //防御力UP+20%
-            case 15: DefenseRateUp(1.2f); break;
+            case 15: DefenseRateUp(0.2f); break;
             //防御力UP+30% 
-            case 16: DefenseRateUp(1.3f); break;
+            case 16: DefenseRateUp(0.3f); break;
             //敵がターゲット
             case 17: break;
             case 18: break;
@@ -946,22 +939,22 @@ public class PlayerController : MonoBehaviour
             case 24: break;//小型爆弾
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
+            //範囲内のプレイヤーのHPを10%回復
+            case 27: HPHeal(10); break;
             //範囲内のプレイヤーのHPを20%回復
-            case 27: HPHeal(20); break;
+            case 28: HPHeal(20); break;
             //範囲内のプレイヤーのHPを30%回復
-            case 28: HPHeal(30); break;
-            //範囲内のプレイヤーのHPを50%回復
-            case 29: HPHeal(50); break;
-            //範囲内のプレイヤーのHPを80%回復
-            case 30: HPHeal(80); break;
-            //範囲内のプレイヤーのMPを20%回復
-            case 31: MPHeal(20); break;
-            //範囲内のプレイヤーのMPを30%回復
-            case 32: MPHeal(30); break;
+            case 29: HPHeal(30); break;
+            //範囲内のプレイヤーのHPを40%回復
+            case 30: HPHeal(40); break;
             //範囲内のプレイヤーのMPを50%回復
-            case 33: MPHeal(50); break;
-            //範囲内のプレイヤーのMPを80%回復
-            case 34: MPHeal(80); break;
+            case 31: HPHeal(50); break;
+            //範囲内のプレイヤーのMPを60%回復
+            case 32: HPHeal(60); break;
+            //プレイヤーの移動速度を0.1上昇
+            case 33: MoveSpeedUp(0.1f); break;
+            //プレイヤーの移動速度を0.3上昇
+            case 34: MoveSpeedUp(0.3f); break;
             //カードを全て一新する
             case 35: ResetCards(); break;
             //カードを2枚引く
@@ -979,7 +972,7 @@ public class PlayerController : MonoBehaviour
             case 98: DefenseUp(2); break;
             case 99: DefenseUp(3); break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }
 
     /// <summary>
@@ -987,6 +980,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void IncreasePlayers(int number)
     {
+        if (this.gameObject.name != "Player") return;
         //このゲームオブジェクトの近くにnumberの数だけプレイヤーを生成する
         for (int i = 0; i < number; i++)
         {
@@ -1079,7 +1073,15 @@ public class PlayerController : MonoBehaviour
 
     void ResetCards()
     {
+        if (this.gameObject.name != "Player") return;
         DrawCardController.instance.ReDrawCardList();
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
+    }
+
+    void MoveSpeedUp(float value)
+    {
+        moveSpeed += value;
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     /// <summary>
@@ -1142,7 +1144,10 @@ public class PlayerController : MonoBehaviour
     //コインを100所持してスタート
     void StartCoinHave(int value)
     {
-        PlayerPrefs.SetInt("StartCoin", value);
+        if (PlayerPrefs.GetInt("StartCoin") <= 100)
+        {
+            PlayerPrefs.SetInt("StartCoin", value);
+        }
     }
 
     void AttackIntervalUp(float value)

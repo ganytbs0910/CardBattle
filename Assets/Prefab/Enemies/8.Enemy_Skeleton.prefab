@@ -230,10 +230,10 @@ GameObject:
   m_Component:
   - component: {fileID: 510548194372005007}
   - component: {fileID: 452955931061297871}
+  - component: {fileID: 511558849965164568}
   - component: {fileID: 511558849965164569}
   - component: {fileID: 511558849965164575}
   - component: {fileID: 511558849965164574}
-  - component: {fileID: 511558849965164568}
   m_Layer: 0
   m_Name: 8.Enemy_Skeleton
   m_TagString: Enemy
@@ -281,6 +281,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &511558849965164568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511558849965164573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 8
+  maxHp: 115
+  attack: 14
+  attackInterval: 1.4
+  defense: 0
+  moveSpeed: 0
+  agility: 0
+  coin: 4
+  dropRate: 35
+  weapon: {fileID: 0}
+  IsDead: 0
+  isAttacking: 0
+  CantMove: 0
+  playerTarget: {fileID: 0}
+  agent: {fileID: 0}
+  weaponCollider: {fileID: 513385611653725780}
+  enemyUIManager: {fileID: 1038011146143140553}
+  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
+  missText: {fileID: 2445863007951436526}
+  attackEffect: {fileID: 0}
+  getHitEffect: {fileID: 8937386559117865193, guid: 07799b25da23d9c4d97a417f6f0d0f31, type: 3}
+  effectCollider: {fileID: 0}
 --- !u!136 &511558849965164569
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -333,39 +367,6 @@ NavMeshAgent:
   m_BaseOffset: -0.06
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &511558849965164568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511558849965164573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 8
-  maxHp: 45
-  attack: 7
-  attackInterval: 1.4
-  defense: 0
-  moveSpeed: 0
-  agility: 0
-  coin: 4
-  dropRate: 35
-  weapon: {fileID: 0}
-  IsDead: 0
-  isAttacking: 0
-  CantMove: 0
-  playerTarget: {fileID: 0}
-  agent: {fileID: 0}
-  weaponCollider: {fileID: 513385611653725780}
-  enemyUIManager: {fileID: 1038011146143140553}
-  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  missText: {fileID: 2445863007951436526}
-  attackEffect: {fileID: 0}
-  effectCollider: {fileID: 0}
 --- !u!1 &511578777653914461
 GameObject:
   m_ObjectHideFlags: 0

@@ -608,15 +608,15 @@ public class UIManager : MonoBehaviour
     }
 
     //ステータスの確認
-    public void StatusCheckUpdate(int hp, int attack, float attackRate, int defense, float defenseRate, int avoidance)
+    public void StatusCheckUpdate(int maxHp, int attack, float attackRate, int defense, float defenseRate, int avoidance, float moveSpeed)
     {
         switch (PlayerPrefs.GetString("Language"))
         {
             case "Japanese":
-                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\nHP : {hp}\n\nAttack : {attack}\n\nAttackRate : {attackRate}倍\n\nDefense : {defense}\n\nDefenseRate : {defenseRate}倍\n\nAvoidance : {avoidance}%";
+                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}";
                 break;
             case "English":
-                statusCheckText.text = $"Current stage : {PlayerPrefs.GetInt("StageHierarchy")}F\n\nHP : {hp}\n\nAttack : {attack}\n\nAttackRate : {attackRate}times\n\nDefense : {defense}\n\nDefenseRate : {defenseRate}times\n\nAvoidance : {avoidance}%";
+                statusCheckText.text = $"Current floor : {PlayerPrefs.GetInt("StageHierarchy")}th floor\n\nMax HP : {maxHp}\n\nAttack : {attack}\n\nAttack rate : {attackRate} times\n\nDefense : {defense}\n\nDefense rate : {defenseRate} times\n\nAvoidance : {avoidance}%\n\nPlayer's move speed : {moveSpeed}";
                 break;
         }
     }

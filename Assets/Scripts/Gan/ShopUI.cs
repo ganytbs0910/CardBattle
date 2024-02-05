@@ -56,10 +56,10 @@ public class ShopUI : MonoBehaviour
             while (cardModel.tiar != tiar);
 
             GameObject payButtonClone = Instantiate(payButton.gameObject, payPanel.transform);
-            payButtonClone.transform.GetChild(0).GetComponent<TMP_Text>().text = (tiar * 100).ToString();
+            int price = tiar * 30;
+            payButtonClone.transform.GetChild(0).GetComponent<TMP_Text>().text = (price).ToString();
 
             Button button = payButtonClone.GetComponent<Button>();
-            int price = tiar * 50;
 
             cardUIList.Add(new CardUI { cardObject = card.gameObject, payButton = button, cardID = cardID, price = price });
 

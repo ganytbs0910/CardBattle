@@ -414,7 +414,7 @@ public class GameManager : MonoBehaviour
             default:
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10;
-                int enemiesToSpawn = remainder / 2 + 1;
+                int enemiesToSpawn = remainder / 3 + 1;
                 //PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
                 PlayerPrefs.Save();
                 for (int i = 0; i < enemiesToSpawn; i++)
@@ -633,7 +633,7 @@ public class GameManager : MonoBehaviour
         float[] probabilities;
 
         // Stage 1~10の確率
-        if (stageHierarchy <= 10) probabilities = new float[] { 0.6f, 0.2f, 0.18f, 0.1f, 0.05f, 0.02f };
+        if (stageHierarchy <= 10) probabilities = new float[] { 0.6f, 0.2f, 0.1f, 0.06f, 0.03f, 0.01f };
         // Stage 11~20の確率
         else if (stageHierarchy <= 20) probabilities = new float[] { 0.4f, 0.2f, 0.2f, 0.1f, 0.05f, 0.05f };
         // Stage 21~30までの確率

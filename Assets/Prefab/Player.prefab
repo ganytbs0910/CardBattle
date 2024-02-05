@@ -770,12 +770,12 @@ MonoBehaviour:
   attack: 0
   attackInterval: 1
   throwAttack: 0
-  defense: 0
+  defense: 1
   Agility: 5
   moveSpeed: 3.5
   addHealthRate: 1
   addAttackRate: 1
-  addDefenceRate: 1
+  addDefenseRate: 1
   IsDead: 0
   isAttacking: 0
   CantMove: 0
@@ -793,8 +793,8 @@ MonoBehaviour:
   playerUIManager: {fileID: 8271458525144559588}
   playerPrefab: {fileID: 413004607273014060}
   currentWeapon: {fileID: 0}
-  currentArmor: {fileID: 0}
   currentHead: {fileID: 0}
+  currentArmor: {fileID: 0}
   currentBackpack: {fileID: 0}
   playerColliders:
   - {fileID: 1076528725495630229}

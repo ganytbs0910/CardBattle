@@ -1,94 +1,100 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon", menuName = "Weapon/Make New Weapon", order = 0)]
-
 public class Weapon : ScriptableObject
 {
-    [SerializeField] AnimatorOverrideController animatorOverride; //animatorの登録
-    [SerializeField] AnimatorOverrideController subAnimatorOverride = null; //サブアニメーターの登録
-
-    [SerializeField] GameObject weaponPrefab = null; //武器の登録
+    [SerializeField] AnimatorOverrideController animatorOverride;
+    [SerializeField] AnimatorOverrideController subAnimatorOverride = null;
+    [SerializeField] GameObject weaponPrefab = null;
     [SerializeField] float weaponRange;
     [SerializeField] int attackPoint;
     [SerializeField] int defendPoint;
     BoxCollider weaponCollider;
     [SerializeField] bool isRightHanded = true;
-    [SerializeField] private bool twoHandedWeapon;
+    [SerializeField] bool TwoHandedWeapon;
     [SerializeField] bool isShield;
     [SerializeField] Projectile projectile = null;
 
     const string rightWeaponName = "rightWeapon";
     const string leftWeaponName = "leftWeapon";
 
-    PlayerController playerController;
-
-    public enum WeaponType
-    {
-        NoWeapon, OneHandSword, TwoHandSword, Shield, Spear, Arrow, Wand
-    }
-
+    public enum WeaponType { NoWeapon, OneHandSword, TwoHandSword, Shield, Spear, Arrow, Wand }
     public WeaponType weaponType;
 
     public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
     {
-        if (!weaponPrefab) return;
+        if (weaponPrefab != null)
+        {
+            DestroyAllWeaponsInHand(rightHand);
+            DestroyAllWeaponsInHand(leftHand);
 
-        DestroyOldWeapon(rightHand, leftHand);
+            Transform handTransform = GetTransform(rightHand, leftHand, animator);
+            GameObject weapon = Instantiate(weaponPrefab, handTransform.position, handTransform.rotation, handTransform);
+            weapon.transform.localPosition = Vector3.zero;
+            weaponCollider = weapon.GetComponent<BoxCollider>();
 
-        Transform handTransform = GetTransform(rightHand, leftHand, animator);
-        GameObject weapon = Instantiate(weaponPrefab, handTransform.position, handTransform.rotation, handTransform);
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.name = GetWeaponName();
-
-        ApplyAnimatorController(animator, handTransform, rightHand, leftHand); // 修正したメソッド呼び出し
+            SetWeaponName(weapon);
+        }
     }
 
-    //装備する手を取得する
     private Transform GetTransform(Transform rightHand, Transform leftHand, Animator animator)
     {
-        if (twoHandedWeapon) return projectile != null ? leftHand : rightHand;
-        return isRightHanded && !IsRightHandEmpty(rightHand) ? leftHand : (isRightHanded ? rightHand : leftHand);
+        Transform targetHand = isRightHanded ? rightHand : leftHand;
+
+        if (TwoHandedWeapon)
+        {
+            targetHand = rightHand;
+            animator.runtimeAnimatorController = animatorOverride;
+        }
+        else if (isShield)
+        {
+            targetHand = leftHand;
+            animator.runtimeAnimatorController = subAnimatorOverride ?? animatorOverride;
+        }
+        else if (!IsRightHandEmpty(rightHand) && !isShield)
+        {
+            targetHand = leftHand;
+            animator.runtimeAnimatorController = subAnimatorOverride ?? animatorOverride;
+        }
+        else
+        {
+            animator.runtimeAnimatorController = animatorOverride;
+        }
+
+        return targetHand;
     }
-    private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+
+    private void SetWeaponName(GameObject weapon)
     {
-        DestroyAllWeaponsInHand(rightHand);
-        DestroyAllWeaponsInHand(leftHand);
+        if (TwoHandedWeapon || isRightHanded)
+        {
+            weapon.name = rightWeaponName;
+        }
+        else if (isShield)
+        {
+            weapon.name = leftWeaponName;
+        }
+        else
+        {
+            weapon.name = isRightHanded ? rightWeaponName : leftWeaponName;
+        }
     }
-
-
-    private void DestroyWeaponInHand(Transform hand, string weaponName)
-    {
-        Transform oldWeapon = hand.Find(weaponName);
-        if (oldWeapon) Destroy(oldWeapon.gameObject);
-    }
-
 
     private void DestroyAllWeaponsInHand(Transform hand)
     {
         foreach (Transform child in hand)
         {
-            if (child.name == rightWeaponName || child.name == leftWeaponName || child.name == "NoWeapon_r" || child.name == "NoWeapon_l")
+            if (child.name == rightWeaponName || child.name == leftWeaponName || child.name.StartsWith("NoWeapon"))
             {
                 Destroy(child.gameObject);
             }
         }
     }
 
-    private string GetWeaponName()
+    public bool IsLeftHandEmpty(Transform leftHand)
     {
-        if (twoHandedWeapon) return rightWeaponName;
-        if (isShield) return leftWeaponName;
-        return isRightHanded ? rightWeaponName : leftWeaponName;
-    }
-
-    private void ApplyAnimatorController(Animator animator, Transform handTransform, Transform rightHand, Transform leftHand)
-    {
-        // handTransformがrightHandに等しいかどうかを確認して適切なAnimatorOverrideControllerを適用
-        AnimatorOverrideController controller = handTransform == rightHand ? animatorOverride : subAnimatorOverride;
-        if (controller) animator.runtimeAnimatorController = controller;
+        return leftHand.Find(leftWeaponName) == null;
     }
 
     public bool IsRightHandEmpty(Transform rightHand)
@@ -108,9 +114,7 @@ public class Weapon : ScriptableObject
 
     public BoxCollider GetCollider()
     {
-        if (weaponCollider == null)
-        { return null; }
-        return weaponCollider;
+        return weaponCollider == null ? null : weaponCollider;
     }
 
     public float GetRange()
@@ -126,11 +130,6 @@ public class Weapon : ScriptableObject
     public void LaunchProjectile(Transform rightHand, Transform leftHand, Animator animator)
     {
         Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand, animator).position, Quaternion.identity);
-        if (playerController != null)
-        {
-            //PlayerControllerの攻撃値をダメージに代入
-            projectileInstance.damage = playerController.attack;
-        }
-
+        // Add projectile launch logic here
     }
 }

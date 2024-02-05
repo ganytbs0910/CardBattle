@@ -294,10 +294,6 @@ public class ScreenRay : MonoBehaviour
         // 弾丸に力を加える（方向ベクトルを正規化し、力を乗算）
         bomb.GetComponent<Rigidbody>().AddForce(direction.normalized * power);
 
-        Debug.Log($"ターゲットの場所は{targetPos}でカメラの位置は{Camera.main.transform.position}です");
-
         AudioManager.instance.PlaySE(AudioManager.SE.ThrowObject);
-
-        print("投射物を投げました");
     }
 }
