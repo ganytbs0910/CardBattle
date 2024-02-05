@@ -95,6 +95,9 @@ public class PlayerController : MonoBehaviour
         {
             EquipWeapon(defaultWeapon);
         }
+        //Clone用に初期状態を設定
+        isAttacking = false;
+        CantMove = false;
 
         CollectionFirstEffect();
 
@@ -127,6 +130,58 @@ public class PlayerController : MonoBehaviour
             LoadStatus();
             UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
         });
+    }
+
+    void Update()
+    {
+        //死亡中とバトル状態じゃないときはリターン
+        if (IsDead || GameManager.instance.battleState == false)
+        {
+            //print("プレイヤーが死亡しました");
+            return;
+        }
+
+        // 現在のターゲットが死んでいれば新しいターゲットを探す
+        if (enemyTarget != null)
+        {
+            EnemyController targetEnemy = enemyTarget.GetComponent<EnemyController>();
+            if (targetEnemy != null && targetEnemy.IsDead)
+            {
+                //print("エネミーを倒したので次のターゲットを探します");
+                FindClosestEnemy(transform);
+            }
+        }
+
+        transform.LookAt(enemyTarget);//常に敵のほうを向く
+        if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
+        {
+            //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
+            if (!enemyChase)
+            {
+                if (CanAttack()) //攻撃可能
+                {
+                    Attack();
+                    if (!isHealingSword) return;
+                    //回復の剣の効果
+                    if (Random.Range(0, 100) < 10)
+                    {
+                        HPHeal(1);
+                    }
+                }
+                else//攻撃までのインターバル中
+                {
+                    Defend(); // 防御
+                }
+                agent.isStopped = true;
+            }
+            else
+            {
+                CantMove = false;
+                agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
+                Move(); // 移動アニメ
+                agent.isStopped = false; // 移動を再開
+            }
+        }
     }
 
     void CollectionFirstEffect()
@@ -350,58 +405,6 @@ public class PlayerController : MonoBehaviour
         }
         */
         playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
-    }
-
-    void Update()
-    {
-        //死亡中とバトル状態じゃないときはリターン
-        if (IsDead || GameManager.instance.battleState == false)
-        {
-            //print("プレイヤーが死亡しました");
-            return;
-        }
-
-        // 現在のターゲットが死んでいれば新しいターゲットを探す
-        if (enemyTarget != null)
-        {
-            EnemyController targetEnemy = enemyTarget.GetComponent<EnemyController>();
-            if (targetEnemy != null && targetEnemy.IsDead)
-            {
-                //print("エネミーを倒したので次のターゲットを探します");
-                FindClosestEnemy(transform);
-            }
-        }
-
-        transform.LookAt(enemyTarget);//常に敵のほうを向く
-        if (GameManager.instance.battleState == true || Input.GetKeyDown(KeyCode.Space))
-        {
-            //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
-            if (!enemyChase)
-            {
-                if (CanAttack()) //攻撃可能
-                {
-                    Attack();
-                    if (!isHealingSword) return;
-                    //回復の剣の効果
-                    if (Random.Range(0, 100) < 10)
-                    {
-                        HPHeal(1);
-                    }
-                }
-                else//攻撃までのインターバル中
-                {
-                    Defend(); // 防御
-                }
-                agent.isStopped = true;
-            }
-            else
-            {
-                CantMove = false;
-                agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
-                Move(); // 移動アニメ
-                agent.isStopped = false; // 移動を再開
-            }
-        }
     }
 
     //武器をプレイヤーの手に装備させる
@@ -700,11 +703,17 @@ public class PlayerController : MonoBehaviour
         if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
         {
             enemyChase = false;
+            agent.isStopped = true;
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
+        if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
+        {
+            enemyChase = true;
+            agent.isStopped = false;
+        }
         if (IsDead)
         {
             //HPが0なら無効

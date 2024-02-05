@@ -1455,7 +1455,7 @@ MonoBehaviour:
   maxHp: 35
   attack: 5
   attackInterval: 1.4
-  defense: 3
+  defense: 1
   moveSpeed: 0
   agility: 2
   coin: 3
