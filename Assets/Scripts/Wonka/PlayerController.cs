@@ -411,6 +411,9 @@ public class PlayerController : MonoBehaviour
     public void EquipWeapon(Weapon weapon)
     {
         if (weapon == null) return;
+        CantMove = false;
+        isAttacking = false;
+        enemyChase = true;
         //前回の装備のステータスを引く
         if (currentWeapon != null)
         {
@@ -639,6 +642,7 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         if (currentWeapon == null) return;
+        //もし呪文攻撃なら
         if (currentWeapon.HasProjectile())
         {
             currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, animator);
@@ -713,6 +717,8 @@ public class PlayerController : MonoBehaviour
         {
             enemyChase = true;
             agent.isStopped = false;
+            isAttacking = false;
+            CantMove = false;
         }
         if (IsDead)
         {
@@ -783,7 +789,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             weaponCollider = currentWeapon.GetCollider();
-            weaponCollider.enabled = true;
+            if (weaponCollider != null)
+            {
+                weaponCollider.enabled = true;
+            }
         }
 
         //if (currentWeapon == null) return;

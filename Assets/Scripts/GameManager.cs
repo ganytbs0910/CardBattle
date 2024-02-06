@@ -164,6 +164,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CalculateTiar();
+        }
+    }
+
     public void GameReset()
     {
         //UIManager.instance.LosePanel();
@@ -629,33 +637,32 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public int CalculateTiar()
     {
-        // 確率を格納する配列
-        float[] probabilities;
+        // 確率を格納する配列（パーセンテージで）- デフォルト値で初期化
+        float[] probabilities = new float[] { 100f, 0f, 0f, 0f, 0f, 0f };
 
         // Stage 1~10の確率
-        if (stageHierarchy <= 10) probabilities = new float[] { 0.6f, 0.2f, 0.1f, 0.06f, 0.03f, 0.01f };
+        if (stageHierarchy <= 10) probabilities = new float[] { 90f, 6f, 2f, 1f, 0.7f, 0.3f };
         // Stage 11~20の確率
-        else if (stageHierarchy <= 20) probabilities = new float[] { 0.4f, 0.2f, 0.2f, 0.1f, 0.05f, 0.05f };
+        else if (stageHierarchy <= 20) probabilities = new float[] { 80f, 10f, 5f, 3f, 1.5f, 0.5f };
         // Stage 21~30までの確率
-        else if (stageHierarchy <= 30) probabilities = new float[] { 0.2f, 0.2f, 0.2f, 0.2f, 0.1f, 0.1f };
+        else if (stageHierarchy <= 30) probabilities = new float[] { 70f, 15f, 8f, 4f, 2f, 1f };
         // Stage 31~40までの確率
-        else if (stageHierarchy <= 40) probabilities = new float[] { 0.1f, 0.15f, 0.2f, 0.25f, 0.15f, 0.15f };
-        // デフォルトの確率（必要に応じて設定）
-        else probabilities = new float[] { 0.1f, 0.2f, 0.3f, 0.2f, 0.1f, 0.1f };
+        else if (stageHierarchy <= 40) probabilities = new float[] { 60f, 20f, 9f, 6f, 3f, 2f };
 
-        // 乱数を生成してtiarを決定
-        float randomValue = UnityEngine.Random.value;
+        // 乱数を1から100の間で生成してtiarを決定
+        float randomValue = UnityEngine.Random.Range(1, 101); // 1から100までの乱数
         float cumulativeProbability = 0.0f;
         for (int tiar = 1; tiar <= probabilities.Length; tiar++)
         {
             cumulativeProbability += probabilities[tiar - 1];
-            if (randomValue < cumulativeProbability)
+            if (randomValue <= cumulativeProbability)
             {
                 return tiar;
             }
         }
         return 1; // 万が一、どの条件にも当てはまらない場合は最低値を返す
     }
+
 
     /// <summary>
     /// 

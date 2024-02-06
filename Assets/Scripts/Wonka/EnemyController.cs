@@ -229,7 +229,7 @@ public class EnemyController : MonoBehaviour
             if (projectile != null)
             {
                 //Damage(playerWeapon.SumDamage()); //ダメージを与える
-
+                Debug.Log("プレイヤーの弾が当たりました");
                 Damage(projectile.damage);
             }
         }

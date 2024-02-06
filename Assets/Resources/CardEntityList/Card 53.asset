@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Card 53
   m_EditorClassIdentifier: 
   cardID: 53
-  name: "\u706B\u708E\u9B54\u6CD5"
+  name: "\u706B\u708E\u9B54\u6CD5, \u653B\u6483+3"
   information: 
   tiar: 1
   icon: {fileID: 21300000, guid: fa382b1a83b2eae4fa827cdecccfba4b, type: 3}
