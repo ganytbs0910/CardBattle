@@ -415,10 +415,22 @@ public class GameManager : MonoBehaviour
         switch (stageHierarchy)
         {
             // 以降ボス戦
-            case 10: boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
-            case 20: boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
-            case 30: boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
-            case 40: boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
+            case 10:
+                boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
+            case 20:
+                boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
+            case 30:
+                boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
+            case 40:
+                boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
             default:
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10;

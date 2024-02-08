@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform settingButton;
     //[SerializeField] private RectTransform collectionButton;
     public GameObject adsButton;
+    [SerializeField] private GameObject warningPanel;
     [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
     [SerializeField] private GameObject loadPanel;
@@ -627,6 +628,20 @@ public class UIManager : MonoBehaviour
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
         ui.SetActive(!ui.activeSelf);
         print(ui + "のトグルを切り替えます");
+    }
+
+    public void WarningPanel()
+    {
+        Debug.Log("WarningPanel");
+        //warningPanelを0.5秒かけて透明度0にする
+        warningPanel.GetComponent<Image>().DOFade(0, 0.5f);
+        //warningPanelを0.5秒後に0.5秒かけて透明度1にする
+        warningPanel.GetComponent<Image>().DOFade(0.5f, 0.5f).SetDelay(0.5f);
+        warningPanel.GetComponent<Image>().DOFade(0, 0.5f).SetDelay(1);
+        warningPanel.GetComponent<Image>().DOFade(0.5f, 0.5f).SetDelay(1.5f);
+        warningPanel.GetComponent<Image>().DOFade(0, 0.5f).SetDelay(2);
+        warningPanel.GetComponent<Image>().DOFade(0.5f, 0.5f).SetDelay(2.5f);
+        warningPanel.GetComponent<Image>().DOFade(0, 0.5f).SetDelay(3);
     }
 
     /// <summary>
