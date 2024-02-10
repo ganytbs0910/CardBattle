@@ -9,28 +9,28 @@ public class MixerController : MonoBehaviour
 
     void Start()
     {
-        // ゲーム開始時に各スライダーを初期化し、AudioMixerと連動させる
-        InitializeSlider(masterSlider, "Master",0.5f); // MasterVolumeパラメータに関連付ける
-        InitializeSlider(bgmSlider, "BGM",1); // BGMVolumeパラメータに関連付ける
-        InitializeSlider(seSlider, "SE",1); // SEVolumeパラメータに関連付ける
-        InitializeSlider(voiceSlider, "Voice",1); // VoiceVolumeパラメータに関連付ける
+        // ゲーム開始時に各スライダーを初期化し、AudioMixerと連動させ、PlayerPrefsから値を取得して設定する
+        InitializeSlider(masterSlider, "MasterVolume", 0.5f); // MasterVolumeパラメータに関連付ける
+        InitializeSlider(bgmSlider, "BGMVolume", 1); // BGMVolumeパラメータに関連付ける
+        InitializeSlider(seSlider, "SEVolume", 1); // SEVolumeパラメータに関連付ける
+        InitializeSlider(voiceSlider, "VoiceVolume", 1); // VoiceVolumeパラメータに関連付ける
     }
 
-    void InitializeSlider(Slider slider, string audioMixerParameter,float defaultValue)
+    void InitializeSlider(Slider slider, string audioMixerParameter, float defaultValue)
     {
-        // スライダーの初期値を設定
-        slider.value = defaultValue;
+        // PlayerPrefsからボリューム値を読み込み、存在しない場合はdefaultValueを使用
+        float savedValue = PlayerPrefs.GetFloat(audioMixerParameter, defaultValue);
+        // スライダーの値を設定
+        slider.value = savedValue;
         // スライダーの値が変更されたときのリスナーを設定
-        slider.onValueChanged.AddListener(volume => SetVolume(audioMixerParameter, volume));
+        slider.onValueChanged.AddListener(volume =>
+        {
+            SetVolume(audioMixerParameter, volume);
+            // 新しいボリューム値をPlayerPrefsに保存
+            PlayerPrefs.SetFloat(audioMixerParameter, volume);
+        });
         // AudioMixerに初期値を適用
-        SetVolume(audioMixerParameter, defaultValue);
-        //float value;
-        //// AudioMixerから現在のボリューム値を取得
-        //audioMixer.GetFloat(audioMixerParameter, out value);
-        //// スライダーの値をAudioMixerのボリューム値に合わせる
-        //slider.value = Mathf.Pow(10, value / 20);
-        //// スライダーの値が変更されたときのリスナーを設定
-        //slider.onValueChanged.AddListener(volume => SetVolume(audioMixerParameter, volume));
+        SetVolume(audioMixerParameter, savedValue);
     }
 
     void SetVolume(string parameterName, float sliderValue)

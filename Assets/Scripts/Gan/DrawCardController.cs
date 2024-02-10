@@ -99,16 +99,17 @@ public class DrawCardController : MonoBehaviour
 
     public void DrawCard(int? cardID = null)
     {
+        UIManager.instance.battlePanel.SetActive(true);
+        UIManager.instance.cardListPanel.gameObject.SetActive(true);
+
         if (parentPanel.transform.childCount >= maximumCardNumber) return;
         int tiar = GameManager.instance.CalculateTiar();
-
         // カードIDが指定されていない場合、ランダムにカードを選択
+        CardEntity[] cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
+        CardController card;
+        CardModel cardModel;
         if (cardID == null)
         {
-            CardEntity[] cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
-            CardController card;
-            CardModel cardModel;
-
             do
             {
                 // ランダムにカードを選ぶ
@@ -135,15 +136,18 @@ public class DrawCardController : MonoBehaviour
         else
         {
             // カードIDが指定されている場合、そのカードを生成
-            CardController card = Instantiate(cardPrefab, parentPanel.transform);
+            card = Instantiate(cardPrefab, parentPanel.transform);
             card.name = $"Card_{cardID}";
+            //ここのInitがエラーを吐く
             card.Init(cardID.Value);
             cardIDList.Add(cardID.Value);
-            CardModel cardModel = card.model;
+            cardModel = card.model;
 
             // ランクに応じてアウトライン変更
             TiarSelectOutline(card, cardModel);
         }
+        UIManager.instance.battlePanel.SetActive(false);
+        UIManager.instance.cardListPanel.gameObject.SetActive(false);
     }
 
     //ランクに応じてアウトライン変更

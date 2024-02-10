@@ -32,7 +32,7 @@ public class Armor : ScriptableObject
     {
         if (armorPrefab != null)
         {
-            DestroyOldArmor(head, body,backpack);//古い武器を削除する
+            DestroyOldArmor(head, body, backpack);//古い武器を削除する
 
             Transform armorTransform = GetTransform(head, body, backpack);
             //装備位置を取得する。
@@ -68,7 +68,7 @@ public class Armor : ScriptableObject
             {
                 child.gameObject.SetActive(true);
             }
-            else if(child.CompareTag("Armor"))
+            else if (child.CompareTag("Armor"))
             {
                 child.gameObject.SetActive(false);
             }
@@ -94,21 +94,21 @@ public class Armor : ScriptableObject
     }
 
     // 古い武器を削除する
-    private void DestroyOldArmor(Transform head, Transform body,Transform backpack)
+    private void DestroyOldArmor(Transform head, Transform body, Transform backpack)
     {
         switch (armorType)
         {
             case ArmorType.Head:
-                if(!IsHeadEmpty(head))
-                DestroyArmorInCharacter(head, "headArmor");
+                if (!IsHeadEmpty(head))
+                    DestroyArmorInCharacter(head, "headArmor");
                 break;
             case ArmorType.Body:
-                if(!IsBodyEmpty(body))
-                DestroyArmorInCharacter(body, "bodyArmor");
+                if (!IsBodyEmpty(body))
+                    DestroyArmorInCharacter(body, "bodyArmor");
                 break;
             case ArmorType.BackPack:
-                if(!IsBackPackEmpty(backpack))
-                DestroyArmorInCharacter(backpack, "backPackArmor");
+                if (!IsBackPackEmpty(backpack))
+                    DestroyArmorInCharacter(backpack, "backPackArmor");
                 break;
         }
     }
@@ -119,7 +119,8 @@ public class Armor : ScriptableObject
         Transform oldArmor = parts.Find(armorName);
         if (oldArmor != null) // 古い武器が存在する場合は削除
         {
-            Destroy(oldArmor.gameObject);
+            //setactiveをfalseにする
+            oldArmor.gameObject.SetActive(false);
         }
     }
 
@@ -132,7 +133,7 @@ public class Armor : ScriptableObject
     {
         return DEFPoint;
     }
-    
+
     public int GetAGIPoint()
     {
         return AGIPoint;

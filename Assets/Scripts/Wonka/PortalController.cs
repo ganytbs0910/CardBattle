@@ -119,25 +119,25 @@ public class PortalController : MonoBehaviour
                 leftButton.SetActive(false);
                 rightButton.SetActive(true);
                 portalCamera[0].Priority = 1;
-                GameManager.instance.stageHierarchy = 1;
+                GameManager.instance.stageHierarchy = 0;
                 break;
             case 2:
                 leftButton.SetActive(true);
                 rightButton.SetActive(true);
                 portalCamera[1].Priority = 1;
-                GameManager.instance.stageHierarchy = 11;
+                GameManager.instance.stageHierarchy = 10;
                 break;
             case 3:
                 leftButton.SetActive(true);
                 rightButton.SetActive(true);
                 portalCamera[2].Priority = 1;
-                GameManager.instance.stageHierarchy = 21;
+                GameManager.instance.stageHierarchy = 20;
                 break;
             case 4:
                 leftButton.SetActive(true);
                 rightButton.SetActive(false);
                 portalCamera[3].Priority = 1;
-                GameManager.instance.stageHierarchy = 31;
+                GameManager.instance.stageHierarchy = 30;
                 break;
         }
 
@@ -274,6 +274,7 @@ public class PortalController : MonoBehaviour
 
         //GameManager.instance.SpawnEnemies();
         GameManager.instance.SpawnPlayer();
+        GameManager.instance.PortalMovement(GameManager.instance.stageHierarchy);
     }
 
 

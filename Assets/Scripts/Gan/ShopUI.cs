@@ -13,15 +13,10 @@ public class ShopUI : MonoBehaviour
     CardEntity[] cardEntities;
     int cardID;
 
-    private struct CardUI
-    {
-        public GameObject cardObject;
-        public Button payButton;
-        public int cardID;
-        public int price;
-    }
-
-    private List<CardUI> cardUIList = new List<CardUI>();
+    public List<int> priceList = new List<int>();
+    public List<int> cardIDList = new List<int>();
+    public List<GameObject> cardObjectList = new List<GameObject>();
+    public List<Button> payButtonList = new List<Button>();
 
     void Start()
     {
@@ -61,7 +56,10 @@ public class ShopUI : MonoBehaviour
 
             Button button = payButtonClone.GetComponent<Button>();
 
-            cardUIList.Add(new CardUI { cardObject = card.gameObject, payButton = button, cardID = cardID, price = price });
+            priceList.Add(price);
+            cardIDList.Add(cardID);
+            cardObjectList.Add(card.gameObject);
+            payButtonList.Add(button);
 
             DrawCardController.instance.TiarSelectOutline(card, cardModel);
         }
@@ -70,38 +68,46 @@ public class ShopUI : MonoBehaviour
 
     void ClearShop()
     {
-        foreach (var cardUI in cardUIList)
+        for (int i = 0; i < cardObjectList.Count; i++)
         {
-            if (cardUI.cardObject != null) Destroy(cardUI.cardObject);
-            if (cardUI.payButton != null) Destroy(cardUI.payButton.gameObject);
+            Destroy(cardObjectList[i]);
+            Destroy(payButtonList[i].gameObject);
         }
-        cardUIList.Clear();
+        cardObjectList.Clear();
+        payButtonList.Clear();
+        priceList.Clear();
+        cardIDList.Clear();
     }
 
     void BuyButtonAddListener()
     {
-        for (int i = 0; i < cardUIList.Count; i++)
+        for (int i = 0; i < cardIDList.Count; i++)
         {
             int index = i; // インデックスの値を保持する
-            cardUIList[index].payButton.onClick.RemoveAllListeners();
-            cardUIList[index].payButton.onClick.AddListener(() => PurchaseItem(index));
+            payButtonList[index].onClick.RemoveAllListeners();
+            payButtonList[index].onClick.AddListener(() => PurchaseItem(index));
         }
     }
 
     void PurchaseItem(int index)
     {
-        if (PlayerPrefs.GetInt("Coin") < cardUIList[index].price) UIManager.instance.HeroMessageDetail("コインが足りません"); return;
-        if (DrawCardController.instance.parentPanel.transform.childCount == DrawCardController.instance.maximumCardNumber) UIManager.instance.HeroMessageDetail("カードが満タンだ"); return;
-        if (index < 0 || index >= cardUIList.Count) return;
-
-        var cardUI = cardUIList[index];
-        UIManager.instance.cardListPanel.gameObject.SetActive(true);
-        PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") - cardUI.price);
-        DrawCardController.instance.DrawCard(cardUI.cardID);
+        if (PlayerPrefs.GetInt("Coin") < priceList[index])
+        {
+            UIManager.instance.HeroMessageDetail("コインが足りません");
+            return;
+        }
+        if (DrawCardController.instance.parentPanel.transform.childCount >= DrawCardController.instance.maximumCardNumber)
+        {
+            UIManager.instance.HeroMessageDetail("カードが満タンだ");
+            return;
+        }
+        PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") - priceList[index]);
+        //エラー元
+        DrawCardController.instance.DrawCard(cardIDList[index]);
         GoblinShop.instance.BuyCardGoblinEffect();
-        UIManager.instance.AnimateButtonScaleFalse(cardUI.cardObject);
-        cardUI.cardObject.SetActive(false);
-        cardUI.payButton.gameObject.SetActive(false);
-        UIManager.instance.cardListPanel.gameObject.SetActive(false);
+        UIManager.instance.AnimateButtonScaleFalse(cardObjectList[index]);
+        cardObjectList[index].SetActive(false);
+        payButtonList[index].gameObject.SetActive(false);
+
     }
 }

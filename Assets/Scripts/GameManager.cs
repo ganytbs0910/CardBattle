@@ -117,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         SpawnPlayer();
 
+        /*
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -162,6 +163,8 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
+        */
+        SpawnEnemies();
     }
 
     void Update()
@@ -399,6 +402,7 @@ public class GameManager : MonoBehaviour
     // 敵をスポーンする
     public void SpawnEnemies()
     {
+        Debug.Log("敵が生成された");
         // "Enemies" という名前のゲームオブジェクトを探す
         GameObject enemiesParent = GameObject.Find("Enemies");
 
@@ -436,7 +440,7 @@ public class GameManager : MonoBehaviour
                 int remainder = (stageHierarchy - 1) % 10;
                 int enemiesToSpawn = remainder / 3 + 1;
                 //PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
-                PlayerPrefs.Save();
+                //PlayerPrefs.Save();
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
                     int range = stageHierarchy / 10;
@@ -553,6 +557,7 @@ public class GameManager : MonoBehaviour
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
+        Debug.Log("現在のステージ階層：" + stageHierarchy);
         for (int i = 0; i < UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
         {
             drawCardController.DrawCard();
@@ -576,6 +581,12 @@ public class GameManager : MonoBehaviour
             UIManager.instance.gameClearPanel.SetActive(true);
             AudioManager.instance.PlayBGM(AudioManager.BGM.GameClearTheme);
         }
+    }
+
+    public void PortalMovement(int setHierarchy)
+    {
+        stageHierarchy = setHierarchy;
+        UIManager.instance.Loading();
     }
 
     //プレイヤーとエネミーを初期位置と初期アニメに戻す
@@ -659,7 +670,7 @@ public class GameManager : MonoBehaviour
         // Stage 21~30までの確率
         else if (stageHierarchy <= 30) probabilities = new float[] { 70f, 15f, 8f, 4f, 2f, 1f };
         // Stage 31~40までの確率
-        else if (stageHierarchy <= 40) probabilities = new float[] { 60f, 20f, 9f, 6f, 3f, 2f };
+        else if (stageHierarchy <= 40) probabilities = new float[] { 55f, 20f, 10f, 7f, 5f, 3f };
 
         // 乱数を1から100の間で生成してtiarを決定
         float randomValue = UnityEngine.Random.Range(1, 101); // 1から100までの乱数

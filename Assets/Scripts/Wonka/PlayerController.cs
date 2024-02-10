@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public bool isDropRateUp = false;
     public bool battleStartHeal = false;
     public Weapon defaultWeapon = null;
+    bool canDefendAnim = true;
     //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
@@ -59,6 +60,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 initialPosition;
 
     public Weapon currentWeapon = null;
+    [SerializeField] private List<GameObject> AllHeadList = new List<GameObject>();
+    [SerializeField] private List<GameObject> AllArmorList = new List<GameObject>();
+    [SerializeField] private List<GameObject> AllBackPackList = new List<GameObject>();
 
     [SerializeField] Armor currentHead = null;
     [SerializeField] Armor currentArmor = null;
@@ -83,7 +87,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
-        moveSpeed = agent.speed;
+        moveSpeed = 3.5f;
         // Animatorコンポーネントを取得
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -249,49 +253,72 @@ public class PlayerController : MonoBehaviour
 
     public void GameReset()
     {
-        maxHp = 100;
-        PlayerPrefs.SetInt("MaxHP", maxHp);
-        hp = maxHp;
-        PlayerPrefs.SetInt("HP", hp);
-        playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
-        maxMp = 100;
-        PlayerPrefs.SetInt("MaxMP", maxMp);
-        mp = maxMp;
-        PlayerPrefs.SetInt("MP", mp);
-        playerUIManager.UpdateMP(maxMp, mp);//MPSliderの更新
-        attack = 5;
-        PlayerPrefs.SetInt("Attack", attack);
-        attackInterval = 1;
-        throwAttack = 0;
-        defense = 1;
-        PlayerPrefs.SetInt("Defense", defense);
-        Agility = 5;
-        PlayerPrefs.SetInt("Agility", Agility);
-        moveSpeed = 3.5f;
-        addHealthRate = 1;
-        addAttackRate = 1;
-        addDefenseRate = 1;
-        cloneHpRate = 2;
-        cloneAttackRate = 2;
-        cloneDefenseRateUp = 2;
-        lastAttackTime = 0f;
-        IsDead = false;
-        isAttacking = false;
-        CantMove = true;
-        isDropRateUp = false;
-        battleStartHeal = false;
-        defaultWeapon = null;
-        currentArmor = null;
-        currentHead = null;
-        currentBackpack = null;
-        isHealingSword = false;
-        enemyChase = true;
-        EquipWeapon(defaultWeapon);
-        GameManager.instance.battleState = false;
-        agent.enabled = true;
-        PlayerPrefs.Save();
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
-        //プレイヤーを移動させないように
+        if (this.gameObject != null)
+        {
+            maxHp = 100;
+            PlayerPrefs.SetInt("MaxHP", maxHp);
+            hp = maxHp;
+            PlayerPrefs.SetInt("HP", hp);
+            playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
+            maxMp = 100;
+            PlayerPrefs.SetInt("MaxMP", maxMp);
+            mp = maxMp;
+            PlayerPrefs.SetInt("MP", mp);
+            playerUIManager.UpdateMP(maxMp, mp);//MPSliderの更新
+            attack = 5;
+            PlayerPrefs.SetInt("Attack", attack);
+            attackInterval = 1;
+            throwAttack = 0;
+            defense = 1;
+            PlayerPrefs.SetInt("Defense", defense);
+            Agility = 5;
+            PlayerPrefs.SetInt("Agility", Agility);
+            moveSpeed = 3.5f;
+            addHealthRate = 1;
+            addAttackRate = 1;
+            addDefenseRate = 1;
+            cloneHpRate = 2;
+            cloneAttackRate = 2;
+            cloneDefenseRateUp = 2;
+            lastAttackTime = 0f;
+            IsDead = false;
+            isAttacking = false;
+            CantMove = true;
+            isDropRateUp = false;
+            battleStartHeal = false;
+            defaultWeapon = null;
+            currentHead = null;
+            for (int i = 0; i < AllHeadList.Count; i++)
+            {
+                AllHeadList[i].SetActive(false);
+            }
+            currentArmor = null;
+            for (int i = 0; i < AllArmorList.Count; i++)
+            {
+                AllArmorList[i].SetActive(false);
+                if (i == 2)
+                {
+                    AllArmorList[i].SetActive(true);
+                }
+            }
+            currentBackpack = null;
+            for (int i = 0; i < AllBackPackList.Count; i++)
+            {
+                AllBackPackList[i].SetActive(false);
+            }
+            PlayerPrefs.DeleteKey("Weapon");
+            PlayerPrefs.DeleteKey("Armor");
+            PlayerPrefs.DeleteKey("Head");
+            PlayerPrefs.DeleteKey("BackPack");
+            isHealingSword = false;
+            enemyChase = true;
+            EquipWeapon(defaultWeapon);
+            GameManager.instance.battleState = false;
+            agent.enabled = true;
+            PlayerPrefs.Save();
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+            //プレイヤーを移動させないように
+        }
 
     }
     public void SaveEquipment()
@@ -368,42 +395,6 @@ public class PlayerController : MonoBehaviour
         {
             Agility = 5;
         }
-
-        /*
-        //装備のステータス強化分は差し引く
-        if (currentWeapon != null)
-        {
-            //maxHp -= currentWeapon.GetAddMAXHP();
-            //maxMp -= currentWeapon.GetAddMAXMP();
-            attack -= currentWeapon.GetATKPoint();
-            defense -= currentWeapon.GetDEFPoint();
-            //Agility -= currentWeapon.GetAGIPoint();
-        }
-        if (currentArmor != null)
-        {
-            maxHp -= currentArmor.GetAddMAXHP();
-            maxMp -= currentArmor.GetAddMAXMP();
-            attack -= currentArmor.GetATKPoint();
-            defense -= currentArmor.GetDEFPoint();
-            Agility -= currentArmor.GetAGIPoint();
-        }
-        if (currentHead != null)
-        {
-            maxHp -= currentHead.GetAddMAXHP();
-            maxMp -= currentHead.GetAddMAXMP();
-            attack -= currentHead.GetATKPoint();
-            defense -= currentHead.GetDEFPoint();
-            Agility -= currentHead.GetAGIPoint();
-        }
-        if (currentBackpack != null)
-        {
-            maxHp -= currentBackpack.GetAddMAXHP();
-            maxMp -= currentBackpack.GetAddMAXMP();
-            attack -= currentBackpack.GetATKPoint();
-            defense -= currentBackpack.GetDEFPoint();
-            Agility -= currentBackpack.GetAGIPoint();
-        }
-        */
         playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
     }
 
@@ -679,6 +670,7 @@ public class PlayerController : MonoBehaviour
         //damegeが0.9~1.2倍になる（不要なら外す）
         damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
+
         if (sumDamage <= 0)
         {
             sumDamage = 0;
@@ -711,7 +703,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnTriggerExit(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
         {
@@ -725,15 +717,11 @@ public class PlayerController : MonoBehaviour
             //HPが0なら無効
             return;
         }
-
         if (other.CompareTag("Weapon_Enemy"))
         {
             EnemyWeapon enemyWeapon = other.GetComponent<EnemyWeapon>();
             if (enemyWeapon != null)
             {
-                //ダメージを与えるものにぶつかったら
-                //print(other.name + "が" + gameObject.name + "に" + enemyWeapon.SumDamage() + "ダメージを与えた");
-
                 GetHit();//ノックバック
 
                 //回避率のチェック
@@ -817,7 +805,13 @@ public class PlayerController : MonoBehaviour
     //防御
     public void Defend()
     {
-        animator.SetTrigger("Defend");
+        //2秒間は連続でアニメーションが再生されない
+        if (canDefendAnim)
+        {
+            animator.SetTrigger("Defend");
+        }
+        canDefendAnim = false;
+        DOVirtual.DelayedCall(2f, () => canDefendAnim = true);
     }
 
     //ノックバック

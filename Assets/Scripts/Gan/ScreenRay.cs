@@ -142,22 +142,31 @@ public class ScreenRay : MonoBehaviour
 
     public void PlayParticleAtPosition(Collider collider)
     {
-        //生成位置を選択
+        // instantPositionにデフォルト値を設定
+        Vector3 instantPosition = Vector3.zero;
+
+        // 生成位置を選択
         switch (particlePosition)
         {
             case CardEntity.ParticlePosition.Top:
-                InstantPosition = collider.bounds.center + new Vector3(0, collider.bounds.extents.y, 0);
+                instantPosition = collider.bounds.center + new Vector3(0, collider.bounds.extents.y, 0);
                 break;
             case CardEntity.ParticlePosition.Center:
-                InstantPosition = collider.bounds.center;
+                instantPosition = collider.bounds.center;
                 break;
             case CardEntity.ParticlePosition.Bottom:
-                InstantPosition = collider.bounds.center - new Vector3(0, collider.bounds.extents.y, 0);
+                instantPosition = collider.bounds.center - new Vector3(0, collider.bounds.extents.y, 0);
+                break;
+            default:
+                Debug.LogError("Invalid particle position specified.");
                 break;
         }
 
         // パーティクルシステムのインスタンスを生成
-        ParticleSystem newParticle = Instantiate(particle, InstantPosition, Quaternion.identity);
+        ParticleSystem newParticle = Instantiate(particle, collider.transform);
+
+        // パーティクルシステムの位置を設定
+        newParticle.transform.localPosition = collider.transform.InverseTransformPoint(instantPosition);
 
         // パーティクルを再生
         newParticle.Play();

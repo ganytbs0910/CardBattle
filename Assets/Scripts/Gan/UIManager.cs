@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform settingButton;
     //[SerializeField] private RectTransform collectionButton;
     public GameObject adsButton;
+    public GameObject battlePanel;
     [SerializeField] private GameObject warningPanel;
     [SerializeField] private GameObject coinPanel;
     [SerializeField] private GameObject startCheckButton;
@@ -393,6 +394,7 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
+        Debug.Log("Loadingのスポーン");
         GameManager.instance.SpawnItems();
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.CreateCharacterList();//リストを更新
@@ -494,6 +496,7 @@ public class UIManager : MonoBehaviour
 
         playerController.agent.enabled = false;
         yield return new WaitForSeconds(2);
+        losePanel.SetActive(false);
         //Loading();
         PortalController.instance.GoPortal();
 
@@ -502,8 +505,7 @@ public class UIManager : MonoBehaviour
         //プレイヤーのステータスを元に戻す
         GameManager.instance.GameReset();
         playerController.GameReset();
-        losePanel.SetActive(false);
-        GameManager.instance.SpawnEnemies();
+        Debug.Log("GiveUpのスポーン");
         yield return new WaitForSeconds(1f);
         //GameManager.instance.enemiesの一つ目の要素以外をリストから外す
         PlayerPrefs.SetInt("EnemyCount", 1);
