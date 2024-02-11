@@ -313,22 +313,23 @@ public class PlayerController : MonoBehaviour
             }
             PlayerPrefs.DeleteKey("Head");
             PlayerPrefs.DeleteKey("BackPack");
-
-
+            //このゲームオブジェクトの子オブジェクト全て取得
             Transform[] allChildren = this.GetComponentsInChildren<Transform>();
-            // 全ての子オブジェクトをループしてHeadを探す
+            // 全ての子オブジェクトをループしてheadArmorという名前のオブジェクトを探す
             foreach (Transform child in allChildren)
             {
-                if (child.name == "bodyArmor")
+                Debug.Log(child.name + "なまえがこれ");
+                if (child.name == "headArmor")
                 {
+                    Debug.Log("ヘッドアーマーを消します");
                     Destroy(child.gameObject);
                 }
                 if (child.name == "backPackArmor")
                 {
+                    Debug.Log("バックパックアーマーを消します");
                     Destroy(child.gameObject);
                 }
             }
-
 
             isHealingSword = false;
             enemyChase = true;
