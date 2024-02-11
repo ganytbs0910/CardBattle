@@ -60,9 +60,9 @@ public class PlayerController : MonoBehaviour
     private Vector3 initialPosition;
 
     public Weapon currentWeapon = null;
-    [SerializeField] private List<GameObject> AllHeadList = new List<GameObject>();
-    [SerializeField] private List<GameObject> AllArmorList = new List<GameObject>();
-    [SerializeField] private List<GameObject> AllBackPackList = new List<GameObject>();
+    [SerializeField] private GameObject weaponRightPrefab;
+    [SerializeField] private Weapon weaponRight;
+    [SerializeField] private List<GameObject> allArmorList = new List<GameObject>();
 
     [SerializeField] Armor currentHead = null;
     [SerializeField] Armor currentArmor = null;
@@ -176,14 +176,20 @@ public class PlayerController : MonoBehaviour
                 {
                     Defend(); // 防御
                 }
-                agent.isStopped = true;
+                if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+                {
+                    agent.isStopped = true;
+                }
             }
             else
             {
                 CantMove = false;
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
-                agent.isStopped = false; // 移動を再開
+                if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+                {
+                    agent.isStopped = false; // 移動を再開
+                }
             }
         }
     }
@@ -287,29 +293,43 @@ public class PlayerController : MonoBehaviour
             isDropRateUp = false;
             battleStartHeal = false;
             defaultWeapon = null;
+            currentWeapon = null;
             currentHead = null;
-            for (int i = 0; i < AllHeadList.Count; i++)
-            {
-                AllHeadList[i].SetActive(false);
-            }
             currentArmor = null;
-            for (int i = 0; i < AllArmorList.Count; i++)
+            currentBackpack = null;
+            PlayerPrefs.SetString("Weapon", "NoWeapon");
+            EquipWeapon(weaponRight);
+            PlayerPrefs.DeleteKey("Armor");
+            for (int i = 0; i < allArmorList.Count; i++)
             {
-                AllArmorList[i].SetActive(false);
                 if (i == 2)
                 {
-                    AllArmorList[i].SetActive(true);
+                    allArmorList[i].SetActive(true);
+                }
+                else
+                {
+                    allArmorList[i].SetActive(false);
                 }
             }
-            currentBackpack = null;
-            for (int i = 0; i < AllBackPackList.Count; i++)
-            {
-                AllBackPackList[i].SetActive(false);
-            }
-            PlayerPrefs.DeleteKey("Weapon");
-            PlayerPrefs.DeleteKey("Armor");
             PlayerPrefs.DeleteKey("Head");
             PlayerPrefs.DeleteKey("BackPack");
+
+
+            Transform[] allChildren = this.GetComponentsInChildren<Transform>();
+            // 全ての子オブジェクトをループしてHeadを探す
+            foreach (Transform child in allChildren)
+            {
+                if (child.name == "bodyArmor")
+                {
+                    Destroy(child.gameObject);
+                }
+                if (child.name == "backPackArmor")
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+
+
             isHealingSword = false;
             enemyChase = true;
             EquipWeapon(defaultWeapon);
@@ -699,7 +719,10 @@ public class PlayerController : MonoBehaviour
         if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
         {
             enemyChase = false;
-            agent.isStopped = true;
+            if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+            }
         }
     }
 

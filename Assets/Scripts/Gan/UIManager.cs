@@ -360,18 +360,6 @@ public class UIManager : MonoBehaviour
         //地面に置かれたアイテムを消す
         GameManager.instance.DestroyAllItemWithTag("itemObj");
         GameManager.instance.DungeonCameraChange();
-
-        /*
-        // カメラの角度を調整
-        Vector3 currentCameraRotation = camera.transform.eulerAngles;
-        camera.transform.eulerAngles = new Vector3(currentCameraRotation.x + 10, currentCameraRotation.y, currentCameraRotation.z);
-        // UIパネルの位置を調整
-        Vector2 difficultyPanelPosition = difficultyPanel.anchoredPosition;
-        difficultyPanel.anchoredPosition = new Vector2(difficultyPanelPosition.x, difficultyPanelPosition.y - 500);
-
-        Vector2 cardListPanelPosition = cardListPanel.anchoredPosition;
-        cardListPanel.anchoredPosition = new Vector2(cardListPanelPosition.x, cardListPanelPosition.y + 100);
-        */
         battleStartButton.gameObject.SetActive(true);
         GameManager.instance.battleState = false;
         loadPanel.SetActive(true);
@@ -394,7 +382,6 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
-        Debug.Log("Loadingのスポーン");
         GameManager.instance.SpawnItems();
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.CreateCharacterList();//リストを更新
@@ -421,14 +408,6 @@ public class UIManager : MonoBehaviour
         UIManager.instance.TutorialTextDetail("戦闘は自動で行われます");
 
         startCheckButton.SetActive(false);
-        //heroMessageText.gameObject.SetActive(false);
-        /*
-        camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-        difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-        cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
-        */
-        //battleStartButton.gameObject.SetActive(true);
-        //shopButton.gameObject.SetActive(false);
     }
 
     public void NextStageButton()
@@ -463,15 +442,6 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator GiveUpCoroutine()
     {
-        //UIを調整する
-        if (GameManager.instance.battleState == false)
-        {
-            /*
-            camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-            difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-            cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
-            */
-        }
         GameManager.instance.battleState = false;
         losePanel.SetActive(true);
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
@@ -932,11 +902,32 @@ public class UIManager : MonoBehaviour
                     case Language.English: message = "It's called strategic retreat. ...... Right?"; break;
                 }
                 break;
-            case "ポータル":
+            case "ポータル1":
                 switch (language)
                 {
-                    case Language.Japanese: message = "挑戦したい階層を選択しよう！"; break;
-                    case Language.English: message = "Select the hierarchy you wish to challenge!"; break;
+                    case Language.Japanese: message = "このポータルは1階層から始まるよ！"; break;
+                    case Language.English: message = "This portal starts from the 1st floor!"; break;
+                }
+                break;
+            case "ポータル2":
+                switch (language)
+                {
+                    case Language.Japanese: message = "このポータルは11階層から始まるよ！"; break;
+                    case Language.English: message = "This portal starts from the 11th floor!"; break;
+                }
+                break;
+            case "ポータル3":
+                switch (language)
+                {
+                    case Language.Japanese: message = "このポータルは21階層から始まるよ！"; break;
+                    case Language.English: message = "This portal starts from the 21st floor!"; break;
+                }
+                break;
+            case "ポータル4":
+                switch (language)
+                {
+                    case Language.Japanese: message = "このポータルは31階層から始まるよ！"; break;
+                    case Language.English: message = "This portal starts from the 31st floor!"; break;
                 }
                 break;
             case "未開放ポータル":

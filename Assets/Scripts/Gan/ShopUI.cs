@@ -102,12 +102,15 @@ public class ShopUI : MonoBehaviour
             return;
         }
         PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") - priceList[index]);
-        //エラー元
+        UIManager.instance.battlePanel.SetActive(true);
+        UIManager.instance.cardListPanel.gameObject.SetActive(true);
         DrawCardController.instance.DrawCard(cardIDList[index]);
         GoblinShop.instance.BuyCardGoblinEffect();
         UIManager.instance.AnimateButtonScaleFalse(cardObjectList[index]);
         cardObjectList[index].SetActive(false);
         payButtonList[index].gameObject.SetActive(false);
+        UIManager.instance.battlePanel.SetActive(false);
+        UIManager.instance.cardListPanel.gameObject.SetActive(false);
 
     }
 }

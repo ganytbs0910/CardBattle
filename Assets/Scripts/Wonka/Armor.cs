@@ -119,8 +119,7 @@ public class Armor : ScriptableObject
         Transform oldArmor = parts.Find(armorName);
         if (oldArmor != null) // 古い武器が存在する場合は削除
         {
-            //setactiveをfalseにする
-            oldArmor.gameObject.SetActive(false);
+            Destroy(oldArmor.gameObject);
         }
     }
 

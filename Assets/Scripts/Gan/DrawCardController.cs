@@ -99,55 +99,55 @@ public class DrawCardController : MonoBehaviour
 
     public void DrawCard(int? cardID = null)
     {
-        UIManager.instance.battlePanel.SetActive(true);
-        UIManager.instance.cardListPanel.gameObject.SetActive(true);
-
-        if (parentPanel.transform.childCount >= maximumCardNumber) return;
-        int tiar = GameManager.instance.CalculateTiar();
-        // カードIDが指定されていない場合、ランダムにカードを選択
-        CardEntity[] cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
-        CardController card;
-        CardModel cardModel;
-        if (cardID == null)
+        if (this.gameObject != null)
         {
-            do
+            UIManager.instance.battlePanel.SetActive(true);
+            UIManager.instance.cardListPanel.gameObject.SetActive(true);
+            if (parentPanel.transform.childCount >= maximumCardNumber) return;
+            int tiar = GameManager.instance.CalculateTiar();
+            // カードIDが指定されていない場合、ランダムにカードを選択
+            CardEntity[] cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
+            CardController card;
+            CardModel cardModel;
+            if (cardID == null)
             {
-                // ランダムにカードを選ぶ
-                cardID = Random.Range(1, cardEntities.Length + 1);
+                do
+                {
+                    // ランダムにカードを選ぶ
+                    cardID = Random.Range(1, cardEntities.Length + 1);
+                    card = Instantiate(cardPrefab, parentPanel.transform);
+                    card.name = $"Card_{cardID}";
+                    card.Init(cardID.Value);
+                    cardModel = card.model;
+
+                    // カードのtiarが条件を満たさない場合は破棄して再試行
+                    if (cardModel.tiar != tiar)
+                    {
+                        Destroy(card.gameObject);
+                    }
+                }
+                while (cardModel.tiar != tiar);
+
+                // 条件を満たしたカードをリストに追加
+                cardIDList.Add(cardID.Value);
+
+                // ランクに応じてアウトライン変更
+                TiarSelectOutline(card, cardModel);
+            }
+            else
+            {
+                // カードIDが指定されている場合、そのカードを生成
                 card = Instantiate(cardPrefab, parentPanel.transform);
                 card.name = $"Card_{cardID}";
+                //ここのInitがエラーを吐く
                 card.Init(cardID.Value);
+                cardIDList.Add(cardID.Value);
                 cardModel = card.model;
 
-                // カードのtiarが条件を満たさない場合は破棄して再試行
-                if (cardModel.tiar != tiar)
-                {
-                    Destroy(card.gameObject);
-                }
+                // ランクに応じてアウトライン変更
+                TiarSelectOutline(card, cardModel);
             }
-            while (cardModel.tiar != tiar);
-
-            // 条件を満たしたカードをリストに追加
-            cardIDList.Add(cardID.Value);
-
-            // ランクに応じてアウトライン変更
-            TiarSelectOutline(card, cardModel);
         }
-        else
-        {
-            // カードIDが指定されている場合、そのカードを生成
-            card = Instantiate(cardPrefab, parentPanel.transform);
-            card.name = $"Card_{cardID}";
-            //ここのInitがエラーを吐く
-            card.Init(cardID.Value);
-            cardIDList.Add(cardID.Value);
-            cardModel = card.model;
-
-            // ランクに応じてアウトライン変更
-            TiarSelectOutline(card, cardModel);
-        }
-        UIManager.instance.battlePanel.SetActive(false);
-        UIManager.instance.cardListPanel.gameObject.SetActive(false);
     }
 
     //ランクに応じてアウトライン変更

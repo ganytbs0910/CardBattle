@@ -136,7 +136,7 @@ public class Weapon : ScriptableObject
     }
 
     // 古い武器を削除する
-    private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+    public void DestroyOldWeapon(Transform rightHand, Transform leftHand)
     {
         // 両手に装備する武器の場合
         if (TwoHandedWeapon)
@@ -240,5 +240,11 @@ public class Weapon : ScriptableObject
             //呪文の攻撃はPlayerの攻撃の80%にする
             projectileInstance.damage = (int)(playerController.attack * 0.8f);
         }
+    }
+    public void NoHand(Transform rightHand, Transform leftHand)
+    {
+        // 両手からすべての装備を削除
+        DestroyAllWeaponsInHand(rightHand);
+        DestroyAllWeaponsInHand(leftHand);
     }
 }
