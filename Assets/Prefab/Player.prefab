@@ -820,6 +820,10 @@ MonoBehaviour:
   enemyChase: 1
   missText: {fileID: 6440343210301636223}
   increaseEffect: {fileID: 380284327063089886, guid: c4785daaed5578e40b1201a3147e56cf, type: 3}
+  noWeaponAnim: {fileID: 22100000, guid: 1fa1579904e67b34d8f02c044f45024d, type: 2}
+  noWeaponScriptableObject: {fileID: 11400000, guid: 32c253c37b1cc25498cb144417bd6155, type: 2}
+  weaponPos: {fileID: 3334851929020121597}
+  noWeaponObject: {fileID: 3974440262548107585, guid: 5ed775aa380a5d14db3845d23d17a25b, type: 3}
 --- !u!195 &1076528725495630228
 NavMeshAgent:
   m_ObjectHideFlags: 0

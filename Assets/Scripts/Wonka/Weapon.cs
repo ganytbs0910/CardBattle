@@ -42,7 +42,8 @@ public class Weapon : ScriptableObject
     {
         if (weaponPrefab != null)
         {
-            DestroyOldWeapon(rightHand, leftHand);//古い武器を削除する
+            DestroyAllWeaponsInHand(rightHand);
+            DestroyAllWeaponsInHand(leftHand);
 
             Transform handTransform = GetTransform(rightHand, leftHand, animator);
             //手の位置を取得する。
@@ -131,7 +132,8 @@ public class Weapon : ScriptableObject
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
-            return isRightHanded ? rightHand : leftHand;
+            //return isRightHanded ? rightHand : leftHand;
+            return rightHand;
         }
     }
 

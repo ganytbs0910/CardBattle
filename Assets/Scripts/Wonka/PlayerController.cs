@@ -84,6 +84,14 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem increaseEffect;
 
+    [Header("Playerの装備を初期に戻すための")]
+    [SerializeField] private RuntimeAnimatorController noWeaponAnim;
+
+    [SerializeField] private Weapon noWeaponScriptableObject;
+    [SerializeField] private Transform weaponPos;
+    [SerializeField] private GameObject noWeaponObject;
+
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
@@ -298,7 +306,7 @@ public class PlayerController : MonoBehaviour
             currentArmor = null;
             currentBackpack = null;
             PlayerPrefs.SetString("Weapon", "NoWeapon");
-            EquipWeapon(weaponRight);
+            PlayerPrefs.DeleteKey("Head");
             PlayerPrefs.DeleteKey("Armor");
             for (int i = 0; i < allArmorList.Count; i++)
             {
@@ -311,25 +319,33 @@ public class PlayerController : MonoBehaviour
                     allArmorList[i].SetActive(false);
                 }
             }
-            PlayerPrefs.DeleteKey("Head");
             PlayerPrefs.DeleteKey("BackPack");
             //このゲームオブジェクトの子オブジェクト全て取得
             Transform[] allChildren = this.GetComponentsInChildren<Transform>();
             // 全ての子オブジェクトをループしてheadArmorという名前のオブジェクトを探す
             foreach (Transform child in allChildren)
             {
-                Debug.Log(child.name + "なまえがこれ");
+                if (child.name == "rightWeapon")
+                {
+                    Destroy(child.gameObject);
+                }
+                if (child.name == "leftWeapon")
+                {
+                    Destroy(child.gameObject);
+                }
                 if (child.name == "headArmor")
                 {
-                    Debug.Log("ヘッドアーマーを消します");
                     Destroy(child.gameObject);
                 }
                 if (child.name == "backPackArmor")
                 {
-                    Debug.Log("バックパックアーマーを消します");
                     Destroy(child.gameObject);
                 }
             }
+            //武器をなくしてNoWeaponを再現
+            animator.runtimeAnimatorController = noWeaponAnim;
+            currentWeapon = noWeaponScriptableObject;
+            Instantiate(noWeaponObject, weaponPos);
 
             isHealingSword = false;
             enemyChase = true;
