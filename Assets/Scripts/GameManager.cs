@@ -402,7 +402,6 @@ public class GameManager : MonoBehaviour
     // 敵をスポーンする
     public void SpawnEnemies()
     {
-        Debug.Log("敵が生成された");
         // "Enemies" という名前のゲームオブジェクトを探す
         GameObject enemiesParent = GameObject.Find("Enemies");
 
@@ -557,7 +556,6 @@ public class GameManager : MonoBehaviour
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
-        Debug.Log("現在のステージ階層：" + stageHierarchy);
         for (int i = 0; i < UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
         {
             drawCardController.DrawCard();

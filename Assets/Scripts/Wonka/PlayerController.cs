@@ -1056,7 +1056,9 @@ public class PlayerController : MonoBehaviour
 
             foreach (Renderer renderer in renderers)
             {
-                renderer.material.color = Color.gray;
+                //renderer.material.color = Color.gray;
+                renderer.material.color = new Color(0.05f, 0.05f, 0.05f, 1);
+
             }
         }
         GameManager.instance.CreateCharacterList();

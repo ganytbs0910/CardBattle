@@ -398,12 +398,13 @@ public class EnemyController : MonoBehaviour
 
         //コレクションがドロップするかどうかの判定
         int dropNumber = Random.Range(1, 101);
-        if (dropNumber >= dropRate) return;
-
-        //コレクションをドロップする
-        PlayerPrefs.SetInt($"Collection{id}", 1);
-        ItemDrop();
-        UIManager.instance.CollectionCardUpdate();
+        if (dropNumber <= dropRate)
+        {
+            //コレクションをドロップする
+            PlayerPrefs.SetInt($"Collection{id}", 1);
+            ItemDrop();
+            UIManager.instance.CollectionCardUpdate();
+        }
     }
 
     /// <summary>
