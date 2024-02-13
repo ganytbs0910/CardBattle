@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public bool isDropRateUp = false;
     public bool battleStartHeal = false;
     public Weapon defaultWeapon = null;
-    bool canDefendAnim = true;
+    bool canGetHitAnim = true;
     //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
@@ -269,6 +269,19 @@ public class PlayerController : MonoBehaviour
     {
         if (this.gameObject != null)
         {
+            IsDead = true;
+            //このゲームオブジェクトについている当たり判定が消える
+            GetComponent<Collider>().enabled = false;
+
+            //剣の当たり判定も消す
+            DisableColliderWeapon();
+
+            // GameManager のプレイヤーリストから自身を除外
+            GameManager.instance.RemovePlayerFromList(this);
+
+            //// ディレイののち、オブジェクトを2秒かけて縮小
+            transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+
             maxHp = 100;
             PlayerPrefs.SetInt("MaxHP", maxHp);
             hp = maxHp;
@@ -845,20 +858,21 @@ public class PlayerController : MonoBehaviour
     //防御
     public void Defend()
     {
-        //2秒間は連続でアニメーションが再生されない
-        if (canDefendAnim)
-        {
-            animator.SetTrigger("Defend");
-        }
-        canDefendAnim = false;
-        DOVirtual.DelayedCall(2f, () => canDefendAnim = true);
+
+        animator.SetTrigger("Defend");
+
     }
 
     //ノックバック
     public void GetHit()
     {
-        animator.SetTrigger("GetHit");
-        animator.SetInteger("GetHitType", Random.Range(1, 4));
+        if (canGetHitAnim)
+        {
+            animator.SetTrigger("GetHit");
+            animator.SetInteger("GetHitType", Random.Range(1, 4));
+            canGetHitAnim = false;
+        }
+        DOVirtual.DelayedCall(2f, () => canGetHitAnim = true);
     }
 
     //死亡
@@ -877,12 +891,6 @@ public class PlayerController : MonoBehaviour
         //もし死んだのが本体の場合
         if (gameObject.name != "Player") return;
         UIManager.instance.GiveUpButton();
-
-        //// ディレイののち、オブジェクトを2秒かけて縮小
-        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
-
-        //ゲームの勝敗をチェックする
-        GameManager.instance.CheckBattleStatus();
     }
 
     public void GiveUpAnime()

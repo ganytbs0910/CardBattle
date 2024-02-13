@@ -662,11 +662,11 @@ public class GameManager : MonoBehaviour
         float[] probabilities = new float[] { 100f, 0f, 0f, 0f, 0f, 0f };
 
         // Stage 1~10の確率
-        if (stageHierarchy <= 10) probabilities = new float[] { 90f, 6f, 2f, 1f, 0.7f, 0.3f };
+        if (stageHierarchy <= 10) probabilities = new float[] { 85f, 9f, 3f, 2f, 0.7f, 0.3f };
         // Stage 11~20の確率
-        else if (stageHierarchy <= 20) probabilities = new float[] { 80f, 10f, 5f, 3f, 1.5f, 0.5f };
+        else if (stageHierarchy <= 20) probabilities = new float[] { 75f, 13f, 6f, 4f, 1.5f, 0.5f };
         // Stage 21~30までの確率
-        else if (stageHierarchy <= 30) probabilities = new float[] { 70f, 15f, 8f, 4f, 2f, 1f };
+        else if (stageHierarchy <= 30) probabilities = new float[] { 65f, 17f, 10f, 5f, 2f, 1f };
         // Stage 31~40までの確率
         else if (stageHierarchy <= 40) probabilities = new float[] { 55f, 20f, 10f, 7f, 5f, 3f };
 

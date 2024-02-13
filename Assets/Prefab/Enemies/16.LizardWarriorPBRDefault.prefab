@@ -1054,7 +1054,7 @@ MonoBehaviour:
   moveSpeed: 0
   agility: 5
   coin: 6
-  dropRate: 5
+  dropRate: 7
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0

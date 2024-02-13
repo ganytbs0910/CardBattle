@@ -12,6 +12,7 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private CardController cardPrefab;
     CardEntity[] cardEntities;
     int cardID;
+    int previousHirarchy;
 
     public List<int> priceList = new List<int>();
     public List<int> cardIDList = new List<int>();
@@ -22,6 +23,13 @@ public class ShopUI : MonoBehaviour
     {
         cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
         SetCardToShop();
+    }
+
+    void OnEnable()
+    {
+        if (previousHirarchy == GameManager.instance.stageHierarchy) return;
+        SetCardToShop();
+        previousHirarchy = GameManager.instance.stageHierarchy;
     }
 
     public void SetCardToShop()
@@ -111,6 +119,5 @@ public class ShopUI : MonoBehaviour
         payButtonList[index].gameObject.SetActive(false);
         UIManager.instance.battlePanel.SetActive(false);
         UIManager.instance.cardListPanel.gameObject.SetActive(false);
-
     }
 }
