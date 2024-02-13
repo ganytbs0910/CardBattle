@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Card 70
   m_EditorClassIdentifier: 
   cardID: 70
-  name: "\u5E7B\u60D1\u9B54\u6CD5"
+  name: "HP+70, \u9632\u5FA1+9, \u56DE\u907F+5"
   information: 
   tiar: 5
-  icon: {fileID: 21300000, guid: d2521e451b367324bb760e57d87ded80, type: 3}
-  weapon: {fileID: 11400000, guid: 84cd908890701f94b9dc97abca39cea1, type: 2}
-  armor: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9ff7ca3742c018b40a758c28f3d9e2cd, type: 3}
+  weapon: {fileID: 0}
+  armor: {fileID: 11400000, guid: 523825024dea90f4cb98577edcbac0b7, type: 2}
   targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0

@@ -51,14 +51,14 @@ public class BreaksOnTouch : MonoBehaviour
                 AudioManager.instance.PlaySE(AudioManager.SE.BreakGlass);
                 print("ジャグを破壊しました");
                 break;
-            //case ItemType.Pumpkin:
-            //    ParalysisEffect();
-            //    break;
-            //case ItemType.Diamond:
-            //    AddMPEffect();
-            //    break;
-            //case ItemType.Mashroom:
-            //    PoisonEffect();
+                //case ItemType.Pumpkin:
+                //    ParalysisEffect();
+                //    break;
+                //case ItemType.Diamond:
+                //    AddMPEffect();
+                //    break;
+                //case ItemType.Mashroom:
+                //    PoisonEffect();
                 //break;
 
         }
@@ -66,21 +66,27 @@ public class BreaksOnTouch : MonoBehaviour
 
     public void RandomDropItem()
     {
-        int randomIndex = Random.Range(0, 2);
+        int randomIndex = Random.Range(0, 6);
         switch (randomIndex)
         {
             case 0:
                 DropCoin();
                 break;
             case 1:
+                DropCoin();
+                break;
+            case 2:
                 DropCard();
+                break;
+            default:
+                NoDrop();
                 break;
         }
     }
 
     private void NoDrop()
     {
-        print("何もドロップしなかった");
+        //print("何もドロップしなかった");
     }
 
     public void DropCoin()

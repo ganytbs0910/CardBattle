@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
   m_Name: Card 23
   m_EditorClassIdentifier: 
-  cardID: 21
-  name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u9632\u5FA1\u529B\u309210%\u4E0A\u3052\u308B"
+  cardID: 23
+  name: "\u6575\u306E\u56DE\u907F\u7387\u3092\u4E0B\u3052\u308B"
   information: 
   tiar: 1
-  icon: {fileID: -1790223000, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
+  icon: {fileID: -675950143, guid: 2285e4e68eed3b349a19c98014e049a6, type: 3}
   weapon: {fileID: 0}
   armor: {fileID: 0}
-  targetType: 0
+  targetType: 1
   particle: {fileID: 8476858034194145143, guid: 84c915043f939b8469605560770bb2d1, type: 3}
   particlePosition: 2

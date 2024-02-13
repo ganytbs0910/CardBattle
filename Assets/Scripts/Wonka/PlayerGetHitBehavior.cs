@@ -12,7 +12,7 @@ public class PlayerGetHitBehavior : StateMachineBehaviour
         if (playerController != null && playerController.agent != null)
         {
             // 元の速度を保存し、速度を0に設定
-            playerController.agent.speed = 0f;
+            //playerController.agent.speed = 0f;
             playerController.CantMove = true;
         }
 
@@ -33,7 +33,7 @@ public class PlayerGetHitBehavior : StateMachineBehaviour
         if (playerController != null && playerController.agent != null)
         {
             // 速度を元に戻す
-            playerController.agent.speed = playerController.moveSpeed;
+            //playerController.agent.speed = playerController.moveSpeed;
             playerController.CantMove = false;
         }
 

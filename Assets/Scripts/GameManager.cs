@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("StageHierarchy"))
         {
             PlayerPrefs.SetInt("StageHierarchy", 1);
+            PlayerPrefs.Save();
         }
         stageHierarchy = PlayerPrefs.GetInt("StageHierarchy");
 
@@ -116,6 +117,7 @@ public class GameManager : MonoBehaviour
 
         SpawnPlayer();
 
+        /*
         if (PlayerPrefs.HasKey("EnemyCount"))
         {
             // "Enemies" という名前のゲームオブジェクトを探す
@@ -161,6 +163,16 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies();
         }
+        */
+        SpawnEnemies();
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            CalculateTiar();
+        }
     }
 
     public void GameReset()
@@ -176,6 +188,7 @@ public class GameManager : MonoBehaviour
             }
         }
         PlayerPrefs.SetInt("StageHierarchy", 1);
+        PlayerPrefs.Save();
         stageHierarchy = 0;
 
         //enemiesのオブジェクトを全て破棄
@@ -186,9 +199,14 @@ public class GameManager : MonoBehaviour
                 Destroy(enemy.gameObject);
             }
         }
+        /*
+        for (int i = 0; i < PlayerPrefs.GetInt("EnemyCount"); i++)
+        {
+            PlayerPrefs.DeleteKey($"Enemy{i}");
+        }
+        PlayerPrefs.DeleteKey("EnemyCount");
+        */
 
-        //enemiesのリストをリセット
-        enemies.Clear();
         DestroyAllItemWithTag("itemObj");
         for (int i = playerObjects.Count - 1; i >= 0; i--)
         {
@@ -209,10 +227,11 @@ public class GameManager : MonoBehaviour
         {
             reachingStage = stageHierarchy;
             PlayerPrefs.SetInt("ReachingStage", reachingStage);
+            PlayerPrefs.Save();
         }
     }
 
-        public void DestroyAllItemWithTag(string tag)
+    public void DestroyAllItemWithTag(string tag)
     {
         GameObject[] items = GameObject.FindGameObjectsWithTag(tag);
         foreach (GameObject item in items)
@@ -268,6 +287,7 @@ public class GameManager : MonoBehaviour
         float randomNum = UnityEngine.Random.Range(0.8f, 2f);
         coin += Mathf.RoundToInt(stageHierarchy * randomNum * 10);
         PlayerPrefs.SetInt("Coin", coin);
+        PlayerPrefs.Save();
         UIManager.instance.UpdateCoinText();
     }
 
@@ -279,11 +299,15 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt($"Card{i}", drawCardController.cardIDList[i]);
         }
+        /*
         PlayerPrefs.SetInt("EnemyCount", enemies.Count);
         for (int i = 0; i < enemies.Count; i++)
         {
             PlayerPrefs.SetInt($"Enemy{i}", enemies[i].GetComponent<EnemyController>().id);
         }
+        */
+
+        PlayerPrefs.Save();
     }
 
     //キャラクターのリストを作成する。あるいはリストをリフレッシュするする。
@@ -394,15 +418,28 @@ public class GameManager : MonoBehaviour
         switch (stageHierarchy)
         {
             // 以降ボス戦
-            case 10: boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
-            case 20: boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
-            case 30: boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
-            case 40: boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation); break;
+            case 10:
+                boss = Instantiate(bossPrefab[0], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
+            case 20:
+                boss = Instantiate(bossPrefab[1], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
+            case 30:
+                boss = Instantiate(bossPrefab[2], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
+            case 40:
+                boss = Instantiate(bossPrefab[3], enemySpawnPoints[0].position, enemySpawnPoints[0].rotation);
+                UIManager.instance.WarningPanel();
+                break;
             default:
                 // stageHierarchyの値に基づいて敵の数を決定
                 int remainder = (stageHierarchy - 1) % 10;
-                int enemiesToSpawn = remainder / 2 + 1;
-                PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
+                int enemiesToSpawn = remainder / 3 + 1;
+                //PlayerPrefs.SetInt("EnemyCount", enemiesToSpawn);
+                //PlayerPrefs.Save();
                 for (int i = 0; i < enemiesToSpawn; i++)
                 {
                     int range = stageHierarchy / 10;
@@ -533,8 +570,21 @@ public class GameManager : MonoBehaviour
                 playerObjects.RemoveAt(i); // RemoveAtを使用して要素を削除
             }
         }
-
+        PlayerController player = playerObjects[0].GetComponent<PlayerController>();
+        player.SaveStatus();
+        player.SaveEquipment();
         UpdateStage();
+        if (stageHierarchy == 41)
+        {
+            UIManager.instance.gameClearPanel.SetActive(true);
+            AudioManager.instance.PlayBGM(AudioManager.BGM.GameClearTheme);
+        }
+    }
+
+    public void PortalMovement(int setHierarchy)
+    {
+        stageHierarchy = setHierarchy;
+        UIManager.instance.Loading();
     }
 
     //プレイヤーとエネミーを初期位置と初期アニメに戻す
@@ -608,33 +658,32 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public int CalculateTiar()
     {
-        // 確率を格納する配列
-        float[] probabilities;
+        // 確率を格納する配列（パーセンテージで）- デフォルト値で初期化
+        float[] probabilities = new float[] { 100f, 0f, 0f, 0f, 0f, 0f };
 
         // Stage 1~10の確率
-        if (stageHierarchy <= 10) probabilities = new float[] { 0.6f, 0.2f, 0.18f, 0.1f, 0.05f, 0.02f };
+        if (stageHierarchy <= 10) probabilities = new float[] { 85f, 9f, 3f, 2f, 0.7f, 0.3f };
         // Stage 11~20の確率
-        else if (stageHierarchy <= 20) probabilities = new float[] { 0.4f, 0.2f, 0.2f, 0.1f, 0.05f, 0.05f };
+        else if (stageHierarchy <= 20) probabilities = new float[] { 75f, 13f, 6f, 4f, 1.5f, 0.5f };
         // Stage 21~30までの確率
-        else if (stageHierarchy <= 30) probabilities = new float[] { 0.2f, 0.2f, 0.2f, 0.2f, 0.1f, 0.1f };
+        else if (stageHierarchy <= 30) probabilities = new float[] { 65f, 17f, 10f, 5f, 2f, 1f };
         // Stage 31~40までの確率
-        else if (stageHierarchy <= 40) probabilities = new float[] { 0.1f, 0.15f, 0.2f, 0.25f, 0.15f, 0.15f };
-        // デフォルトの確率（必要に応じて設定）
-        else probabilities = new float[] { 0.1f, 0.2f, 0.3f, 0.2f, 0.1f, 0.1f };
+        else if (stageHierarchy <= 40) probabilities = new float[] { 55f, 20f, 10f, 7f, 5f, 3f };
 
-        // 乱数を生成してtiarを決定
-        float randomValue = UnityEngine.Random.value;
+        // 乱数を1から100の間で生成してtiarを決定
+        float randomValue = UnityEngine.Random.Range(1, 101); // 1から100までの乱数
         float cumulativeProbability = 0.0f;
         for (int tiar = 1; tiar <= probabilities.Length; tiar++)
         {
             cumulativeProbability += probabilities[tiar - 1];
-            if (randomValue < cumulativeProbability)
+            if (randomValue <= cumulativeProbability)
             {
                 return tiar;
             }
         }
         return 1; // 万が一、どの条件にも当てはまらない場合は最低値を返す
     }
+
 
     /// <summary>
     /// 

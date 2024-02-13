@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Card 65
   m_EditorClassIdentifier: 
   cardID: 65
-  name: ATK+75
+  name: "\u653B\u6483+9, \u9632\u5FA1-3"
   information: 
-  tiar: 5
-  icon: {fileID: 21300000, guid: 06279f26512e7c24488f78a91bae63a0, type: 3}
-  weapon: {fileID: 11400000, guid: 75750d8c3de0dc14982970b85a09ba7b, type: 2}
+  tiar: 3
+  icon: {fileID: 21300000, guid: 81df5162e64c68a4c9a683d0ac8a168d, type: 3}
+  weapon: {fileID: 11400000, guid: 26b7aa841db48524e80da93550a94bed, type: 2}
   armor: {fileID: 0}
   targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0

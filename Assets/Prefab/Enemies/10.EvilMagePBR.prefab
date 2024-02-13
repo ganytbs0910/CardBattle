@@ -418,10 +418,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4744821207475892}
   - component: {fileID: 95892162074931524}
+  - component: {fileID: -6972706945561812306}
   - component: {fileID: -8964833949620451620}
   - component: {fileID: -2097616848181213610}
   - component: {fileID: 8623718884680259833}
-  - component: {fileID: -6972706945561812306}
   m_Layer: 0
   m_Name: 10.EvilMagePBR
   m_TagString: Enemy
@@ -468,6 +468,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-6972706945561812306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201003157251696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 10
+  maxHp: 130
+  attack: 16
+  attackInterval: 1.4
+  defense: 2
+  moveSpeed: 0
+  agility: 0
+  coin: 5
+  dropRate: 10
+  weapon: {fileID: 0}
+  IsDead: 0
+  isAttacking: 0
+  CantMove: 0
+  playerTarget: {fileID: 0}
+  agent: {fileID: 0}
+  weaponCollider: {fileID: 7807575366225951120}
+  enemyUIManager: {fileID: 1567354348502721719}
+  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
+  missText: {fileID: 1615881850251838276}
+  attackEffect: {fileID: 0}
+  getHitEffect: {fileID: 8937386559117865193, guid: 07799b25da23d9c4d97a417f6f0d0f31, type: 3}
+  effectCollider: {fileID: 0}
 --- !u!54 &-8964833949620451620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -520,39 +554,6 @@ CapsuleCollider:
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0.1}
---- !u!114 &-6972706945561812306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1201003157251696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 10
-  maxHp: 20
-  attack: 6
-  attackInterval: 1.4
-  defense: 8
-  moveSpeed: 0
-  agility: 0
-  coin: 5
-  dropRate: 35
-  weapon: {fileID: 0}
-  IsDead: 0
-  isAttacking: 0
-  CantMove: 0
-  playerTarget: {fileID: 0}
-  agent: {fileID: 0}
-  weaponCollider: {fileID: 7807575366225951120}
-  enemyUIManager: {fileID: 1567354348502721719}
-  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  missText: {fileID: 1615881850251838276}
-  attackEffect: {fileID: 0}
-  effectCollider: {fileID: 0}
 --- !u!1 &1217098102103856
 GameObject:
   m_ObjectHideFlags: 0

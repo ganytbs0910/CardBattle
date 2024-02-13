@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
     public int throwAttack = 0;
     public int defense = 1;
     public int Agility = 5;//回比率
-    public float moveSpeed;
+    public float moveSpeed = 3.5f;
     public float addHealthRate = 1;
     public float addAttackRate = 1;
-    public float addDefenceRate = 1;
+    public float addDefenseRate = 1;
 
     int cloneHpRate = 2;
     int cloneAttackRate = 2;
-    int cloneDefenceRate = 2;
+    int cloneDefenseRateUp = 2;
 
     //通常変数
     int hp;
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public bool isDropRateUp = false;
     public bool battleStartHeal = false;
     public Weapon defaultWeapon = null;
+    bool canGetHitAnim = true;
     //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
     [SerializeField] Transform leftHandTransform = null;
@@ -59,9 +60,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 initialPosition;
 
     public Weapon currentWeapon = null;
+    [SerializeField] private GameObject weaponRightPrefab;
+    [SerializeField] private Weapon weaponRight;
+    [SerializeField] private List<GameObject> allArmorList = new List<GameObject>();
 
-    [SerializeField] Armor currentArmor = null;
     [SerializeField] Armor currentHead = null;
+    [SerializeField] Armor currentArmor = null;
     [SerializeField] Armor currentBackpack = null;
     BoxCollider weaponCollider;
     bool isHealingSword = false;
@@ -80,23 +84,18 @@ public class PlayerController : MonoBehaviour
 
     public ParticleSystem increaseEffect;
 
+    [Header("Playerの装備を初期に戻すための")]
+    [SerializeField] private RuntimeAnimatorController noWeaponAnim;
+
+    [SerializeField] private Weapon noWeaponScriptableObject;
+    [SerializeField] private Transform weaponPos;
+    [SerializeField] private GameObject noWeaponObject;
+
+
     void Start()
     {
-        if (!PlayerPrefs.HasKey("HP"))
-        {
-            maxHp = (int)(maxHp * addHealthRate);
-            hp = maxHp;
-            mp = maxMp;
-        }
-        else
-        {
-            hp = PlayerPrefs.GetInt("HP");
-            mp = PlayerPrefs.GetInt("MP");
-        }
-        UpdateStats();
-
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
-        moveSpeed = agent.speed;
+        moveSpeed = 3.5f;
         // Animatorコンポーネントを取得
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
@@ -104,152 +103,49 @@ public class PlayerController : MonoBehaviour
 
         playerUIManager.Init(this);//スライダーの初期化
         initialPosition = transform.position;
-
-        EquipWeapon(defaultWeapon);
+        if (defaultWeapon != null)
+        {
+            EquipWeapon(defaultWeapon);
+        }
+        //Clone用に初期状態を設定
+        isAttacking = false;
+        CantMove = false;
 
         CollectionFirstEffect();
-        SaveStatus();
-        LoadStatus();
-    }
 
-    void CollectionFirstEffect()
-    {
-        //コレクションの効果を反映
-        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
+        //1秒後に
+        DOVirtual.DelayedCall(0.5f, () =>
         {
-            //カードを所持していたら...以下の処理を行う
-            if (PlayerPrefs.HasKey($"Collection{i}"))
+            if (PlayerPrefs.HasKey("Weapon"))
             {
-                switch (i)
+                Weapon[] weapon = Resources.LoadAll<Weapon>("Weapon");
+                foreach (var item in weapon)
                 {
-                    //HP+5
-                    case 1: HealthUp(5); break;
-                    //Attack+1
-                    case 2: AttackUp(1); break;
-                    //Defence+1
-                    case 3: DefenceUp(1); break;
-                    //ボムダメージ+10
-                    case 4: BombDamageUp(10); break;
-                    //コインドロップ+1
-                    case 5: CoinDropUp(1); break;
-                    //回避率2%UP
-                    case 6: AvoidanceUp(2); break;
-                    //コレクションのドロップ率が1/100→1/(100-value)に
-                    case 7: CollectionDropRateUp(1); break;
-                    //HP1.1倍
-                    case 8: HealthRateUp(1.1f); break;
-                    //攻撃1.1倍
-                    case 9: AttackRateUp(1.1f); break;
-                    //防御1.1倍
-                    case 10: DefenceRate(1.1f); break;
-                    //移動速度+1
-                    case 11: MoveSpeedUp(1); break;
-                    //HP+25
-                    case 12: HealthUp(25); break;
-                    //Attack+3
-                    case 13: AttackUp(3); break;
-                    //Defence+3
-                    case 14: DefenceUp(3); break;
-                    //コインを100所持した状態でスタート
-                    case 15: StartCoinHave(100); break;
-                    //攻撃のインターバルが短縮
-                    case 16: AttackIntervalUp(0.1f); break;
-                    //分身のHPが1/2→1/3
-                    case 17: CloneHPUp(3); break;
-                    //分身の攻撃力が1/2→1/3
-                    case 18: CloneAttackUp(3); break;
-                    //分身の防御力が1/2→1/3
-                    case 19: CloneDefenceUp(3); break;
-                    //全てのステータス+5
-                    case 20: AllStatusUp(5); break;
-                    //階層が始まるとHP回復+3
-                    case 21: StartHierarchyHeal(3); break;
-                    //攻撃に回復効果が付与
-                    case 22: AttackHealAdd(); break;
-                    //カードの最低ドロー枚数が+1
-                    case 23: MinDrawCardNumberAdd(1); break;
-                    //カードの最大ドロー枚数が+1
-                    case 24: MaxDrawCardNumberAdd(1); break;
+                    if (item.name == PlayerPrefs.GetString("Weapon"))
+                    {
+                        EquipWeapon(item);
+                    }
                 }
             }
-        }
-    }
-
-    public void GameReset()
-    {
-        maxHp = 100;
-        PlayerPrefs.SetInt("MaxHP", maxHp);
-        hp = maxHp;
-        PlayerPrefs.SetInt("HP", hp);
-        playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
-        maxMp = 100;
-        PlayerPrefs.SetInt("MaxMP", maxMp);
-        mp = maxMp;
-        PlayerPrefs.SetInt("MP", mp);
-        playerUIManager.UpdateMP(maxMp, mp);//MPSliderの更新
-        attack = 5;
-        PlayerPrefs.SetInt("Attack", attack);
-        attackInterval = 1;
-        throwAttack = 0;
-        defense = 1;
-        PlayerPrefs.SetInt("Defense", defense);
-        Agility = 5;
-        PlayerPrefs.SetInt("Agility", Agility);
-        moveSpeed = 3.5f;
-        addHealthRate = 1;
-        addAttackRate = 1;
-        addDefenceRate = 1;
-        cloneHpRate = 2;
-        cloneAttackRate = 2;
-        cloneDefenceRate = 2;
-        lastAttackTime = 0f;
-        IsDead = false;
-        isAttacking = false;
-        CantMove = true;
-        isDropRateUp = false;
-        battleStartHeal = false;
-        defaultWeapon = null;
-        currentArmor = null;
-        currentHead = null;
-        currentBackpack = null;
-        isHealingSword = false;
-        enemyChase = true;
-        EquipWeapon(defaultWeapon);
-        GameManager.instance.battleState = false;
-        agent.enabled = true;
-        PlayerPrefs.Save();
-        //プレイヤーを移動させないように
-
-    }
-
-    public void SaveStatus()
-    {
-        PlayerPrefs.SetInt("HP", hp);
-        PlayerPrefs.SetInt("MP", mp);
-        PlayerPrefs.SetInt("Attack", attack);
-        PlayerPrefs.SetInt("Defense", defense);
-        PlayerPrefs.SetInt("Agility", Agility);
-        PlayerPrefs.SetInt("MaxHP", maxHp);
-        PlayerPrefs.SetInt("MaxMP", maxMp);
-        PlayerPrefs.Save();
-    }
-
-    void LoadStatus()
-    {
-        hp = PlayerPrefs.GetInt("HP");
-        playerUIManager.UpdateHP(maxHp, hp);
-        mp = PlayerPrefs.GetInt("MP");
-        playerUIManager.UpdateMP(maxMp, mp);
-        attack = PlayerPrefs.GetInt("Attack");
-        defense = PlayerPrefs.GetInt("Defense");
-        Agility = PlayerPrefs.GetInt("Agility");
-        maxHp = PlayerPrefs.GetInt("MaxHP");
-        maxMp = PlayerPrefs.GetInt("MaxMP");
+            if (PlayerPrefs.HasKey("Armor"))
+            {
+                EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Armor")}"));
+            }
+            if (PlayerPrefs.HasKey("Head"))
+            {
+                EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("Head")}"));
+            }
+            if (PlayerPrefs.HasKey("BackPack"))
+            {
+                EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
+            }
+            LoadStatus();
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+        });
     }
 
     void Update()
     {
-
         //死亡中とバトル状態じゃないときはリターン
         if (IsDead || GameManager.instance.battleState == false)
         {
@@ -274,47 +170,299 @@ public class PlayerController : MonoBehaviour
             //接近攻撃の場合はPlayerとEnemyが触れたときに攻撃する
             if (!enemyChase)
             {
-                //print("攻撃範囲内");
                 if (CanAttack()) //攻撃可能
                 {
-                    //print("攻撃");
-                    Attack(); // 攻撃
+                    Attack();
                     if (!isHealingSword) return;
                     //回復の剣の効果
                     if (Random.Range(0, 100) < 10)
                     {
-                        HPHeal(5);
+                        HPHeal(1);
                     }
                 }
                 else//攻撃までのインターバル中
                 {
-                    //print("防御");
                     Defend(); // 防御
                 }
-                agent.isStopped = true;
+                if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+                {
+                    agent.isStopped = true;
+                }
             }
             else
             {
                 CantMove = false;
-                //print("範囲外");
                 agent.SetDestination(enemyTarget.position); // 敵に向かって移動開始
                 Move(); // 移動アニメ
-                agent.isStopped = false; // 移動を再開
+                if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+                {
+                    agent.isStopped = false; // 移動を再開
+                }
             }
         }
+    }
+
+    void CollectionFirstEffect()
+    {
+        //コレクションの効果を反映
+        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
+        {
+            //カードを所持していたら...以下の処理を行う
+            if (PlayerPrefs.HasKey($"Collection{i}"))
+            {
+                switch (i)
+                {
+                    //HP+10
+                    case 1: HealthUp(10); break;
+                    //Attack+1
+                    case 2: AttackUp(1); break;
+                    //Defence+1
+                    case 3: DefenseUp(1); break;
+                    //ボムダメージ+10
+                    case 4: BombDamageUp(10); break;
+                    //コインドロップ+1
+                    case 5: CoinDropUp(1); break;
+                    //回避率2%UP
+                    case 6: AvoidanceUp(2); break;
+                    //コレクションのドロップ率が1/100→1/(100-value)に
+                    case 7: CollectionDropRateUp(1); break;
+                    //HP1.1倍
+                    case 8: HealthRateUp(0.1f); break;
+                    //攻撃1.1倍
+                    case 9: AttackRateUp(0.1f); break;
+                    //防御1.1倍
+                    case 10: DefenseRateUp(0.1f); break;
+                    //移動速度+1
+                    case 11: MoveSpeedUp(1); break;
+                    //HP+30
+                    case 12: HealthUp(40); break;
+                    //Attack+4
+                    case 13: AttackUp(4); break;
+                    //Defence+3
+                    case 14: DefenseUp(3); break;
+                    //コインを100所持した状態でスタート
+                    case 15: StartCoinHave(100); break;
+                    //攻撃のインターバルが短縮
+                    case 16: AttackIntervalUp(0.1f); break;
+                    //分身のHPが1/2→1/3
+                    case 17: CloneHPUp(3); break;
+                    //分身の攻撃力が1/2→1/3
+                    case 18: CloneAttackUp(3); break;
+                    //分身の防御力が1/2→1/3
+                    case 19: CloneDefenseUp(3); break;
+                    //全てのステータス+5
+                    case 20: AllStatusUp(5); break;
+                    //階層が始まるとHP回復+3
+                    case 21: StartHierarchyHeal(3); break;
+                    //攻撃に回復効果が付与
+                    case 22: AttackHealAdd(); break;
+                    //カードの最低ドロー枚数が+1
+                    case 23: MinDrawCardNumberAdd(1); break;
+                    //カードの最大ドロー枚数が+1
+                    case 24: MaxDrawCardNumberAdd(1); break;
+                }
+            }
+        }
+    }
+
+    public void GameReset()
+    {
+        if (this.gameObject != null)
+        {
+            IsDead = true;
+            //このゲームオブジェクトについている当たり判定が消える
+            GetComponent<Collider>().enabled = false;
+
+            //剣の当たり判定も消す
+            DisableColliderWeapon();
+
+            // GameManager のプレイヤーリストから自身を除外
+            GameManager.instance.RemovePlayerFromList(this);
+
+            //// ディレイののち、オブジェクトを2秒かけて縮小
+            transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+
+            maxHp = 100;
+            PlayerPrefs.SetInt("MaxHP", maxHp);
+            hp = maxHp;
+            PlayerPrefs.SetInt("HP", hp);
+            playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
+            maxMp = 100;
+            PlayerPrefs.SetInt("MaxMP", maxMp);
+            mp = maxMp;
+            PlayerPrefs.SetInt("MP", mp);
+            playerUIManager.UpdateMP(maxMp, mp);//MPSliderの更新
+            attack = 5;
+            PlayerPrefs.SetInt("Attack", attack);
+            attackInterval = 1;
+            throwAttack = 0;
+            defense = 1;
+            PlayerPrefs.SetInt("Defense", defense);
+            Agility = 5;
+            PlayerPrefs.SetInt("Agility", Agility);
+            moveSpeed = 3.5f;
+            addHealthRate = 1;
+            addAttackRate = 1;
+            addDefenseRate = 1;
+            cloneHpRate = 2;
+            cloneAttackRate = 2;
+            cloneDefenseRateUp = 2;
+            lastAttackTime = 0f;
+            IsDead = false;
+            isAttacking = false;
+            CantMove = true;
+            isDropRateUp = false;
+            battleStartHeal = false;
+            defaultWeapon = null;
+            currentWeapon = null;
+            currentHead = null;
+            currentArmor = null;
+            currentBackpack = null;
+            PlayerPrefs.SetString("Weapon", "NoWeapon");
+            PlayerPrefs.DeleteKey("Head");
+            PlayerPrefs.DeleteKey("Armor");
+            for (int i = 0; i < allArmorList.Count; i++)
+            {
+                if (i == 2)
+                {
+                    allArmorList[i].SetActive(true);
+                }
+                else
+                {
+                    allArmorList[i].SetActive(false);
+                }
+            }
+            PlayerPrefs.DeleteKey("BackPack");
+            //このゲームオブジェクトの子オブジェクト全て取得
+            Transform[] allChildren = this.GetComponentsInChildren<Transform>();
+            // 全ての子オブジェクトをループしてheadArmorという名前のオブジェクトを探す
+            foreach (Transform child in allChildren)
+            {
+                if (child.name == "rightWeapon")
+                {
+                    Destroy(child.gameObject);
+                }
+                if (child.name == "leftWeapon")
+                {
+                    Destroy(child.gameObject);
+                }
+                if (child.name == "headArmor")
+                {
+                    Destroy(child.gameObject);
+                }
+                if (child.name == "backPackArmor")
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+            //武器をなくしてNoWeaponを再現
+            animator.runtimeAnimatorController = noWeaponAnim;
+            currentWeapon = noWeaponScriptableObject;
+            Instantiate(noWeaponObject, weaponPos);
+
+            isHealingSword = false;
+            enemyChase = true;
+            EquipWeapon(defaultWeapon);
+            GameManager.instance.battleState = false;
+            agent.enabled = true;
+            PlayerPrefs.Save();
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+            //プレイヤーを移動させないように
+        }
+
+    }
+    public void SaveEquipment()
+    {
+        if (currentWeapon != null)
+        {
+            PlayerPrefs.SetString("Weapon", currentWeapon.name);
+        }
+        if (currentArmor != null)
+        {
+            PlayerPrefs.SetString("Armor", currentArmor.name);
+        }
+        if (currentHead != null)
+        {
+            PlayerPrefs.SetString("Head", currentHead.name);
+        }
+        if (currentBackpack != null)
+        {
+            PlayerPrefs.SetString("BackPack", currentBackpack.name);
+        }
+        PlayerPrefs.Save();
+    }
+    public void SaveStatus()
+    {
+        PlayerPrefs.SetInt("HP", hp);
+        PlayerPrefs.SetInt("MP", mp);
+        PlayerPrefs.SetInt("Attack", attack);
+        PlayerPrefs.SetInt("Defense", defense);
+        PlayerPrefs.SetInt("Agility", Agility);
+        PlayerPrefs.SetFloat("MoveSpeed", moveSpeed);
+
+        PlayerPrefs.SetInt("MaxHP", maxHp);
+        PlayerPrefs.SetInt("MaxMP", maxMp);
+        PlayerPrefs.Save();
+    }
+
+    void LoadStatus()
+    {
+        maxHp = PlayerPrefs.GetInt("MaxHP");
+        maxMp = PlayerPrefs.GetInt("MaxMP");
+        hp = PlayerPrefs.GetInt("HP");
+        playerUIManager.UpdateHP(maxHp, hp);
+        mp = PlayerPrefs.GetInt("MP");
+        //playerUIManager.UpdateMP(maxMp, mp);
+        attack = PlayerPrefs.GetInt("Attack");
+        defense = PlayerPrefs.GetInt("Defense");
+        Agility = PlayerPrefs.GetInt("Agility");
+        moveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
+        if (!PlayerPrefs.HasKey("MaxHP"))
+        {
+            maxHp = 100;
+        }
+        if (!PlayerPrefs.HasKey("MaxMP"))
+        {
+            maxMp = 100;
+        }
+        if (!PlayerPrefs.HasKey("HP"))
+        {
+            hp = maxHp;
+        }
+        if (!PlayerPrefs.HasKey("MP"))
+        {
+            mp = maxMp;
+        }
+        if (!PlayerPrefs.HasKey("Attack"))
+        {
+            attack = 5;
+        }
+        if (!PlayerPrefs.HasKey("Defense"))
+        {
+            defense = 1;
+        }
+        if (!PlayerPrefs.HasKey("Agility"))
+        {
+            Agility = 5;
+        }
+        playerUIManager.UpdateHP(maxHp, hp);//HPSliderの更新
     }
 
     //武器をプレイヤーの手に装備させる
     public void EquipWeapon(Weapon weapon)
     {
         if (weapon == null) return;
+        CantMove = false;
+        isAttacking = false;
+        enemyChase = true;
         //前回の装備のステータスを引く
         if (currentWeapon != null)
         {
+            //maxHp -= currentWeapon.GetAddMAXHP();
+            //maxMp -= currentWeapon.GetAddMAXMP();
             attack -= currentWeapon.GetATKPoint();
             defense -= currentWeapon.GetDEFPoint();
-            Debug.Log("前回の武器の攻撃力" + currentWeapon.GetATKPoint());
-            Debug.Log("前回の武器の防御力" + currentWeapon.GetDEFPoint());
+            //Agility -= currentWeapon.GetAGIPoint();
         }
 
         //playerCollidersの要素全てをenabledをfalseにする
@@ -326,26 +474,14 @@ public class PlayerController : MonoBehaviour
         currentWeapon = weapon;
         switch (currentWeapon.weaponType)
         {
-            case Weapon.WeaponType.NoWeapon:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.OneHandSword:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.TwoHandSword:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.Shield:
-                playerColliders[0].enabled = true;
-                break;
-            case Weapon.WeaponType.Spear:
-                playerColliders[0].enabled = true;
-                break;
             case Weapon.WeaponType.Arrow:
                 playerColliders[1].enabled = true;
                 break;
             case Weapon.WeaponType.Wand:
                 playerColliders[1].enabled = true;
+                break;
+            default:
+                playerColliders[0].enabled = true;
                 break;
         }
 
@@ -359,101 +495,95 @@ public class PlayerController : MonoBehaviour
         StopDistance = weapon.GetRange();
         agent.stoppingDistance = StopDistance;
 
-        print(weapon + "を装備しました");
+        //装備のバフを追加
+        if (currentWeapon == null)
+        {
+            return;
+        }
 
-        UpdateStats();
+        attack += currentWeapon.GetATKPoint();
+        defense += currentWeapon.GetDEFPoint();
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }
 
     public void EquipArmor(Armor armor)
     {
-        if (armor == null)
+        if (armor == null) return;
+        switch (armor.armorType)
         {
-            return;
+            case Armor.ArmorType.Head:
+                if (currentHead != null)
+                {
+                    maxHp -= currentHead.GetAddMAXHP();
+                    maxMp -= currentHead.GetAddMAXMP();
+                    attack -= currentHead.GetATKPoint();
+                    defense -= currentHead.GetDEFPoint();
+                    Agility -= currentHead.GetAGIPoint();
+                }
+                currentHead = armor;
+                break;
+            case Armor.ArmorType.Body:
+                if (currentArmor != null)
+                {
+                    maxHp -= currentArmor.GetAddMAXHP();
+                    maxMp -= currentArmor.GetAddMAXMP();
+                    attack -= currentArmor.GetATKPoint();
+                    defense -= currentArmor.GetDEFPoint();
+                    Agility -= currentArmor.GetAGIPoint();
+                }
+                currentArmor = armor;
+                break;
+            case Armor.ArmorType.BackPack:
+                if (currentBackpack != null)
+                {
+                    maxHp -= currentBackpack.GetAddMAXHP();
+                    maxMp -= currentBackpack.GetAddMAXMP();
+                    attack -= currentBackpack.GetATKPoint();
+                    defense -= currentBackpack.GetDEFPoint();
+                    Agility -= currentBackpack.GetAGIPoint();
+                }
+                currentBackpack = armor;
+                break;
         }
 
         //防具を生成
         armor.Spawn(headTransform, bodyTransform, backPackTransform);
 
-
+        //防具のバフ
         switch (armor.armorType)
         {
-            case Armor.ArmorType.Head: currentHead = armor; break;
-            case Armor.ArmorType.Body: currentArmor = armor; break;
-            case Armor.ArmorType.BackPack: currentBackpack = armor; break;
+            case Armor.ArmorType.Head:
+                if (currentHead != null)
+                {
+                    maxHp += currentHead.GetAddMAXHP();
+                    maxMp += currentHead.GetAddMAXMP();
+                    attack += currentHead.GetATKPoint();
+                    defense += currentHead.GetDEFPoint();
+                    Agility += currentHead.GetAGIPoint();
+                }
+                break;
+            case Armor.ArmorType.Body:
+                if (currentArmor != null)
+                {
+                    maxHp += currentArmor.GetAddMAXHP();
+                    maxMp += currentArmor.GetAddMAXMP();
+                    attack += currentArmor.GetATKPoint();
+                    defense += currentArmor.GetDEFPoint();
+                    Agility += currentArmor.GetAGIPoint();
+                }
+                break;
+            case Armor.ArmorType.BackPack:
+                if (currentBackpack != null)
+                {
+                    maxHp += currentBackpack.GetAddMAXHP();
+                    maxMp += currentBackpack.GetAddMAXMP();
+                    attack += currentBackpack.GetATKPoint();
+                    defense += currentBackpack.GetDEFPoint();
+                    Agility += currentBackpack.GetAGIPoint();
+                }
+                break;
         }
-
-        UpdateStats();
-
-        print("防具を装備した");
-    }
-
-    private void UpdateStats()
-    {
-        //武器と防具量を加算
-        AddWeaponState();
-        AddArmorState();
-    }
-
-
-    private void AddWeaponState()
-    {
-        //装備の攻撃を追加
-        if (currentWeapon == null)
-        {
-            attack += 5;//素手の攻撃力
-            return;
-        }
-
-        int weaponATK = currentWeapon.GetATKPoint();
-        Debug.Log("武器の攻撃力" + weaponATK);
-        int weaponDEF = currentWeapon.GetDEFPoint();
-        Debug.Log("武器の防御力" + weaponDEF);
-
-        attack += weaponATK;
-        defense += weaponDEF;
-    }
-
-    private void AddArmorState()
-    {
-        int armorATK = 0;
-        int armorDEF = 0;
-        int armorAGI = 0;
-        int armorMAXHP = 0;
-        int armorMAXMP = 0;
-
-        if (currentArmor != null)
-        {
-            armorATK += currentArmor.GetATKPoint();
-            armorDEF += currentArmor.GetDEFPoint();
-            armorAGI += currentArmor.GetAGIPoint();
-            armorMAXHP += currentArmor.GetAddMAXHP();
-            armorMAXMP += currentArmor.GetAddMAXMP();
-        }
-
-        if (currentHead != null)
-        {
-            armorATK += currentHead.GetATKPoint();
-            armorDEF += currentHead.GetDEFPoint();
-            armorAGI += currentHead.GetAGIPoint();
-            armorMAXHP += currentHead.GetAddMAXHP();
-            armorMAXMP += currentHead.GetAddMAXMP();
-        }
-
-        if (currentBackpack != null)
-        {
-            armorATK += currentBackpack.GetATKPoint();
-            armorDEF += currentBackpack.GetDEFPoint();
-            armorAGI += currentBackpack.GetAGIPoint();
-            armorMAXHP += currentBackpack.GetAddMAXHP();
-            armorMAXMP += currentBackpack.GetAddMAXMP();
-        }
-
-
-        attack += armorATK;
-        defense += armorDEF;
-        Agility += armorAGI;
-        maxHp += armorMAXHP;
-        maxMp += armorMAXMP;
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }
 
     /// <summary>
@@ -500,7 +630,6 @@ public class PlayerController : MonoBehaviour
         // 敵グループの平均位置に向く
         Vector3 averageEnemyPosition = GetAveragePositionOfEnemies();
         LookTowards(averageEnemyPosition);
-        SaveStatus();
     }
 
     // NavMeshAgentのターゲットを更新するメソッド
@@ -554,10 +683,10 @@ public class PlayerController : MonoBehaviour
     public void Shoot()
     {
         if (currentWeapon == null) return;
+        //もし呪文攻撃なら
         if (currentWeapon.HasProjectile())
         {
             currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, animator);
-            print("矢を撃ちました");
         }
     }
 
@@ -588,7 +717,10 @@ public class PlayerController : MonoBehaviour
     void Damage(int damage)
     {
         int sumDamage;
-        sumDamage = damage - (int)(defense * addDefenceRate);
+        //damegeが0.9~1.2倍になる（不要なら外す）
+        damage = (int)(damage * Random.Range(0.9f, 1.2f));
+        sumDamage = damage - (int)(defense * addDefenseRate);
+
         if (sumDamage <= 0)
         {
             sumDamage = 0;
@@ -612,35 +744,42 @@ public class PlayerController : MonoBehaviour
     //    return weaponDamage;
     //}
 
-
-    public void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        //もしenemyTargetのオブジェクトに触れたら
         if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
         {
             enemyChase = false;
+            if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+            {
+                agent.isStopped = true;
+            }
         }
+    }
 
+    public void OnTriggerEnter(Collider other)
+    {
+        if (enemyTarget != null && other.gameObject == enemyTarget.gameObject)
+        {
+            enemyChase = true;
+            agent.isStopped = false;
+            isAttacking = false;
+            CantMove = false;
+        }
         if (IsDead)
         {
             //HPが0なら無効
             return;
         }
-
         if (other.CompareTag("Weapon_Enemy"))
         {
             EnemyWeapon enemyWeapon = other.GetComponent<EnemyWeapon>();
             if (enemyWeapon != null)
             {
-                //ダメージを与えるものにぶつかったら
-                //print(other.name + "が" + gameObject.name + "に" + enemyWeapon.SumDamage() + "ダメージを与えた");
-
                 GetHit();//ノックバック
 
                 //回避率のチェック
                 if (Random.Range(0, 100) < Agility)
                 {
-                    Debug.Log("攻撃を回避");
                     ShowMissText();
                     return;//攻撃を回避
                 }
@@ -658,14 +797,6 @@ public class PlayerController : MonoBehaviour
 
         // フェードアウトのアニメーションを設定
         missText.DOFade(0, 2f).OnComplete(() => missText.gameObject.SetActive(false));
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject == enemyTarget.gameObject)
-        {
-            enemyChase = true;
-        }
     }
 
     //アニメイベントで使用します
@@ -699,7 +830,10 @@ public class PlayerController : MonoBehaviour
         else
         {
             weaponCollider = currentWeapon.GetCollider();
-            weaponCollider.enabled = true;
+            if (weaponCollider != null)
+            {
+                weaponCollider.enabled = true;
+            }
         }
 
         //if (currentWeapon == null) return;
@@ -724,14 +858,21 @@ public class PlayerController : MonoBehaviour
     //防御
     public void Defend()
     {
+
         animator.SetTrigger("Defend");
+
     }
 
     //ノックバック
     public void GetHit()
     {
-        animator.SetTrigger("GetHit");
-        animator.SetInteger("GetHitType", Random.Range(1, 4));
+        if (canGetHitAnim)
+        {
+            animator.SetTrigger("GetHit");
+            animator.SetInteger("GetHitType", Random.Range(1, 4));
+            canGetHitAnim = false;
+        }
+        DOVirtual.DelayedCall(2f, () => canGetHitAnim = true);
     }
 
     //死亡
@@ -747,12 +888,9 @@ public class PlayerController : MonoBehaviour
 
         // GameManager のプレイヤーリストから自身を除外
         GameManager.instance.RemovePlayerFromList(this);
-
-        //// ディレイののち、オブジェクトを2秒かけて縮小
-        transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
-
-        //ゲームの勝敗をチェックする
-        GameManager.instance.CheckBattleStatus();
+        //もし死んだのが本体の場合
+        if (gameObject.name != "Player") return;
+        UIManager.instance.GiveUpButton();
     }
 
     public void GiveUpAnime()
@@ -772,6 +910,7 @@ public class PlayerController : MonoBehaviour
 
     public void Victory()
     {
+        if (gameObject.name != "Player") return;
         if (!IsDead && GameManager.instance.battleState == true)
         {
             //print("勝利した");
@@ -836,17 +975,17 @@ public class PlayerController : MonoBehaviour
             case 9: break;
             case 10: break;
             //攻撃力UP+10%
-            case 11: AttackUp(1.1f); break;
+            case 11: AttackRateUp(0.1f); break;
             //攻撃力UP+20%
-            case 12: AttackUp(1.2f); break;
+            case 12: AttackRateUp(0.2f); break;
             //攻撃力UP+30%
-            case 13: AttackUp(1.3f); break;
+            case 13: AttackRateUp(0.3f); break;
             //防御力UP+10%
-            case 14: DefenceUp(1.1f); break;
+            case 14: DefenseRateUp(0.1f); break;
             //防御力UP+20%
-            case 15: DefenceUp(1.2f); break;
+            case 15: DefenseRateUp(0.2f); break;
             //防御力UP+30% 
-            case 16: DefenceUp(1.3f); break;
+            case 16: DefenseRateUp(0.3f); break;
             //敵がターゲット
             case 17: break;
             case 18: break;
@@ -860,29 +999,40 @@ public class PlayerController : MonoBehaviour
             case 24: break;//小型爆弾
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
+            //範囲内のプレイヤーのHPを10%回復
+            case 27: HPHeal(10); break;
             //範囲内のプレイヤーのHPを20%回復
-            case 27: HPHeal(20); break;
+            case 28: HPHeal(20); break;
             //範囲内のプレイヤーのHPを30%回復
-            case 28: HPHeal(30); break;
-            //範囲内のプレイヤーのHPを50%回復
-            case 29: HPHeal(50); break;
-            //範囲内のプレイヤーのHPを80%回復
-            case 30: HPHeal(80); break;
-            //範囲内のプレイヤーのMPを20%回復
-            case 31: MPHeal(20); break;
-            //範囲内のプレイヤーのMPを30%回復
-            case 32: MPHeal(30); break;
+            case 29: HPHeal(30); break;
+            //範囲内のプレイヤーのHPを40%回復
+            case 30: HPHeal(40); break;
             //範囲内のプレイヤーのMPを50%回復
-            case 33: MPHeal(50); break;
-            //範囲内のプレイヤーのMPを80%回復
-            case 34: MPHeal(80); break;
+            case 31: HPHeal(50); break;
+            //範囲内のプレイヤーのMPを60%回復
+            case 32: HPHeal(60); break;
+            //プレイヤーの移動速度を0.1上昇
+            case 33: MoveSpeedUp(0.1f); break;
+            //プレイヤーの移動速度を0.3上昇
+            case 34: MoveSpeedUp(0.3f); break;
             //カードを全て一新する
             case 35: ResetCards(); break;
             //カードを2枚引く
             case 36: TwoDrowCard(); break;
             //プレイヤーの位置を移動させる
             case 37: Warp(); break;
+            //攻撃2UP
+            case 91: AttackUp(2); break;
+            case 92: AttackUp(4); break;
+            case 93: AttackUp(6); break;
+            case 94: HealthUp(5); break;
+            case 95: HealthUp(10); break;
+            case 96: HealthUp(15); break;
+            case 97: DefenseUp(1); break;
+            case 98: DefenseUp(2); break;
+            case 99: DefenseUp(3); break;
         }
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }
 
     /// <summary>
@@ -890,6 +1040,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void IncreasePlayers(int number)
     {
+        if (this.gameObject.name != "Player") return;
         //このゲームオブジェクトの近くにnumberの数だけプレイヤーを生成する
         for (int i = 0; i < number; i++)
         {
@@ -908,17 +1059,17 @@ public class PlayerController : MonoBehaviour
             clonePlayer.name = "ShadowPlayer";
             clonePlayer.GetComponent<PlayerController>().hp /= cloneHpRate;
             clonePlayer.GetComponent<PlayerController>().attack /= cloneAttackRate;
-            clonePlayer.GetComponent<PlayerController>().defense /= cloneDefenceRate;
+            clonePlayer.GetComponent<PlayerController>().defense /= cloneDefenseRateUp;
             Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
 
             foreach (Renderer renderer in renderers)
             {
-                renderer.material.color = Color.gray;
+                //renderer.material.color = Color.gray;
+                renderer.material.color = new Color(0.05f, 0.05f, 0.05f, 1);
+
             }
         }
         GameManager.instance.CreateCharacterList();
-
-        print("プレイヤーの人数が" + number + "増えました");
 
         AudioManager.instance.PlaySE(AudioManager.SE.PlayerIncrease);
     }
@@ -928,18 +1079,15 @@ public class PlayerController : MonoBehaviour
         maxHp += value;
         hp += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
-
     }
-    void AttackUp(float value)
+    void AttackUp(int value)
     {
-        attack = Mathf.RoundToInt(attack * value);
-
+        attack += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
-    void DefenceUp(float value)
+    void DefenseUp(int value)
     {
-        defense = Mathf.RoundToInt(defense * value);
-
+        defense = value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
@@ -960,7 +1108,6 @@ public class PlayerController : MonoBehaviour
         }
         //Sliderを修正
         playerUIManager.UpdateHP(maxHp, hp);
-        print("プレイヤーのHPが" + value + "回復しました");
 
         AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
 
@@ -983,14 +1130,20 @@ public class PlayerController : MonoBehaviour
         //Sliderを修正
         playerUIManager.UpdateMP(maxMp, mp);
 
-        print("プレイヤーのMPが" + value + "回復しました");
-
         AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
     }
 
     void ResetCards()
     {
+        if (this.gameObject.name != "Player") return;
         DrawCardController.instance.ReDrawCardList();
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
+    }
+
+    void MoveSpeedUp(float value)
+    {
+        moveSpeed += value;
+        AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     /// <summary>
@@ -1026,38 +1179,37 @@ public class PlayerController : MonoBehaviour
     //体力の倍率上昇
     void HealthRateUp(float value)
     {
-        addHealthRate = value;
-
+        addHealthRate += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //攻撃の倍率上昇
     void AttackRateUp(float value)
     {
-        addAttackRate = value;
-
+        addAttackRate += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //防御の倍率上昇
-    void DefenceRate(float value)
+    void DefenseRateUp(float value)
     {
-        addDefenceRate = value;
-
+        addDefenseRate += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     void MoveSpeedUp(int value)
     {
         moveSpeed += value;
-
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
     //コインを100所持してスタート
     void StartCoinHave(int value)
     {
-        PlayerPrefs.SetInt("StartCoin", value);
+        if (PlayerPrefs.GetInt("StartCoin") <= 100)
+        {
+            PlayerPrefs.SetInt("StartCoin", value);
+        }
     }
 
     void AttackIntervalUp(float value)
@@ -1076,16 +1228,16 @@ public class PlayerController : MonoBehaviour
         cloneAttackRate = value;
     }
 
-    void CloneDefenceUp(int value)
+    void CloneDefenseUp(int value)
     {
-        cloneDefenceRate = value;
+        cloneDefenseRateUp = value;
     }
 
     void AllStatusUp(int value)
     {
         HealthUp(value);
         AttackUp(value);
-        DefenceUp(value);
+        DefenseUp(value);
 
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
@@ -1118,6 +1270,6 @@ public class PlayerController : MonoBehaviour
     }
     void Warp()
     {
-        transform.position = new Vector3(Random.Range(-5, 5), 0, Random.Range(-5, 5));
+        transform.position = new Vector3(Random.Range(-3, 3), 0, Random.Range(-3, 10));
     }
 }

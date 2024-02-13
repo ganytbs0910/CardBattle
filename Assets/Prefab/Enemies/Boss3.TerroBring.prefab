@@ -330,10 +330,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 480112}
+  - component: {fileID: -3889117291760148601}
   - component: {fileID: 9584802}
   - component: {fileID: -6784718059726904905}
   - component: {fileID: -2405028282425245204}
-  - component: {fileID: -3889117291760148601}
   - component: {fileID: 2711671670705241428}
   m_Layer: 0
   m_Name: Boss3.TerroBring
@@ -360,6 +360,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &-3889117291760148601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 23
+  maxHp: 600
+  attack: 50
+  attackInterval: 1
+  defense: 12
+  moveSpeed: 0
+  agility: 10
+  coin: 50
+  dropRate: 3
+  weapon: {fileID: 0}
+  IsDead: 0
+  isAttacking: 0
+  CantMove: 0
+  playerTarget: {fileID: 0}
+  agent: {fileID: 0}
+  weaponCollider: {fileID: 1074491307513507980}
+  enemyUIManager: {fileID: 114161775267045113}
+  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
+  missText: {fileID: 4573170359623430934}
+  attackEffect: {fileID: 0}
+  getHitEffect: {fileID: 8937386559117865193, guid: 07799b25da23d9c4d97a417f6f0d0f31, type: 3}
+  effectCollider: {fileID: 0}
 --- !u!95 &9584802
 Animator:
   serializedVersion: 4
@@ -418,39 +452,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-3889117291760148601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 109776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee073fd03321490a8f9d0a65ec21da0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  id: 23
-  maxHp: 150
-  attack: 25
-  attackInterval: 1
-  defense: 10
-  moveSpeed: 0
-  agility: 7
-  coin: 50
-  dropRate: 50
-  weapon: {fileID: 0}
-  IsDead: 0
-  isAttacking: 0
-  CantMove: 0
-  playerTarget: {fileID: 0}
-  agent: {fileID: 0}
-  weaponCollider: {fileID: 1074491307513507980}
-  enemyUIManager: {fileID: 114161775267045113}
-  coinEffectPrefab: {fileID: 4736524979501352156, guid: a87ede14a61bb564f992cfa4ef93a656, type: 3}
-  missText: {fileID: 4573170359623430934}
-  attackEffect: {fileID: 0}
-  effectCollider: {fileID: 0}
 --- !u!136 &2711671670705241428
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Card 90
   m_EditorClassIdentifier: 
   cardID: 90
-  name: DEF+20,MAXHP+40
+  name: "HP+50, \u653B\u6483+22, \u9632\u5FA1+8"
   information: 
-  tiar: 2
-  icon: {fileID: 21300000, guid: 26726598593dc6348a1f91f081246df1, type: 3}
+  tiar: 5
+  icon: {fileID: 21300000, guid: bc81bf1dc3286b146b7dc00cbe06e58c, type: 3}
   weapon: {fileID: 0}
-  armor: {fileID: 11400000, guid: c76258297766de64ba392cab503ff4b0, type: 2}
+  armor: {fileID: 11400000, guid: 2175dc8020297ce4cae33127f9f43103, type: 2}
   targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0

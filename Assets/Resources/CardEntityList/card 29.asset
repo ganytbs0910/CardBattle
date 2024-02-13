@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: card 29
   m_EditorClassIdentifier: 
   cardID: 29
-  name: "HP\u309250%\u56DE\u5FA9"
+  name: "HP\u309230%\u56DE\u5FA9"
   information: "\u73FE\u5728\u306E\u4F53\u529B\u304B\u308950%\u56DE\u5FA9\u3059\u308B"
   tiar: 3
   icon: {fileID: 21300000, guid: f60e44751055a41b9a0694f031fa55ab, type: 3}

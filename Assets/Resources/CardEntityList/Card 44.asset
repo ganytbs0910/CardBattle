@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
+  m_Name: Card 44
+  m_EditorClassIdentifier: 
+  cardID: 44
+  name: "\u653B\u6483+3, \u9632\u5FA1+4"
+  information: 
+  tiar: 2
+  icon: {fileID: 21300000, guid: 9b4f259d53de24e4db72fbc4c385e84f, type: 3}
+  weapon: {fileID: 11400000, guid: a5bfb37a03d9e0744932ca76e78a7af9, type: 2}
+  armor: {fileID: 0}
+  targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0

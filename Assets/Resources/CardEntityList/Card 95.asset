@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Card 95
   m_EditorClassIdentifier: 
   cardID: 95
-  name: AGI+10,MAXMP+20
+  name: "\u4F53\u529B\u304C10\u5897\u52A0"
   information: 
-  tiar: 2
-  icon: {fileID: 21300000, guid: 8f21701e0ed6f4e409f238f0ea6bf232, type: 3}
+  tiar: 3
+  icon: {fileID: 21300000, guid: 4a5f9b140dc7d4ad390bc07b0237696a, type: 3}
   weapon: {fileID: 0}
-  armor: {fileID: 11400000, guid: b85853073ae6a0947985490ebabac941, type: 2}
+  armor: {fileID: 0}
   targetType: 0
+  particle: {fileID: 5697101180579792180, guid: 5f95cf4020a7cb94893e1a3690b46b1e, type: 3}
+  particlePosition: 2

@@ -10,6 +10,9 @@ scopes = {
 	"last_search.8040E7BB" = "gamema"
 	"OpenInspectorPreview.8040E7BB" = "1"
 	"currentGroup.8040E7BB" = "_group_provider_Files"
+	"last_search.7BEC51F9" = "Particle"
+	"OpenInspectorPreview.7BEC51F9" = "0"
+	"currentGroup.7BEC51F9" = "_group_provider_Files"
 }
 providers = {
 	find = {
@@ -54,6 +57,8 @@ providers = {
 	}
 }
 recentSearches = [
+	"Particle"
+	"Particle System"
 	"g"
 	"p"
 ]

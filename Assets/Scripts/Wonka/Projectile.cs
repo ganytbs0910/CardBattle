@@ -13,11 +13,12 @@ public class Projectile : MonoBehaviour
 
     private void Start()
     {
-        //damage = 
+        //damage =
         if (MuzzleEffect != null)
         {
             Instantiate(MuzzleEffect, transform.position, transform.rotation);
         }
+        FindClosestEnemy(transform);
     }
     void Update()
     {
@@ -39,7 +40,6 @@ public class Projectile : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            print("着弾した");
             Destroy(gameObject);
 
             if (hitEffect != null)
@@ -53,6 +53,8 @@ public class Projectile : MonoBehaviour
     //着弾場所の取得
     public Vector3 GetAimLocation()
     {
+        if (enemyTarget == null) return Vector3.zero; // enemyTargetがnullの場合、デフォルトの位置を返す
+
         CapsuleCollider targetCapsule = enemyTarget.GetComponent<CapsuleCollider>();
 
         if (targetCapsule == null)

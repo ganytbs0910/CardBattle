@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: card 33
   m_EditorClassIdentifier: 
   cardID: 33
-  name: "MP\u309250%\u56DE\u5FA9"
-  information: "MP\u309220%\u56DE\u5FA9"
-  tiar: 3
-  icon: {fileID: 21300000, guid: 660f70af7a74a4d549a19578a3bdbc09, type: 3}
+  name: "\u79FB\u52D5\u901F\u5EA6\u30920.1\u4E0A\u6607"
+  information: 
+  tiar: 2
+  icon: {fileID: 21300000, guid: 7652c06b66a3b4d58a35b5c5aa8f8456, type: 3}
   weapon: {fileID: 0}
   armor: {fileID: 0}
   targetType: 0

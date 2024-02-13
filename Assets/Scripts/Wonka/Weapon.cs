@@ -42,7 +42,8 @@ public class Weapon : ScriptableObject
     {
         if (weaponPrefab != null)
         {
-            DestroyOldWeapon(rightHand, leftHand);//古い武器を削除する
+            DestroyAllWeaponsInHand(rightHand);
+            DestroyAllWeaponsInHand(leftHand);
 
             Transform handTransform = GetTransform(rightHand, leftHand, animator);
             //手の位置を取得する。
@@ -131,58 +132,13 @@ public class Weapon : ScriptableObject
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
-            return isRightHanded ? rightHand : leftHand;
+            //return isRightHanded ? rightHand : leftHand;
+            return rightHand;
         }
-        //// 右手に装備しようとしているが、右手が既に埋まっている場合は左手に装備
-        //if (isRightHanded && !IsRightHandEmpty(rightHand))
-        //{
-        //    if (subAnimatorOverride != null)
-        //    {
-        //        animator.runtimeAnimatorController = subAnimatorOverride;
-        //    }
-        //    return leftHand; //右手を取得
-        //}
-        //else 
-        //{
-        //    if (animatorOverride != null)
-        //    {
-        //        animator.runtimeAnimatorController = animatorOverride;
-        //    }
-        //    return isRightHanded ? rightHand : leftHand;
-        //}
-
-        //// 両手に装備する武器で、かつプロジェクタイルがある場合、常に左手を使用
-        //if (TwoHandedWeapon && projectile != null)
-        //{
-        //    if (animatorOverride != null)
-        //    {
-        //        animator.runtimeAnimatorController = animatorOverride;
-        //    }
-        //    return leftHand;
-        //}
-        //// 両手に装備する通常の武器の場合、常に右手を使用
-        //else if (TwoHandedWeapon)
-        //{
-        //    if (animatorOverride != null)
-        //    {
-        //        animator.runtimeAnimatorController = animatorOverride;
-        //    }
-        //    return rightHand;
-        //}
-
-        ////杖のパターン
-        //if (isRightHanded && projectile != null)
-        //{
-        //    if (animatorOverride != null)
-        //    {
-        //        animator.runtimeAnimatorController = animatorOverride;
-        //    }
-        //    return rightHand;
-        //}
     }
 
     // 古い武器を削除する
-    private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+    public void DestroyOldWeapon(Transform rightHand, Transform leftHand)
     {
         // 両手に装備する武器の場合
         if (TwoHandedWeapon)
@@ -279,11 +235,18 @@ public class Weapon : ScriptableObject
     public void LaunchProjectile(Transform rightHand, Transform leftHand, Animator animator)
     {
         Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand, animator).position, Quaternion.identity);
+        //8秒後にDestroy
+        Destroy(projectileInstance.gameObject, 8f);
         if (playerController != null)
         {
-            //PlayerControllerの攻撃値をダメージに代入
-            projectileInstance.damage = playerController.attack;
+            //呪文の攻撃はPlayerの攻撃の80%にする
+            projectileInstance.damage = (int)(playerController.attack * 0.8f);
         }
-
+    }
+    public void NoHand(Transform rightHand, Transform leftHand)
+    {
+        // 両手からすべての装備を削除
+        DestroyAllWeaponsInHand(rightHand);
+        DestroyAllWeaponsInHand(leftHand);
     }
 }

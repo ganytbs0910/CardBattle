@@ -16,10 +16,10 @@ MonoBehaviour:
   subAnimatorOverride: {fileID: 22100000, guid: d3f6c1db23875bb4a8f7970d231d94cd, type: 2}
   weaponPrefab: {fileID: 4870839823681686658, guid: b6c2bb07e276fbf4d9886c2cd556eaca, type: 3}
   weaponRange: 15
-  attackPoint: 4
-  defendPoint: -2
+  attackPoint: 5
+  defendPoint: -1
   isRightHanded: 0
-  TwoHandedWeapon: 1
+  twoHandedWeapon: 0
   isShield: 0
   projectile: {fileID: 9139232764144289132, guid: 6749d0f3b8379a54899acb7a121e4bcf, type: 3}
   weaponType: 5

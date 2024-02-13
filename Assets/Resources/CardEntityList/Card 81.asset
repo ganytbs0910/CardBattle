@@ -13,10 +13,12 @@ MonoBehaviour:
   m_Name: Card 81
   m_EditorClassIdentifier: 
   cardID: 81
-  name: MAXHP+20
+  name: "\u9632\u5FA1+4"
   information: 
   tiar: 1
-  icon: {fileID: 21300000, guid: dd54e10a7b74298439c7d10e7fc10c61, type: 3}
+  icon: {fileID: 21300000, guid: 82ef3e09b378d0c45a8f931471f7c665, type: 3}
   weapon: {fileID: 0}
-  armor: {fileID: 11400000, guid: 7bbd2b421e3ef304889a05f016f3a864, type: 2}
+  armor: {fileID: 11400000, guid: 9d8c3a1b781b1364fbad7461cfb3f54d, type: 2}
   targetType: 0
+  particle: {fileID: 0}
+  particlePosition: 0

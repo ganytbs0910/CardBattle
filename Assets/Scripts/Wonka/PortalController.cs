@@ -35,8 +35,8 @@ public class PortalController : MonoBehaviour
     private void Start()
     {
         //ポータルは一番最初とゲームオーバーになった時に選択可能にする
-        //UIManager
-        GoPortal();
+        //UIManager)
+        //GoPortal();
     }
 
     private void Update()
@@ -119,25 +119,29 @@ public class PortalController : MonoBehaviour
                 leftButton.SetActive(false);
                 rightButton.SetActive(true);
                 portalCamera[0].Priority = 1;
-                GameManager.instance.stageHierarchy = 1;
+                GameManager.instance.stageHierarchy = 0;
+                UIManager.instance.HeroMessageDetail("ポータル1");
                 break;
             case 2:
                 leftButton.SetActive(true);
                 rightButton.SetActive(true);
                 portalCamera[1].Priority = 1;
-                GameManager.instance.stageHierarchy = 11;
+                GameManager.instance.stageHierarchy = 10;
+                UIManager.instance.HeroMessageDetail("ポータル2");
                 break;
             case 3:
                 leftButton.SetActive(true);
                 rightButton.SetActive(true);
                 portalCamera[2].Priority = 1;
-                GameManager.instance.stageHierarchy = 21;
+                GameManager.instance.stageHierarchy = 20;
+                UIManager.instance.HeroMessageDetail("ポータル3");
                 break;
             case 4:
                 leftButton.SetActive(true);
                 rightButton.SetActive(false);
                 portalCamera[3].Priority = 1;
-                GameManager.instance.stageHierarchy = 31;
+                GameManager.instance.stageHierarchy = 30;
+                UIManager.instance.HeroMessageDetail("ポータル4");
                 break;
         }
 
@@ -204,7 +208,6 @@ public class PortalController : MonoBehaviour
         // ショップ関連の処理をフェードアウト後に実行
         sequence.AppendCallback(() =>
         {
-            UIManager.instance.HeroMessageDetail("ポータル");
             GameManager.instance.PortalCameraChange();
 
             PortalEnviloment.SetActive(true);
@@ -274,6 +277,7 @@ public class PortalController : MonoBehaviour
 
         //GameManager.instance.SpawnEnemies();
         GameManager.instance.SpawnPlayer();
+        GameManager.instance.PortalMovement(GameManager.instance.stageHierarchy);
     }
 
 

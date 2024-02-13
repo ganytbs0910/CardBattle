@@ -80,13 +80,11 @@ public class ScreenRay : MonoBehaviour
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
-                        print("武器を装備させた");
                         AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
                     }
                     if (armor != null) //防具カードを装備
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
-                        print("防具を装備させた");
                         AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
 
                     }
@@ -116,12 +114,6 @@ public class ScreenRay : MonoBehaviour
                     switch (cardID)
                     {
                         case 24:
-                            /*前のコード
-                            drawCardController.cardIDList.Remove(cardID);
-                            ThrowObject(bombPrefab, lastRaycastHit.point, 2500, new Vector3(1, 1, 1));
-                            Destroy(chooseCard);
-                            cardID = 0;
-                            */
                             //新しいコード(24,25,26に適応)
                             ThrowBomb(cardID, lastRaycastHit.point, 2500, new Vector3(1, 1, 1), 2f);
                             break;
@@ -150,31 +142,37 @@ public class ScreenRay : MonoBehaviour
 
     public void PlayParticleAtPosition(Collider collider)
     {
-        //生成位置を選択
+        // instantPositionにデフォルト値を設定
+        Vector3 instantPosition = Vector3.zero;
+
+        // 生成位置を選択
         switch (particlePosition)
         {
             case CardEntity.ParticlePosition.Top:
-                InstantPosition = collider.bounds.center + new Vector3(0, collider.bounds.extents.y, 0);
+                instantPosition = collider.bounds.center + new Vector3(0, collider.bounds.extents.y, 0);
                 break;
             case CardEntity.ParticlePosition.Center:
-                InstantPosition = collider.bounds.center;
+                instantPosition = collider.bounds.center;
                 break;
             case CardEntity.ParticlePosition.Bottom:
-                InstantPosition = collider.bounds.center - new Vector3(0, collider.bounds.extents.y, 0);
+                instantPosition = collider.bounds.center - new Vector3(0, collider.bounds.extents.y, 0);
+                break;
+            default:
+                Debug.LogError("Invalid particle position specified.");
                 break;
         }
 
         // パーティクルシステムのインスタンスを生成
-        ParticleSystem newParticle = Instantiate(particle, InstantPosition, Quaternion.identity);
+        ParticleSystem newParticle = Instantiate(particle, collider.transform);
+
+        // パーティクルシステムの位置を設定
+        newParticle.transform.localPosition = collider.transform.InverseTransformPoint(instantPosition);
 
         // パーティクルを再生
         newParticle.Play();
 
         // パーティクルの再生が終了したら自動的に破棄する
         Destroy(newParticle.gameObject, newParticle.main.duration);
-
-        print(particle.name + "を実行します");
-
     }
 
     void RayCastUI()
@@ -305,10 +303,6 @@ public class ScreenRay : MonoBehaviour
         // 弾丸に力を加える（方向ベクトルを正規化し、力を乗算）
         bomb.GetComponent<Rigidbody>().AddForce(direction.normalized * power);
 
-        Debug.Log($"ターゲットの場所は{targetPos}でカメラの位置は{Camera.main.transform.position}です");
-
         AudioManager.instance.PlaySE(AudioManager.SE.ThrowObject);
-
-        print("投射物を投げました");
     }
 }

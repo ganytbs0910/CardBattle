@@ -51,6 +51,7 @@ public class EnemyController : MonoBehaviour
     public TextMeshProUGUI missText;
 
     public ParticleSystem attackEffect = null;
+    public ParticleSystem getHitEffect = null;
     public GameObject effectCollider = null;
 
     void Start()
@@ -228,7 +229,7 @@ public class EnemyController : MonoBehaviour
             if (projectile != null)
             {
                 //Damage(playerWeapon.SumDamage()); //ダメージを与える
-
+                Debug.Log("プレイヤーの弾が当たりました");
                 Damage(projectile.damage);
             }
         }
@@ -305,6 +306,8 @@ public class EnemyController : MonoBehaviour
     void Damage(int damage)
     {
         int sumDamage;
+        //damegeが0.9~1.2倍になる（不要なら外す）
+        damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - defense;
         if (sumDamage <= 0)
         {
@@ -357,6 +360,7 @@ public class EnemyController : MonoBehaviour
     //ノックバック
     public void GetHit()
     {
+        PlayGetHitEffect();
         animator.SetTrigger("GetHit");
     }
 
@@ -393,13 +397,14 @@ public class EnemyController : MonoBehaviour
         GameManager.instance.CheckBattleStatus();
 
         //コレクションがドロップするかどうかの判定
-        int dropNumber = Random.Range(1, dropRate);//ごめんちょっと確率高くしちゃった
-        if (dropNumber != 1) return;
-
-        //コレクションをドロップする
-        PlayerPrefs.SetInt($"Collection{id}", 1);
-        ItemDrop();
-        UIManager.instance.CollectionCardUpdate();
+        int dropNumber = Random.Range(1, 101);
+        if (dropNumber <= dropRate)
+        {
+            //コレクションをドロップする
+            PlayerPrefs.SetInt($"Collection{id}", 1);
+            ItemDrop();
+            UIManager.instance.CollectionCardUpdate();
+        }
     }
 
     /// <summary>
@@ -412,7 +417,7 @@ public class EnemyController : MonoBehaviour
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
         //dropItemPrefabをCollectionEnetityのid番目のiconを取得kする
         Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
-        UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition);
+        UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition, dropItemPrefab.name);
 
         AudioManager.instance.PlaySE(AudioManager.SE.DropCoin);
     }
@@ -501,8 +506,6 @@ public class EnemyController : MonoBehaviour
         //hpをvalue%分減らす
         hp -= (int)(hp * value);
         enemyUIManager.UpdateHP(hp);//HPSliderの更新
-        print("敵に" + hp * value + "ダメージを与えました");
-
         AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
     }
 
@@ -672,6 +675,17 @@ public class EnemyController : MonoBehaviour
         {
             effectCollider.SetActive(true);
             attackEffect.Play();
+        }
+    }
+
+    public void PlayGetHitEffect()
+    {
+        if (getHitEffect != null)
+        {
+            ParticleSystem getHitEffectClone = Instantiate(getHitEffect, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+            //getHitEffectCloneのサイズを半分に
+            getHitEffectClone.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            getHitEffectClone.Play();
         }
     }
 
