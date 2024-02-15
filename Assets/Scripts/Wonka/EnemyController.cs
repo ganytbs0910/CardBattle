@@ -400,6 +400,8 @@ public class EnemyController : MonoBehaviour
         int dropNumber = Random.Range(1, 101);
         if (dropNumber <= dropRate)
         {
+            //もし既にコレクションを持っている場合はドロップしない
+            if (PlayerPrefs.HasKey($"Collection{id}")) return;
             //コレクションをドロップする
             PlayerPrefs.SetInt($"Collection{id}", 1);
             ItemDrop();
