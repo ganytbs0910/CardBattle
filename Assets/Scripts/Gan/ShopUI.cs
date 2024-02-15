@@ -19,59 +19,70 @@ public class ShopUI : MonoBehaviour
     public List<GameObject> cardObjectList = new List<GameObject>();
     public List<Button> payButtonList = new List<Button>();
 
-    void Start()
+    void Awake()
     {
         cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
-        SetCardToShop();
-    }
-
-    void OnEnable()
-    {
-        if (previousHirarchy == GameManager.instance.stageHierarchy) return;
         SetCardToShop();
         previousHirarchy = GameManager.instance.stageHierarchy;
     }
 
-    public void SetCardToShop()
+    void OnEnable()
+    {
+        if (previousHirarchy != GameManager.instance.stageHierarchy)
+        {
+            SetCardToShop();
+            previousHirarchy = GameManager.instance.stageHierarchy;
+        }
+    }
+
+    public void SetCardToShop(int cardNum = 0, int cardTiar = 0)
     {
         ClearShop();
-
-        for (int i = 0; i < 3; i++)
+        if (cardNum == 0)
         {
-            int tiar = GameManager.instance.CalculateTiar();
-            CardController card;
-            CardModel cardModel;
-            do
+            for (int i = 0; i < 3; i++)
             {
-                cardID = Random.Range(1, cardEntities.Length + 1);
-                card = Instantiate(cardPrefab, itemsParentPanel.transform);
-                //cardのToggleの機能を廃止
-                card.GetComponent<Toggle>().enabled = false;
-                card.name = $"Card_{cardID}";
-                card.Init(cardID);
-                cardModel = card.model;
-
-                if (cardModel.tiar != tiar)
+                int tiar = GameManager.instance.CalculateTiar();
+                PlayerPrefs.SetInt($"ShopCardTiar{i}", tiar);
+                CardController card;
+                CardModel cardModel;
+                do
                 {
-                    Destroy(card.gameObject);
+                    cardID = Random.Range(1, cardEntities.Length + 1);
+                    PlayerPrefs.SetInt($"ShopCardID{i}", cardID);
+                    card = Instantiate(cardPrefab, itemsParentPanel.transform);
+                    //cardのToggleの機能を廃止
+                    card.GetComponent<Toggle>().enabled = false;
+                    card.name = $"Card_{cardID}";
+                    card.Init(cardID);
+                    cardModel = card.model;
+
+                    if (cardModel.tiar != tiar)
+                    {
+                        Destroy(card.gameObject);
+                    }
                 }
+                while (cardModel.tiar != tiar);
+
+                GameObject payButtonClone = Instantiate(payButton.gameObject, payPanel.transform);
+                int price = tiar * 30;
+                payButtonClone.transform.GetChild(0).GetComponent<TMP_Text>().text = (price).ToString();
+
+                Button button = payButtonClone.GetComponent<Button>();
+
+                priceList.Add(price);
+                cardIDList.Add(cardID);
+                cardObjectList.Add(card.gameObject);
+                payButtonList.Add(button);
+
+                DrawCardController.instance.TiarSelectOutline(card, cardModel);
             }
-            while (cardModel.tiar != tiar);
-
-            GameObject payButtonClone = Instantiate(payButton.gameObject, payPanel.transform);
-            int price = tiar * 30;
-            payButtonClone.transform.GetChild(0).GetComponent<TMP_Text>().text = (price).ToString();
-
-            Button button = payButtonClone.GetComponent<Button>();
-
-            priceList.Add(price);
-            cardIDList.Add(cardID);
-            cardObjectList.Add(card.gameObject);
-            payButtonList.Add(button);
-
-            DrawCardController.instance.TiarSelectOutline(card, cardModel);
+            BuyButtonAddListener();
         }
-        BuyButtonAddListener();
+        else
+        {
+
+        }
     }
 
     void ClearShop()
