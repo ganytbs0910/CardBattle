@@ -95,7 +95,8 @@ public class Weapon : ScriptableObject
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
-            return leftHand;
+            //return leftHand;
+            return rightHand;
         }
         // 両手に装備する通常の武器の場合、常に右手を使用
         else if (TwoHandedWeapon)
@@ -122,7 +123,8 @@ public class Weapon : ScriptableObject
             {
                 animator.runtimeAnimatorController = subAnimatorOverride;
             }
-            return leftHand;
+            //return leftHand;
+            return rightHand;
         }
 
         // その他の場合

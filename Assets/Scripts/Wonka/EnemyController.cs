@@ -541,6 +541,7 @@ public class EnemyController : MonoBehaviour
                 {
                     hp -= 1;
                 }).AddTo(this); // オブジェクト破棄時に購読を自動解除するためにAddToを使用
+            poison = false;
         }
         if (stan)
         {
@@ -552,11 +553,13 @@ public class EnemyController : MonoBehaviour
             {
                 lastAttackTime = 0;
             }).AddTo(this); // オブジェクト破棄時に購読を自動解除
+            stan = false;
         }
         if (sleep)
         {
             //眠り状態の処理
             //攻撃を喰らうまでなにもしない
+            sleep = false;
 
         }
         if (charm)
@@ -564,7 +567,7 @@ public class EnemyController : MonoBehaviour
             //フリーズ状態の処理
             //移動速度が半分になる
             moveSpeed /= 2;
-
+            charm = false;
         }
     }
 

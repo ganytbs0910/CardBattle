@@ -710,6 +710,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
     /// <summary>
     /// ダメージを与える関数
     /// </summary>
@@ -720,6 +721,7 @@ public class PlayerController : MonoBehaviour
         //damegeが0.9~1.2倍になる（不要なら外す）
         damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
+        Debug.Log("プレイヤーの被ダメージ：" + sumDamage);
 
         if (sumDamage <= 0)
         {
@@ -1000,17 +1002,17 @@ public class PlayerController : MonoBehaviour
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
             //範囲内のプレイヤーのHPを10%回復
-            case 27: HPHeal(10); break;
+            case 27: HPHeal(25); break;
             //範囲内のプレイヤーのHPを20%回復
-            case 28: HPHeal(20); break;
+            case 28: HPHeal(35); break;
             //範囲内のプレイヤーのHPを30%回復
-            case 29: HPHeal(30); break;
+            case 29: HPHeal(45); break;
             //範囲内のプレイヤーのHPを40%回復
-            case 30: HPHeal(40); break;
+            case 30: HPHeal(60); break;
             //範囲内のプレイヤーのMPを50%回復
-            case 31: HPHeal(50); break;
+            case 31: HPHeal(70); break;
             //範囲内のプレイヤーのMPを60%回復
-            case 32: HPHeal(60); break;
+            case 32: HPHeal(80); break;
             //プレイヤーの移動速度を0.1上昇
             case 33: MoveSpeedUp(0.1f); break;
             //プレイヤーの移動速度を0.3上昇
@@ -1031,6 +1033,12 @@ public class PlayerController : MonoBehaviour
             case 97: DefenseUp(1); break;
             case 98: DefenseUp(2); break;
             case 99: DefenseUp(3); break;
+            case 100:
+                {
+                    TwoDrowCard();
+                    DrawCardController.instance.DrawCard();
+                }
+                break;
         }
         UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
     }

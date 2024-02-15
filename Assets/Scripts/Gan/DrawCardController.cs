@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
+
 
 public class DrawCardController : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class DrawCardController : MonoBehaviour
         instance = this;
         if (!PlayerPrefs.HasKey("MinDrawCard"))
         {
-            PlayerPrefs.SetInt("MinDrawCard", 1);
+            PlayerPrefs.SetInt("MinDrawCard", 2);
             PlayerPrefs.SetInt("MaxDrawCard", 4);
             PlayerPrefs.Save();
         }
@@ -37,7 +39,8 @@ public class DrawCardController : MonoBehaviour
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
         if (!PlayerPrefs.HasKey("CurrentStageCard"))
         {
-            for (int i = 0; i < Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
+            int count = Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard") + 1);
+            for (int i = 0; i < count; i++)
             {
                 DrawCard();
             }
@@ -103,53 +106,56 @@ public class DrawCardController : MonoBehaviour
         {
             UIManager.instance.battlePanel.SetActive(true);
             UIManager.instance.cardListPanel.gameObject.SetActive(true);
-            if (parentPanel.transform.childCount >= maximumCardNumber) return;
+            if (parentPanel.transform.childCount >= maximumCardNumber)
+            {
+                foreach (Transform child in parentPanel.transform)
+                {
+                    Debug.Log(child.name);
+                }
+                Debug.Log("カードが満タンだ");
+                return;
+            }
             int tiar = GameManager.instance.CalculateTiar();
-            // カードIDが指定されていない場合、ランダムにカードを選択
-            CardEntity[] cardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
+            // 全てのCardEntityオブジェクトをロード
+            CardEntity[] allCardEntities = Resources.LoadAll<CardEntity>("CardEntityList");
+            // tiar値に一致するCardEntityのみをフィルタリング
+            var filteredCardEntities = allCardEntities.Where(card => card.tiar == tiar).ToArray();
+
             CardController card;
             CardModel cardModel;
+
+            // カードIDが指定されていない場合、フィルタリングされたリストからランダムに選択
             if (cardID == null)
             {
-                do
+                if (filteredCardEntities.Length > 0)
                 {
-                    // ランダムにカードを選ぶ
-                    cardID = Random.Range(1, cardEntities.Length + 1);
+                    int randomIndex = Random.Range(0, filteredCardEntities.Length);
+                    cardID = filteredCardEntities[randomIndex].cardID; // 仮定: CardEntityにはユニークなIDがある
                     card = Instantiate(cardPrefab, parentPanel.transform);
                     card.name = $"Card_{cardID}";
                     card.Init(cardID.Value);
                     cardModel = card.model;
-
-                    // カードのtiarが条件を満たさない場合は破棄して再試行
-                    if (cardModel.tiar != tiar)
-                    {
-                        Destroy(card.gameObject);
-                    }
+                    cardIDList.Add(cardID.Value);
+                    TiarSelectOutline(card, cardModel);
                 }
-                while (cardModel.tiar != tiar);
-
-                // 条件を満たしたカードをリストに追加
-                cardIDList.Add(cardID.Value);
-
-                // ランクに応じてアウトライン変更
-                TiarSelectOutline(card, cardModel);
+                else
+                {
+                    Debug.Log("条件に合うカードがありません。");
+                    return;
+                }
             }
             else
             {
                 // カードIDが指定されている場合、そのカードを生成
                 card = Instantiate(cardPrefab, parentPanel.transform);
                 card.name = $"Card_{cardID}";
-                //ここのInitがエラーを吐く
                 card.Init(cardID.Value);
                 cardIDList.Add(cardID.Value);
                 cardModel = card.model;
-
-                // ランクに応じてアウトライン変更
                 TiarSelectOutline(card, cardModel);
             }
         }
     }
-
     //ランクに応じてアウトライン変更
     public void TiarSelectOutline(CardController card, CardModel cardModel)
     {

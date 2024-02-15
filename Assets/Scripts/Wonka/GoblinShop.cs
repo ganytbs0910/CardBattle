@@ -80,6 +80,7 @@ public class GoblinShop : MonoBehaviour
             }
         });
 
+
         // フェードイン
         sequence.Append(LoadPanel.DOFade(0, 1.0f)); // 1秒かけて明転
 

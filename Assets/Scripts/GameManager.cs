@@ -556,7 +556,9 @@ public class GameManager : MonoBehaviour
     {
         stageHierarchy++;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
-        for (int i = 0; i < UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
+        int count = UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard") + 1);
+        Debug.Log("ガチャの数" + count);
+        for (int i = 0; i < count; i++)
         {
             drawCardController.DrawCard();
         }
