@@ -8,14 +8,6 @@ using DG.Tweening;
 
 public class ScreenRay : MonoBehaviour
 {
-    /*
-    public enum TargetType
-    {
-        player, enemy, other
-    }
-    public TargetType targetType = TargetType.other;
-    */
-
     public TMP_Text debugCardEffectText;
     public DrawCardController drawCardController;
     [SerializeField] private GameObject targetMarker;

@@ -34,8 +34,6 @@ public class DrawCardController : MonoBehaviour
             DrawCard(1);
             return;
         }
-        //iPhoneかAndroidなら処理を実行
-#if UNITY_IOS || UNITY_ANDROID
         //もしCurrentStageCardがないならドローして、あるならそのカードを引く
         if (!PlayerPrefs.HasKey("CurrentStageCard"))
         {
@@ -52,14 +50,6 @@ public class DrawCardController : MonoBehaviour
                 DrawCard(PlayerPrefs.GetInt($"Card{i}"));
             }
         }
-#endif
-
-#if UNITY_EDITOR
-        for (int i = 0; i < maximumCardNumber; i++)
-        {
-            DrawCard();
-        }
-#endif
     }
 
     void Update()
@@ -77,10 +67,6 @@ public class DrawCardController : MonoBehaviour
         foreach (Transform child in parentPanel.transform)
         {
             Destroy(child.gameObject);
-        }
-        for (int i = 0; i < Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard")); i++)
-        {
-            DrawCard();
         }
     }
 
@@ -139,7 +125,6 @@ public class DrawCardController : MonoBehaviour
                     cardModel = card.model;
                     cardIDList.Add(cardID.Value);
                     TiarSelectOutline(card, cardModel);
-                    Debug.Log("引いたカードは" + cardID);
                 }
                 else
                 {

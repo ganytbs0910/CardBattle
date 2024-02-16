@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 8
   nameJP: "\u4F53\u529B\u306E\u77F3"
   nameEN: stone of health
-  informationJP: "HP\u304C1.1\u500D"
-  informationEN: HP 1.1x
+  informationJP: "HP\u304C1.2\u500D"
+  informationEN: HP 1.2x
   icon: {fileID: -1464399911, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

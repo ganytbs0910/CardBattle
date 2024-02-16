@@ -322,18 +322,6 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    //最初のタップ //使用しない方向で？
-    public void MoveUI()
-    {
-        //startCheckButton.SetActive(false);
-        //heroMessageText.gameObject.SetActive(false);
-        //camera.transform.DORotate(new Vector3(camera.transform.eulerAngles.x - 10, camera.transform.eulerAngles.y, camera.transform.eulerAngles.z), 1.0f);
-        //difficultyPanel.DOAnchorPosY(difficultyPanel.anchoredPosition.y + 500, 0.8f);
-        //cardListPanel.DOAnchorPosY(cardListPanel.anchoredPosition.y - 100, 1.0f);
-        //battleStartButton.gameObject.SetActive(true);
-        //shopButton.gameObject.SetActive(false);
-    }
-
     public void Loading()
     {
         StartCoroutine(LoadingCoroutine());

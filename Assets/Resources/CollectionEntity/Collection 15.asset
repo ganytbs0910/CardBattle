@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 15
   nameJP: "\u5E78\u904B\u306E\u5B9D\u77F3"
   nameEN: lucky gem
-  informationJP: "\u30B3\u30A4\u30F3\u3092100\u6240\u6301\u3057\u3066\u958B\u59CB"
-  informationEN: Start with 100 coins
+  informationJP: "\u30B3\u30A4\u30F3\u3092300\u6240\u6301\u3057\u3066\u958B\u59CB"
+  informationEN: Start with 300 coins
   icon: {fileID: -483482041, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

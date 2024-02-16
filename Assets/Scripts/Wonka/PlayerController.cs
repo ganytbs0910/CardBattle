@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         CantMove = false;
 
-        CollectionFirstEffect();
+        LoadStatus();
 
         //1秒後に
         DOVirtual.DelayedCall(0.5f, () =>
@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour
             {
                 EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
             }
-            LoadStatus();
             UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
         });
     }
@@ -204,66 +203,44 @@ public class PlayerController : MonoBehaviour
 
     void CollectionFirstEffect()
     {
-        //コレクションの効果を反映
+        // コレクションの効果を反映
         for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
         {
-            //カードを所持していたら...以下の処理を行う
+            // カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
             {
                 switch (i)
                 {
-                    //HP+10
-                    case 1: HealthUp(10); break;
-                    //Attack+1
-                    case 2: AttackUp(1); break;
-                    //Defence+1
-                    case 3: DefenseUp(1); break;
-                    //ボムダメージ+10
-                    case 4: BombDamageUp(10); break;
-                    //コインドロップ+1
-                    case 5: CoinDropUp(1); break;
-                    //回避率2%UP
-                    case 6: AvoidanceUp(2); break;
-                    //コレクションのドロップ率が1/100→1/(100-value)に
-                    case 7: CollectionDropRateUp(3); break;
-                    //HP1.1倍
-                    case 8: HealthRateUp(0.2f); break;
-                    //攻撃1.1倍
-                    case 9: AttackRateUp(0.2f); break;
-                    //防御1.1倍
-                    case 10: DefenseRateUp(0.2f); break;
-                    //移動速度+1
-                    case 11: MoveSpeedUp(1); break;
-                    //HP+40
-                    case 12: HealthUp(40); break;
-                    //Attack+4
-                    case 13: AttackUp(4); break;
-                    //Defence+3
-                    case 14: DefenseUp(3); break;
-                    //コインを100所持した状態でスタート
-                    case 15: StartCoinHave(300); break;
-                    //攻撃のインターバルが短縮
-                    case 16: AttackIntervalUp(0.1f); break;
-                    //分身のHPが1/2→1/3
-                    case 17: CloneHPUp(3); break;
-                    //分身の攻撃力が1/2→1/3
-                    case 18: CloneAttackUp(3); break;
-                    //分身の防御力が1/2→1/3
-                    case 19: CloneDefenseUp(3); break;
-                    //全てのステータス+5
-                    case 20: AllStatusUp(5); break;
-                    //階層が始まるとHP回復+3
-                    case 21: battleStartHeal = true; break;
-                    //攻撃に回復効果が付与
-                    case 22: AttackHealAdd(); break;
-                    //カードの最低ドロー枚数が+1
-                    case 23: MinDrawCardNumberAdd(1); break;
-                    //カードの最大ドロー枚数が+1
-                    case 24: MaxDrawCardNumberAdd(1); break;
+                    case 1: HealthUp(10); Debug.Log("HP+10"); break;
+                    case 2: AttackUp(1); Debug.Log("Attack+1"); break;
+                    case 3: DefenseUp(1); Debug.Log("Defence+1"); break;
+                    case 4: BombDamageUp(10); Debug.Log("ボムダメージ+10"); break;
+                    case 5: CoinDropUp(1); Debug.Log("コインドロップ+1"); break;
+                    case 6: AvoidanceUp(2); Debug.Log("回避率2%UP"); break;
+                    case 7: CollectionDropRateUp(3); Debug.Log("コレクションのドロップ率改善"); break;
+                    case 8: HealthRateUp(0.2f); Debug.Log("HP1.1倍"); break;
+                    case 9: AttackRateUp(0.2f); Debug.Log("攻撃1.1倍"); break;
+                    case 10: DefenseRateUp(0.2f); Debug.Log("防御1.1倍"); break;
+                    case 11: MoveSpeedUp(1); Debug.Log("移動速度+1"); break;
+                    case 12: HealthUp(40); Debug.Log("HP+40"); break;
+                    case 13: AttackUp(4); Debug.Log("Attack+4"); break;
+                    case 14: DefenseUp(3); Debug.Log("Defence+3"); break;
+                    case 15: StartCoinHave(300); Debug.Log("スタート時にコイン300所持"); break;
+                    case 16: AttackIntervalUp(0.1f); Debug.Log("攻撃のインターバル短縮"); break;
+                    case 17: CloneHPUp(3); Debug.Log("分身のHP改善"); break;
+                    case 18: CloneAttackUp(3); Debug.Log("分身の攻撃力改善"); break;
+                    case 19: CloneDefenseUp(3); Debug.Log("分身の防御力改善"); break;
+                    case 20: AllStatusUp(5); Debug.Log("全てのステータス+5"); break;
+                    case 21: battleStartHeal = true; Debug.Log("戦闘開始時にHP回復"); break;
+                    case 22: AttackHealAdd(); Debug.Log("攻撃に回復効果付与"); break;
+                    case 23: MinDrawCardNumberAdd(1); Debug.Log("カードの最低ドロー枚数+1"); break;
+                    case 24: MaxDrawCardNumberAdd(1); Debug.Log("カードの最大ドロー枚数+1"); break;
                 }
             }
         }
     }
+
+
 
     public void GameReset()
     {
@@ -366,10 +343,11 @@ public class PlayerController : MonoBehaviour
             EquipWeapon(defaultWeapon);
             GameManager.instance.battleState = false;
             agent.enabled = true;
-            PlayerPrefs.Save();
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
             //プレイヤーを移動させないように
             playerColliders[0].enabled = true;
+            PlayerPrefs.Save();
+            CollectionFirstEffect();
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
         }
 
     }

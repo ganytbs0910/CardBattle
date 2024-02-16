@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 9
   nameJP: "\u653B\u6483\u306E\u77F3"
   nameEN: stone of attack
-  informationJP: "\u653B\u6483\u529B\u304C1.1\u500D"
-  informationEN: AT 1.1x
+  informationJP: "\u653B\u6483\u529B\u304C1.2\u500D"
+  informationEN: AT 1.2x
   icon: {fileID: -1837014117, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

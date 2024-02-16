@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 10
   nameJP: "\u9632\u5FA1\u306E\u77F3"
   nameEN: pebble of defence
-  informationJP: "\u9632\u5FA1\u529B\u304C1.1\u500D"
-  informationEN: DF 1.1x
+  informationJP: "\u9632\u5FA1\u529B\u304C1.2\u500D"
+  informationEN: DF 1.2x
   icon: {fileID: -1531731440, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}
