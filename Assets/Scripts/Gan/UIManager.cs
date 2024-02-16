@@ -341,6 +341,7 @@ public class UIManager : MonoBehaviour
 
     IEnumerator LoadingCoroutine()
     {
+        AdmobInterstitial.instance.ShowAd();
         GameManager.instance.NextStage();
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         loadPanel.SetActive(true);
@@ -379,6 +380,9 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", 1);
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
         TutorialTextDetail("");
+        //1/2の確率で広告を表示させる
+        //if (Random.Range(0, 2) == 0) AdmobInterstitial.instance.ShowAd();
+
 
         yield return new WaitForSeconds(0.1f);
         GameManager.instance.SpawnEnemies();//敵をスポーンさせる
@@ -581,18 +585,24 @@ public class UIManager : MonoBehaviour
     }
 
     //ステータスの確認
-    public void StatusCheckUpdate(int maxHp, int attack, float attackRate, int defense, float defenseRate, int avoidance, float moveSpeed)
+    public void StatusCheckUpdate(int maxHp, int attack, float attackRate, int defense, float defenseRate, int avoidance, float moveSpeed, Weapon weapon, Armor head, Armor armor, Armor backpack)
     {
+        string weaponText = weapon != null ? $"攻撃力{weapon.attackPoint}, 防御力{weapon.defendPoint}" : "未装備";
+        string headText = head != null ? $"攻撃力{head.ATKPoint}, 防御力{head.DEFPoint}\n\n回避率{head.AGIPoint}, 追加最大HP{head.MAXHPAdd}" : "未装備";
+        string armorText = armor != null ? $"攻撃力{armor.ATKPoint}, 防御力{armor.DEFPoint}\n\n回避率{armor.AGIPoint}, 追加最大HP{armor.MAXHPAdd}" : "未装備";
+        string backpackText = backpack != null ? $"攻撃力{backpack.ATKPoint}, 防御力{backpack.DEFPoint}\n\n回避率{backpack.AGIPoint}, 追加最大HP{backpack.MAXHPAdd}" : "未装備";
+
         switch (PlayerPrefs.GetString("Language"))
         {
             case "Japanese":
-                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}";
+                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}\n\n剣 : {weaponText}\n\n頭 : {headText}\n\nアーマー : {armorText}\n\nリュックサック : {backpackText}";
                 break;
             case "English":
-                statusCheckText.text = $"Current floor : {PlayerPrefs.GetInt("StageHierarchy")}th floor\n\nMax HP : {maxHp}\n\nAttack : {attack}\n\nAttack rate : {attackRate} times\n\nDefense : {defense}\n\nDefense rate : {defenseRate} times\n\nAvoidance : {avoidance}%\n\nPlayer's move speed : {moveSpeed}";
+                statusCheckText.text = $"Current floor : {PlayerPrefs.GetInt("StageHierarchy")}th floor\n\nMax HP : {maxHp}\n\nAttack : {attack}\n\nAttack rate : {attackRate} times\n\nDefense : {defense}\n\nDefense rate : {defenseRate} times\n\nAvoidance : {avoidance}%\n\nPlayer's move speed : {moveSpeed}\n\nSword : {weaponText}\n\nHeadgear : {headText}\n\nArmor : {armorText}\n\nBackpack : {backpackText}";
                 break;
         }
     }
+
 
     //UIのOnOff
     public void ActiveToggle(GameObject ui)
@@ -1016,7 +1026,7 @@ public class UIManager : MonoBehaviour
             case Language.Japanese:
                 statusText.text = "ステータス";
                 startText.text = "スタート";
-                collectionTitleText.text = "所持中のアイテム";
+                collectionTitleText.text = "所持中のコレクション";
                 settingText.text = "設定";
                 shopText.text = "ショップ";
                 dungeonText.text = "ダンジョン";
@@ -1047,7 +1057,7 @@ public class UIManager : MonoBehaviour
             case Language.English:
                 statusText.text = "Status";
                 startText.text = "Start";
-                collectionTitleText.text = "Items in possession";
+                collectionTitleText.text = "Collections in possession";
                 settingText.text = "Settings";
                 shopText.text = "Shop";
                 dungeonText.text = "dungeon";

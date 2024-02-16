@@ -17,11 +17,11 @@ public class Armor : ScriptableObject
 
     [SerializeField] GameObject armorPrefab = null; //武器の登録
     [SerializeField] string armorName = null;
-    [SerializeField] int ATKPoint;
-    [SerializeField] int DEFPoint;
-    [SerializeField] int AGIPoint;
-    [SerializeField] int MAXHPAdd;
-    [SerializeField] int MAXMPAdd;
+    public int ATKPoint;
+    public int DEFPoint;
+    public int AGIPoint;
+    public int MAXHPAdd;
+    public int MAXMPAdd;
 
     const string headArmorName = "headArmor";
     const string bodyArmorName = "bodyArmor";

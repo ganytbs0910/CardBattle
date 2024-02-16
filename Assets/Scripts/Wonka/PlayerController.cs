@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour
                 EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
             }
             LoadStatus();
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
         });
     }
 
@@ -366,7 +366,7 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.battleState = false;
             agent.enabled = true;
             PlayerPrefs.Save();
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
             //プレイヤーを移動させないように
         }
 
@@ -503,7 +503,7 @@ public class PlayerController : MonoBehaviour
 
         attack += currentWeapon.GetATKPoint();
         defense += currentWeapon.GetDEFPoint();
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
     public void EquipArmor(Armor armor)
@@ -583,7 +583,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
     /// <summary>
@@ -1040,7 +1040,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed);
+        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
     /// <summary>

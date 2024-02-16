@@ -12,8 +12,8 @@ public class Weapon : ScriptableObject
 
     [SerializeField] GameObject weaponPrefab = null; //武器の登録
     [SerializeField] float weaponRange;
-    [SerializeField] int attackPoint;
-    [SerializeField] int defendPoint;
+    public int attackPoint;
+    public int defendPoint;
     BoxCollider weaponCollider;
     [SerializeField] bool isRightHanded = true;
     [SerializeField] bool TwoHandedWeapon;
