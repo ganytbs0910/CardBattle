@@ -572,6 +572,7 @@ public class GameManager : MonoBehaviour
             }
         }
         PlayerController player = playerObjects[0].GetComponent<PlayerController>();
+        player.StartHierarchyHeal(3);
         player.SaveStatus();
         player.SaveEquipment();
         UpdateStage();

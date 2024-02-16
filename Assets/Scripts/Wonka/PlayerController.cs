@@ -253,7 +253,7 @@ public class PlayerController : MonoBehaviour
                     //全てのステータス+5
                     case 20: AllStatusUp(5); break;
                     //階層が始まるとHP回復+3
-                    case 21: StartHierarchyHeal(3); break;
+                    case 21: battleStartHeal = true; break;
                     //攻撃に回復効果が付与
                     case 22: AttackHealAdd(); break;
                     //カードの最低ドロー枚数が+1
@@ -280,7 +280,7 @@ public class PlayerController : MonoBehaviour
             GameManager.instance.RemovePlayerFromList(this);
 
             //// ディレイののち、オブジェクトを2秒かけて縮小
-            transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
+            //transform.DOScale(Vector3.zero, 2.0f).SetDelay(2.0f).OnComplete(() => Destroy(gameObject));
 
             maxHp = 100;
             PlayerPrefs.SetInt("MaxHP", maxHp);
@@ -368,6 +368,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.Save();
             UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
             //プレイヤーを移動させないように
+            playerColliders[0].enabled = true;
         }
 
     }
@@ -822,7 +823,11 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            noWeaponCols.enabled = true;
+            if (noWeaponCols != null)
+            {
+                noWeaponCols.enabled = true;
+
+            }
             weaponCollider = currentWeapon.GetCollider();
             if (weaponCollider != null)
             {
@@ -1087,7 +1092,7 @@ public class PlayerController : MonoBehaviour
     }
     void DefenseUp(int value)
     {
-        defense = value;
+        defense += value;
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
 
@@ -1243,9 +1248,16 @@ public class PlayerController : MonoBehaviour
     }
 
     //階層が始まるとHPが3回復
-    void StartHierarchyHeal(int value)
+    public void StartHierarchyHeal(int value)
     {
-        battleStartHeal = true;
+        if (battleStartHeal)
+        {
+            hp += value;
+            if (hp > maxHp)
+            {
+                hp = maxHp;
+            }
+        }
     }
 
     //攻撃に回復効果が付与

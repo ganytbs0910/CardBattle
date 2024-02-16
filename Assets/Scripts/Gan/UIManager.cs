@@ -447,6 +447,7 @@ public class UIManager : MonoBehaviour
     {
         AdmobInterstitial.instance.ShowAd();
         GameManager.instance.battleState = false;
+        winPanel.SetActive(false);
         losePanel.SetActive(true);
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
 
