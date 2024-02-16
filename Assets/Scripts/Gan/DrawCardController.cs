@@ -66,7 +66,7 @@ public class DrawCardController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            ReDrawCardList(8);
+            DrawCard(35);
         }
     }
 
@@ -86,14 +86,21 @@ public class DrawCardController : MonoBehaviour
 
     public void ReDrawCardList(int num = 0)
     {
+        StartCoroutine(ReDrawCardListCoroutine(num));
+    }
+
+    IEnumerator ReDrawCardListCoroutine(int num = 0)
+    {
         if (num == 0) num = parentPanel.transform.childCount;
         PlayerPrefs.DeleteKey("CurrentStageCard");
         cardIDList.Clear();
-        //parentPanelの子オブジェクトを一括で全て削除
+        //parentPanelの子オブジェクトを全て削除
         foreach (Transform child in parentPanel.transform)
         {
             Destroy(child.gameObject);
         }
+        yield return null;
+        //yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < num; i++)
         {
             DrawCard();
@@ -132,11 +139,11 @@ public class DrawCardController : MonoBehaviour
                     cardModel = card.model;
                     cardIDList.Add(cardID.Value);
                     TiarSelectOutline(card, cardModel);
+                    Debug.Log("引いたカードは" + cardID);
                 }
                 else
                 {
-                    Debug.Log("条件に合うカードがありません。");
-                    return;
+                    Debug.LogWarning("Tiar値に一致するカードがありません");
                 }
             }
             else

@@ -227,11 +227,11 @@ public class PlayerController : MonoBehaviour
                     //コレクションのドロップ率が1/100→1/(100-value)に
                     case 7: CollectionDropRateUp(3); break;
                     //HP1.1倍
-                    case 8: HealthRateUp(0.1f); break;
+                    case 8: HealthRateUp(0.2f); break;
                     //攻撃1.1倍
-                    case 9: AttackRateUp(0.1f); break;
+                    case 9: AttackRateUp(0.2f); break;
                     //防御1.1倍
-                    case 10: DefenseRateUp(0.1f); break;
+                    case 10: DefenseRateUp(0.2f); break;
                     //移動速度+1
                     case 11: MoveSpeedUp(1); break;
                     //HP+40
@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
                     //Defence+3
                     case 14: DefenseUp(3); break;
                     //コインを100所持した状態でスタート
-                    case 15: StartCoinHave(100); break;
+                    case 15: StartCoinHave(300); break;
                     //攻撃のインターバルが短縮
                     case 16: AttackIntervalUp(0.1f); break;
                     //分身のHPが1/2→1/3
@@ -269,6 +269,7 @@ public class PlayerController : MonoBehaviour
     {
         if (this.gameObject != null)
         {
+            animator.SetTrigger("Die");
             IsDead = true;
             //このゲームオブジェクトについている当たり判定が消える
             GetComponent<Collider>().enabled = false;
@@ -1140,7 +1141,6 @@ public class PlayerController : MonoBehaviour
 
     void ResetCards()
     {
-        if (this.gameObject.name != "Player") return;
         DrawCardController.instance.ReDrawCardList();
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }

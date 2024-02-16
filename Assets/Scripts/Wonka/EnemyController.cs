@@ -419,6 +419,15 @@ public class EnemyController : MonoBehaviour
         Vector3 screenPosition = Camera.main.WorldToScreenPoint(worldPosition);
         //dropItemPrefabをCollectionEnetityのid番目のiconを取得kする
         Sprite dropItemPrefab = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").icon;
+        if (UIManager.instance.language == UIManager.Language.Japanese)
+        {
+            dropItemPrefab.name = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").nameJP;
+        }
+        else
+        {
+            dropItemPrefab.name = Resources.Load<CollectionEntity>($"CollectionEntity/Collection {id}").nameEN;
+
+        }
         UIManager.instance.ItemDropEffect(dropItemPrefab, screenPosition, dropItemPrefab.name);
 
         AudioManager.instance.PlaySE(AudioManager.SE.DropCoin);

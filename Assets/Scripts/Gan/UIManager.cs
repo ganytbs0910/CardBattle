@@ -580,7 +580,6 @@ public class UIManager : MonoBehaviour
             dropImageItem.rectTransform.DOMove(settingButton.position, 2f).OnComplete(() => Destroy(dropImageItem.gameObject));
             dropImageItem.rectTransform.DOScale(0.5f, 2f);
         });
-
         HeroMessageDetail("コレクションゲット", collectionName);
     }
 
