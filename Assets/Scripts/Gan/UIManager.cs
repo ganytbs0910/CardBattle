@@ -341,7 +341,6 @@ public class UIManager : MonoBehaviour
 
     IEnumerator LoadingCoroutine()
     {
-        AdmobInterstitial.instance.ShowAd();
         GameManager.instance.NextStage();
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         loadPanel.SetActive(true);
@@ -446,6 +445,7 @@ public class UIManager : MonoBehaviour
     }
     public IEnumerator GiveUpCoroutine()
     {
+        AdmobInterstitial.instance.ShowAd();
         GameManager.instance.battleState = false;
         losePanel.SetActive(true);
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
@@ -479,7 +479,6 @@ public class UIManager : MonoBehaviour
         //プレイヤーのステータスを元に戻す
         GameManager.instance.GameReset();
         playerController.GameReset();
-        Debug.Log("GiveUpのスポーン");
         yield return new WaitForSeconds(1f);
         //GameManager.instance.enemiesの一つ目の要素以外をリストから外す
         PlayerPrefs.SetInt("EnemyCount", 1);

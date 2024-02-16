@@ -108,11 +108,6 @@ public class DrawCardController : MonoBehaviour
             UIManager.instance.cardListPanel.gameObject.SetActive(true);
             if (parentPanel.transform.childCount >= maximumCardNumber)
             {
-                foreach (Transform child in parentPanel.transform)
-                {
-                    Debug.Log(child.name);
-                }
-                Debug.Log("カードが満タンだ");
                 return;
             }
             int tiar = GameManager.instance.CalculateTiar();

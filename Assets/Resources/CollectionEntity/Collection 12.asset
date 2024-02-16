@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 12
   nameJP: "\u4F53\u529B\u306E\u5CA9"
   nameEN: rock of health
-  informationJP: HP+25
-  informationEN: HP+25
+  informationJP: HP+40
+  informationEN: HP+40
   icon: {fileID: -1837014117, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

@@ -59,7 +59,7 @@ MonoBehaviour:
   moveSpeed: 0
   agility: 10
   coin: 40
-  dropRate: 12
+  dropRate: 15
   weapon: {fileID: 0}
   IsDead: 0
   isAttacking: 0
@@ -2584,8 +2584,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 200, y: 200, z: 200}
-  m_Center: {x: -50, y: -20, z: 30}
+  m_Size: {x: 700, y: 700, z: 700}
+  m_Center: {x: 0, y: -20, z: 30}
 --- !u!114 &3333187259860101369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2811,7 +2811,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: miss!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 80a4634220d418844885c612292d85ad, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2875,7 +2875,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &5424946284166485135

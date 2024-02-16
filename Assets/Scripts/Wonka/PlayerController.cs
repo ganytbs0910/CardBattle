@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     public float StopDistance;//NavMeshAgent
     private Animator animator;
 
-    //public Collider weaponCollider;//武器の当たり判定
+    public Collider weaponCollider;//武器の当たり判定
     public PlayerUIManager playerUIManager;
 
     Rigidbody rb;
@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Armor currentHead = null;
     [SerializeField] Armor currentArmor = null;
     [SerializeField] Armor currentBackpack = null;
-    BoxCollider weaponCollider;
+    //BoxCollider weaponCollider;
     bool isHealingSword = false;
 
     //public GameObject NoWeapon_r;
@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
                     //回避率2%UP
                     case 6: AvoidanceUp(2); break;
                     //コレクションのドロップ率が1/100→1/(100-value)に
-                    case 7: CollectionDropRateUp(1); break;
+                    case 7: CollectionDropRateUp(3); break;
                     //HP1.1倍
                     case 8: HealthRateUp(0.1f); break;
                     //攻撃1.1倍
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
                     case 10: DefenseRateUp(0.1f); break;
                     //移動速度+1
                     case 11: MoveSpeedUp(1); break;
-                    //HP+30
+                    //HP+40
                     case 12: HealthUp(40); break;
                     //Attack+4
                     case 13: AttackUp(4); break;
@@ -710,10 +710,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-    /// <summary>
-    /// ダメージを与える関数
-    /// </summary>
     /// <param name="damage">各武器のインスペクター参照</param>
     void Damage(int damage)
     {
@@ -721,8 +717,7 @@ public class PlayerController : MonoBehaviour
         //damegeが0.9~1.2倍になる（不要なら外す）
         damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
-        Debug.Log("プレイヤーの被ダメージ：" + sumDamage);
-
+        Debug.Log("元々のダメージ" + damage + "最終のプレイヤーへのダメージ：" + sumDamage);
         if (sumDamage <= 0)
         {
             sumDamage = 0;
@@ -825,12 +820,9 @@ public class PlayerController : MonoBehaviour
     //アニメイベントで使用します
     public void EnableColliderWeapon()
     {
-        if (currentWeapon == null)
+        if (currentWeapon != null)
         {
             noWeaponCols.enabled = true;
-        }
-        else
-        {
             weaponCollider = currentWeapon.GetCollider();
             if (weaponCollider != null)
             {
@@ -898,7 +890,7 @@ public class PlayerController : MonoBehaviour
     public void GiveUpAnime()
     {
         AllResetAnime();
-        animator.SetTrigger("Die");
+        //animator.SetTrigger("Die");
     }
 
     public void AllResetAnime()

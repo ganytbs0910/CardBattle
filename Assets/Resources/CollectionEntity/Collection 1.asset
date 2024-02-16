@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 1
   nameJP: "\u4F53\u529B\u306E\u5C0F\u77F3"
   nameEN: pebble of health
-  informationJP: HP+5
-  informationEN: HP+5
+  informationJP: HP+10
+  informationEN: HP+10
   icon: {fileID: 2071461693, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}

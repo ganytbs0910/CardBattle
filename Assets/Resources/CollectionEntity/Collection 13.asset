@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 13
   nameJP: "\u653B\u6483\u306E\u5CA9"
   nameEN: rock of attack
-  informationJP: "\u653B\u6483+3"
-  informationEN: AT+3
+  informationJP: "\u653B\u6483+4"
+  informationEN: AT+4
   icon: {fileID: -1034066562, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}
