@@ -336,7 +336,11 @@ public class PlayerController : MonoBehaviour
             //武器をなくしてNoWeaponを再現
             animator.runtimeAnimatorController = noWeaponAnim;
             currentWeapon = noWeaponScriptableObject;
-            Instantiate(noWeaponObject, weaponPos);
+            if (noWeaponCols == null)
+            {
+                GameObject newNoWeapon = Instantiate(noWeaponObject, weaponPos);
+                noWeaponCols = newNoWeapon.GetComponent<BoxCollider>();
+            }
 
             isHealingSword = false;
             enemyChase = true;
@@ -697,7 +701,7 @@ public class PlayerController : MonoBehaviour
         //damegeが0.9~1.2倍になる（不要なら外す）
         damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
-        Debug.Log("元々のダメージ" + damage + "最終のプレイヤーへのダメージ：" + sumDamage);
+        //Debug.Log("元々のダメージ" + damage + "最終のプレイヤーへのダメージ：" + sumDamage);
         if (sumDamage <= 0)
         {
             sumDamage = 0;
@@ -777,8 +781,39 @@ public class PlayerController : MonoBehaviour
     }
 
     //アニメイベントで使用します
+    public void EnableColliderWeapon()
+    {
+        if (currentWeapon != null)
+        {
+            if (noWeaponCols != null)
+            {
+                Debug.Log("武器がないときの当たり判定を有効にします");
+                noWeaponCols.enabled = true;
+            }
+            weaponCollider = currentWeapon.GetCollider();
+            if (weaponCollider != null)
+            {
+                weaponCollider.enabled = true;
+            }
+        }
+    }
+    //アニメイベントで使用します
     public void DisableColliderWeapon()
     {
+        if (currentWeapon != null)
+        {
+            if (noWeaponCols != null)
+            {
+                Debug.Log("武器がないときの当たり判定を無効にします");
+                noWeaponCols.enabled = false;
+            }
+            weaponCollider = currentWeapon.GetCollider();
+            if (weaponCollider != null)
+            {
+                weaponCollider.enabled = false;
+            }
+        }
+        /*
         if (currentWeapon == null)
         {
             noWeaponCols.enabled = false;
@@ -791,33 +826,10 @@ public class PlayerController : MonoBehaviour
                 weaponCollider.enabled = false;
             }
         }
-
-        //if (currentWeapon == null) return;
-        //weaponCollider = currentWeapon.GetCollider();
-        //weaponCollider.enabled = false;
+        */
     }
 
-    //アニメイベントで使用します
-    public void EnableColliderWeapon()
-    {
-        if (currentWeapon != null)
-        {
-            if (noWeaponCols != null)
-            {
-                noWeaponCols.enabled = true;
 
-            }
-            weaponCollider = currentWeapon.GetCollider();
-            if (weaponCollider != null)
-            {
-                weaponCollider.enabled = true;
-            }
-        }
-
-        //if (currentWeapon == null) return;
-        //weaponCollider = currentWeapon.GetCollider();
-        //weaponCollider.enabled = true;
-    }
 
     //移動
     public void Move()

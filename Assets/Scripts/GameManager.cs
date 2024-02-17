@@ -521,7 +521,10 @@ public class GameManager : MonoBehaviour
             // すべてのプレイヤーが勝利アニメーションを再生
             foreach (var player in players)
             {
-                player.Victory();
+                if (player != null) // nullチェックを追加
+                {
+                    player.Victory();
+                }
             }
             if (!PlayerPrefs.HasKey("Tutorial"))
             {
