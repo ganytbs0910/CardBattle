@@ -246,7 +246,6 @@ public class PlayerController : MonoBehaviour
     {
         if (this.gameObject != null)
         {
-            animator.SetTrigger("Die");
             IsDead = true;
             //このゲームオブジェクトについている当たり判定が消える
             GetComponent<Collider>().enabled = false;
@@ -352,6 +351,7 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.Save();
             CollectionFirstEffect();
             UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
+            GiveUpAnime();
         }
 
     }
@@ -886,7 +886,7 @@ public class PlayerController : MonoBehaviour
     public void GiveUpAnime()
     {
         AllResetAnime();
-        //animator.SetTrigger("Die");
+        animator.SetTrigger("Die");
     }
 
     public void AllResetAnime()
