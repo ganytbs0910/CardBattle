@@ -572,7 +572,7 @@ public class UIManager : MonoBehaviour
     }
 
     //ステータスの確認
-    public void StatusCheckUpdate(int maxHp, int attack, float attackRate, int defense, float defenseRate, int avoidance, float moveSpeed, Weapon weapon, Armor head, Armor armor, Armor backpack)
+    public void StatusCheckUpdate(int maxHp, float hpRate, int attack, float attackRate, int defense, float defenseRate, int avoidance, float moveSpeed, Weapon weapon, Armor head, Armor armor, Armor backpack)
     {
         string weaponText = weapon != null ? $"攻撃力{weapon.attackPoint}, 防御力{weapon.defendPoint}" : "未装備";
         string headText = head != null ? $"攻撃力{head.ATKPoint}, 防御力{head.DEFPoint}\n\n回避率{head.AGIPoint}, 追加最大HP{head.MAXHPAdd}" : "未装備";
@@ -582,7 +582,7 @@ public class UIManager : MonoBehaviour
         switch (PlayerPrefs.GetString("Language"))
         {
             case "Japanese":
-                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}\n\n剣 : {weaponText}\n\n頭 : {headText}\n\nアーマー : {armorText}\n\nリュックサック : {backpackText}";
+                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\nHP倍率 : {hpRate}倍\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}\n\n剣 : {weaponText}\n\n頭 : {headText}\n\nアーマー : {armorText}\n\nリュックサック : {backpackText}";
                 break;
             case "English":
                 statusCheckText.text = $"Current floor : {PlayerPrefs.GetInt("StageHierarchy")}th floor\n\nMax HP : {maxHp}\n\nAttack : {attack}\n\nAttack rate : {attackRate} times\n\nDefense : {defense}\n\nDefense rate : {defenseRate} times\n\nAvoidance : {avoidance}%\n\nPlayer's move speed : {moveSpeed}\n\nSword : {weaponText}\n\nHeadgear : {headText}\n\nArmor : {armorText}\n\nBackpack : {backpackText}";

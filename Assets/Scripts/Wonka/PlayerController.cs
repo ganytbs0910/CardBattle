@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour
             {
                 EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
             }
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
+            UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
         });
     }
 
@@ -279,8 +279,11 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetInt("Agility", Agility);
             moveSpeed = 3.5f;
             addHealthRate = 1;
+            PlayerPrefs.SetFloat("AddHealthRate", addHealthRate);
             addAttackRate = 1;
+            PlayerPrefs.SetFloat("AddAttackRate", addAttackRate);
             addDefenseRate = 1;
+            PlayerPrefs.SetFloat("AddDefenseRate", addDefenseRate);
             cloneHpRate = 2;
             cloneAttackRate = 2;
             cloneDefenseRateUp = 2;
@@ -350,7 +353,7 @@ public class PlayerController : MonoBehaviour
             playerColliders[0].enabled = true;
             PlayerPrefs.Save();
             CollectionFirstEffect();
-            UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
+            UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
             GiveUpAnime();
         }
 
@@ -383,9 +386,11 @@ public class PlayerController : MonoBehaviour
         PlayerPrefs.SetInt("Defense", defense);
         PlayerPrefs.SetInt("Agility", Agility);
         PlayerPrefs.SetFloat("MoveSpeed", moveSpeed);
-
         PlayerPrefs.SetInt("MaxHP", maxHp);
         PlayerPrefs.SetInt("MaxMP", maxMp);
+        PlayerPrefs.SetFloat("AddHealthRate", addHealthRate);
+        PlayerPrefs.SetFloat("AddAttackRate", addAttackRate);
+        PlayerPrefs.SetFloat("AddDefenseRate", addDefenseRate);
         PlayerPrefs.Save();
     }
 
@@ -487,7 +492,7 @@ public class PlayerController : MonoBehaviour
 
         attack += currentWeapon.GetATKPoint();
         defense += currentWeapon.GetDEFPoint();
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
+        UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
     public void EquipArmor(Armor armor)
@@ -567,7 +572,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
+        UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
     /// <summary>
@@ -1028,7 +1033,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
-        UIManager.instance.StatusCheckUpdate(maxHp, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
+        UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
     /// <summary>

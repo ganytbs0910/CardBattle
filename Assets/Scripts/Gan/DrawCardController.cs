@@ -56,7 +56,7 @@ public class DrawCardController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            DrawCard(38);
+            DrawCard(35);
         }
     }
 
