@@ -48,6 +48,7 @@ public class AdMobBanner : MonoBehaviour
     //アダプティブバナーを表示する関数
     private void RequestBanner()
     {
+        if (PlayerPrefs.HasKey("RemoveAds")) return;
         //AndroidとiOSで広告IDが違うのでプラットフォームで処理を分けます。
         // 参考
         //【Unity】AndroidとiOSで処理を分ける方法

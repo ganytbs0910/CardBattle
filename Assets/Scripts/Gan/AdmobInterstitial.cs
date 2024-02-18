@@ -30,6 +30,7 @@ public class AdmobInterstitial : MonoBehaviour
 
     public void Start()
     {
+        if (PlayerPrefs.HasKey("RemoveAds")) return;
         // Google Mobile Ads SDK を初期化します。
         MobileAds.Initialize((InitializationStatus initStatus) =>
         {
@@ -41,6 +42,7 @@ public class AdmobInterstitial : MonoBehaviour
 
     public void LoadInterstitialAd()
     {
+        if (PlayerPrefs.HasKey("RemoveAds")) return;
         // 既にロードされている広告があれば破棄します。
         if (interstitialAd != null)
         {
@@ -82,6 +84,7 @@ public class AdmobInterstitial : MonoBehaviour
     /// </summary>
     public void ShowAd()
     {
+        if (PlayerPrefs.HasKey("RemoveAds")) return;
         if (interstitialAd != null && interstitialAd.CanShowAd())
         {
             //Debug.Log("インタースティシャル広告を表示しています。");

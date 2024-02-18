@@ -11,7 +11,6 @@ using UnityEngine.Purchasing;
 
 public class PlayFabLogin : MonoBehaviour, IStoreListener
 {
-    //public TMP_Text testText;
     private bool _shouldCreateAccount;//アカウントを作成するか    
     private string _customID;//ログイン時に使うID
     private string _playFabId;//PlayFabのID
@@ -419,6 +418,18 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
             return PurchaseProcessingResult.Complete;//購入処理を即座に終了
         }
 
+        // 購入したプロダクトIDに応じて処理を分岐
+        if (String.Equals(e.purchasedProduct.definition.id, "hisyouhi_jpy400a", StringComparison.Ordinal))
+        {
+            RemoveAds();//広告を非表示にする
+
+            // 必要に応じて他の処理を追加
+            // 例えば、ゲーム内通貨を追加する、広告を非表示にする、特定のコンテンツをアンロックするなど
+
+            // 購入処理が完了したものとする
+            return PurchaseProcessingResult.Complete;
+        }
+
         //Debug.Log("Processing transaction: " + e.purchasedProduct.transactionID);
 
 
@@ -570,7 +581,6 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         switch (setedPurchasedProductId)
         {
             case "hisyouhi_jpy400a":
-                RemoveAds();
                 break;
 
             case "hisyouhi_jpy250a":
@@ -602,8 +612,8 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
     {
         Debug.Log("広告削除が呼ばれたよ！！");
         PlayerPrefs.SetInt("RemoveAds", 1);//広告を削除
-        AdMobBanner.instance.BannerDestroy();
         UIManager.instance.adsButton.SetActive(false);//広告ボタンを非表示にする
+        //AdMobBanner.instance.BannerDestroy();
     }
 }
 
