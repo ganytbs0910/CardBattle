@@ -889,15 +889,17 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            if (noWeaponCols != null)
-            {
-                Debug.Log("武器がないときの当たり判定を有効にします");
-                noWeaponCols.enabled = true;
-            }
             weaponCollider = currentWeapon.GetCollider();
             if (weaponCollider != null)
             {
                 weaponCollider.enabled = true;
+            }
+        }
+        else
+        {
+            if (noWeaponCols != null)
+            {
+                noWeaponCols.enabled = true;
             }
         }
     }
@@ -906,15 +908,17 @@ public class PlayerController : MonoBehaviour
     {
         if (currentWeapon != null)
         {
-            if (noWeaponCols != null)
-            {
-                Debug.Log("武器がないときの当たり判定を無効にします");
-                noWeaponCols.enabled = false;
-            }
             weaponCollider = currentWeapon.GetCollider();
             if (weaponCollider != null)
             {
                 weaponCollider.enabled = false;
+            }
+        }
+        else
+        {
+            if (noWeaponCols != null)
+            {
+                noWeaponCols.enabled = false;
             }
         }
         /*
@@ -1163,9 +1167,6 @@ public class PlayerController : MonoBehaviour
             clonePlayer.GetComponent<PlayerController>().hp = maxHp - (maxHp / cloneHpRate);
             clonePlayer.GetComponent<PlayerController>().attack = attack - (attack / cloneAttackRate);
             clonePlayer.GetComponent<PlayerController>().defense = defense - (defense / cloneDefenseRateUp);
-            Debug.Log("プレイヤーの体力" + maxHp + "クローンの体力" + clonePlayer.GetComponent<PlayerController>().maxHp);
-            Debug.Log("プレイヤーの攻撃力" + attack + "クローンの攻撃力" + clonePlayer.GetComponent<PlayerController>().attack);
-            Debug.Log("プレイヤーの防御力" + defense + "クローンの防御力" + clonePlayer.GetComponent<PlayerController>().defense);
 
             Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
 

@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 17
   nameJP: "\u8010\u4E45\u306E\u5B9D\u77F3"
   nameEN: durable gem
-  informationJP: "\u5206\u8EAB\u306EHP\u4F4E\u4E0B\u304C\u534A\u5206\u21921/4\u306B"
+  informationJP: "\u5206\u8EAB\u306EHP\u4F4E\u4E0B\u304C1/3\u21921/5\u306B"
   informationEN: Clone's HP decrease from half to 1/4
   icon: {fileID: 1174024442, guid: 3cb6fb245afaf984097137afb9d30422, type: 3}
