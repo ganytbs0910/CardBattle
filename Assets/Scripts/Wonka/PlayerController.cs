@@ -83,6 +83,7 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI missText; //インスペクターで固定する
 
     public ParticleSystem increaseEffect;
+    public ParticleSystem healEffect;
 
     [Header("Playerの装備を初期に戻すための")]
     [SerializeField] private RuntimeAnimatorController noWeaponAnim;
@@ -110,7 +111,19 @@ public class PlayerController : MonoBehaviour
         //Clone用に初期状態を設定
         isAttacking = false;
         CantMove = false;
-
+        // コレクションの効果を反映
+        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
+        {
+            // カードを所持していたら...以下の処理を行う
+            if (PlayerPrefs.HasKey($"Collection{i}"))
+            {
+                switch (i)
+                {
+                    case 21: battleStartHeal = true; break;
+                    case 22: AttackHealAdd(); break;
+                }
+            }
+        }
         LoadStatus();
 
         //1秒後に
@@ -1332,6 +1345,12 @@ public class PlayerController : MonoBehaviour
                 hp = maxHp;
             }
         }
+        playerUIManager.UpdateHP(maxHp, hp);
+        ParticleSystem healEffectClone = Instantiate(healEffect, transform.position, Quaternion.identity);
+        healEffectClone.Play();
+        Destroy(healEffectClone.gameObject, healEffectClone.main.duration);
+
+
     }
 
     //攻撃に回復効果が付与

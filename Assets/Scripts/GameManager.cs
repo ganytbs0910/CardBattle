@@ -575,7 +575,6 @@ public class GameManager : MonoBehaviour
             }
         }
         PlayerController player = playerObjects[0].GetComponent<PlayerController>();
-        player.StartHierarchyHeal(3);
         player.SaveStatus();
         player.SaveEquipment();
         UpdateStage();
@@ -584,7 +583,12 @@ public class GameManager : MonoBehaviour
             UIManager.instance.gameClearPanel.SetActive(true);
             AudioManager.instance.PlayBGM(AudioManager.BGM.GameClearTheme);
         }
+
+        //DOTweenを用いて2秒後に処理
+        DOVirtual.DelayedCall(1.5f, () => player.StartHierarchyHeal(3));
+
     }
+
 
     public void PortalMovement(int setHierarchy)
     {
