@@ -263,8 +263,8 @@ public class PlayerController : MonoBehaviour
                     case 20: AllStatusUp(5); Debug.Log("全てのステータス+5"); break;
                     case 21: battleStartHeal = true; Debug.Log("戦闘開始時にHP回復"); break;
                     case 22: AttackHealAdd(); Debug.Log("攻撃に回復効果付与"); break;
-                    case 23: MinDrawCardNumberAdd(1); Debug.Log("カードの最低ドロー枚数+1"); break;
-                    case 24: MaxDrawCardNumberAdd(1); Debug.Log("カードの最大ドロー枚数+1"); break;
+                    case 23: MinDrawCardNumberAdd(3); Debug.Log("カードの最低ドロー枚数+1"); break;
+                    case 24: MaxDrawCardNumberAdd(5); Debug.Log("カードの最大ドロー枚数+1"); break;
                 }
             }
         }
