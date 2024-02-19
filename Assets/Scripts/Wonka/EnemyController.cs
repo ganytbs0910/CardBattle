@@ -405,7 +405,7 @@ public class EnemyController : MonoBehaviour
             //コレクションをドロップする
             PlayerPrefs.SetInt($"Collection{id}", 1);
             ItemDrop();
-            UIManager.instance.CollectionCardUpdate();
+            UIManager.instance.CollectionCardUpdate(id);
         }
     }
 

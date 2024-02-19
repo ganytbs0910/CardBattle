@@ -8,6 +8,7 @@ using TMPro;
 
 public class UIManager : MonoBehaviour
 {
+    public PlayerController playerController;
     //ローカライズ
     public enum Language
     {
@@ -108,6 +109,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
         if (PlayerPrefs.HasKey("RemoveAds"))
         {
             adsButton.SetActive(false);
@@ -515,7 +517,7 @@ public class UIManager : MonoBehaviour
     /// コレクション
     /// </summary>
 
-    public void CollectionCardUpdate()
+    public void CollectionCardUpdate(int id = 0)
     {
         //コレクションのカードを更新
         for (int i = 1; i < collectionContent.transform.childCount; i++)
@@ -544,6 +546,7 @@ public class UIManager : MonoBehaviour
                 itemIcon.sprite = collectionEntity.icon;
             }
         }
+        playerController.GetCollectionEffect(id);
     }
 
     public void UpdateCoinText(int value = 0)

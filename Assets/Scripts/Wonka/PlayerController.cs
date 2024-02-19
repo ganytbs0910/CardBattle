@@ -241,33 +241,65 @@ public class PlayerController : MonoBehaviour
             {
                 switch (i)
                 {
-                    case 1: HealthUp(10); Debug.Log("HP+10"); break;
-                    case 2: AttackUp(1); Debug.Log("Attack+1"); break;
-                    case 3: DefenseUp(1); Debug.Log("Defence+1"); break;
-                    case 4: BombDamageUp(10); Debug.Log("ボムダメージ+10"); break;
-                    case 5: CoinDropUp(1); Debug.Log("コインドロップ+1"); break;
-                    case 6: AvoidanceUp(2); Debug.Log("回避率2%UP"); break;
-                    case 7: CollectionDropRateUp(3); Debug.Log("コレクションのドロップ率改善"); break;
-                    case 8: HealthRateUp(0.2f); Debug.Log("HP1.1倍"); break;
-                    case 9: AttackRateUp(0.2f); Debug.Log("攻撃1.1倍"); break;
-                    case 10: DefenseRateUp(0.2f); Debug.Log("防御1.1倍"); break;
-                    case 11: MoveSpeedUp(1); Debug.Log("移動速度+1"); break;
-                    case 12: HealthUp(40); Debug.Log("HP+40"); break;
-                    case 13: AttackUp(4); Debug.Log("Attack+4"); break;
-                    case 14: DefenseUp(3); Debug.Log("Defence+3"); break;
-                    case 15: StartCoinHave(300); Debug.Log("スタート時にコイン300所持"); break;
-                    case 16: AttackIntervalUp(0.1f); Debug.Log("攻撃のインターバル短縮"); break;
-                    case 17: CloneHPUp(3); Debug.Log("分身のHP改善"); break;
-                    case 18: CloneAttackUp(3); Debug.Log("分身の攻撃力改善"); break;
-                    case 19: CloneDefenseUp(3); Debug.Log("分身の防御力改善"); break;
-                    case 20: AllStatusUp(5); Debug.Log("全てのステータス+5"); break;
-                    case 21: battleStartHeal = true; Debug.Log("戦闘開始時にHP回復"); break;
-                    case 22: AttackHealAdd(); Debug.Log("攻撃に回復効果付与"); break;
-                    case 23: MinDrawCardNumberAdd(3); Debug.Log("カードの最低ドロー枚数+1"); break;
-                    case 24: MaxDrawCardNumberAdd(5); Debug.Log("カードの最大ドロー枚数+1"); break;
+                    case 1: HealthUp(10); break;
+                    case 2: AttackUp(1); break;
+                    case 3: DefenseUp(1); break;
+                    case 4: BombDamageUp(10); break;
+                    case 5: CoinDropUp(1); break;
+                    case 6: AvoidanceUp(2); break;
+                    case 7: CollectionDropRateUp(3); break;
+                    case 8: HealthRateUp(0.2f); break;
+                    case 9: AttackRateUp(0.2f); break;
+                    case 10: DefenseRateUp(0.2f); break;
+                    case 11: MoveSpeedUp(1); break;
+                    case 12: HealthUp(40); break;
+                    case 13: AttackUp(4); break;
+                    case 14: DefenseUp(3); break;
+                    case 15: StartCoinHave(300); break;
+                    case 16: AttackIntervalUp(0.1f); break;
+                    case 17: CloneHPUp(3); break;
+                    case 18: CloneAttackUp(3); break;
+                    case 19: CloneDefenseUp(3); break;
+                    case 20: AllStatusUp(5); break;
+                    case 21: battleStartHeal = true; break;
+                    case 22: AttackHealAdd(); break;
+                    case 23: MinDrawCardNumberAdd(3); break;
+                    case 24: MaxDrawCardNumberAdd(5); break;
                 }
             }
         }
+    }
+
+    public void GetCollectionEffect(int id)
+    {
+        switch (id)
+        {
+            case 1: HealthUp(10); break;
+            case 2: AttackUp(1); break;
+            case 3: DefenseUp(1); break;
+            case 4: BombDamageUp(10); break;
+            case 5: CoinDropUp(1); break;
+            case 6: AvoidanceUp(2); break;
+            case 7: CollectionDropRateUp(3); break;
+            case 8: HealthRateUp(0.2f); break;
+            case 9: AttackRateUp(0.2f); break;
+            case 10: DefenseRateUp(0.2f); break;
+            case 11: MoveSpeedUp(1); break;
+            case 12: HealthUp(40); break;
+            case 13: AttackUp(4); break;
+            case 14: DefenseUp(3); break;
+            case 15: StartCoinHave(300); break;
+            case 16: AttackIntervalUp(0.1f); break;
+            case 17: CloneHPUp(3); break;
+            case 18: CloneAttackUp(3); break;
+            case 19: CloneDefenseUp(3); break;
+            case 20: AllStatusUp(5); break;
+            case 21: battleStartHeal = true; break;
+            case 22: AttackHealAdd(); break;
+            case 23: MinDrawCardNumberAdd(3); break;
+            case 24: MaxDrawCardNumberAdd(5); break;
+        }
+        UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
 
@@ -1041,7 +1073,7 @@ public class PlayerController : MonoBehaviour
             case 24: break;//小型爆弾
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
-            //範囲内のプレイヤーのHPを10%回復
+                           //範囲内のプレイヤーのHPを10%回復
             case 27: HPHeal(25); break;
             //範囲内のプレイヤーのHPを20%回復
             case 28: HPHeal(35); break;
