@@ -139,6 +139,36 @@ public class PlayerController : MonoBehaviour
             {
                 EquipArmor(Resources.Load<Armor>($"Armor/{PlayerPrefs.GetString("BackPack")}"));
             }
+            if (currentWeapon != null)
+            {
+                attack -= currentWeapon.GetATKPoint();
+                defense -= currentWeapon.GetDEFPoint();
+            }
+            if (currentHead != null)
+            {
+                maxHp -= currentHead.GetAddMAXHP();
+                maxMp -= currentHead.GetAddMAXMP();
+                attack -= currentHead.GetATKPoint();
+                defense -= currentHead.GetDEFPoint();
+                Agility -= currentHead.GetAGIPoint();
+            }
+            if (currentArmor != null)
+            {
+                maxHp -= currentArmor.GetAddMAXHP();
+                maxMp -= currentArmor.GetAddMAXMP();
+                attack -= currentArmor.GetATKPoint();
+                defense -= currentArmor.GetDEFPoint();
+                Agility -= currentArmor.GetAGIPoint();
+            }
+            if (currentBackpack)
+            {
+                maxHp -= currentBackpack.GetAddMAXHP();
+                maxMp -= currentBackpack.GetAddMAXMP();
+                attack -= currentBackpack.GetATKPoint();
+                defense -= currentBackpack.GetDEFPoint();
+                Agility -= currentBackpack.GetAGIPoint();
+            }
+
             UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
         });
     }
@@ -406,9 +436,16 @@ public class PlayerController : MonoBehaviour
         defense = PlayerPrefs.GetInt("Defense");
         Agility = PlayerPrefs.GetInt("Agility");
         moveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
+        addHealthRate = PlayerPrefs.GetFloat("AddHealthRate");
+        addAttackRate = PlayerPrefs.GetFloat("AddAttackRate");
+        addDefenseRate = PlayerPrefs.GetFloat("AddDefenseRate");
         if (!PlayerPrefs.HasKey("MaxHP"))
         {
             maxHp = 100;
+        }
+        if (!PlayerPrefs.HasKey("AddHealthRate"))
+        {
+            addHealthRate = 1;
         }
         if (!PlayerPrefs.HasKey("MaxMP"))
         {
@@ -426,9 +463,17 @@ public class PlayerController : MonoBehaviour
         {
             attack = 5;
         }
+        if (!PlayerPrefs.HasKey("AddAttackRate"))
+        {
+            addAttackRate = 1;
+        }
         if (!PlayerPrefs.HasKey("Defense"))
         {
             defense = 1;
+        }
+        if (!PlayerPrefs.HasKey("AddDefenseRate"))
+        {
+            addDefenseRate = 1;
         }
         if (!PlayerPrefs.HasKey("Agility"))
         {
@@ -519,6 +564,7 @@ public class PlayerController : MonoBehaviour
                     attack -= currentArmor.GetATKPoint();
                     defense -= currentArmor.GetDEFPoint();
                     Agility -= currentArmor.GetAGIPoint();
+
                 }
                 currentArmor = armor;
                 break;
@@ -530,6 +576,7 @@ public class PlayerController : MonoBehaviour
                     attack -= currentBackpack.GetATKPoint();
                     defense -= currentBackpack.GetDEFPoint();
                     Agility -= currentBackpack.GetAGIPoint();
+
                 }
                 currentBackpack = armor;
                 break;
