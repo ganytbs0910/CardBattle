@@ -20,9 +20,9 @@ public class PlayerController : MonoBehaviour
     public float addAttackRate = 1;
     public float addDefenseRate = 1;
 
-    int cloneHpRate = 2;
-    int cloneAttackRate = 2;
-    int cloneDefenseRateUp = 2;
+    int cloneHpRate = 3;
+    int cloneAttackRate = 3;
+    int cloneDefenseRateUp = 3;
 
     //通常変数
     int hp;
@@ -92,7 +92,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform weaponPos;
     [SerializeField] private GameObject noWeaponObject;
 
-
     void Start()
     {
         agent = GetComponent<NavMeshAgent>(); // NavMesh Agentの取得
@@ -108,6 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             EquipWeapon(defaultWeapon);
         }
+
         //Clone用に初期状態を設定
         isAttacking = false;
         CantMove = false;
@@ -124,8 +124,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        LoadStatus();
+        if (this.gameObject.name != "Player") return;
 
+        LoadStatus();
         //1秒後に
         DOVirtual.DelayedCall(0.5f, () =>
         {
@@ -181,9 +182,9 @@ public class PlayerController : MonoBehaviour
                 defense -= currentBackpack.GetDEFPoint();
                 Agility -= currentBackpack.GetAGIPoint();
             }
-
             UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
         });
+
     }
 
     void Update()
@@ -270,9 +271,9 @@ public class PlayerController : MonoBehaviour
                     case 14: DefenseUp(3); break;
                     case 15: StartCoinHave(300); break;
                     case 16: AttackIntervalUp(0.1f); break;
-                    case 17: CloneHPUp(3); break;
-                    case 18: CloneAttackUp(3); break;
-                    case 19: CloneDefenseUp(3); break;
+                    case 17: CloneHPUp(5); break;
+                    case 18: CloneAttackUp(5); break;
+                    case 19: CloneDefenseUp(5); break;
                     case 20: AllStatusUp(5); break;
                     case 21: battleStartHeal = true; break;
                     case 22: AttackHealAdd(); break;
@@ -303,15 +304,16 @@ public class PlayerController : MonoBehaviour
             case 14: DefenseUp(3); break;
             case 15: StartCoinHave(300); break;
             case 16: AttackIntervalUp(0.1f); break;
-            case 17: CloneHPUp(3); break;
-            case 18: CloneAttackUp(3); break;
-            case 19: CloneDefenseUp(3); break;
+            case 17: CloneHPUp(5); break;
+            case 18: CloneAttackUp(5); break;
+            case 19: CloneDefenseUp(5); break;
             case 20: AllStatusUp(5); break;
             case 21: battleStartHeal = true; break;
             case 22: AttackHealAdd(); break;
             case 23: MinDrawCardNumberAdd(3); break;
             case 24: MaxDrawCardNumberAdd(5); break;
         }
+        if (this.gameObject.name != "Player") return;
         UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
@@ -359,9 +361,9 @@ public class PlayerController : MonoBehaviour
             PlayerPrefs.SetFloat("AddAttackRate", addAttackRate);
             addDefenseRate = 1;
             PlayerPrefs.SetFloat("AddDefenseRate", addDefenseRate);
-            cloneHpRate = 2;
-            cloneAttackRate = 2;
-            cloneDefenseRateUp = 2;
+            cloneHpRate = 3;
+            cloneAttackRate = 3;
+            cloneDefenseRateUp = 3;
             lastAttackTime = 0f;
             IsDead = false;
             isAttacking = false;
@@ -428,6 +430,7 @@ public class PlayerController : MonoBehaviour
             playerColliders[0].enabled = true;
             PlayerPrefs.Save();
             CollectionFirstEffect();
+            if (this.gameObject.name != "Player") return;
             UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
             GiveUpAnime();
         }
@@ -435,6 +438,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SaveEquipment()
     {
+        if (this.gameObject.name != "Player") return;
         if (currentWeapon != null)
         {
             PlayerPrefs.SetString("Weapon", currentWeapon.name);
@@ -455,6 +459,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SaveStatus()
     {
+        if (this.gameObject.name != "Player") return;
         PlayerPrefs.SetInt("HP", hp);
         PlayerPrefs.SetInt("MP", mp);
         PlayerPrefs.SetInt("Attack", attack);
@@ -582,6 +587,7 @@ public class PlayerController : MonoBehaviour
 
         attack += currentWeapon.GetATKPoint();
         defense += currentWeapon.GetDEFPoint();
+        if (this.gameObject.name != "Player") return;
         UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
@@ -664,6 +670,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+        if (this.gameObject.name != "Player") return;
         UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
@@ -1125,6 +1132,7 @@ public class PlayerController : MonoBehaviour
                 }
                 break;
         }
+        if (this.gameObject.name != "Player") return;
         UIManager.instance.StatusCheckUpdate(maxHp, addHealthRate, attack, addAttackRate, defense, addDefenseRate, Agility, moveSpeed, currentWeapon, currentHead, currentArmor, currentBackpack);
     }
 
@@ -1150,9 +1158,15 @@ public class PlayerController : MonoBehaviour
 
             //clonePlayerの名前をShadowPlayerにする
             clonePlayer.name = "ShadowPlayer";
-            clonePlayer.GetComponent<PlayerController>().hp /= cloneHpRate;
-            clonePlayer.GetComponent<PlayerController>().attack /= cloneAttackRate;
-            clonePlayer.GetComponent<PlayerController>().defense /= cloneDefenseRateUp;
+
+            clonePlayer.GetComponent<PlayerController>().maxHp = maxHp - (maxHp / cloneHpRate);
+            clonePlayer.GetComponent<PlayerController>().hp = maxHp - (maxHp / cloneHpRate);
+            clonePlayer.GetComponent<PlayerController>().attack = attack - (attack / cloneAttackRate);
+            clonePlayer.GetComponent<PlayerController>().defense = defense - (defense / cloneDefenseRateUp);
+            Debug.Log("プレイヤーの体力" + maxHp + "クローンの体力" + clonePlayer.GetComponent<PlayerController>().maxHp);
+            Debug.Log("プレイヤーの攻撃力" + attack + "クローンの攻撃力" + clonePlayer.GetComponent<PlayerController>().attack);
+            Debug.Log("プレイヤーの防御力" + defense + "クローンの防御力" + clonePlayer.GetComponent<PlayerController>().defense);
+
             Renderer[] renderers = clonePlayer.GetComponentsInChildren<Renderer>();
 
             foreach (Renderer renderer in renderers)
