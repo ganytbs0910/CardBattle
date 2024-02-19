@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: com.GanWonka.CardBattle
-  productName: CardBattle
+  productName: "\u30AB\u30FC\u30C9\u30D0\u30C8\u30EB\u30C0\u30F3\u30B8\u30E7\u30F3\u30BA"
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -154,7 +154,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    iPhone: com.com.GanWonka.CardBattle.CardBattle
+    iPhone: com.com.GanWonka.CardBattle.------------------------------------
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -916,11 +916,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: faea68b6-8493-4dbf-9837-11e04457ce4c
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: "\u30AB\u30FC\u30C9\u30D0\u30C8\u30EB\u30C0\u30F3\u30B8\u30E7\u30F3\u30BA"
-  organizationId: nakakou2002
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
