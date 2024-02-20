@@ -16,7 +16,8 @@ public class Projectile : MonoBehaviour
         //damage =
         if (MuzzleEffect != null)
         {
-            Instantiate(MuzzleEffect, transform.position, transform.rotation);
+            GameObject cloneMuzzleEffect = Instantiate(MuzzleEffect, transform.position, transform.rotation);
+            Destroy(cloneMuzzleEffect, 2.0f);
         }
         FindClosestEnemy(transform);
     }
@@ -44,7 +45,8 @@ public class Projectile : MonoBehaviour
 
             if (hitEffect != null)
             {
-                Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+                GameObject cloneHitEffect = Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+                Destroy(cloneHitEffect, 2.0f);
             }
         }
 

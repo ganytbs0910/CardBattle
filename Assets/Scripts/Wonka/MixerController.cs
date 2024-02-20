@@ -25,6 +25,7 @@ public class MixerController : MonoBehaviour
         // スライダーの値が変更されたときのリスナーを設定
         slider.onValueChanged.AddListener(volume =>
         {
+            Debug.Log(audioMixerParameter + " : " + volume);
             SetVolume(audioMixerParameter, volume);
             // 新しいボリューム値をPlayerPrefsに保存
             PlayerPrefs.SetFloat(audioMixerParameter, volume);

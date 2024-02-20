@@ -889,8 +889,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 20, y: 3, z: 30}
-  m_Center: {x: 0, y: 0, z: 10}
+  m_Size: {x: 10, y: 1.5, z: 10}
+  m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!1 &428474815774862309
 GameObject:
   m_ObjectHideFlags: 0
@@ -20363,6 +20363,10 @@ PrefabInstance:
       value: Hat03
       objectReference: {fileID: 0}
     - target: {fileID: 3509666665836007327, guid: 71abc3d2976e7c74ea0440df6559c9eb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3509666665836007327, guid: 71abc3d2976e7c74ea0440df6559c9eb, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -20429,6 +20433,10 @@ PrefabInstance:
       value: Hat09
       objectReference: {fileID: 0}
     - target: {fileID: 5131437339708146023, guid: 567b51a5781978a4381e5a88a8fc1b92, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5131437339708146023, guid: 567b51a5781978a4381e5a88a8fc1b92, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -20493,6 +20501,10 @@ PrefabInstance:
     - target: {fileID: 7189012864942289536, guid: 575c82cd21b1ebd4c87679c323b3f143, type: 3}
       propertyPath: m_Name
       value: Hat04
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189012864942289536, guid: 575c82cd21b1ebd4c87679c323b3f143, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189012864942289536, guid: 575c82cd21b1ebd4c87679c323b3f143, type: 3}
       propertyPath: m_IsActive
@@ -21301,6 +21313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NoWeapon_r
       objectReference: {fileID: 0}
+    - target: {fileID: 3974440262548107585, guid: 5ed775aa380a5d14db3845d23d17a25b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3974440262548107586, guid: 5ed775aa380a5d14db3845d23d17a25b, type: 3}
       propertyPath: m_RootOrder
       value: 36
@@ -21863,6 +21879,10 @@ PrefabInstance:
       value: Hat07
       objectReference: {fileID: 0}
     - target: {fileID: 1322149422391809006, guid: 41f03b4333017fa4f871be94c2cdf192, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1322149422391809006, guid: 41f03b4333017fa4f871be94c2cdf192, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -21971,6 +21991,10 @@ PrefabInstance:
     - target: {fileID: 1887908501281315422, guid: db0380867781ec645a45f38df6bbcb62, type: 3}
       propertyPath: m_Name
       value: Hat05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1887908501281315422, guid: db0380867781ec645a45f38df6bbcb62, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1887908501281315422, guid: db0380867781ec645a45f38df6bbcb62, type: 3}
       propertyPath: m_IsActive
@@ -22780,6 +22804,10 @@ PrefabInstance:
       value: Hat06
       objectReference: {fileID: 0}
     - target: {fileID: 2958859947986780585, guid: 47f0941f76d29a6429bd4aa561c43fbf, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2958859947986780585, guid: 47f0941f76d29a6429bd4aa561c43fbf, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -22844,6 +22872,10 @@ PrefabInstance:
     - target: {fileID: 6370663135428096283, guid: 65b0951498c604c4aa2ff7306b4095c9, type: 3}
       propertyPath: m_Name
       value: Hat12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6370663135428096283, guid: 65b0951498c604c4aa2ff7306b4095c9, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6370663135428096283, guid: 65b0951498c604c4aa2ff7306b4095c9, type: 3}
       propertyPath: m_IsActive
@@ -23159,6 +23191,10 @@ PrefabInstance:
       value: Hat08
       objectReference: {fileID: 0}
     - target: {fileID: 4528015367403144239, guid: a117fc7f5db5844458f23bd630bf6efb, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4528015367403144239, guid: a117fc7f5db5844458f23bd630bf6efb, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -23225,6 +23261,10 @@ PrefabInstance:
       value: Hat14
       objectReference: {fileID: 0}
     - target: {fileID: 5514673210169937734, guid: f6c02c9936685cc4f8d12315685cd8f5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5514673210169937734, guid: f6c02c9936685cc4f8d12315685cd8f5, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -23289,6 +23329,10 @@ PrefabInstance:
     - target: {fileID: 1045577828487782850, guid: db2362efb53edd145b0c620b06603c2a, type: 3}
       propertyPath: m_Name
       value: Hat11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045577828487782850, guid: db2362efb53edd145b0c620b06603c2a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1045577828487782850, guid: db2362efb53edd145b0c620b06603c2a, type: 3}
       propertyPath: m_IsActive

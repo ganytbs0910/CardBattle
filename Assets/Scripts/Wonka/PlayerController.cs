@@ -805,7 +805,7 @@ public class PlayerController : MonoBehaviour
         //damegeが0.9~1.2倍になる（不要なら外す）
         damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
-        //Debug.Log("元々のダメージ" + damage + "最終のプレイヤーへのダメージ：" + sumDamage);
+        Debug.Log("元々のダメージ" + damage + "最終のプレイヤーへのダメージ：" + sumDamage);
         if (sumDamage <= 0)
         {
             sumDamage = 0;

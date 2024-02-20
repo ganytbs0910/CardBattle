@@ -206,7 +206,6 @@ public class EnemyController : MonoBehaviour
                 // 回避チェック
                 if (Random.Range(0, 100) < agility)
                 {
-                    Debug.Log("攻撃を回避しました！");
                     ShowMissText();
                     return; // 攻撃を回避
                 }
@@ -220,7 +219,6 @@ public class EnemyController : MonoBehaviour
             // 回避チェック
             if (Random.Range(0, 100) < agility)
             {
-                Debug.Log("攻撃を回避しました！");
                 ShowMissText();
                 return; // 攻撃を回避
             }
@@ -229,7 +227,6 @@ public class EnemyController : MonoBehaviour
             if (projectile != null)
             {
                 //Damage(playerWeapon.SumDamage()); //ダメージを与える
-                Debug.Log("プレイヤーの弾が当たりました");
                 Damage(projectile.damage);
             }
         }
@@ -381,7 +378,9 @@ public class EnemyController : MonoBehaviour
         if (coinEffectPrefab != null)
         {
             // コインエフェクトのインスタンス化
-            Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
+            GameObject cloneCoinEffect = Instantiate(coinEffectPrefab, transform.position, Quaternion.identity);
+            Destroy(cloneCoinEffect, 2.0f);
+
         }
 
         //コインを入手
@@ -700,6 +699,7 @@ public class EnemyController : MonoBehaviour
             //getHitEffectCloneのサイズを半分に
             getHitEffectClone.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             getHitEffectClone.Play();
+            Destroy(getHitEffectClone.gameObject, getHitEffectClone.main.duration);
         }
     }
 

@@ -35,6 +35,15 @@ public class ScreenRay : MonoBehaviour
     //効果音用
     bool cardSelect = false;
 
+    void OnDrawGizmos()
+    {
+        // 検出範囲を視覚化
+        Gizmos.color = Color.red; // 色を赤に設定
+        if (lastRaycastHit.collider != null) // レイが何かにヒットしていれば
+        {
+            Gizmos.DrawWireSphere(lastRaycastHit.point, rayWidth); // 最後にヒットしたポイントを中心に、指定した半径のワイヤーフレームの球を描画
+        }
+    }
 
     void Update()
     {
@@ -42,6 +51,7 @@ public class ScreenRay : MonoBehaviour
         {
             ToggleCheck();
         }
+
         if (!baseColor && colorChangeIgnore)
         {
             ResetTargetColors(); // すべてのターゲットの色をリセット
@@ -67,6 +77,7 @@ public class ScreenRay : MonoBehaviour
             {
                 return;
             }
+
             targetMarker.SetActive(false);
             Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
             foreach (Collider collider in colliders)
@@ -74,30 +85,36 @@ public class ScreenRay : MonoBehaviour
                 //もしPlayerタグを持っているオブジェクトに当たったら
                 if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
+
                     UIManager.instance.HeroMessageDetail("自身強化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
+
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipWeapon(weapon);
                         AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
                     }
+
                     if (armor != null) //防具カードを装備
                     {
                         collider.gameObject.GetComponent<PlayerController>().EquipArmor(armor);
                         AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
-
                     }
+
                     if (particle != null) //パーティクルを発生
                     {
                         PlayParticleAtPosition(collider);
                     }
+
                     Destroy(chooseCard);
                     cardID = 0;
                     UIManager.instance.TutorialAnimation(2);
                 }
+
                 else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
+                    Debug.Log("Enemyに触れていてMouseUPしたよ！");
                     UIManager.instance.HeroMessageDetail("敵弱体化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
                     collider.gameObject.GetComponent<EnemyController>().GetCardEffect(cardID);
@@ -111,6 +128,7 @@ public class ScreenRay : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("その他に触れていてMouseUPしたよ！");
                     switch (cardID)
                     {
                         case 24:
@@ -178,7 +196,6 @@ public class ScreenRay : MonoBehaviour
     void RayCastUI()
     {
         if (cardSelect) return;
-
         PointerEventData pointData = new PointerEventData(EventSystem.current);
         List<RaycastResult> results = new List<RaycastResult>();
         pointData.position = Input.mousePosition;
@@ -212,6 +229,8 @@ public class ScreenRay : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
+            lastRaycastHit = hit; // この行を確認または追加
+
             targetMarker.SetActive(true);
             targetMarker.transform.position = hit.point;
             Quaternion markerRotation = Quaternion.LookRotation(hit.normal);
@@ -223,6 +242,16 @@ public class ScreenRay : MonoBehaviour
                 //もしPlayerタグを持っているオブジェクトに当たったら
                 if (collider.gameObject.tag == "Player" && cardID != 0 && targetType == CardEntity.TargetType.Player)
                 {
+                    // Colliderの中心地点（transform.position）からレイがヒットした地点（lastRaycastHit.point）までの距離を計算
+                    float distance = Vector3.Distance(collider.transform.position, lastRaycastHit.point);
+
+                    // 距離が1以上なら処理をスキップ（return）
+                    if (distance >= 2f)
+                    {
+                        Debug.Log("距離は" + distance + "です");
+                        return; // この場合、以降の処理は行われず、ループから抜けます
+                    }
+
                     targetObjects.Add(collider.gameObject);
                     SetColor(Color.green, collider.gameObject);
                     baseColor = false;
@@ -238,7 +267,6 @@ public class ScreenRay : MonoBehaviour
                 else
                 {
                     colorChangeIgnore = false;
-
                 }
             }
             //rayの当たった最終地点を取得
