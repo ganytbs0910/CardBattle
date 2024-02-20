@@ -1073,17 +1073,17 @@ public class PlayerController : MonoBehaviour
             case 9: break;
             case 10: break;
             //攻撃力UP+10%
-            case 11: AttackRateUp(0.1f); break;
+            case 11: AttackRateUp(0.05f); break;
             //攻撃力UP+20%
-            case 12: AttackRateUp(0.2f); break;
+            case 12: AttackRateUp(0.01f); break;
             //攻撃力UP+30%
-            case 13: AttackRateUp(0.3f); break;
+            case 13: AttackRateUp(0.15f); break;
             //防御力UP+10%
-            case 14: DefenseRateUp(0.1f); break;
+            case 14: DefenseRateUp(0.05f); break;
             //防御力UP+20%
-            case 15: DefenseRateUp(0.2f); break;
+            case 15: DefenseRateUp(0.1f); break;
             //防御力UP+30% 
-            case 16: DefenseRateUp(0.3f); break;
+            case 16: DefenseRateUp(0.15f); break;
             //敵がターゲット
             case 17: break;
             case 18: break;
@@ -1098,17 +1098,17 @@ public class PlayerController : MonoBehaviour
             case 25: break;//中型爆弾
             case 26: break;//大型爆弾
                            //範囲内のプレイヤーのHPを10%回復
-            case 27: HPHeal(25); break;
+            case 27: HPHeal(10); break;
             //範囲内のプレイヤーのHPを20%回復
-            case 28: HPHeal(35); break;
+            case 28: HPHeal(20); break;
             //範囲内のプレイヤーのHPを30%回復
-            case 29: HPHeal(45); break;
+            case 29: HPHeal(30); break;
             //範囲内のプレイヤーのHPを40%回復
-            case 30: HPHeal(60); break;
+            case 30: HPHeal(40); break;
             //範囲内のプレイヤーのMPを50%回復
-            case 31: HPHeal(70); break;
+            case 31: HPHeal(50); break;
             //範囲内のプレイヤーのMPを60%回復
-            case 32: HPHeal(80); break;
+            case 32: HPHeal(60); break;
             //プレイヤーの移動速度を0.1上昇
             case 33: MoveSpeedUp(0.1f); break;
             //プレイヤーの移動速度を0.3上昇

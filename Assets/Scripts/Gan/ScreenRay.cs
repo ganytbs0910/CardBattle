@@ -225,6 +225,7 @@ public class ScreenRay : MonoBehaviour
             }
         }
 
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance))
@@ -248,7 +249,6 @@ public class ScreenRay : MonoBehaviour
                     // 距離が1以上なら処理をスキップ（return）
                     if (distance >= 2f)
                     {
-                        Debug.Log("距離は" + distance + "です");
                         return; // この場合、以降の処理は行われず、ループから抜けます
                     }
 

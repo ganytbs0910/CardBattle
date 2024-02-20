@@ -120,7 +120,9 @@ public class ShopUI : MonoBehaviour
             UIManager.instance.HeroMessageDetail("カードが満タンだ");
             return;
         }
+
         PlayerPrefs.SetInt("Coin", PlayerPrefs.GetInt("Coin") - priceList[index]);
+        UIManager.instance.UpdateCoinText(-priceList[index]);
         UIManager.instance.battlePanel.SetActive(true);
         UIManager.instance.cardListPanel.gameObject.SetActive(true);
         DrawCardController.instance.DrawCard(cardIDList[index]);
