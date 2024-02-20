@@ -1364,8 +1364,6 @@ public class PlayerController : MonoBehaviour
         ParticleSystem healEffectClone = Instantiate(healEffect, transform.position, Quaternion.identity);
         healEffectClone.Play();
         Destroy(healEffectClone.gameObject, healEffectClone.main.duration);
-
-
     }
 
     //攻撃に回復効果が付与
