@@ -6,6 +6,7 @@ using TMPro;
 
 public class ShopUI : MonoBehaviour
 {
+    [SerializeField] private TMP_Text cardInformationText;
     [SerializeField] private Transform itemsParentPanel;
     [SerializeField] private Transform payPanel;
     [SerializeField] private Button payButton;
@@ -51,11 +52,27 @@ public class ShopUI : MonoBehaviour
                     cardID = Random.Range(1, cardEntities.Length + 1);
                     PlayerPrefs.SetInt($"ShopCardID{i}", cardID);
                     card = Instantiate(cardPrefab, itemsParentPanel.transform);
-                    //cardのToggleの機能を廃止
-                    card.GetComponent<Toggle>().enabled = false;
+
                     card.name = $"Card_{cardID}";
                     card.Init(cardID);
                     cardModel = card.model;
+
+                    //このオブジェクトの親オブジェクトにあるToggleGroupeに加える
+                    Toggle toggle = card.GetComponent<Toggle>();
+                    toggle.group = itemsParentPanel.GetComponent<ToggleGroup>();
+                    // ToggleのisOnプロパティが変更された時に呼ばれるリスナーを追加
+                    toggle.onValueChanged.AddListener((isOn) =>
+                    {
+                        //カードの効果を表示
+                        if (PlayerPrefs.GetString("Language") == "Japanese")
+                        {
+                            cardInformationText.text = cardModel.nameJP;
+                        }
+                        else
+                        {
+                            cardInformationText.text = cardModel.nameEN;
+                        }
+                    });
 
                     if (cardModel.tiar != tiar)
                     {

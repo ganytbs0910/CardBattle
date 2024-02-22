@@ -973,15 +973,13 @@ public class UIManager : MonoBehaviour
                     case Language.English: message = $"The enemy received {otherMessage}! \nCan I beat it!?"; break;
                 }
                 break;
-                /*
             default:
                 switch (language)
                 {
-                    case Language.Japanese: message = "特に喋ることはないかな。\n期待させてごめんね"; break;
-                    case Language.English: message = "I don't have much to say. Sorry to disappoint."; break;
+                    case Language.Japanese: message = "言語の変更が行われたよ！"; break;
+                    case Language.English: message = "The language has been changed!"; break;
                 }
                 break;
-                */
         }
         if (activeCoroutine != null)
         {
