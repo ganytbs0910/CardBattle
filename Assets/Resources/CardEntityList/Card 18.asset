@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 18
   name: "\u6575\u3092\u30B9\u30BF\u30F3\u72B6\u614B\u306B\u3059\u308B"
+  nameJP: "\u6575\u3092\u30B9\u30BF\u30F3\u72B6\u614B\u306B\u3059\u308B"
+  nameEN: Stun the enemy
   information: "\u6575\u3092\u4E00\u5B9A\u6642\u9593\u52D5\u3051\u306A\u304F\u3059\u308B"
   tiar: 2
   icon: {fileID: -1111758007, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}

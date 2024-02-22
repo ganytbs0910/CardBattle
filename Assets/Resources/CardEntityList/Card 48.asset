@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 48
   name: "\u653B\u6483+3, \u9632\u5FA1+1"
+  nameJP: "\u653B\u6483+3, \u9632\u5FA1+1"
+  nameEN: Attack +3, Defense +1
   information: 
   tiar: 1
   icon: {fileID: 21300000, guid: dd3aa282efa6b6b4294eb07b7c304fa9, type: 3}

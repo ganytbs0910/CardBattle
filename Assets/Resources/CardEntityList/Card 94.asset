@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 94
   name: "\u4F53\u529B\u304C5\u5897\u52A0"
+  nameJP: "\u4F53\u529B\u304C5\u5897\u52A0"
+  nameEN: Health increased by 5
   information: 
   tiar: 1
   icon: {fileID: 21300000, guid: 5a8bce58c7a464789ab2cb9af114422a, type: 3}

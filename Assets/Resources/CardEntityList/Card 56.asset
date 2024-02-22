@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 56
   name: "\u96F7\u7403\u9B54\u6CD5, \u653B\u6483+15"
+  nameJP: "\u96F7\u7403\u9B54\u6CD5, \u653B\u6483+15"
+  nameEN: Lightning ball magic, attack +15
   information: 
   tiar: 4
   icon: {fileID: 21300000, guid: 0c1432b0a7dd01041bb36834aaca1196, type: 3}

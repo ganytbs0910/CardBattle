@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 9
   name: "\u6575\u306E\u4F53\u529B\u309220%\u596A\u3046"
+  nameJP: "\u6575\u306E\u4F53\u529B\u309220%\u596A\u3046"
+  nameEN: Steal 20% of enemy's health
   information: 
   tiar: 2
   icon: {fileID: -135437218, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}

@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 25
   name: "\u4E2D\u578B\u7206\u5F3E\u3092\u6295\u3052\u308B"
+  nameJP: "\u4E2D\u578B\u7206\u5F3E\u3092\u6295\u3052\u308B"
+  nameEN: Throw a medium bomb
   information: 
   tiar: 3
   icon: {fileID: 21300000, guid: 850390017e2834efd81d6f0b95fd791f, type: 3}

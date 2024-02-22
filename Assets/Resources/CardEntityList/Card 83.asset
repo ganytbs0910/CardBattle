@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 83
   name: "HP+30, \u9632\u5FA1+5, \u56DE\u907F+10"
+  nameJP: "HP+30, \u9632\u5FA1+5, \u56DE\u907F+10"
+  nameEN: HP+30, Defense+5, Evasion+10
   information: 
   tiar: 3
   icon: {fileID: 21300000, guid: 6cc4b88d9feec3049815c67ecb6cbaa8, type: 3}

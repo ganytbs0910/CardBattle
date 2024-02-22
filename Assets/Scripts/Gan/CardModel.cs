@@ -7,6 +7,8 @@ public class CardModel
 {
     public int cardID;
     public string name;
+    public string nameJP;
+    public string nameEN;
     public string information;
     public int tiar;
     public Sprite icon;
@@ -29,6 +31,8 @@ public class CardModel
 
             this.cardID = cardEntity.cardID;
             name = cardEntity.name;
+            nameJP = cardEntity.nameJP;
+            nameEN = cardEntity.nameEN;
             information = cardEntity.information;
             tiar = cardEntity.tiar;
             icon = cardEntity.icon;

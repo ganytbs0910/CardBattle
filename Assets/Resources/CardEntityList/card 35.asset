@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: card 35
+  m_Name: Card 35
   m_EditorClassIdentifier: 
   cardID: 35
   name: "\u30AB\u30FC\u30C9\u3092\u4E00\u65B0\u3059\u308B"
+  nameJP: "\u30AB\u30FC\u30C9\u3092\u4E00\u65B0\u3059\u308B"
+  nameEN: Refresh your card
   information: 
   tiar: 3
   icon: {fileID: 21300000, guid: 13756a141b0b84db08f0c80f06bb5d45, type: 3}

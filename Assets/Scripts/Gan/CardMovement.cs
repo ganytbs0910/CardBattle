@@ -15,6 +15,8 @@ public class CardMovement : MonoBehaviour
 
     public int cardID;
     public string name;
+    public string nameJP;
+    public string nameEN;
     public int tiar;
     public CardEntity.TargetType targetType;
 
@@ -23,7 +25,6 @@ public class CardMovement : MonoBehaviour
     public ParticleSystem particle;
 
     public CardEntity.ParticlePosition particlePosition;
-
 
     private void Start()
     {
@@ -37,6 +38,8 @@ public class CardMovement : MonoBehaviour
         cardModel = cardController.model;
         cardID = cardModel.cardID;
         name = cardModel.name;
+        nameJP = cardModel.nameJP;
+        nameEN = cardModel.nameEN;
         tiar = cardModel.tiar;
         targetType = cardModel.targetType;
 

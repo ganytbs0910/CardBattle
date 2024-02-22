@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 91
   name: "\u653B\u6483\u529B\u304C2\u5897\u52A0"
+  nameJP: "\u653B\u6483\u529B\u304C2\u5897\u52A0"
+  nameEN: Attack power increased by 2
   information: 
   tiar: 1
   icon: {fileID: 21300000, guid: 2dcfc01b5b800426bacf64f66c0d09ad, type: 3}

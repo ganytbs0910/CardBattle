@@ -85,7 +85,6 @@ public class ScreenRay : MonoBehaviour
                 //もしPlayerタグを持っているオブジェクトに当たったら
                 if (collider.gameObject.tag == "Player" && targetType == CardEntity.TargetType.Player)
                 {
-
                     Destroy(chooseCard);
                     UIManager.instance.HeroMessageDetail("自身強化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
@@ -211,7 +210,14 @@ public class ScreenRay : MonoBehaviour
                 targetMarker.transform.position = result.gameObject.transform.position;
                 chooseCard = result.gameObject;
                 result.gameObject.GetComponent<CardMovement>().toggle.isOn = true;
-                debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().name;
+                if (PlayerPrefs.GetString("Language") == "Japanese")
+                {
+                    debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().nameJP;
+                }
+                else
+                {
+                    debugCardEffectText.text = result.gameObject.GetComponent<CardMovement>().nameEN;
+                }
                 return;
             }
 
@@ -304,7 +310,14 @@ public class ScreenRay : MonoBehaviour
                 chooseCard = cardListPanel.transform.GetChild(i).gameObject;
                 cardID = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().cardID;
                 targetType = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().targetType;
-                debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().name;
+                if (PlayerPrefs.GetString("Language") == "Japanese")
+                {
+                    debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().nameJP;
+                }
+                else
+                {
+                    debugCardEffectText.text = cardListPanel.transform.GetChild(i).GetComponent<CardMovement>().nameEN;
+                }
                 weapon = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().weapon;
                 armor = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().armor;
                 particle = cardListPanel.transform.GetChild(i).gameObject.GetComponent<CardMovement>().particle;

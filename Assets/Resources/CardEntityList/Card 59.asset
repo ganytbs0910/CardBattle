@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 59
   name: "\u653B\u6483+8"
+  nameJP: "\u653B\u6483+8"
+  nameEN: Attack +8
   information: 
   tiar: 2
   icon: {fileID: 21300000, guid: bc9f77a90e0d7ee4993fb47a5a9372ab, type: 3}

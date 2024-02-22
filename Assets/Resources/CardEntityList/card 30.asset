@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: card 30
+  m_Name: Card 30
   m_EditorClassIdentifier: 
   cardID: 30
   name: "HP\u309240%\u56DE\u5FA9"
+  nameJP: "HP\u309240%\u56DE\u5FA9"
+  nameEN: Recovers HP by 40%
   information: "\u73FE\u5728\u306E\u4F53\u529B\u304B\u308950%\u56DE\u5FA9\u3059\u308B"
   tiar: 4
   icon: {fileID: 21300000, guid: ce4dbffe7f6af4d7db52bd4d1bbe21ee, type: 3}

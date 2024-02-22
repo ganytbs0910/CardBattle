@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Card 11
   m_EditorClassIdentifier: 
   cardID: 11
-  name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u653B\u6483\u529B\u309210%\u4E0A\u3052\u308B"
+  name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u653B\u6483\u529B\u30925%\u4E0A\u3052\u308B"
+  nameJP: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u653B\u6483\u529B\u30925%\u4E0A\u3052\u308B"
+  nameEN: Increases player's attack power by 5%
   information: 
   tiar: 1
   icon: {fileID: -657064968, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}

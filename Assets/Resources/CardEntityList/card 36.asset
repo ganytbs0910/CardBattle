@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1a5f9d9acdee004eb10b2a125bbec09, type: 3}
-  m_Name: card 36
+  m_Name: Card 36
   m_EditorClassIdentifier: 
   cardID: 36
   name: "2\u679A\u306E\u30AB\u30FC\u30C9\u3092\u5F15\u304F"
+  nameJP: "2\u679A\u306E\u30AB\u30FC\u30C9\u3092\u5F15\u304F"
+  nameEN: draw two cards
   information: 
   tiar: 2
   icon: {fileID: 21300000, guid: 6bbe44310535f43768ed03213b8e520d, type: 3}

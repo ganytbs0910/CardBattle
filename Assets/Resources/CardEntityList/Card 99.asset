@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 99
   name: "\u9632\u5FA1\u529B\u304C3\u5897\u52A0"
+  nameJP: "\u9632\u5FA1\u529B\u304C3\u5897\u52A0"
+  nameEN: Defense power increases by 3
   information: 
   tiar: 5
   icon: {fileID: 21300000, guid: 27e5fc7bf572f4a43be6798a41d06de7, type: 3}

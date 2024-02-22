@@ -9,10 +9,12 @@ public class CardEntity : ScriptableObject
 {
     public int cardID;
     public new string name;
+    public string nameJP;
+    public string nameEN;
     [TextArea(1, 3)]
     public string information;
     [Range(1, 6)]
-    public int tiar =1;
+    public int tiar = 1;
     public Sprite icon;
     public Action<CardModel> effect;
 
@@ -30,7 +32,7 @@ public class CardEntity : ScriptableObject
     public ParticleSystem particle = null;
 
     public enum ParticlePosition
-    { 
+    {
         Top,
         Center,
         Bottom,

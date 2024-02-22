@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 22
   name: "\u6575\u306E\u9632\u5FA1\u529B\u3092\u4E0B\u3052\u308B"
+  nameJP: "\u6575\u306E\u9632\u5FA1\u529B\u3092\u4E0B\u3052\u308B"
+  nameEN: lower enemy's defense power
   information: 
   tiar: 1
   icon: {fileID: 1095960425, guid: 674ff6575ae04ae49801cac08dd65e95, type: 3}

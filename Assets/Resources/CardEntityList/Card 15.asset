@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardID: 15
   name: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u9632\u5FA1\u529B\u309210%\u4E0A\u3052\u308B"
+  nameJP: "\u30D7\u30EC\u30A4\u30E4\u30FC\u306E\u9632\u5FA1\u529B\u309210%\u4E0A\u3052\u308B"
+  nameEN: Increases player's defense power by 10%
   information: 
   tiar: 2
   icon: {fileID: -1790223000, guid: 5a6f79a0ba1bf874e9e74194973f05ba, type: 3}
