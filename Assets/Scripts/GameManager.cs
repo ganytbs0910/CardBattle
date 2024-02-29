@@ -453,14 +453,27 @@ public class GameManager : MonoBehaviour
                         case 2: randomIndex = UnityEngine.Random.Range(11, 15); break;
                         // 31~39の場合の処理
                         case 3: randomIndex = UnityEngine.Random.Range(16, 20); break;
+                        //それ以外の処理
+                        default: randomIndex = UnityEngine.Random.Range(0, 20); break;
                     }
 
                     // 敵のインスタンス化とステータスの調整
-                    newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
-                    newEnemy.GetComponent<EnemyController>().maxHp *= stageHierarchy % 10 / 10 + 1;
-                    newEnemy.GetComponent<EnemyController>().attack *= stageHierarchy % 10 / 10 + 1;
-                    newEnemy.GetComponent<EnemyController>().defense *= stageHierarchy % 10 / 10 + 1;
-                    newEnemy.transform.SetParent(enemiesParent.transform);
+                    if (stageHierarchy < 40)
+                    {
+                        newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+                        newEnemy.GetComponent<EnemyController>().maxHp *= stageHierarchy % 10 / 10 + 1;
+                        newEnemy.GetComponent<EnemyController>().attack *= stageHierarchy % 10 / 10 + 1;
+                        newEnemy.GetComponent<EnemyController>().defense *= stageHierarchy % 10 / 10 + 1;
+                        newEnemy.transform.SetParent(enemiesParent.transform);
+                    }
+                    else
+                    {
+                        newEnemy = Instantiate(enemyPrefab[randomIndex], enemySpawnPoints[i].position, enemySpawnPoints[i].rotation);
+                        newEnemy.GetComponent<EnemyController>().maxHp = stageHierarchy * 15;
+                        newEnemy.GetComponent<EnemyController>().attack = stageHierarchy;
+                        newEnemy.GetComponent<EnemyController>().defense = stageHierarchy - 25;
+                        newEnemy.transform.SetParent(enemiesParent.transform);
+                    }
                 }
                 break;
         }
@@ -555,9 +568,9 @@ public class GameManager : MonoBehaviour
     }
 
     //次のステージへ移行する
-    public void NextStage()
+    public void NextStage(int value = 1)
     {
-        stageHierarchy++;
+        stageHierarchy += value;
         PlayerPrefs.SetInt("StageHierarchy", stageHierarchy);
         int count = UnityEngine.Random.Range(PlayerPrefs.GetInt("MinDrawCard"), PlayerPrefs.GetInt("MaxDrawCard") + 1);
         for (int i = 0; i < count; i++)
@@ -678,6 +691,11 @@ public class GameManager : MonoBehaviour
         else if (stageHierarchy <= 30) probabilities = new float[] { 65f, 17f, 10f, 5f, 2f, 1f };
         // Stage 31~40までの確率
         else if (stageHierarchy <= 40) probabilities = new float[] { 55f, 20f, 10f, 7f, 5f, 3f };
+        // それ以降の処理
+        else
+        {
+            probabilities = new float[] { 50f, 20f, 10f, 9f, 7f, 4f };
+        }
 
         // 乱数を1から100の間で生成してtiarを決定
         float randomValue = UnityEngine.Random.Range(1, 101); // 1から100までの乱数

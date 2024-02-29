@@ -161,36 +161,20 @@ public class PortalController : MonoBehaviour
         switch (currentPortal)
         {
             case 1:
-                if (levelClear[0])
-                {
-                    LeavePortal();
-                }
-                else
-                { UIManager.instance.HeroMessageDetail("未開放ポータル"); }
+                if (levelClear[0]) LeavePortal();
+                else UIManager.instance.HeroMessageDetail("未開放ポータル");
                 break;
             case 2:
-                if (levelClear[1])
-                {
-                    LeavePortal();
-                }
-                else
-                { UIManager.instance.HeroMessageDetail("未開放ポータル"); }
+                if (levelClear[1]) LeavePortal();
+                else UIManager.instance.HeroMessageDetail("未開放ポータル");
                 break;
             case 3:
-                if (levelClear[2])
-                {
-                    LeavePortal();
-                }
-                else
-                { UIManager.instance.HeroMessageDetail("未開放ポータル"); }
+                if (levelClear[2]) LeavePortal();
+                else UIManager.instance.HeroMessageDetail("未開放ポータル");
                 break;
             case 4:
-                if (levelClear[3])
-                {
-                    LeavePortal();
-                }
-                else
-                { UIManager.instance.HeroMessageDetail("未開放ポータル"); }
+                if (levelClear[3]) LeavePortal();
+                else UIManager.instance.HeroMessageDetail("未開放ポータル");
                 break;
         }
     }
@@ -271,10 +255,10 @@ public class PortalController : MonoBehaviour
         });
         sequence.Play();
 
-
         //GameManager.instance.SpawnEnemies();
         GameManager.instance.SpawnPlayer();
         GameManager.instance.PortalMovement(GameManager.instance.stageHierarchy);
+
     }
 
 

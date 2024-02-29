@@ -15,6 +15,6 @@ MonoBehaviour:
   collectionID: 22
   nameJP: "\u6226\u3044\u306E\u5B9D\u77F3"
   nameEN: battle gem
-  informationJP: "\u653B\u6483\u306B\u56DE\u5FA9\u52B9\u679C\u304C\u4ED8\u4E0E\u3055\u308C\u308B"
+  informationJP: "\u653B\u6483\u3059\u308B\u306810%\u306E\u78BA\u7387\u3067HP\u304C3\u56DE\u5FA9\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
   informationEN: Adds recovery effect to attack
   icon: {fileID: -217046095, guid: b2713bbf286ea3b4d8cf4478d348ee16, type: 3}

@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public bool isDropRateUp = false;
     public bool battleStartHeal = false;
     public Weapon defaultWeapon = null;
+    public bool isHealingSword = false;
     bool canGetHitAnim = true;
     //武器の装備箇所
     [SerializeField] Transform rightHandTransform = null;
@@ -68,7 +69,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Armor currentArmor = null;
     [SerializeField] Armor currentBackpack = null;
     //BoxCollider weaponCollider;
-    bool isHealingSword = false;
 
     //public GameObject NoWeapon_r;
     //public GameObject NoWeapon_l;
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         isAttacking = false;
         CantMove = false;
         // コレクションの効果を反映
-        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
+        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount + 1; i++)
         {
             // カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
@@ -217,12 +217,13 @@ public class PlayerController : MonoBehaviour
                 {
                     Attack();
                     if (!isHealingSword) return;
-                    //回復の剣の効果
-                    if (Random.Range(0, 100) < 10)
+                    //回復の剣の効果で10%の確率でHPが3回復
+                    if (Random.Range(0, 101) < 10)
                     {
-                        HPHeal(1);
+                        SwordAttackHeal(3);
                     }
                 }
+
                 else//攻撃までのインターバル中
                 {
                     Defend(); // 防御
@@ -248,7 +249,7 @@ public class PlayerController : MonoBehaviour
     void CollectionFirstEffect()
     {
         // コレクションの効果を反映
-        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount; i++)
+        for (int i = 1; i < UIManager.instance.collectionContent.transform.childCount + 1; i++)
         {
             // カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
@@ -271,9 +272,9 @@ public class PlayerController : MonoBehaviour
                     case 14: DefenseUp(3); break;
                     case 15: StartCoinHave(300); break;
                     case 16: AttackIntervalUp(0.1f); break;
-                    case 17: CloneHPUp(5); break;
-                    case 18: CloneAttackUp(5); break;
-                    case 19: CloneDefenseUp(5); break;
+                    case 17: CloneHPUp(2); break;
+                    case 18: CloneAttackUp(2); break;
+                    case 19: CloneDefenseUp(2); break;
                     case 20: AllStatusUp(5); break;
                     case 21: battleStartHeal = true; break;
                     case 22: AttackHealAdd(); break;
@@ -304,9 +305,9 @@ public class PlayerController : MonoBehaviour
             case 14: DefenseUp(3); break;
             case 15: StartCoinHave(300); break;
             case 16: AttackIntervalUp(0.1f); break;
-            case 17: CloneHPUp(5); break;
-            case 18: CloneAttackUp(5); break;
-            case 19: CloneDefenseUp(5); break;
+            case 17: CloneHPUp(2); break;
+            case 18: CloneAttackUp(2); break;
+            case 19: CloneDefenseUp(2); break;
             case 20: AllStatusUp(5); break;
             case 21: battleStartHeal = true; break;
             case 22: AttackHealAdd(); break;
@@ -805,7 +806,6 @@ public class PlayerController : MonoBehaviour
         //damegeが0.9~1.2倍になる（不要なら外す）
         damage = (int)(damage * Random.Range(0.9f, 1.2f));
         sumDamage = damage - (int)(defense * addDefenseRate);
-        Debug.Log("元々のダメージ" + damage + "最終のプレイヤーへのダメージ：" + sumDamage);
         if (sumDamage <= 0)
         {
             sumDamage = 0;
@@ -1208,17 +1208,25 @@ public class PlayerController : MonoBehaviour
         {
             hp = maxHp;
         }
-
-        //回復アニメ
-        if (isHealingSword != true)
-        {
-            animator.SetTrigger("Drink");
-        }
+        animator.SetTrigger("Drink");
         //Sliderを修正
         playerUIManager.UpdateHP(maxHp, hp);
 
         AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
-
+    }
+    //階層が始まるとHPが3回復
+    public void SwordAttackHeal(int value)
+    {
+        hp += value;
+        if (hp > maxHp)
+        {
+            hp = maxHp;
+        }
+        playerUIManager.UpdateHP(maxHp, hp);
+        ParticleSystem healEffectClone = Instantiate(healEffect, transform.position, Quaternion.identity);
+        healEffectClone.Play();
+        Destroy(healEffectClone.gameObject, healEffectClone.main.duration);
+        AudioManager.instance.PlaySE(AudioManager.SE.Regeneration);
     }
 
     void MPHeal(int value)
@@ -1348,7 +1356,6 @@ public class PlayerController : MonoBehaviour
 
         AudioManager.instance.PlaySE(AudioManager.SE.PowerUp);
     }
-
     //階層が始まるとHPが3回復
     public void StartHierarchyHeal(int value)
     {
@@ -1365,6 +1372,7 @@ public class PlayerController : MonoBehaviour
         healEffectClone.Play();
         Destroy(healEffectClone.gameObject, healEffectClone.main.duration);
     }
+
 
     //攻撃に回復効果が付与
     void AttackHealAdd()

@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
 
     public ParticleSystem attackEffect = null;
     public ParticleSystem getHitEffect = null;
-    public GameObject effectCollider = null;
+    //public GameObject effectCollider = null;
 
     void Start()
     {
@@ -686,7 +686,7 @@ public class EnemyController : MonoBehaviour
     {
         if (attackEffect != null)
         {
-            effectCollider.SetActive(true);
+            //effectCollider.SetActive(true);
             attackEffect.Play();
         }
     }
@@ -707,7 +707,7 @@ public class EnemyController : MonoBehaviour
     {
         if (attackEffect != null)
         {
-            effectCollider.SetActive(false);
+            //effectCollider.SetActive(false);
             attackEffect.Stop();
         }
     }

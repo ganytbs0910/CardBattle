@@ -29,7 +29,7 @@ public class DrawCardController : MonoBehaviour
         if (!PlayerPrefs.HasKey("Tutorial"))
         {
             //敵のHPダウン
-            DrawCard(9); ;
+            DrawCard(9);
             //複製カード
             DrawCard(1);
             return;
@@ -168,6 +168,14 @@ public class DrawCardController : MonoBehaviour
                 anim.runtimeAnimatorController = outlineAnimators[5];
                 break;
 
+        }
+    }
+
+    public void DebugDrawCardFull()
+    {
+        for (int i = 0; i < maximumCardNumber; i++)
+        {
+            DrawCard();
         }
     }
 }

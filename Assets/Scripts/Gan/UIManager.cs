@@ -324,14 +324,14 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void Loading()
+    public void Loading(int value = 1)
     {
-        StartCoroutine(LoadingCoroutine());
+        StartCoroutine(LoadingCoroutine(value));
     }
 
-    IEnumerator LoadingCoroutine()
+    IEnumerator LoadingCoroutine(int value = 1)
     {
-        GameManager.instance.NextStage();
+        GameManager.instance.NextStage(value);
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         loadPanel.SetActive(true);
         loadPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
@@ -408,8 +408,6 @@ public class UIManager : MonoBehaviour
         //読み込みを行う
         Loading();
         AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
-
-
     }
 
     public void WinPanel()
@@ -520,7 +518,7 @@ public class UIManager : MonoBehaviour
     public void CollectionCardUpdate(int id = 0)
     {
         //コレクションのカードを更新
-        for (int i = 1; i < collectionContent.transform.childCount; i++)
+        for (int i = 1; i < collectionContent.transform.childCount + 1; i++)
         {
             //カードを所持していたら...以下の処理を行う
             if (PlayerPrefs.HasKey($"Collection{i}"))
@@ -585,10 +583,10 @@ public class UIManager : MonoBehaviour
         switch (PlayerPrefs.GetString("Language"))
         {
             case "Japanese":
-                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\nHP倍率 : {hpRate}倍\n\n合計体力 : {(int)maxHp * hpRate}\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n合計攻撃力 : {(int)attack * attackRate}\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n合計防御力{(int)defense * defenseRate}\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}\n\n剣 : {weaponText}\n\n頭 : {headText}\n\nアーマー : {armorText}\n\nリュックサック : {backpackText}";
+                statusCheckText.text = $"現在の階層 : {PlayerPrefs.GetInt("StageHierarchy")}階層\n\n最大HP : {maxHp}\n\nHP倍率 : {hpRate}倍\n\n合計体力 : {(int)(maxHp * hpRate)}\n\n攻撃力 : {attack}\n\n攻撃倍率 : {attackRate}倍\n\n合計攻撃力 : {(int)(attack * attackRate)}\n\n防御力 : {defense}\n\n防御倍率 : {defenseRate}倍\n\n合計防御力{(int)(defense * defenseRate)}\n\n回避率 : {avoidance}%\n\nプレイヤーの移動速度 : {moveSpeed}\n\n剣 : {weaponText}\n\n頭 : {headText}\n\nアーマー : {armorText}\n\nリュックサック : {backpackText}";
                 break;
             case "English":
-                statusCheckText.text = $"Current stage : {PlayerPrefs.GetInt("StageHierarchy")}F\n\nMax HP : {maxHp}\n\nHP rate : {hpRate} times\n\nTotal HP : {(int)maxHp * hpRate}\n\nAttack : {attack}\n\nAttack rate : {attackRate} times\n\nTotal attack : {(int)attack * attackRate}\n\nDefense : {defense}\n\nDefense rate : {defenseRate} times\n\nTotal defense : {(int)defense * defenseRate}\n\nAvoidance : {avoidance}%\n\nPlayer's move speed : {moveSpeed}\n\nWeapon : {weaponText}\n\nHead : {headText}\n\nArmor : {armorText}\n\nBackpack : {backpackText}";
+                statusCheckText.text = $"Current stage : {PlayerPrefs.GetInt("StageHierarchy")}F\n\nMax HP : {maxHp}\n\nHP rate : {hpRate} times\n\nTotal HP : {(int)(maxHp * hpRate)}\n\nAttack : {attack}\n\nAttack rate : {attackRate} times\n\nTotal attack : {(int)(attack * attackRate)}\n\nDefense : {defense}\n\nDefense rate : {defenseRate} times\n\nTotal defense : {(int)(defense * defenseRate)}\n\nAvoidance : {avoidance}%\n\nPlayer's move speed : {moveSpeed}\n\nWeapon : {weaponText}\n\nHead : {headText}\n\nArmor : {armorText}\n\nBackpack : {backpackText}";
                 break;
         }
     }
@@ -1074,5 +1072,41 @@ public class UIManager : MonoBehaviour
                 clearDetailText.text = "I can't believe someone has cleared it.\nYou're quite a fighter.\n\nWe are developing further hierarchies, new enemies, and skill cards.\n\nWe would like to ask for your support in the form of reviews and spreading the word on SNS to improve our development costs and motivation.\n\nLet's meet again in another game.\n\nI'm looking forward to your further success.\n\nGoodbye.";
                 break;
         }
+    }
+
+    /// <summary>
+    /// デバッグ用
+    /// </summary>
+    public void DebugCollectionFull()
+    {
+        for (int i = 1; i < collectionContent.transform.childCount + 1; i++)
+        {
+            if (PlayerPrefs.HasKey($"Collection{i}")) return;
+            PlayerPrefs.SetInt($"Collection{i}", 1);
+            UIManager.instance.CollectionCardUpdate(i);
+        }
+    }
+
+    public void DebugNextStageButton()
+    {
+        //フィールドにあるタグがEnemyのオブジェクトを全て破棄
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemy);
+        }
+        //読み込みを行う
+        Loading();
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
+    }
+    public void DebugTenUpStageButton()
+    {
+        //フィールドにあるタグがEnemyのオブジェクトを全て破棄
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemy);
+        }
+        //読み込みを行う
+        Loading(10);
+        AudioManager.instance.PlaySE(AudioManager.SE.ButtonClick);
     }
 }
