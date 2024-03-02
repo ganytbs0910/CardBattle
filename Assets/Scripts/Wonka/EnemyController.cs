@@ -358,7 +358,19 @@ public class EnemyController : MonoBehaviour
     public void GetHit()
     {
         PlayGetHitEffect();
-        animator.SetTrigger("GetHit");
+        //攻撃アニメーションを呼んでいたらそちらの処理を優先して呼ばれないように
+        if (isAttacking)
+        {
+            int a = Random.Range(0, 2);
+            if (a == 0)
+            {
+                animator.SetTrigger("GetHit");
+            }
+        }
+        else
+        {
+            animator.SetTrigger("GetHit");
+        }
     }
 
     //死亡
