@@ -7,6 +7,7 @@ using System;
 
 public class CardEntity : ScriptableObject
 {
+
     public int cardID;
     public new string name;
     public string nameJP;

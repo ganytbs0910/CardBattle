@@ -731,7 +731,6 @@ MonoBehaviour:
   missText: {fileID: 6173855531171155521}
   attackEffect: {fileID: 0}
   getHitEffect: {fileID: 8937386559117865193, guid: 07799b25da23d9c4d97a417f6f0d0f31, type: 3}
-  effectCollider: {fileID: 0}
 --- !u!54 &-2668620937051552002
 Rigidbody:
   m_ObjectHideFlags: 0
