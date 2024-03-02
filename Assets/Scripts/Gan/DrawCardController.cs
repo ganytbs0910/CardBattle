@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
-
 public class DrawCardController : MonoBehaviour
 {
     public int maximumCardNumber = 8;
@@ -56,7 +55,7 @@ public class DrawCardController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            DrawCard(35);
+            DrawCard(6);
         }
     }
 
@@ -112,13 +111,27 @@ public class DrawCardController : MonoBehaviour
             CardController card;
             CardModel cardModel;
 
-            // カードIDが指定されていない場合、フィルタリングされたリストからランダムに選択
             if (cardID == null)
             {
-                if (filteredCardEntities.Length > 0)
+                bool isValidCardSelected = false;
+                while (!isValidCardSelected && filteredCardEntities.Length > 0)
                 {
                     int randomIndex = Random.Range(0, filteredCardEntities.Length);
                     cardID = filteredCardEntities[randomIndex].cardID; // 仮定: CardEntityにはユニークなIDがある
+
+                    // もしカードIDが4または5ならば、もう一度引き直す
+                    if (cardID != 4 && cardID != 5)
+                    {
+                        isValidCardSelected = true;
+                    }
+                    else
+                    {
+                        Debug.Log("出てねぇよ");
+                    }
+                }
+
+                if (isValidCardSelected)
+                {
                     card = Instantiate(cardPrefab, parentPanel.transform);
                     card.name = $"Card_{cardID}";
                     card.Init(cardID.Value);
@@ -128,7 +141,7 @@ public class DrawCardController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("Tiar値に一致するカードがありません");
+                    Debug.LogWarning("有効なカードが選択されませんでした");
                 }
             }
             else
@@ -167,7 +180,6 @@ public class DrawCardController : MonoBehaviour
             case 6:
                 anim.runtimeAnimatorController = outlineAnimators[5];
                 break;
-
         }
     }
 

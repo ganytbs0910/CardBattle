@@ -257,6 +257,7 @@ public class ScreenRay : MonoBehaviour
                     }
 
                     targetObjects.Add(collider.gameObject);
+                    //もしcollider.gameObject.nameがShadowPlayerだったら色は変えない
                     SetColor(Color.green, collider.gameObject);
                     baseColor = false;
                     colorChangeIgnore = true;
