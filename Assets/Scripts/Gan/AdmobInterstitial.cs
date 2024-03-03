@@ -10,7 +10,7 @@ public class AdmobInterstitial : MonoBehaviour
     public static AdmobInterstitial instance;
     // これらの広告ユニットは、常にテスト広告を配信するように設定されています。
 #if UNITY_ANDROID
-  private string _adUnitId = "ca-app-pub-4317478239934902/4363664068";
+  private string _adUnitId = "ca-app-pub-7957458721094755/6598555525";
 #elif UNITY_IPHONE
   private string _adUnitId = "ca-app-pub-4317478239934902/4203881967";
 #else

@@ -358,6 +358,8 @@ public class EnemyController : MonoBehaviour
     public void GetHit()
     {
         PlayGetHitEffect();
+        animator.ResetTrigger("Idle");
+        animator.ResetTrigger("Move");
         animator.SetTrigger("GetHit");
     }
 
