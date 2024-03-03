@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 
+
 public class DrawCardController : MonoBehaviour
 {
     public int maximumCardNumber = 8;
@@ -120,7 +121,7 @@ public class DrawCardController : MonoBehaviour
                     cardID = filteredCardEntities[randomIndex].cardID; // 仮定: CardEntityにはユニークなIDがある
 
                     // もしカードIDが4または5ならば、もう一度引き直す
-                    if (cardID != 4 && cardID != 5)
+                    if (cardID != 4 && cardID != 5 && cardID != 7)
                     {
                         isValidCardSelected = true;
                     }
