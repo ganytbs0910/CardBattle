@@ -77,9 +77,18 @@ public class ScreenRay : MonoBehaviour
             {
                 return;
             }
-
+            
             targetMarker.SetActive(false);
             Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
+            //collidersの中にPlayerというタグの数の分だけint型を保存する
+            int playerCount = 0;
+            foreach (Collider collider in colliders)
+            {
+                if (collider.gameObject.tag == "Player")
+                {
+                    playerCount++;
+                }
+            }
             foreach (Collider collider in colliders)
             {
                 //もしPlayerタグを持っているオブジェクトに当たったら
@@ -88,7 +97,7 @@ public class ScreenRay : MonoBehaviour
                     Destroy(chooseCard);
                     UIManager.instance.HeroMessageDetail("自身強化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
-                    collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID);
+                    collider.gameObject.GetComponent<PlayerController>().GetCardEffect(cardID, playerCount);
 
                     if (weapon != null) //武器カードだったら直接ここで装備させる
                     {
@@ -257,6 +266,7 @@ public class ScreenRay : MonoBehaviour
                     }
 
                     targetObjects.Add(collider.gameObject);
+                    //もしcollider.gameObject.nameがShadowPlayerだったら色は変えない
                     SetColor(Color.green, collider.gameObject);
                     baseColor = false;
                     colorChangeIgnore = true;
@@ -283,6 +293,7 @@ public class ScreenRay : MonoBehaviour
     {
         foreach (GameObject target in targetObjects)
         {
+            if (target.gameObject.name == "ShadowPlayer") return;
             SetColor(Color.white, target);
         }
         targetObjects.Clear();
@@ -292,6 +303,7 @@ public class ScreenRay : MonoBehaviour
     {
         //色を白に戻す
         Renderer[] renderers = target.GetComponentsInChildren<Renderer>();
+        if (target.gameObject.name == "ShadowPlayer") return;
         foreach (Renderer renderer in renderers)
         {
             renderer.material.color = color;
