@@ -9,6 +9,28 @@ public class MixerController : MonoBehaviour
 
     void Start()
     {
+        //もし値がなければ初期を与える
+        if (!PlayerPrefs.HasKey("Master"))
+        {
+            PlayerPrefs.SetFloat("Master", 0.4f);
+            PlayerPrefs.Save();
+        }
+        if (!PlayerPrefs.HasKey("BGM"))
+        {
+            PlayerPrefs.SetFloat("BGM", 0.4f);
+            PlayerPrefs.Save();
+        }
+        if (!PlayerPrefs.HasKey("SE"))
+        {
+            PlayerPrefs.SetFloat("SE", 0.4f);
+            PlayerPrefs.Save();
+        }
+        if (!PlayerPrefs.HasKey("Voice"))
+        {
+            PlayerPrefs.SetFloat("Voice", 0.4f);
+            PlayerPrefs.Save();
+        }
+        
         // ゲーム開始時に各スライダーを初期化し、AudioMixerと連動させる
         InitializeSlider(masterSlider, "Master", PlayerPrefs.GetFloat("Master")); // MasterVolumeパラメータに関連付ける
         InitializeSlider(bgmSlider, "BGM", PlayerPrefs.GetFloat("BGM")); // BGMVolumeパラメータに関連付ける

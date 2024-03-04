@@ -894,6 +894,10 @@ public class PlayerController : MonoBehaviour
             {
                 weaponCollider.enabled = true;
             }
+            if (noWeaponCols != null)
+            {
+                noWeaponCols.enabled = true;
+            }
         }
         else
         {
@@ -912,6 +916,10 @@ public class PlayerController : MonoBehaviour
             if (weaponCollider != null)
             {
                 weaponCollider.enabled = false;
+            }
+            if (noWeaponCols != null)
+            {
+                noWeaponCols.enabled = false;
             }
         }
         else
