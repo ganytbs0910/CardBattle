@@ -134,7 +134,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.02.4
+  bundleVersion: 1.02.5
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -916,11 +916,12 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 6447d647-7a5b-4ac1-b2b8-65e7a6ddd30d
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: "\u30AB\u30FC\u30C9\u30D0\u30C8\u30EB\u30C0\u30F3\u30B8\u30E7\u30F3\u30BA
+    (1)"
+  organizationId: nakakou2002
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

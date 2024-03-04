@@ -8,6 +8,7 @@ using System.Linq;
 
 public class DrawCardController : MonoBehaviour
 {
+    public int debugDrawCardID;
     public int maximumCardNumber = 8;
     public static DrawCardController instance;
 
@@ -56,7 +57,7 @@ public class DrawCardController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            DrawCard(6);
+            DrawCard(debugDrawCardID);
         }
     }
 
