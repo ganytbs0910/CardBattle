@@ -1,0 +1,1185 @@
+﻿#include "pch-c.h"
+#ifndef _MSC_VER
+# include <alloca.h>
+#else
+# include <malloc.h>
+#endif
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+// 0x00000001 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackBloom_HDRP::get_FeedbackDuration()
+extern void MMFeedbackBloom_HDRP_get_FeedbackDuration_m7447EE817BB0F086500E472C9EA62B296293C94C (void);
+// 0x00000002 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackBloom_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackBloom_HDRP_set_FeedbackDuration_m6889C6F38A830EF9347B741DCB2400A094B6925B (void);
+// 0x00000003 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackBloom_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackBloom_HDRP_CustomPlayFeedback_m40B3E6F94B7F73C229ED0913D4620B873714FA38 (void);
+// 0x00000004 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackBloom_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackBloom_HDRP_CustomStopFeedback_m44230EF52F612C7FD14CEC414BA6346B9DF2877F (void);
+// 0x00000005 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackBloom_HDRP::.ctor()
+extern void MMFeedbackBloom_HDRP__ctor_m9D37742B641E270B180E4ABA4A6C638E26658E60 (void);
+// 0x00000006 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackBloom_HDRP::.cctor()
+extern void MMFeedbackBloom_HDRP__cctor_m0FB5CB6772166176393046B5F9834740D8793118 (void);
+// 0x00000007 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackChannelMixer_HDRP::get_FeedbackDuration()
+extern void MMFeedbackChannelMixer_HDRP_get_FeedbackDuration_m8C2A4A81B489D8DF84DCCD29F9686CD3A692D558 (void);
+// 0x00000008 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChannelMixer_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackChannelMixer_HDRP_set_FeedbackDuration_mA037C8379EFA72B3DBD218794C6ED85AF1785E0D (void);
+// 0x00000009 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChannelMixer_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackChannelMixer_HDRP_CustomPlayFeedback_m41FCF42D2DBFC9F6865E8FA029157E18444E25D1 (void);
+// 0x0000000A System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChannelMixer_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackChannelMixer_HDRP_CustomStopFeedback_m1940CFE3260B5558DB6CDD5B0D134E932DEA04A2 (void);
+// 0x0000000B System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChannelMixer_HDRP::.ctor()
+extern void MMFeedbackChannelMixer_HDRP__ctor_m90F26F158CB608C57D7782901775DAD8706CE8B3 (void);
+// 0x0000000C System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChannelMixer_HDRP::.cctor()
+extern void MMFeedbackChannelMixer_HDRP__cctor_m256DE81A82053E7204DA2684E906704C656E8B85 (void);
+// 0x0000000D System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackChromaticAberration_HDRP::get_FeedbackDuration()
+extern void MMFeedbackChromaticAberration_HDRP_get_FeedbackDuration_m8EE823BA0BF373DB32376A4781CA3BB149AD889C (void);
+// 0x0000000E System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChromaticAberration_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackChromaticAberration_HDRP_set_FeedbackDuration_mA1F57691EAFCF378E8C3649677C13A50210341E0 (void);
+// 0x0000000F System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChromaticAberration_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackChromaticAberration_HDRP_CustomPlayFeedback_m786BE0C5EEC3F5D41E643D3056C6E2E0AD81A046 (void);
+// 0x00000010 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChromaticAberration_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackChromaticAberration_HDRP_CustomStopFeedback_m9D0D39C5446E8E67094369F26A2F474C5FF78792 (void);
+// 0x00000011 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChromaticAberration_HDRP::.ctor()
+extern void MMFeedbackChromaticAberration_HDRP__ctor_m580D47E71B89E0440D6431A65041EC3222507734 (void);
+// 0x00000012 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackChromaticAberration_HDRP::.cctor()
+extern void MMFeedbackChromaticAberration_HDRP__cctor_mB4C0C34ACEB393A85B0716B0DB511452B21A9C42 (void);
+// 0x00000013 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackColorAdjustments_HDRP::get_FeedbackDuration()
+extern void MMFeedbackColorAdjustments_HDRP_get_FeedbackDuration_mC276E75744908FCD38D1B64E39E0B6FE5815E877 (void);
+// 0x00000014 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackColorAdjustments_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackColorAdjustments_HDRP_set_FeedbackDuration_m3244EE22A0F19054E33C9076ECC88975B960A4CC (void);
+// 0x00000015 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackColorAdjustments_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackColorAdjustments_HDRP_CustomPlayFeedback_mC61A1C1243C890D5D7F291E71E2B1289B5D61804 (void);
+// 0x00000016 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackColorAdjustments_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackColorAdjustments_HDRP_CustomStopFeedback_mDC15C94FEE7C306911F0FE0B9113B302EF684694 (void);
+// 0x00000017 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackColorAdjustments_HDRP::.ctor()
+extern void MMFeedbackColorAdjustments_HDRP__ctor_m6C06943A341DBE654D27D952689CCABED7205CD6 (void);
+// 0x00000018 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackColorAdjustments_HDRP::.cctor()
+extern void MMFeedbackColorAdjustments_HDRP__cctor_mB71523DE5180D6B4781D821D8D421AA7B8DFEC4D (void);
+// 0x00000019 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackExposure_HDRP::get_FeedbackDuration()
+extern void MMFeedbackExposure_HDRP_get_FeedbackDuration_mA19478BBE0FA043DE7B0E228C6FC312A3A6C8A77 (void);
+// 0x0000001A System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackExposure_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackExposure_HDRP_set_FeedbackDuration_m233F29BD602A5D5F86FAE7669A2808C21F15321F (void);
+// 0x0000001B System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackExposure_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackExposure_HDRP_CustomPlayFeedback_m25157A6CAD106B71A217A0E4D9B34F1984B1C545 (void);
+// 0x0000001C System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackExposure_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackExposure_HDRP_CustomStopFeedback_m5C1670E6E2684C81592C1D36DFD7A81CE583CE2B (void);
+// 0x0000001D System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackExposure_HDRP::.ctor()
+extern void MMFeedbackExposure_HDRP__ctor_m1E6C12ADDEED7CD84CF55AA0B98408EBE4DCF823 (void);
+// 0x0000001E System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackExposure_HDRP::.cctor()
+extern void MMFeedbackExposure_HDRP__cctor_m2B2C3983009D7DCE4A5A0B3FEEDA0614F6EF038F (void);
+// 0x0000001F System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackFilmGrain_HDRP::get_FeedbackDuration()
+extern void MMFeedbackFilmGrain_HDRP_get_FeedbackDuration_mDE235B5B113B9CA58B7E49C7C17067F26120B3E1 (void);
+// 0x00000020 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackFilmGrain_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackFilmGrain_HDRP_set_FeedbackDuration_m7BC4419EA8D8804A8B53E1C42F68D95CE1888DC3 (void);
+// 0x00000021 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackFilmGrain_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackFilmGrain_HDRP_CustomPlayFeedback_m9BA2C19CC51DD3FF3E2E5D9A5534A77900DC558A (void);
+// 0x00000022 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackFilmGrain_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackFilmGrain_HDRP_CustomStopFeedback_mB58BC6B47B718CE726A1E457F975351A3B6BC203 (void);
+// 0x00000023 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackFilmGrain_HDRP::.ctor()
+extern void MMFeedbackFilmGrain_HDRP__ctor_m6CF0CF5F7D716B6C151890BC3BAB5F102EE4228B (void);
+// 0x00000024 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackFilmGrain_HDRP::.cctor()
+extern void MMFeedbackFilmGrain_HDRP__cctor_mC785DBA4047E638EB08C7C845C8BE2486D4DDA2E (void);
+// 0x00000025 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackLensDistortion_HDRP::get_FeedbackDuration()
+extern void MMFeedbackLensDistortion_HDRP_get_FeedbackDuration_mA2725439AAFFC99B37D80046AAD35CFDB30D0393 (void);
+// 0x00000026 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackLensDistortion_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackLensDistortion_HDRP_set_FeedbackDuration_m759ACE2521ABAA0922673BBE7E3F198575B5D930 (void);
+// 0x00000027 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackLensDistortion_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackLensDistortion_HDRP_CustomPlayFeedback_m5ADADCB03616E5C6860D07D8A77239601F40476C (void);
+// 0x00000028 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackLensDistortion_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackLensDistortion_HDRP_CustomStopFeedback_mAF954B08E4EBB4207A900E806ADB8459A6A67E20 (void);
+// 0x00000029 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackLensDistortion_HDRP::.ctor()
+extern void MMFeedbackLensDistortion_HDRP__ctor_m8AE27FE3D6749D06D8575D14736370ADD812AA26 (void);
+// 0x0000002A System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackLensDistortion_HDRP::.cctor()
+extern void MMFeedbackLensDistortion_HDRP__cctor_m3E35217D44B30E6722DBF35CA8A4D1F6C37272E2 (void);
+// 0x0000002B System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackMotionBlur_HDRP::get_FeedbackDuration()
+extern void MMFeedbackMotionBlur_HDRP_get_FeedbackDuration_m1F9DE054D6FE30212099AE38D44267184D161DA5 (void);
+// 0x0000002C System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackMotionBlur_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackMotionBlur_HDRP_set_FeedbackDuration_m46948812A33FE18610310AFC7706A0CD35C4F0B6 (void);
+// 0x0000002D System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackMotionBlur_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackMotionBlur_HDRP_CustomPlayFeedback_m42CC7042FCB84423EC3A83B68030BC5FF8923861 (void);
+// 0x0000002E System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackMotionBlur_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackMotionBlur_HDRP_CustomStopFeedback_m09E1914C68F69611880E48D9724C591306E20E17 (void);
+// 0x0000002F System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackMotionBlur_HDRP::.ctor()
+extern void MMFeedbackMotionBlur_HDRP__ctor_m2A9F99EB73B19337AB8A23093533264B0F7E0A02 (void);
+// 0x00000030 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackMotionBlur_HDRP::.cctor()
+extern void MMFeedbackMotionBlur_HDRP__cctor_m31706E3E23EA61C703F7B77C165E30F520CBA983 (void);
+// 0x00000031 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackPaniniProjection_HDRP::get_FeedbackDuration()
+extern void MMFeedbackPaniniProjection_HDRP_get_FeedbackDuration_m3276B71DC7C02577E9BEA50607C21370C6B4F2C5 (void);
+// 0x00000032 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackPaniniProjection_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackPaniniProjection_HDRP_set_FeedbackDuration_mAC894AB19FEF33803AB137CF907EF86D52A334B3 (void);
+// 0x00000033 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackPaniniProjection_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackPaniniProjection_HDRP_CustomPlayFeedback_m27FDB279120B9B01269FDC305412168616716E7E (void);
+// 0x00000034 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackPaniniProjection_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackPaniniProjection_HDRP_CustomStopFeedback_m15C6BB9EBA024D00656633CED9FC9ACF2DAB5E3A (void);
+// 0x00000035 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackPaniniProjection_HDRP::.ctor()
+extern void MMFeedbackPaniniProjection_HDRP__ctor_mB667C416B3996218C8437A9342924BE9CC8D5C58 (void);
+// 0x00000036 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackPaniniProjection_HDRP::.cctor()
+extern void MMFeedbackPaniniProjection_HDRP__cctor_m6FB18F62E8B61AEA9593D88B81CB8BF50692D434 (void);
+// 0x00000037 System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackVignette_HDRP::get_FeedbackDuration()
+extern void MMFeedbackVignette_HDRP_get_FeedbackDuration_m5458E1303D22DA8F084A579C91612FA020F70C85 (void);
+// 0x00000038 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackVignette_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackVignette_HDRP_set_FeedbackDuration_m8D92323B1B9C06D97E2F5F5D4FC63D0843A6CCE6 (void);
+// 0x00000039 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackVignette_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackVignette_HDRP_CustomPlayFeedback_m979D0DE2A507F8FF23D93F6150FF5FB46D827DAD (void);
+// 0x0000003A System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackVignette_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackVignette_HDRP_CustomStopFeedback_m943A182C0371AE9BDA00700460BF444F64F866B1 (void);
+// 0x0000003B System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackVignette_HDRP::.ctor()
+extern void MMFeedbackVignette_HDRP__ctor_m24E5D110C2921AD6F04227EC8DBAC0B48E293D96 (void);
+// 0x0000003C System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackVignette_HDRP::.cctor()
+extern void MMFeedbackVignette_HDRP__cctor_m6F5ECA0CE8879DB264AE685442C5DD8B2B965737 (void);
+// 0x0000003D System.Single MoreMountains.FeedbacksForThirdParty.MMFeedbackWhiteBalance_HDRP::get_FeedbackDuration()
+extern void MMFeedbackWhiteBalance_HDRP_get_FeedbackDuration_mE17211EAA8B2B11A3C3E02A6C1CC9E1E9C8C2A92 (void);
+// 0x0000003E System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackWhiteBalance_HDRP::set_FeedbackDuration(System.Single)
+extern void MMFeedbackWhiteBalance_HDRP_set_FeedbackDuration_mFE4F48BA9E2871200829EEBF16080274184D1465 (void);
+// 0x0000003F System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackWhiteBalance_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackWhiteBalance_HDRP_CustomPlayFeedback_m07C17B02B2D9A5EE30382CC10077835D452BA601 (void);
+// 0x00000040 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackWhiteBalance_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMFeedbackWhiteBalance_HDRP_CustomStopFeedback_m68DA6717DE21B24C6CC85094259A83C0B81D7F78 (void);
+// 0x00000041 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackWhiteBalance_HDRP::.ctor()
+extern void MMFeedbackWhiteBalance_HDRP__ctor_m08639EDD51B9414F9131899724C35045EAC52C18 (void);
+// 0x00000042 System.Void MoreMountains.FeedbacksForThirdParty.MMFeedbackWhiteBalance_HDRP::.cctor()
+extern void MMFeedbackWhiteBalance_HDRP__cctor_mAA7807F23C3063081DFF95640B2372901E393A13 (void);
+// 0x00000043 System.Single MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::get_FeedbackDuration()
+extern void MMF_Bloom_HDRP_get_FeedbackDuration_m286C52AA6A527A9DEEB9FFDE90A78D1576E7A1C0 (void);
+// 0x00000044 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_Bloom_HDRP_set_FeedbackDuration_m668B16FCED1C0380151CD8D0B5DB0B6B0731EF6E (void);
+// 0x00000045 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::get_HasChannel()
+extern void MMF_Bloom_HDRP_get_HasChannel_m8BCA444CD31CB96EBD663EF823ACFCE848140DBE (void);
+// 0x00000046 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::get_HasRandomness()
+extern void MMF_Bloom_HDRP_get_HasRandomness_mA2E4C99CDA87D85A44B9327D03B97ADBD2200A8A (void);
+// 0x00000047 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_Bloom_HDRP_CustomPlayFeedback_mDA8D0C28290DB71063F7534F0D3CB80B0670F2E9 (void);
+// 0x00000048 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_Bloom_HDRP_CustomStopFeedback_m0A5492C234009B9ACE27F6C9E857C45242EAAAC9 (void);
+// 0x00000049 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::CustomRestoreInitialValues()
+extern void MMF_Bloom_HDRP_CustomRestoreInitialValues_mFC50272C7ACD624476863FDAFC902396807364FC (void);
+// 0x0000004A System.Void MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::.ctor()
+extern void MMF_Bloom_HDRP__ctor_mDFCE713F8D63DD61315FA26B5B75B575FFF74DBE (void);
+// 0x0000004B System.Void MoreMountains.FeedbacksForThirdParty.MMF_Bloom_HDRP::.cctor()
+extern void MMF_Bloom_HDRP__cctor_m443E9A85495E1FF0B9FC8F724D5AA29AA21AE2A4 (void);
+// 0x0000004C System.Single MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::get_FeedbackDuration()
+extern void MMF_ChannelMixer_HDRP_get_FeedbackDuration_mDAC281D160F0F8EB6DA46BCE9602F2BF8D21D4A6 (void);
+// 0x0000004D System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_ChannelMixer_HDRP_set_FeedbackDuration_mDCA5F2B7B83AFD32A565CC3941CA83FB5F0BC9E8 (void);
+// 0x0000004E System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::get_HasChannel()
+extern void MMF_ChannelMixer_HDRP_get_HasChannel_mC636DFA9360745429198104F5B049681F75A7370 (void);
+// 0x0000004F System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::get_HasRandomness()
+extern void MMF_ChannelMixer_HDRP_get_HasRandomness_m5850B4CD0DEE33D5D8FD21E78D7FC7FA0782F779 (void);
+// 0x00000050 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_ChannelMixer_HDRP_CustomPlayFeedback_mCD4B30F5229F11113EFB2AA5A1F7C14DF9C2AA70 (void);
+// 0x00000051 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_ChannelMixer_HDRP_CustomStopFeedback_m259416760C90A4C0D559C3CF561A9C38B6BD49EB (void);
+// 0x00000052 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::CustomRestoreInitialValues()
+extern void MMF_ChannelMixer_HDRP_CustomRestoreInitialValues_mF81A1DD6DEED5E7F5DDDE0B6381657C34D9FE5F5 (void);
+// 0x00000053 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::.ctor()
+extern void MMF_ChannelMixer_HDRP__ctor_m24ABBCC841B5BFC4C00C7D02A9D02A020FB7E3B6 (void);
+// 0x00000054 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChannelMixer_HDRP::.cctor()
+extern void MMF_ChannelMixer_HDRP__cctor_mA25A216748592AE053731BFDB33B856ACD6417E3 (void);
+// 0x00000055 System.Single MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::get_FeedbackDuration()
+extern void MMF_ChromaticAberration_HDRP_get_FeedbackDuration_mD234C9DCDEEDA6B1700EDEA311A3D0BF8E86DCE9 (void);
+// 0x00000056 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_ChromaticAberration_HDRP_set_FeedbackDuration_mAAEA10F8E76BCCC3BBDF58B48974F98FE81AB29D (void);
+// 0x00000057 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::get_HasChannel()
+extern void MMF_ChromaticAberration_HDRP_get_HasChannel_mCF3A578C8F3D794B95FFB3EDFFA5D71CBB773514 (void);
+// 0x00000058 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::get_HasRandomness()
+extern void MMF_ChromaticAberration_HDRP_get_HasRandomness_m55250D4BCE1035247E07ACDBE3565A669AE2ACE8 (void);
+// 0x00000059 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_ChromaticAberration_HDRP_CustomPlayFeedback_mB35756C912F86E4C98F9118D4B28A1B098D8828D (void);
+// 0x0000005A System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_ChromaticAberration_HDRP_CustomStopFeedback_mDB47497ECDE95196243D082D8A45DBA646CA3FA9 (void);
+// 0x0000005B System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::CustomRestoreInitialValues()
+extern void MMF_ChromaticAberration_HDRP_CustomRestoreInitialValues_m63E3B38100D99D93D543F117AF0A28B7A414CF48 (void);
+// 0x0000005C System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::.ctor()
+extern void MMF_ChromaticAberration_HDRP__ctor_mF64FBF4ACD66F76A7205E753D1CB21AA5B68C448 (void);
+// 0x0000005D System.Void MoreMountains.FeedbacksForThirdParty.MMF_ChromaticAberration_HDRP::.cctor()
+extern void MMF_ChromaticAberration_HDRP__cctor_mA31A4C735BD335473A663A7EB5A1570BCDECC281 (void);
+// 0x0000005E System.Single MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::get_FeedbackDuration()
+extern void MMF_ColorAdjustments_HDRP_get_FeedbackDuration_m5B4AEB4987C821FE6FA94FE3D9B26E7F23349D29 (void);
+// 0x0000005F System.Void MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_ColorAdjustments_HDRP_set_FeedbackDuration_m70BFA847EB5D2F91539D8C1703DD32A151DD5EDD (void);
+// 0x00000060 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::get_HasChannel()
+extern void MMF_ColorAdjustments_HDRP_get_HasChannel_m119A3F15051C1E99C71DA30CF4E634901B085354 (void);
+// 0x00000061 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::get_HasRandomness()
+extern void MMF_ColorAdjustments_HDRP_get_HasRandomness_m2D2888982E231E371CE23A99370CDC01B7F4B399 (void);
+// 0x00000062 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_ColorAdjustments_HDRP_CustomPlayFeedback_m78B26261563BF809AFB7901446D3BE60D4FA6B42 (void);
+// 0x00000063 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_ColorAdjustments_HDRP_CustomStopFeedback_m66C3B7E0924B4E49E2FFB637DC77D44FED490A60 (void);
+// 0x00000064 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::CustomRestoreInitialValues()
+extern void MMF_ColorAdjustments_HDRP_CustomRestoreInitialValues_mDAE22235072739EBDA95B5F19EAB238B5D363C69 (void);
+// 0x00000065 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::.ctor()
+extern void MMF_ColorAdjustments_HDRP__ctor_mC8718AA0FADBEC1514A687127788ECD40F3ED1D0 (void);
+// 0x00000066 System.Void MoreMountains.FeedbacksForThirdParty.MMF_ColorAdjustments_HDRP::.cctor()
+extern void MMF_ColorAdjustments_HDRP__cctor_m2B84BF432650A1276C6C05E3ADD9F36D2D1281B2 (void);
+// 0x00000067 System.Single MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::get_FeedbackDuration()
+extern void MMF_Exposure_HDRP_get_FeedbackDuration_m8D54ADD6AF5833142AAC22A636027E23CDDA1290 (void);
+// 0x00000068 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_Exposure_HDRP_set_FeedbackDuration_mAEBD75D714AF4C0C27A08EF7649493F7657470F9 (void);
+// 0x00000069 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::get_HasChannel()
+extern void MMF_Exposure_HDRP_get_HasChannel_m03598848FDE5B1C499042F5E054B34ED2C657F88 (void);
+// 0x0000006A System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::get_HasRandomness()
+extern void MMF_Exposure_HDRP_get_HasRandomness_mE117DFEA41AE7052A2EFEE524813F225264F5FD1 (void);
+// 0x0000006B System.Void MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_Exposure_HDRP_CustomPlayFeedback_m3A0E58211B34A0BB10DF2027779451FE76EA9EF0 (void);
+// 0x0000006C System.Void MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_Exposure_HDRP_CustomStopFeedback_m40942A99DC9BD22D13976C02795CB4514848096E (void);
+// 0x0000006D System.Void MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::CustomRestoreInitialValues()
+extern void MMF_Exposure_HDRP_CustomRestoreInitialValues_m59E269082E6B0CFBEBDAA3836BB972E9852A53CC (void);
+// 0x0000006E System.Void MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::.ctor()
+extern void MMF_Exposure_HDRP__ctor_m7254DC1438910ADA9291937A1B78D5C984EE778A (void);
+// 0x0000006F System.Void MoreMountains.FeedbacksForThirdParty.MMF_Exposure_HDRP::.cctor()
+extern void MMF_Exposure_HDRP__cctor_m384A4E4C24F66111AC5284618C32E422BD2BBA09 (void);
+// 0x00000070 System.Single MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::get_FeedbackDuration()
+extern void MMF_FilmGrain_HDRP_get_FeedbackDuration_m6D5DD445070AE178EA5B32C87868642D017B784D (void);
+// 0x00000071 System.Void MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_FilmGrain_HDRP_set_FeedbackDuration_m25BAE2A212764A3B720813EAE829B4E921737E51 (void);
+// 0x00000072 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::get_HasChannel()
+extern void MMF_FilmGrain_HDRP_get_HasChannel_m0BAD468C14538307E400CFD6A6327BDFE54CEAE9 (void);
+// 0x00000073 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::get_HasRandomness()
+extern void MMF_FilmGrain_HDRP_get_HasRandomness_m4B4346FC59E1D7084AC227ED409E3A7033E14084 (void);
+// 0x00000074 System.Void MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_FilmGrain_HDRP_CustomPlayFeedback_m39A3D6672F05A93BDDB1C0D78C809B4D73C238F5 (void);
+// 0x00000075 System.Void MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_FilmGrain_HDRP_CustomStopFeedback_m06F8ACD663F6949CDF85C1DB2FC1D345E7861098 (void);
+// 0x00000076 System.Void MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::CustomRestoreInitialValues()
+extern void MMF_FilmGrain_HDRP_CustomRestoreInitialValues_m713AEA6A4F8BE5BDFCE9D4EBDBE5440217A70CD6 (void);
+// 0x00000077 System.Void MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::.ctor()
+extern void MMF_FilmGrain_HDRP__ctor_mAB88D20DB346996A0E042972DD1FC952BC14A42E (void);
+// 0x00000078 System.Void MoreMountains.FeedbacksForThirdParty.MMF_FilmGrain_HDRP::.cctor()
+extern void MMF_FilmGrain_HDRP__cctor_mFE3EA187F5EA44123376DC57780C0FDC784D8EE4 (void);
+// 0x00000079 System.Single MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::get_FeedbackDuration()
+extern void MMF_LensDistortion_HDRP_get_FeedbackDuration_mDEADE95E0805C2286EC54E3235365B4CDF3DF5C6 (void);
+// 0x0000007A System.Void MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_LensDistortion_HDRP_set_FeedbackDuration_m1F395678929910FB480C48BF0777636F241B127D (void);
+// 0x0000007B System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::get_HasChannel()
+extern void MMF_LensDistortion_HDRP_get_HasChannel_mB974AE8472FC63CC4FDC9EEC6273829B2EAC0790 (void);
+// 0x0000007C System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::get_HasRandomness()
+extern void MMF_LensDistortion_HDRP_get_HasRandomness_m091FC568B500FDC09CA27FA4D4AE0D2532164BDD (void);
+// 0x0000007D System.Void MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_LensDistortion_HDRP_CustomPlayFeedback_mC3A10FEF062B69C37900CB2FC11B1D66795B8559 (void);
+// 0x0000007E System.Void MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_LensDistortion_HDRP_CustomStopFeedback_m1E01B55EB0EE947D9432BBD1510914CC47350D53 (void);
+// 0x0000007F System.Void MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::CustomRestoreInitialValues()
+extern void MMF_LensDistortion_HDRP_CustomRestoreInitialValues_m9402B6168C6B3714B0C65EFD33E0B65FD2681872 (void);
+// 0x00000080 System.Void MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::.ctor()
+extern void MMF_LensDistortion_HDRP__ctor_mA10B4539A4BEA260D191AA8F0B9BC5C6602FDBF0 (void);
+// 0x00000081 System.Void MoreMountains.FeedbacksForThirdParty.MMF_LensDistortion_HDRP::.cctor()
+extern void MMF_LensDistortion_HDRP__cctor_m5BBC07CF11DD7B6B4949084079937F49539B197F (void);
+// 0x00000082 System.Single MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::get_FeedbackDuration()
+extern void MMF_MotionBlur_HDRP_get_FeedbackDuration_mABCB5E7727BE756DB9E75CEE4AFD575C6A40720E (void);
+// 0x00000083 System.Void MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_MotionBlur_HDRP_set_FeedbackDuration_m1863EA13A88C410C0C510DABFAA13DE8D02FFCD5 (void);
+// 0x00000084 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::get_HasChannel()
+extern void MMF_MotionBlur_HDRP_get_HasChannel_m3A56ACA69459B3CF196B6A9EEA4046F5AD57458D (void);
+// 0x00000085 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::get_HasRandomness()
+extern void MMF_MotionBlur_HDRP_get_HasRandomness_mC145454F5E4265D3E5D408D20B54CDEBE89039F4 (void);
+// 0x00000086 System.Void MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_MotionBlur_HDRP_CustomPlayFeedback_mA46C8DC39E50DC9B4EB0EDC5902BF046882C65BE (void);
+// 0x00000087 System.Void MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_MotionBlur_HDRP_CustomStopFeedback_m0E86C49FAAAB9532FD77BDF56365BA7B9242EB1B (void);
+// 0x00000088 System.Void MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::CustomRestoreInitialValues()
+extern void MMF_MotionBlur_HDRP_CustomRestoreInitialValues_m23EE1949E32107DD663B9C32F6DAA5CFB9FB4228 (void);
+// 0x00000089 System.Void MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::.ctor()
+extern void MMF_MotionBlur_HDRP__ctor_mD1AA4F45FB42AE283F574B9D4325E60243034A7C (void);
+// 0x0000008A System.Void MoreMountains.FeedbacksForThirdParty.MMF_MotionBlur_HDRP::.cctor()
+extern void MMF_MotionBlur_HDRP__cctor_m768496B5C5591E5713B6A7A908A9424BDE49857F (void);
+// 0x0000008B System.Single MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::get_FeedbackDuration()
+extern void MMF_PaniniProjection_HDRP_get_FeedbackDuration_mC129D7D92286E1160AA4717E6BA8112AB4127C50 (void);
+// 0x0000008C System.Void MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_PaniniProjection_HDRP_set_FeedbackDuration_mF2F7884599E1EA7894B6020894024642B7BA6F62 (void);
+// 0x0000008D System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::get_HasChannel()
+extern void MMF_PaniniProjection_HDRP_get_HasChannel_m1A22469BE898B18271FB2F27F35FD86AC086345C (void);
+// 0x0000008E System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::get_HasRandomness()
+extern void MMF_PaniniProjection_HDRP_get_HasRandomness_mDAE7050A3FFD9752BCDD82F5E2E502D2E92F05B9 (void);
+// 0x0000008F System.Void MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_PaniniProjection_HDRP_CustomPlayFeedback_m634BE893777F5FF176374DDAA0AE967C9372C7BF (void);
+// 0x00000090 System.Void MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_PaniniProjection_HDRP_CustomStopFeedback_m62D1C359815BDC3E00E862592AABEB2CF9895EA9 (void);
+// 0x00000091 System.Void MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::CustomRestoreInitialValues()
+extern void MMF_PaniniProjection_HDRP_CustomRestoreInitialValues_m2B75C488A4CC01752201091B58F2BF8B0E270EA5 (void);
+// 0x00000092 System.Void MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::.ctor()
+extern void MMF_PaniniProjection_HDRP__ctor_mC8E9F75D50859E4D36EDFF7EB81CE979206848AC (void);
+// 0x00000093 System.Void MoreMountains.FeedbacksForThirdParty.MMF_PaniniProjection_HDRP::.cctor()
+extern void MMF_PaniniProjection_HDRP__cctor_m3A50267F8D5ED4FDA497C35DD590A0FB7A72F99C (void);
+// 0x00000094 System.Single MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::get_FeedbackDuration()
+extern void MMF_Vignette_HDRP_get_FeedbackDuration_m64F44CFBE56044F14726120A50EB54F1437BE12B (void);
+// 0x00000095 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_Vignette_HDRP_set_FeedbackDuration_m705FF2C895890EEF03810C6DA670DA80BFAB036A (void);
+// 0x00000096 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::get_HasChannel()
+extern void MMF_Vignette_HDRP_get_HasChannel_mA0EE616AFA36D21FBA0CAC282C7D0808E08E4F1A (void);
+// 0x00000097 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::get_HasRandomness()
+extern void MMF_Vignette_HDRP_get_HasRandomness_m8D3C5A7AFC89A10DE04D4B3579ED164A79ED7A95 (void);
+// 0x00000098 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_Vignette_HDRP_CustomPlayFeedback_m360661581656539574702DEDF2AB56CF3D4FA405 (void);
+// 0x00000099 System.Void MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_Vignette_HDRP_CustomStopFeedback_mD0D9605056F2EFDB8273C59BA5E67CE1E206D0CB (void);
+// 0x0000009A System.Void MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::CustomRestoreInitialValues()
+extern void MMF_Vignette_HDRP_CustomRestoreInitialValues_mEEDD02AF53BF2484CC70EA683CFAED4DAA249913 (void);
+// 0x0000009B System.Void MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::.ctor()
+extern void MMF_Vignette_HDRP__ctor_m175DBBC03C2A84949A19A8F429165F3530EEC972 (void);
+// 0x0000009C System.Void MoreMountains.FeedbacksForThirdParty.MMF_Vignette_HDRP::.cctor()
+extern void MMF_Vignette_HDRP__cctor_m65CBCEAC5D69E9B33611B01903688E54B735A790 (void);
+// 0x0000009D System.Single MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::get_FeedbackDuration()
+extern void MMF_WhiteBalance_HDRP_get_FeedbackDuration_m4BBA0280B7CEE1B0D47A66122BBD3484F4837C7D (void);
+// 0x0000009E System.Void MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::set_FeedbackDuration(System.Single)
+extern void MMF_WhiteBalance_HDRP_set_FeedbackDuration_m17345EC33D35E057A072454028E872BD035A22B4 (void);
+// 0x0000009F System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::get_HasChannel()
+extern void MMF_WhiteBalance_HDRP_get_HasChannel_mCE55D5A57A0B128F1BB79A444553D0B8212F5206 (void);
+// 0x000000A0 System.Boolean MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::get_HasRandomness()
+extern void MMF_WhiteBalance_HDRP_get_HasRandomness_m0D36C12BE991DFFFE6AFE5D1DCD8427E727037D9 (void);
+// 0x000000A1 System.Void MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::CustomPlayFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_WhiteBalance_HDRP_CustomPlayFeedback_m15B01FCB109F3E75B4AA56D2320CCBCF542066CC (void);
+// 0x000000A2 System.Void MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::CustomStopFeedback(UnityEngine.Vector3,System.Single)
+extern void MMF_WhiteBalance_HDRP_CustomStopFeedback_m563FABB92ED6045202CD74718EBE5FF1700423E9 (void);
+// 0x000000A3 System.Void MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::CustomRestoreInitialValues()
+extern void MMF_WhiteBalance_HDRP_CustomRestoreInitialValues_m49E173E88D241C94555B26B55D465A45C2D7B28B (void);
+// 0x000000A4 System.Void MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::.ctor()
+extern void MMF_WhiteBalance_HDRP__ctor_m779E36E3BED2B4551CE3848FB63963303344E35F (void);
+// 0x000000A5 System.Void MoreMountains.FeedbacksForThirdParty.MMF_WhiteBalance_HDRP::.cctor()
+extern void MMF_WhiteBalance_HDRP__cctor_mCE8572D68414D61297E7F50E9AECD5BAF218542B (void);
+// 0x000000A6 System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShaker_HDRP::.ctor()
+extern void MMBloomShaker_HDRP__ctor_m301249DFC2BECD10C17F7A65F65E15DCF791CBC6 (void);
+// 0x000000A7 System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate)
+extern void MMBloomShakeEvent_HDRP_add_OnEvent_mBACB2B2E1673EB77F8E41C5DDA76D93A1736E040 (void);
+// 0x000000A8 System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate)
+extern void MMBloomShakeEvent_HDRP_remove_OnEvent_m862E36D743E7A84BCB7918B26447A69EBC61A841 (void);
+// 0x000000A9 System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP::RuntimeInitialization()
+extern void MMBloomShakeEvent_HDRP_RuntimeInitialization_m36A6CB31783B97EEB1A2CB66216F0165463B2A31 (void);
+// 0x000000AA System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate)
+extern void MMBloomShakeEvent_HDRP_Register_m9D8928B9DB51BCDA41856D9D3558B19438145A4C (void);
+// 0x000000AB System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate)
+extern void MMBloomShakeEvent_HDRP_Unregister_mA09813760BE1C9090B96AFD4CCA44E046F702A2B (void);
+// 0x000000AC System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMBloomShakeEvent_HDRP_Trigger_m4ECA9DAC4A871E6969E32F9D63D26F8DB896B765 (void);
+// 0x000000AD System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m5B297FE7168B4C630CBB41DD5F5E107C1ED3E044 (void);
+// 0x000000AE System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m43B470FBD3EF9EF791504F440C3E8326BC9B2AA5 (void);
+// 0x000000AF System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m283F54E9E01D5523316AF980D5E7C3B536E878E8 (void);
+// 0x000000B0 System.Void MoreMountains.FeedbacksForThirdParty.MMBloomShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_mFAD7E45587EC1A1713B211E5E07366B210BD4763 (void);
+// 0x000000B1 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShaker_HDRP::.ctor()
+extern void MMChannelMixerShaker_HDRP__ctor_mC7D664C4CF3A278AF2821F56428C1D699B1EBAAC (void);
+// 0x000000B2 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate)
+extern void MMChannelMixerShakeEvent_HDRP_add_OnEvent_m1B89A269F85E9CF8146DF1E3B4ED9CC997E00E5F (void);
+// 0x000000B3 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate)
+extern void MMChannelMixerShakeEvent_HDRP_remove_OnEvent_m5B4E0C02253FE8B421543E57A7AF7DA2D481BA4C (void);
+// 0x000000B4 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP::RuntimeInitialization()
+extern void MMChannelMixerShakeEvent_HDRP_RuntimeInitialization_mAF189778F45D2BB438A345B4740303ADE4FC1C6F (void);
+// 0x000000B5 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate)
+extern void MMChannelMixerShakeEvent_HDRP_Register_mB42A27C35EB6A39C2ED84D82FF4659795EAE5AB4 (void);
+// 0x000000B6 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate)
+extern void MMChannelMixerShakeEvent_HDRP_Unregister_m7F301A6F85C608B3D0029EC10E5DF7E3427DF434 (void);
+// 0x000000B7 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMChannelMixerShakeEvent_HDRP_Trigger_mD638A4122087D9850DD06DA63D827FB68F608089 (void);
+// 0x000000B8 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m5E6292FE26E8924E5BFEEA5045E28913BD12E95D (void);
+// 0x000000B9 System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m740E744E05FC2F10EC4BA460A434AAAE53A39987 (void);
+// 0x000000BA System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m1D7B2ABC404D68262B0D90B04279D31F36350AB7 (void);
+// 0x000000BB System.Void MoreMountains.FeedbacksForThirdParty.MMChannelMixerShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_mF345042A43B5CBE512806194D929702D15B71B1E (void);
+// 0x000000BC System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShaker_HDRP::.ctor()
+extern void MMChromaticAberrationShaker_HDRP__ctor_m9287FD8BB01BC65FEF9FA336C765DCA5A5CC079C (void);
+// 0x000000BD System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate)
+extern void MMChromaticAberrationShakeEvent_HDRP_add_OnEvent_mE7C78EA78C4CC1B88616D9A5C489639D45FDE850 (void);
+// 0x000000BE System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate)
+extern void MMChromaticAberrationShakeEvent_HDRP_remove_OnEvent_m64DE8CEE54538A490DF1DCE9666FD7C1EE6B89F2 (void);
+// 0x000000BF System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP::RuntimeInitialization()
+extern void MMChromaticAberrationShakeEvent_HDRP_RuntimeInitialization_mC5B67A12C2DC13C32EF29CF537B6655C60B2C15F (void);
+// 0x000000C0 System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate)
+extern void MMChromaticAberrationShakeEvent_HDRP_Register_mF5D9D312135E4A93241E970359A9EE1A916F5C30 (void);
+// 0x000000C1 System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate)
+extern void MMChromaticAberrationShakeEvent_HDRP_Unregister_mB7C1FC0BDCD15DBB4CA59129748E427EC713E696 (void);
+// 0x000000C2 System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMChromaticAberrationShakeEvent_HDRP_Trigger_mEC7A69A7BFEE12D9B14961829A6981A8C16CD163 (void);
+// 0x000000C3 System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m122276D5B739DF092B7F02C282DCBC7D145AA592 (void);
+// 0x000000C4 System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m4691F1F82BA1656ADAF8932C4391DEDD6C2BF783 (void);
+// 0x000000C5 System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m257335ACC49368AD1A0F45FCF544EF7F7E274E53 (void);
+// 0x000000C6 System.Void MoreMountains.FeedbacksForThirdParty.MMChromaticAberrationShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_mB49F3CDFF6C056F9273E2D6E5DCCAC79D8716BA8 (void);
+// 0x000000C7 System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShaker_HDRP::.ctor()
+extern void MMColorAdjustmentsShaker_HDRP__ctor_m8EE6398D25FB162FE689BD793C53C8C16331B096 (void);
+// 0x000000C8 System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate)
+extern void MMColorAdjustmentsShakeEvent_HDRP_add_OnEvent_m373E19C7915ED6CFF2CA28648C59DFF1A2E23CC5 (void);
+// 0x000000C9 System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate)
+extern void MMColorAdjustmentsShakeEvent_HDRP_remove_OnEvent_m2C3388C7B7526BBFD1705DB2EFB6B2F6CD9508B2 (void);
+// 0x000000CA System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP::RuntimeInitialization()
+extern void MMColorAdjustmentsShakeEvent_HDRP_RuntimeInitialization_mEDDF35A950276212F224966BEB0DBB75EECA2339 (void);
+// 0x000000CB System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate)
+extern void MMColorAdjustmentsShakeEvent_HDRP_Register_m3CEF4858B230BDF3777DA707DE3E67BFCFFFAB40 (void);
+// 0x000000CC System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate)
+extern void MMColorAdjustmentsShakeEvent_HDRP_Unregister_m689D6AB7946CFE261D0FC4410015BC4BBCDDD8A7 (void);
+// 0x000000CD System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShaker_HDRP/ColorFilterModes,UnityEngine.Gradient,UnityEngine.Color,UnityEngine.AnimationCurve,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMColorAdjustmentsShakeEvent_HDRP_Trigger_mE6D074AA3F4752046BE102AB930E8264D983B2DF (void);
+// 0x000000CE System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m97E65EB7302F876DE070BF69272A56B7AB94C029 (void);
+// 0x000000CF System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShaker_HDRP/ColorFilterModes,UnityEngine.Gradient,UnityEngine.Color,UnityEngine.AnimationCurve,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_mF3ACB883C24DA71731848398BFA5975E29461165 (void);
+// 0x000000D0 System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShaker_HDRP/ColorFilterModes,UnityEngine.Gradient,UnityEngine.Color,UnityEngine.AnimationCurve,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m4035B65B34EC12B9D74B590C914D8D62869C7854 (void);
+// 0x000000D1 System.Void MoreMountains.FeedbacksForThirdParty.MMColorAdjustmentsShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m6221464ECAADB76F9357520957E2F1F38E3EBFCB (void);
+// 0x000000D2 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShaker_HDRP::.ctor()
+extern void MMExposureShaker_HDRP__ctor_mDAFF2C89AD6B5F27743917E4285955B00BAC2183 (void);
+// 0x000000D3 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate)
+extern void MMExposureShakeEvent_HDRP_add_OnEvent_mF8E014E68F94E1EDEBCBECDE96302109FBB3CB83 (void);
+// 0x000000D4 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate)
+extern void MMExposureShakeEvent_HDRP_remove_OnEvent_m96DBF3DBE5F32A54295606238DA58829CDE41041 (void);
+// 0x000000D5 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP::RuntimeInitialization()
+extern void MMExposureShakeEvent_HDRP_RuntimeInitialization_m7EDD3223C8C71A5DBF9D1AA3840A7E125823D2AB (void);
+// 0x000000D6 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate)
+extern void MMExposureShakeEvent_HDRP_Register_m4618B17B4483E47F1F06D1D9F750A6CF15BEA9EE (void);
+// 0x000000D7 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate)
+extern void MMExposureShakeEvent_HDRP_Unregister_m6CFE5CD39FE8CB8C2A573A1A107240AD876D7C8D (void);
+// 0x000000D8 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMExposureShakeEvent_HDRP_Trigger_mE842346C7B80E1CAB59118E944CC94CEC83D9E05 (void);
+// 0x000000D9 System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_mB3AEE2D117D36F83EFD510581427C3EBFDBBEA1E (void);
+// 0x000000DA System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m1BA2EB5FEB461682F12419B97FD7FD84482C598B (void);
+// 0x000000DB System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m5169240418EB0957125E8D0BCE617E52F0DCBA8E (void);
+// 0x000000DC System.Void MoreMountains.FeedbacksForThirdParty.MMExposureShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m1306C4D1902F45B5E8A245B78B93F50B85F23094 (void);
+// 0x000000DD System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShaker_HDRP::.ctor()
+extern void MMFilmGrainShaker_HDRP__ctor_m7F165ABB45ED5B5953B594801BBC364BB4B353BC (void);
+// 0x000000DE System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate)
+extern void MMFilmGrainShakeEvent_HDRP_add_OnEvent_m33B473170A90DE6F53B3EFB06AE27E55EED2D0FE (void);
+// 0x000000DF System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate)
+extern void MMFilmGrainShakeEvent_HDRP_remove_OnEvent_mC213089BD01657E56C443B93A1F24EB319EA8769 (void);
+// 0x000000E0 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP::RuntimeInitialization()
+extern void MMFilmGrainShakeEvent_HDRP_RuntimeInitialization_m6ADB3A75CC1AC86545541398D6020C22F99D7919 (void);
+// 0x000000E1 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate)
+extern void MMFilmGrainShakeEvent_HDRP_Register_m768E707436C419CE08297284E9109309732DF2B3 (void);
+// 0x000000E2 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate)
+extern void MMFilmGrainShakeEvent_HDRP_Unregister_m09A110940E72F19FA5EF7ED424F40875CDE85F3E (void);
+// 0x000000E3 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMFilmGrainShakeEvent_HDRP_Trigger_m587D085F91893F1E2CB73F27479B2890C67778B4 (void);
+// 0x000000E4 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m5B1B9C36B9A4466589F524885F6EB4BA76D7306A (void);
+// 0x000000E5 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m8FFD1E8A86BE6F0119F9B0E3B619B2C2BC6631C9 (void);
+// 0x000000E6 System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m44D5CF776E1F8B190EF774794639E9F6A369F3C3 (void);
+// 0x000000E7 System.Void MoreMountains.FeedbacksForThirdParty.MMFilmGrainShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m57CC293197FD12921FBB17A51FF906D6B7D50B4A (void);
+// 0x000000E8 System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShaker_HDRP::.ctor()
+extern void MMLensDistortionShaker_HDRP__ctor_m8A8B30A4416DC0DF3EE9A53D0A3A985E45E1BAF3 (void);
+// 0x000000E9 System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate)
+extern void MMLensDistortionShakeEvent_HDRP_add_OnEvent_m40E4EAA8D88965A00E86FC81D2CB938BA81E52C2 (void);
+// 0x000000EA System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate)
+extern void MMLensDistortionShakeEvent_HDRP_remove_OnEvent_m236E71FD0533DB8F7AC0AE31E8B8591D7ED8EFE6 (void);
+// 0x000000EB System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP::RuntimeInitialization()
+extern void MMLensDistortionShakeEvent_HDRP_RuntimeInitialization_m94D64FC87FB281D0E59704819DC36B52090F25C5 (void);
+// 0x000000EC System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate)
+extern void MMLensDistortionShakeEvent_HDRP_Register_m51B03BED2FDD7F185D37147C5B55CBEE9AE85D13 (void);
+// 0x000000ED System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate)
+extern void MMLensDistortionShakeEvent_HDRP_Unregister_m8D8306C705DE81045D0EA1BA4942ED1AC438D4B6 (void);
+// 0x000000EE System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMLensDistortionShakeEvent_HDRP_Trigger_m25199F11DCB9950842F92D1526CA68A6D0005109 (void);
+// 0x000000EF System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_mC101A020A82846B960F4251679689CC0599DE240 (void);
+// 0x000000F0 System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_mF3603E3BBD22F6E0EF259AD103905FA98122800B (void);
+// 0x000000F1 System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m07277F8B03251162A0B8FB6E3086CD1AD9DCC84F (void);
+// 0x000000F2 System.Void MoreMountains.FeedbacksForThirdParty.MMLensDistortionShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m8B5E565F7BA384494BB0C5E0FBA75A58215B1E2B (void);
+// 0x000000F3 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShaker_HDRP::.ctor()
+extern void MMMotionBlurShaker_HDRP__ctor_mCCDEC97A809C016DCE3C1D7E5ADEDE9BD2E92AC9 (void);
+// 0x000000F4 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate)
+extern void MMMotionBlurShakeEvent_HDRP_add_OnEvent_m6A180451C6B8050DB164A29073B93DD54F24442F (void);
+// 0x000000F5 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate)
+extern void MMMotionBlurShakeEvent_HDRP_remove_OnEvent_m6B8506587606290156A2A8EE95898E941F8FE855 (void);
+// 0x000000F6 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP::RuntimeInitialization()
+extern void MMMotionBlurShakeEvent_HDRP_RuntimeInitialization_mCE1F887A0C74857ACD1112D3B630790FB1819A44 (void);
+// 0x000000F7 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate)
+extern void MMMotionBlurShakeEvent_HDRP_Register_mF8DC021B89C035D8D3C77AFEB861748533767DA2 (void);
+// 0x000000F8 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate)
+extern void MMMotionBlurShakeEvent_HDRP_Unregister_mA9782CF5E511B17887EBD0F4E4366D6B2F0D74DF (void);
+// 0x000000F9 System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMMotionBlurShakeEvent_HDRP_Trigger_m71F80B5E6F9DAD10C2F65BAF208F28820D6F0497 (void);
+// 0x000000FA System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m0259C5B0B96F2D474BAE78A57494210F0D90A42F (void);
+// 0x000000FB System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m631DD6EDBCA4FD720BBA94FC51D0CA31CCB3932A (void);
+// 0x000000FC System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_mEA305687E6DB2B3EA52F9866FBA022C742BA1F72 (void);
+// 0x000000FD System.Void MoreMountains.FeedbacksForThirdParty.MMMotionBlurShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m0ED41C54D3A8CE1B5858F87D41AD1F2D4856A0ED (void);
+// 0x000000FE System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShaker_HDRP::.ctor()
+extern void MMPaniniProjectionShaker_HDRP__ctor_m4F75385787E54859394D0BF2DF3608E409EA3B0F (void);
+// 0x000000FF System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate)
+extern void MMPaniniProjectionShakeEvent_HDRP_add_OnEvent_m33AD7D5F86811CACDABBB53144C8DFF2DF9DF13C (void);
+// 0x00000100 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate)
+extern void MMPaniniProjectionShakeEvent_HDRP_remove_OnEvent_m71E90A745A43A9727A1BE861231B9C14B5DEC50C (void);
+// 0x00000101 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP::RuntimeInitialization()
+extern void MMPaniniProjectionShakeEvent_HDRP_RuntimeInitialization_m20833B17C98B35EBFC8ADD2E7A80862D447BAA8A (void);
+// 0x00000102 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate)
+extern void MMPaniniProjectionShakeEvent_HDRP_Register_m96B52E8E0E2DB0827670D464DB5D0DD6AADEA7AE (void);
+// 0x00000103 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate)
+extern void MMPaniniProjectionShakeEvent_HDRP_Unregister_m247A44E49181B0676048099A57AE99FB0B97F045 (void);
+// 0x00000104 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMPaniniProjectionShakeEvent_HDRP_Trigger_m4A33FDAE940952078EC893E18397F1A9FD8ADE50 (void);
+// 0x00000105 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m5656E31DF229B3CDD57D2388AA6CE110891E6981 (void);
+// 0x00000106 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_mA0462D2D7632BCF90845B0349F74902B29EA5536 (void);
+// 0x00000107 System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m2F138BE456A5F8CFFF6694F7AB6AA451456A40FB (void);
+// 0x00000108 System.Void MoreMountains.FeedbacksForThirdParty.MMPaniniProjectionShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m8AD324705D762FE41FA0B0D929DCAD05FD2B584E (void);
+// 0x00000109 System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShaker_HDRP::.ctor()
+extern void MMVignetteShaker_HDRP__ctor_mFF1AF62333D2D6AE8BE9D9C8D59212EFDDB568F5 (void);
+// 0x0000010A System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate)
+extern void MMVignetteShakeEvent_HDRP_add_OnEvent_m304D2C4DE3AE40A1B00D6BB2D0F481D40A15DBB9 (void);
+// 0x0000010B System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate)
+extern void MMVignetteShakeEvent_HDRP_remove_OnEvent_mFCE73EC11B7E73A417F1DB9116D3015FF48DCCDB (void);
+// 0x0000010C System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP::RuntimeInitialization()
+extern void MMVignetteShakeEvent_HDRP_RuntimeInitialization_m001A345BFA4085B8F5386B925B1A3A9EC0547552 (void);
+// 0x0000010D System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate)
+extern void MMVignetteShakeEvent_HDRP_Register_m4FD31CB26B942AB3CE95A77384FC0EE5D4732A56 (void);
+// 0x0000010E System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate)
+extern void MMVignetteShakeEvent_HDRP_Unregister_mBCC4CD5A3D9F6428224680433A141078A9F24775 (void);
+// 0x0000010F System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMVignetteShakeEvent_HDRP_Trigger_m9B856301DEB8E1F2960CC0F3D9F86B62D220A978 (void);
+// 0x00000110 System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_mA6C7436FBD890384D1C6FB87B0CD6BAB39FFCD11 (void);
+// 0x00000111 System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_mF4BC9DD3C893ED55CC6224D601A54DE0338417A4 (void);
+// 0x00000112 System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_mDB18A0C1F91AC7E9FFFB9B49183B866811D95F33 (void);
+// 0x00000113 System.Void MoreMountains.FeedbacksForThirdParty.MMVignetteShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_mA10F784672CB85B68CBE09C5B92C456386F9FDD2 (void);
+// 0x00000114 System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShaker_HDRP::.ctor()
+extern void MMWhiteBalanceShaker_HDRP__ctor_m30A331A6955E9CE67D5D7212132EEC6EF417258A (void);
+// 0x00000115 System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP::add_OnEvent(MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate)
+extern void MMWhiteBalanceShakeEvent_HDRP_add_OnEvent_mCBAA6A05AF9C1E76B01E2A63FA67B6ECEF9D5AE8 (void);
+// 0x00000116 System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP::remove_OnEvent(MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate)
+extern void MMWhiteBalanceShakeEvent_HDRP_remove_OnEvent_m7CC0DA39D3EFE82855C68CE566DE9AA2442A9819 (void);
+// 0x00000117 System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP::RuntimeInitialization()
+extern void MMWhiteBalanceShakeEvent_HDRP_RuntimeInitialization_m61590DF85920ADC4F3A7E07FB8E0395DFBEFFD6F (void);
+// 0x00000118 System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP::Register(MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate)
+extern void MMWhiteBalanceShakeEvent_HDRP_Register_m028C78E0CD28EA00989E12B53F84F42311440194 (void);
+// 0x00000119 System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP::Unregister(MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate)
+extern void MMWhiteBalanceShakeEvent_HDRP_Unregister_m601FD1581F9FA6F39B7B22C3C648F004810A7AE9 (void);
+// 0x0000011A System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP::Trigger(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void MMWhiteBalanceShakeEvent_HDRP_Trigger_mD93F99B7B07AF4AF94E05E25265BB80DCB28176F (void);
+// 0x0000011B System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate::.ctor(System.Object,System.IntPtr)
+extern void Delegate__ctor_m2B40716B84A92B82E7DC710F9504D77FE59652DF (void);
+// 0x0000011C System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate::Invoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean)
+extern void Delegate_Invoke_m91BD8ED7CFCB675DA6F371407243B6B2571F4F89 (void);
+// 0x0000011D System.IAsyncResult MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate::BeginInvoke(UnityEngine.AnimationCurve,System.Single,System.Single,System.Single,UnityEngine.AnimationCurve,System.Single,System.Single,System.Boolean,System.Single,MoreMountains.Feedbacks.MMChannelData,System.Boolean,System.Boolean,System.Boolean,MoreMountains.Feedbacks.TimescaleModes,System.Boolean,System.Boolean,System.AsyncCallback,System.Object)
+extern void Delegate_BeginInvoke_m0C1BEC1DC0FD8A1E173FDE5BEFE7E9A797A9B931 (void);
+// 0x0000011E System.Void MoreMountains.FeedbacksForThirdParty.MMWhiteBalanceShakeEvent_HDRP/Delegate::EndInvoke(System.IAsyncResult)
+extern void Delegate_EndInvoke_m7102A3B78A5B6FEF8F14751607D49D40DB0928B8 (void);
+static Il2CppMethodPointer s_methodPointers[286] = 
+{
+	MMFeedbackBloom_HDRP_get_FeedbackDuration_m7447EE817BB0F086500E472C9EA62B296293C94C,
+	MMFeedbackBloom_HDRP_set_FeedbackDuration_m6889C6F38A830EF9347B741DCB2400A094B6925B,
+	MMFeedbackBloom_HDRP_CustomPlayFeedback_m40B3E6F94B7F73C229ED0913D4620B873714FA38,
+	MMFeedbackBloom_HDRP_CustomStopFeedback_m44230EF52F612C7FD14CEC414BA6346B9DF2877F,
+	MMFeedbackBloom_HDRP__ctor_m9D37742B641E270B180E4ABA4A6C638E26658E60,
+	MMFeedbackBloom_HDRP__cctor_m0FB5CB6772166176393046B5F9834740D8793118,
+	MMFeedbackChannelMixer_HDRP_get_FeedbackDuration_m8C2A4A81B489D8DF84DCCD29F9686CD3A692D558,
+	MMFeedbackChannelMixer_HDRP_set_FeedbackDuration_mA037C8379EFA72B3DBD218794C6ED85AF1785E0D,
+	MMFeedbackChannelMixer_HDRP_CustomPlayFeedback_m41FCF42D2DBFC9F6865E8FA029157E18444E25D1,
+	MMFeedbackChannelMixer_HDRP_CustomStopFeedback_m1940CFE3260B5558DB6CDD5B0D134E932DEA04A2,
+	MMFeedbackChannelMixer_HDRP__ctor_m90F26F158CB608C57D7782901775DAD8706CE8B3,
+	MMFeedbackChannelMixer_HDRP__cctor_m256DE81A82053E7204DA2684E906704C656E8B85,
+	MMFeedbackChromaticAberration_HDRP_get_FeedbackDuration_m8EE823BA0BF373DB32376A4781CA3BB149AD889C,
+	MMFeedbackChromaticAberration_HDRP_set_FeedbackDuration_mA1F57691EAFCF378E8C3649677C13A50210341E0,
+	MMFeedbackChromaticAberration_HDRP_CustomPlayFeedback_m786BE0C5EEC3F5D41E643D3056C6E2E0AD81A046,
+	MMFeedbackChromaticAberration_HDRP_CustomStopFeedback_m9D0D39C5446E8E67094369F26A2F474C5FF78792,
+	MMFeedbackChromaticAberration_HDRP__ctor_m580D47E71B89E0440D6431A65041EC3222507734,
+	MMFeedbackChromaticAberration_HDRP__cctor_mB4C0C34ACEB393A85B0716B0DB511452B21A9C42,
+	MMFeedbackColorAdjustments_HDRP_get_FeedbackDuration_mC276E75744908FCD38D1B64E39E0B6FE5815E877,
+	MMFeedbackColorAdjustments_HDRP_set_FeedbackDuration_m3244EE22A0F19054E33C9076ECC88975B960A4CC,
+	MMFeedbackColorAdjustments_HDRP_CustomPlayFeedback_mC61A1C1243C890D5D7F291E71E2B1289B5D61804,
+	MMFeedbackColorAdjustments_HDRP_CustomStopFeedback_mDC15C94FEE7C306911F0FE0B9113B302EF684694,
+	MMFeedbackColorAdjustments_HDRP__ctor_m6C06943A341DBE654D27D952689CCABED7205CD6,
+	MMFeedbackColorAdjustments_HDRP__cctor_mB71523DE5180D6B4781D821D8D421AA7B8DFEC4D,
+	MMFeedbackExposure_HDRP_get_FeedbackDuration_mA19478BBE0FA043DE7B0E228C6FC312A3A6C8A77,
+	MMFeedbackExposure_HDRP_set_FeedbackDuration_m233F29BD602A5D5F86FAE7669A2808C21F15321F,
+	MMFeedbackExposure_HDRP_CustomPlayFeedback_m25157A6CAD106B71A217A0E4D9B34F1984B1C545,
+	MMFeedbackExposure_HDRP_CustomStopFeedback_m5C1670E6E2684C81592C1D36DFD7A81CE583CE2B,
+	MMFeedbackExposure_HDRP__ctor_m1E6C12ADDEED7CD84CF55AA0B98408EBE4DCF823,
+	MMFeedbackExposure_HDRP__cctor_m2B2C3983009D7DCE4A5A0B3FEEDA0614F6EF038F,
+	MMFeedbackFilmGrain_HDRP_get_FeedbackDuration_mDE235B5B113B9CA58B7E49C7C17067F26120B3E1,
+	MMFeedbackFilmGrain_HDRP_set_FeedbackDuration_m7BC4419EA8D8804A8B53E1C42F68D95CE1888DC3,
+	MMFeedbackFilmGrain_HDRP_CustomPlayFeedback_m9BA2C19CC51DD3FF3E2E5D9A5534A77900DC558A,
+	MMFeedbackFilmGrain_HDRP_CustomStopFeedback_mB58BC6B47B718CE726A1E457F975351A3B6BC203,
+	MMFeedbackFilmGrain_HDRP__ctor_m6CF0CF5F7D716B6C151890BC3BAB5F102EE4228B,
+	MMFeedbackFilmGrain_HDRP__cctor_mC785DBA4047E638EB08C7C845C8BE2486D4DDA2E,
+	MMFeedbackLensDistortion_HDRP_get_FeedbackDuration_mA2725439AAFFC99B37D80046AAD35CFDB30D0393,
+	MMFeedbackLensDistortion_HDRP_set_FeedbackDuration_m759ACE2521ABAA0922673BBE7E3F198575B5D930,
+	MMFeedbackLensDistortion_HDRP_CustomPlayFeedback_m5ADADCB03616E5C6860D07D8A77239601F40476C,
+	MMFeedbackLensDistortion_HDRP_CustomStopFeedback_mAF954B08E4EBB4207A900E806ADB8459A6A67E20,
+	MMFeedbackLensDistortion_HDRP__ctor_m8AE27FE3D6749D06D8575D14736370ADD812AA26,
+	MMFeedbackLensDistortion_HDRP__cctor_m3E35217D44B30E6722DBF35CA8A4D1F6C37272E2,
+	MMFeedbackMotionBlur_HDRP_get_FeedbackDuration_m1F9DE054D6FE30212099AE38D44267184D161DA5,
+	MMFeedbackMotionBlur_HDRP_set_FeedbackDuration_m46948812A33FE18610310AFC7706A0CD35C4F0B6,
+	MMFeedbackMotionBlur_HDRP_CustomPlayFeedback_m42CC7042FCB84423EC3A83B68030BC5FF8923861,
+	MMFeedbackMotionBlur_HDRP_CustomStopFeedback_m09E1914C68F69611880E48D9724C591306E20E17,
+	MMFeedbackMotionBlur_HDRP__ctor_m2A9F99EB73B19337AB8A23093533264B0F7E0A02,
+	MMFeedbackMotionBlur_HDRP__cctor_m31706E3E23EA61C703F7B77C165E30F520CBA983,
+	MMFeedbackPaniniProjection_HDRP_get_FeedbackDuration_m3276B71DC7C02577E9BEA50607C21370C6B4F2C5,
+	MMFeedbackPaniniProjection_HDRP_set_FeedbackDuration_mAC894AB19FEF33803AB137CF907EF86D52A334B3,
+	MMFeedbackPaniniProjection_HDRP_CustomPlayFeedback_m27FDB279120B9B01269FDC305412168616716E7E,
+	MMFeedbackPaniniProjection_HDRP_CustomStopFeedback_m15C6BB9EBA024D00656633CED9FC9ACF2DAB5E3A,
+	MMFeedbackPaniniProjection_HDRP__ctor_mB667C416B3996218C8437A9342924BE9CC8D5C58,
+	MMFeedbackPaniniProjection_HDRP__cctor_m6FB18F62E8B61AEA9593D88B81CB8BF50692D434,
+	MMFeedbackVignette_HDRP_get_FeedbackDuration_m5458E1303D22DA8F084A579C91612FA020F70C85,
+	MMFeedbackVignette_HDRP_set_FeedbackDuration_m8D92323B1B9C06D97E2F5F5D4FC63D0843A6CCE6,
+	MMFeedbackVignette_HDRP_CustomPlayFeedback_m979D0DE2A507F8FF23D93F6150FF5FB46D827DAD,
+	MMFeedbackVignette_HDRP_CustomStopFeedback_m943A182C0371AE9BDA00700460BF444F64F866B1,
+	MMFeedbackVignette_HDRP__ctor_m24E5D110C2921AD6F04227EC8DBAC0B48E293D96,
+	MMFeedbackVignette_HDRP__cctor_m6F5ECA0CE8879DB264AE685442C5DD8B2B965737,
+	MMFeedbackWhiteBalance_HDRP_get_FeedbackDuration_mE17211EAA8B2B11A3C3E02A6C1CC9E1E9C8C2A92,
+	MMFeedbackWhiteBalance_HDRP_set_FeedbackDuration_mFE4F48BA9E2871200829EEBF16080274184D1465,
+	MMFeedbackWhiteBalance_HDRP_CustomPlayFeedback_m07C17B02B2D9A5EE30382CC10077835D452BA601,
+	MMFeedbackWhiteBalance_HDRP_CustomStopFeedback_m68DA6717DE21B24C6CC85094259A83C0B81D7F78,
+	MMFeedbackWhiteBalance_HDRP__ctor_m08639EDD51B9414F9131899724C35045EAC52C18,
+	MMFeedbackWhiteBalance_HDRP__cctor_mAA7807F23C3063081DFF95640B2372901E393A13,
+	MMF_Bloom_HDRP_get_FeedbackDuration_m286C52AA6A527A9DEEB9FFDE90A78D1576E7A1C0,
+	MMF_Bloom_HDRP_set_FeedbackDuration_m668B16FCED1C0380151CD8D0B5DB0B6B0731EF6E,
+	MMF_Bloom_HDRP_get_HasChannel_m8BCA444CD31CB96EBD663EF823ACFCE848140DBE,
+	MMF_Bloom_HDRP_get_HasRandomness_mA2E4C99CDA87D85A44B9327D03B97ADBD2200A8A,
+	MMF_Bloom_HDRP_CustomPlayFeedback_mDA8D0C28290DB71063F7534F0D3CB80B0670F2E9,
+	MMF_Bloom_HDRP_CustomStopFeedback_m0A5492C234009B9ACE27F6C9E857C45242EAAAC9,
+	MMF_Bloom_HDRP_CustomRestoreInitialValues_mFC50272C7ACD624476863FDAFC902396807364FC,
+	MMF_Bloom_HDRP__ctor_mDFCE713F8D63DD61315FA26B5B75B575FFF74DBE,
+	MMF_Bloom_HDRP__cctor_m443E9A85495E1FF0B9FC8F724D5AA29AA21AE2A4,
+	MMF_ChannelMixer_HDRP_get_FeedbackDuration_mDAC281D160F0F8EB6DA46BCE9602F2BF8D21D4A6,
+	MMF_ChannelMixer_HDRP_set_FeedbackDuration_mDCA5F2B7B83AFD32A565CC3941CA83FB5F0BC9E8,
+	MMF_ChannelMixer_HDRP_get_HasChannel_mC636DFA9360745429198104F5B049681F75A7370,
+	MMF_ChannelMixer_HDRP_get_HasRandomness_m5850B4CD0DEE33D5D8FD21E78D7FC7FA0782F779,
+	MMF_ChannelMixer_HDRP_CustomPlayFeedback_mCD4B30F5229F11113EFB2AA5A1F7C14DF9C2AA70,
+	MMF_ChannelMixer_HDRP_CustomStopFeedback_m259416760C90A4C0D559C3CF561A9C38B6BD49EB,
+	MMF_ChannelMixer_HDRP_CustomRestoreInitialValues_mF81A1DD6DEED5E7F5DDDE0B6381657C34D9FE5F5,
+	MMF_ChannelMixer_HDRP__ctor_m24ABBCC841B5BFC4C00C7D02A9D02A020FB7E3B6,
+	MMF_ChannelMixer_HDRP__cctor_mA25A216748592AE053731BFDB33B856ACD6417E3,
+	MMF_ChromaticAberration_HDRP_get_FeedbackDuration_mD234C9DCDEEDA6B1700EDEA311A3D0BF8E86DCE9,
+	MMF_ChromaticAberration_HDRP_set_FeedbackDuration_mAAEA10F8E76BCCC3BBDF58B48974F98FE81AB29D,
+	MMF_ChromaticAberration_HDRP_get_HasChannel_mCF3A578C8F3D794B95FFB3EDFFA5D71CBB773514,
+	MMF_ChromaticAberration_HDRP_get_HasRandomness_m55250D4BCE1035247E07ACDBE3565A669AE2ACE8,
+	MMF_ChromaticAberration_HDRP_CustomPlayFeedback_mB35756C912F86E4C98F9118D4B28A1B098D8828D,
+	MMF_ChromaticAberration_HDRP_CustomStopFeedback_mDB47497ECDE95196243D082D8A45DBA646CA3FA9,
+	MMF_ChromaticAberration_HDRP_CustomRestoreInitialValues_m63E3B38100D99D93D543F117AF0A28B7A414CF48,
+	MMF_ChromaticAberration_HDRP__ctor_mF64FBF4ACD66F76A7205E753D1CB21AA5B68C448,
+	MMF_ChromaticAberration_HDRP__cctor_mA31A4C735BD335473A663A7EB5A1570BCDECC281,
+	MMF_ColorAdjustments_HDRP_get_FeedbackDuration_m5B4AEB4987C821FE6FA94FE3D9B26E7F23349D29,
+	MMF_ColorAdjustments_HDRP_set_FeedbackDuration_m70BFA847EB5D2F91539D8C1703DD32A151DD5EDD,
+	MMF_ColorAdjustments_HDRP_get_HasChannel_m119A3F15051C1E99C71DA30CF4E634901B085354,
+	MMF_ColorAdjustments_HDRP_get_HasRandomness_m2D2888982E231E371CE23A99370CDC01B7F4B399,
+	MMF_ColorAdjustments_HDRP_CustomPlayFeedback_m78B26261563BF809AFB7901446D3BE60D4FA6B42,
+	MMF_ColorAdjustments_HDRP_CustomStopFeedback_m66C3B7E0924B4E49E2FFB637DC77D44FED490A60,
+	MMF_ColorAdjustments_HDRP_CustomRestoreInitialValues_mDAE22235072739EBDA95B5F19EAB238B5D363C69,
+	MMF_ColorAdjustments_HDRP__ctor_mC8718AA0FADBEC1514A687127788ECD40F3ED1D0,
+	MMF_ColorAdjustments_HDRP__cctor_m2B84BF432650A1276C6C05E3ADD9F36D2D1281B2,
+	MMF_Exposure_HDRP_get_FeedbackDuration_m8D54ADD6AF5833142AAC22A636027E23CDDA1290,
+	MMF_Exposure_HDRP_set_FeedbackDuration_mAEBD75D714AF4C0C27A08EF7649493F7657470F9,
+	MMF_Exposure_HDRP_get_HasChannel_m03598848FDE5B1C499042F5E054B34ED2C657F88,
+	MMF_Exposure_HDRP_get_HasRandomness_mE117DFEA41AE7052A2EFEE524813F225264F5FD1,
+	MMF_Exposure_HDRP_CustomPlayFeedback_m3A0E58211B34A0BB10DF2027779451FE76EA9EF0,
+	MMF_Exposure_HDRP_CustomStopFeedback_m40942A99DC9BD22D13976C02795CB4514848096E,
+	MMF_Exposure_HDRP_CustomRestoreInitialValues_m59E269082E6B0CFBEBDAA3836BB972E9852A53CC,
+	MMF_Exposure_HDRP__ctor_m7254DC1438910ADA9291937A1B78D5C984EE778A,
+	MMF_Exposure_HDRP__cctor_m384A4E4C24F66111AC5284618C32E422BD2BBA09,
+	MMF_FilmGrain_HDRP_get_FeedbackDuration_m6D5DD445070AE178EA5B32C87868642D017B784D,
+	MMF_FilmGrain_HDRP_set_FeedbackDuration_m25BAE2A212764A3B720813EAE829B4E921737E51,
+	MMF_FilmGrain_HDRP_get_HasChannel_m0BAD468C14538307E400CFD6A6327BDFE54CEAE9,
+	MMF_FilmGrain_HDRP_get_HasRandomness_m4B4346FC59E1D7084AC227ED409E3A7033E14084,
+	MMF_FilmGrain_HDRP_CustomPlayFeedback_m39A3D6672F05A93BDDB1C0D78C809B4D73C238F5,
+	MMF_FilmGrain_HDRP_CustomStopFeedback_m06F8ACD663F6949CDF85C1DB2FC1D345E7861098,
+	MMF_FilmGrain_HDRP_CustomRestoreInitialValues_m713AEA6A4F8BE5BDFCE9D4EBDBE5440217A70CD6,
+	MMF_FilmGrain_HDRP__ctor_mAB88D20DB346996A0E042972DD1FC952BC14A42E,
+	MMF_FilmGrain_HDRP__cctor_mFE3EA187F5EA44123376DC57780C0FDC784D8EE4,
+	MMF_LensDistortion_HDRP_get_FeedbackDuration_mDEADE95E0805C2286EC54E3235365B4CDF3DF5C6,
+	MMF_LensDistortion_HDRP_set_FeedbackDuration_m1F395678929910FB480C48BF0777636F241B127D,
+	MMF_LensDistortion_HDRP_get_HasChannel_mB974AE8472FC63CC4FDC9EEC6273829B2EAC0790,
+	MMF_LensDistortion_HDRP_get_HasRandomness_m091FC568B500FDC09CA27FA4D4AE0D2532164BDD,
+	MMF_LensDistortion_HDRP_CustomPlayFeedback_mC3A10FEF062B69C37900CB2FC11B1D66795B8559,
+	MMF_LensDistortion_HDRP_CustomStopFeedback_m1E01B55EB0EE947D9432BBD1510914CC47350D53,
+	MMF_LensDistortion_HDRP_CustomRestoreInitialValues_m9402B6168C6B3714B0C65EFD33E0B65FD2681872,
+	MMF_LensDistortion_HDRP__ctor_mA10B4539A4BEA260D191AA8F0B9BC5C6602FDBF0,
+	MMF_LensDistortion_HDRP__cctor_m5BBC07CF11DD7B6B4949084079937F49539B197F,
+	MMF_MotionBlur_HDRP_get_FeedbackDuration_mABCB5E7727BE756DB9E75CEE4AFD575C6A40720E,
+	MMF_MotionBlur_HDRP_set_FeedbackDuration_m1863EA13A88C410C0C510DABFAA13DE8D02FFCD5,
+	MMF_MotionBlur_HDRP_get_HasChannel_m3A56ACA69459B3CF196B6A9EEA4046F5AD57458D,
+	MMF_MotionBlur_HDRP_get_HasRandomness_mC145454F5E4265D3E5D408D20B54CDEBE89039F4,
+	MMF_MotionBlur_HDRP_CustomPlayFeedback_mA46C8DC39E50DC9B4EB0EDC5902BF046882C65BE,
+	MMF_MotionBlur_HDRP_CustomStopFeedback_m0E86C49FAAAB9532FD77BDF56365BA7B9242EB1B,
+	MMF_MotionBlur_HDRP_CustomRestoreInitialValues_m23EE1949E32107DD663B9C32F6DAA5CFB9FB4228,
+	MMF_MotionBlur_HDRP__ctor_mD1AA4F45FB42AE283F574B9D4325E60243034A7C,
+	MMF_MotionBlur_HDRP__cctor_m768496B5C5591E5713B6A7A908A9424BDE49857F,
+	MMF_PaniniProjection_HDRP_get_FeedbackDuration_mC129D7D92286E1160AA4717E6BA8112AB4127C50,
+	MMF_PaniniProjection_HDRP_set_FeedbackDuration_mF2F7884599E1EA7894B6020894024642B7BA6F62,
+	MMF_PaniniProjection_HDRP_get_HasChannel_m1A22469BE898B18271FB2F27F35FD86AC086345C,
+	MMF_PaniniProjection_HDRP_get_HasRandomness_mDAE7050A3FFD9752BCDD82F5E2E502D2E92F05B9,
+	MMF_PaniniProjection_HDRP_CustomPlayFeedback_m634BE893777F5FF176374DDAA0AE967C9372C7BF,
+	MMF_PaniniProjection_HDRP_CustomStopFeedback_m62D1C359815BDC3E00E862592AABEB2CF9895EA9,
+	MMF_PaniniProjection_HDRP_CustomRestoreInitialValues_m2B75C488A4CC01752201091B58F2BF8B0E270EA5,
+	MMF_PaniniProjection_HDRP__ctor_mC8E9F75D50859E4D36EDFF7EB81CE979206848AC,
+	MMF_PaniniProjection_HDRP__cctor_m3A50267F8D5ED4FDA497C35DD590A0FB7A72F99C,
+	MMF_Vignette_HDRP_get_FeedbackDuration_m64F44CFBE56044F14726120A50EB54F1437BE12B,
+	MMF_Vignette_HDRP_set_FeedbackDuration_m705FF2C895890EEF03810C6DA670DA80BFAB036A,
+	MMF_Vignette_HDRP_get_HasChannel_mA0EE616AFA36D21FBA0CAC282C7D0808E08E4F1A,
+	MMF_Vignette_HDRP_get_HasRandomness_m8D3C5A7AFC89A10DE04D4B3579ED164A79ED7A95,
+	MMF_Vignette_HDRP_CustomPlayFeedback_m360661581656539574702DEDF2AB56CF3D4FA405,
+	MMF_Vignette_HDRP_CustomStopFeedback_mD0D9605056F2EFDB8273C59BA5E67CE1E206D0CB,
+	MMF_Vignette_HDRP_CustomRestoreInitialValues_mEEDD02AF53BF2484CC70EA683CFAED4DAA249913,
+	MMF_Vignette_HDRP__ctor_m175DBBC03C2A84949A19A8F429165F3530EEC972,
+	MMF_Vignette_HDRP__cctor_m65CBCEAC5D69E9B33611B01903688E54B735A790,
+	MMF_WhiteBalance_HDRP_get_FeedbackDuration_m4BBA0280B7CEE1B0D47A66122BBD3484F4837C7D,
+	MMF_WhiteBalance_HDRP_set_FeedbackDuration_m17345EC33D35E057A072454028E872BD035A22B4,
+	MMF_WhiteBalance_HDRP_get_HasChannel_mCE55D5A57A0B128F1BB79A444553D0B8212F5206,
+	MMF_WhiteBalance_HDRP_get_HasRandomness_m0D36C12BE991DFFFE6AFE5D1DCD8427E727037D9,
+	MMF_WhiteBalance_HDRP_CustomPlayFeedback_m15B01FCB109F3E75B4AA56D2320CCBCF542066CC,
+	MMF_WhiteBalance_HDRP_CustomStopFeedback_m563FABB92ED6045202CD74718EBE5FF1700423E9,
+	MMF_WhiteBalance_HDRP_CustomRestoreInitialValues_m49E173E88D241C94555B26B55D465A45C2D7B28B,
+	MMF_WhiteBalance_HDRP__ctor_m779E36E3BED2B4551CE3848FB63963303344E35F,
+	MMF_WhiteBalance_HDRP__cctor_mCE8572D68414D61297E7F50E9AECD5BAF218542B,
+	MMBloomShaker_HDRP__ctor_m301249DFC2BECD10C17F7A65F65E15DCF791CBC6,
+	MMBloomShakeEvent_HDRP_add_OnEvent_mBACB2B2E1673EB77F8E41C5DDA76D93A1736E040,
+	MMBloomShakeEvent_HDRP_remove_OnEvent_m862E36D743E7A84BCB7918B26447A69EBC61A841,
+	MMBloomShakeEvent_HDRP_RuntimeInitialization_m36A6CB31783B97EEB1A2CB66216F0165463B2A31,
+	MMBloomShakeEvent_HDRP_Register_m9D8928B9DB51BCDA41856D9D3558B19438145A4C,
+	MMBloomShakeEvent_HDRP_Unregister_mA09813760BE1C9090B96AFD4CCA44E046F702A2B,
+	MMBloomShakeEvent_HDRP_Trigger_m4ECA9DAC4A871E6969E32F9D63D26F8DB896B765,
+	Delegate__ctor_m5B297FE7168B4C630CBB41DD5F5E107C1ED3E044,
+	Delegate_Invoke_m43B470FBD3EF9EF791504F440C3E8326BC9B2AA5,
+	Delegate_BeginInvoke_m283F54E9E01D5523316AF980D5E7C3B536E878E8,
+	Delegate_EndInvoke_mFAD7E45587EC1A1713B211E5E07366B210BD4763,
+	MMChannelMixerShaker_HDRP__ctor_mC7D664C4CF3A278AF2821F56428C1D699B1EBAAC,
+	MMChannelMixerShakeEvent_HDRP_add_OnEvent_m1B89A269F85E9CF8146DF1E3B4ED9CC997E00E5F,
+	MMChannelMixerShakeEvent_HDRP_remove_OnEvent_m5B4E0C02253FE8B421543E57A7AF7DA2D481BA4C,
+	MMChannelMixerShakeEvent_HDRP_RuntimeInitialization_mAF189778F45D2BB438A345B4740303ADE4FC1C6F,
+	MMChannelMixerShakeEvent_HDRP_Register_mB42A27C35EB6A39C2ED84D82FF4659795EAE5AB4,
+	MMChannelMixerShakeEvent_HDRP_Unregister_m7F301A6F85C608B3D0029EC10E5DF7E3427DF434,
+	MMChannelMixerShakeEvent_HDRP_Trigger_mD638A4122087D9850DD06DA63D827FB68F608089,
+	Delegate__ctor_m5E6292FE26E8924E5BFEEA5045E28913BD12E95D,
+	Delegate_Invoke_m740E744E05FC2F10EC4BA460A434AAAE53A39987,
+	Delegate_BeginInvoke_m1D7B2ABC404D68262B0D90B04279D31F36350AB7,
+	Delegate_EndInvoke_mF345042A43B5CBE512806194D929702D15B71B1E,
+	MMChromaticAberrationShaker_HDRP__ctor_m9287FD8BB01BC65FEF9FA336C765DCA5A5CC079C,
+	MMChromaticAberrationShakeEvent_HDRP_add_OnEvent_mE7C78EA78C4CC1B88616D9A5C489639D45FDE850,
+	MMChromaticAberrationShakeEvent_HDRP_remove_OnEvent_m64DE8CEE54538A490DF1DCE9666FD7C1EE6B89F2,
+	MMChromaticAberrationShakeEvent_HDRP_RuntimeInitialization_mC5B67A12C2DC13C32EF29CF537B6655C60B2C15F,
+	MMChromaticAberrationShakeEvent_HDRP_Register_mF5D9D312135E4A93241E970359A9EE1A916F5C30,
+	MMChromaticAberrationShakeEvent_HDRP_Unregister_mB7C1FC0BDCD15DBB4CA59129748E427EC713E696,
+	MMChromaticAberrationShakeEvent_HDRP_Trigger_mEC7A69A7BFEE12D9B14961829A6981A8C16CD163,
+	Delegate__ctor_m122276D5B739DF092B7F02C282DCBC7D145AA592,
+	Delegate_Invoke_m4691F1F82BA1656ADAF8932C4391DEDD6C2BF783,
+	Delegate_BeginInvoke_m257335ACC49368AD1A0F45FCF544EF7F7E274E53,
+	Delegate_EndInvoke_mB49F3CDFF6C056F9273E2D6E5DCCAC79D8716BA8,
+	MMColorAdjustmentsShaker_HDRP__ctor_m8EE6398D25FB162FE689BD793C53C8C16331B096,
+	MMColorAdjustmentsShakeEvent_HDRP_add_OnEvent_m373E19C7915ED6CFF2CA28648C59DFF1A2E23CC5,
+	MMColorAdjustmentsShakeEvent_HDRP_remove_OnEvent_m2C3388C7B7526BBFD1705DB2EFB6B2F6CD9508B2,
+	MMColorAdjustmentsShakeEvent_HDRP_RuntimeInitialization_mEDDF35A950276212F224966BEB0DBB75EECA2339,
+	MMColorAdjustmentsShakeEvent_HDRP_Register_m3CEF4858B230BDF3777DA707DE3E67BFCFFFAB40,
+	MMColorAdjustmentsShakeEvent_HDRP_Unregister_m689D6AB7946CFE261D0FC4410015BC4BBCDDD8A7,
+	MMColorAdjustmentsShakeEvent_HDRP_Trigger_mE6D074AA3F4752046BE102AB930E8264D983B2DF,
+	Delegate__ctor_m97E65EB7302F876DE070BF69272A56B7AB94C029,
+	Delegate_Invoke_mF3ACB883C24DA71731848398BFA5975E29461165,
+	Delegate_BeginInvoke_m4035B65B34EC12B9D74B590C914D8D62869C7854,
+	Delegate_EndInvoke_m6221464ECAADB76F9357520957E2F1F38E3EBFCB,
+	MMExposureShaker_HDRP__ctor_mDAFF2C89AD6B5F27743917E4285955B00BAC2183,
+	MMExposureShakeEvent_HDRP_add_OnEvent_mF8E014E68F94E1EDEBCBECDE96302109FBB3CB83,
+	MMExposureShakeEvent_HDRP_remove_OnEvent_m96DBF3DBE5F32A54295606238DA58829CDE41041,
+	MMExposureShakeEvent_HDRP_RuntimeInitialization_m7EDD3223C8C71A5DBF9D1AA3840A7E125823D2AB,
+	MMExposureShakeEvent_HDRP_Register_m4618B17B4483E47F1F06D1D9F750A6CF15BEA9EE,
+	MMExposureShakeEvent_HDRP_Unregister_m6CFE5CD39FE8CB8C2A573A1A107240AD876D7C8D,
+	MMExposureShakeEvent_HDRP_Trigger_mE842346C7B80E1CAB59118E944CC94CEC83D9E05,
+	Delegate__ctor_mB3AEE2D117D36F83EFD510581427C3EBFDBBEA1E,
+	Delegate_Invoke_m1BA2EB5FEB461682F12419B97FD7FD84482C598B,
+	Delegate_BeginInvoke_m5169240418EB0957125E8D0BCE617E52F0DCBA8E,
+	Delegate_EndInvoke_m1306C4D1902F45B5E8A245B78B93F50B85F23094,
+	MMFilmGrainShaker_HDRP__ctor_m7F165ABB45ED5B5953B594801BBC364BB4B353BC,
+	MMFilmGrainShakeEvent_HDRP_add_OnEvent_m33B473170A90DE6F53B3EFB06AE27E55EED2D0FE,
+	MMFilmGrainShakeEvent_HDRP_remove_OnEvent_mC213089BD01657E56C443B93A1F24EB319EA8769,
+	MMFilmGrainShakeEvent_HDRP_RuntimeInitialization_m6ADB3A75CC1AC86545541398D6020C22F99D7919,
+	MMFilmGrainShakeEvent_HDRP_Register_m768E707436C419CE08297284E9109309732DF2B3,
+	MMFilmGrainShakeEvent_HDRP_Unregister_m09A110940E72F19FA5EF7ED424F40875CDE85F3E,
+	MMFilmGrainShakeEvent_HDRP_Trigger_m587D085F91893F1E2CB73F27479B2890C67778B4,
+	Delegate__ctor_m5B1B9C36B9A4466589F524885F6EB4BA76D7306A,
+	Delegate_Invoke_m8FFD1E8A86BE6F0119F9B0E3B619B2C2BC6631C9,
+	Delegate_BeginInvoke_m44D5CF776E1F8B190EF774794639E9F6A369F3C3,
+	Delegate_EndInvoke_m57CC293197FD12921FBB17A51FF906D6B7D50B4A,
+	MMLensDistortionShaker_HDRP__ctor_m8A8B30A4416DC0DF3EE9A53D0A3A985E45E1BAF3,
+	MMLensDistortionShakeEvent_HDRP_add_OnEvent_m40E4EAA8D88965A00E86FC81D2CB938BA81E52C2,
+	MMLensDistortionShakeEvent_HDRP_remove_OnEvent_m236E71FD0533DB8F7AC0AE31E8B8591D7ED8EFE6,
+	MMLensDistortionShakeEvent_HDRP_RuntimeInitialization_m94D64FC87FB281D0E59704819DC36B52090F25C5,
+	MMLensDistortionShakeEvent_HDRP_Register_m51B03BED2FDD7F185D37147C5B55CBEE9AE85D13,
+	MMLensDistortionShakeEvent_HDRP_Unregister_m8D8306C705DE81045D0EA1BA4942ED1AC438D4B6,
+	MMLensDistortionShakeEvent_HDRP_Trigger_m25199F11DCB9950842F92D1526CA68A6D0005109,
+	Delegate__ctor_mC101A020A82846B960F4251679689CC0599DE240,
+	Delegate_Invoke_mF3603E3BBD22F6E0EF259AD103905FA98122800B,
+	Delegate_BeginInvoke_m07277F8B03251162A0B8FB6E3086CD1AD9DCC84F,
+	Delegate_EndInvoke_m8B5E565F7BA384494BB0C5E0FBA75A58215B1E2B,
+	MMMotionBlurShaker_HDRP__ctor_mCCDEC97A809C016DCE3C1D7E5ADEDE9BD2E92AC9,
+	MMMotionBlurShakeEvent_HDRP_add_OnEvent_m6A180451C6B8050DB164A29073B93DD54F24442F,
+	MMMotionBlurShakeEvent_HDRP_remove_OnEvent_m6B8506587606290156A2A8EE95898E941F8FE855,
+	MMMotionBlurShakeEvent_HDRP_RuntimeInitialization_mCE1F887A0C74857ACD1112D3B630790FB1819A44,
+	MMMotionBlurShakeEvent_HDRP_Register_mF8DC021B89C035D8D3C77AFEB861748533767DA2,
+	MMMotionBlurShakeEvent_HDRP_Unregister_mA9782CF5E511B17887EBD0F4E4366D6B2F0D74DF,
+	MMMotionBlurShakeEvent_HDRP_Trigger_m71F80B5E6F9DAD10C2F65BAF208F28820D6F0497,
+	Delegate__ctor_m0259C5B0B96F2D474BAE78A57494210F0D90A42F,
+	Delegate_Invoke_m631DD6EDBCA4FD720BBA94FC51D0CA31CCB3932A,
+	Delegate_BeginInvoke_mEA305687E6DB2B3EA52F9866FBA022C742BA1F72,
+	Delegate_EndInvoke_m0ED41C54D3A8CE1B5858F87D41AD1F2D4856A0ED,
+	MMPaniniProjectionShaker_HDRP__ctor_m4F75385787E54859394D0BF2DF3608E409EA3B0F,
+	MMPaniniProjectionShakeEvent_HDRP_add_OnEvent_m33AD7D5F86811CACDABBB53144C8DFF2DF9DF13C,
+	MMPaniniProjectionShakeEvent_HDRP_remove_OnEvent_m71E90A745A43A9727A1BE861231B9C14B5DEC50C,
+	MMPaniniProjectionShakeEvent_HDRP_RuntimeInitialization_m20833B17C98B35EBFC8ADD2E7A80862D447BAA8A,
+	MMPaniniProjectionShakeEvent_HDRP_Register_m96B52E8E0E2DB0827670D464DB5D0DD6AADEA7AE,
+	MMPaniniProjectionShakeEvent_HDRP_Unregister_m247A44E49181B0676048099A57AE99FB0B97F045,
+	MMPaniniProjectionShakeEvent_HDRP_Trigger_m4A33FDAE940952078EC893E18397F1A9FD8ADE50,
+	Delegate__ctor_m5656E31DF229B3CDD57D2388AA6CE110891E6981,
+	Delegate_Invoke_mA0462D2D7632BCF90845B0349F74902B29EA5536,
+	Delegate_BeginInvoke_m2F138BE456A5F8CFFF6694F7AB6AA451456A40FB,
+	Delegate_EndInvoke_m8AD324705D762FE41FA0B0D929DCAD05FD2B584E,
+	MMVignetteShaker_HDRP__ctor_mFF1AF62333D2D6AE8BE9D9C8D59212EFDDB568F5,
+	MMVignetteShakeEvent_HDRP_add_OnEvent_m304D2C4DE3AE40A1B00D6BB2D0F481D40A15DBB9,
+	MMVignetteShakeEvent_HDRP_remove_OnEvent_mFCE73EC11B7E73A417F1DB9116D3015FF48DCCDB,
+	MMVignetteShakeEvent_HDRP_RuntimeInitialization_m001A345BFA4085B8F5386B925B1A3A9EC0547552,
+	MMVignetteShakeEvent_HDRP_Register_m4FD31CB26B942AB3CE95A77384FC0EE5D4732A56,
+	MMVignetteShakeEvent_HDRP_Unregister_mBCC4CD5A3D9F6428224680433A141078A9F24775,
+	MMVignetteShakeEvent_HDRP_Trigger_m9B856301DEB8E1F2960CC0F3D9F86B62D220A978,
+	Delegate__ctor_mA6C7436FBD890384D1C6FB87B0CD6BAB39FFCD11,
+	Delegate_Invoke_mF4BC9DD3C893ED55CC6224D601A54DE0338417A4,
+	Delegate_BeginInvoke_mDB18A0C1F91AC7E9FFFB9B49183B866811D95F33,
+	Delegate_EndInvoke_mA10F784672CB85B68CBE09C5B92C456386F9FDD2,
+	MMWhiteBalanceShaker_HDRP__ctor_m30A331A6955E9CE67D5D7212132EEC6EF417258A,
+	MMWhiteBalanceShakeEvent_HDRP_add_OnEvent_mCBAA6A05AF9C1E76B01E2A63FA67B6ECEF9D5AE8,
+	MMWhiteBalanceShakeEvent_HDRP_remove_OnEvent_m7CC0DA39D3EFE82855C68CE566DE9AA2442A9819,
+	MMWhiteBalanceShakeEvent_HDRP_RuntimeInitialization_m61590DF85920ADC4F3A7E07FB8E0395DFBEFFD6F,
+	MMWhiteBalanceShakeEvent_HDRP_Register_m028C78E0CD28EA00989E12B53F84F42311440194,
+	MMWhiteBalanceShakeEvent_HDRP_Unregister_m601FD1581F9FA6F39B7B22C3C648F004810A7AE9,
+	MMWhiteBalanceShakeEvent_HDRP_Trigger_mD93F99B7B07AF4AF94E05E25265BB80DCB28176F,
+	Delegate__ctor_m2B40716B84A92B82E7DC710F9504D77FE59652DF,
+	Delegate_Invoke_m91BD8ED7CFCB675DA6F371407243B6B2571F4F89,
+	Delegate_BeginInvoke_m0C1BEC1DC0FD8A1E173FDE5BEFE7E9A797A9B931,
+	Delegate_EndInvoke_m7102A3B78A5B6FEF8F14751607D49D40DB0928B8,
+};
+static const int32_t s_InvokerIndices[286] = 
+{
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	2809,
+	2809,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5344,
+	4506,
+	5219,
+	5219,
+	2809,
+	2809,
+	5409,
+	5409,
+	8498,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5520,
+	2731,
+	22,
+	20,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5516,
+	2731,
+	18,
+	13,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5512,
+	2731,
+	6,
+	3,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5523,
+	2731,
+	27,
+	23,
+	4471,
+	5409,
+	8347,
+	8347,
+	8498,
+	8347,
+	8347,
+	5520,
+	2731,
+	22,
+	20,
+	4471,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_MoreMountains_Feedbacks_HDRP_CodeGenModule;
+const Il2CppCodeGenModule g_MoreMountains_Feedbacks_HDRP_CodeGenModule = 
+{
+	"MoreMountains.Feedbacks.HDRP.dll",
+	286,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL, // module initializer,
+	NULL,
+	NULL,
+	NULL,
+};
