@@ -559,6 +559,7 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
                if (error.ErrorMessage == "Receipt already used")
                {
                    storeController.ConfirmPendingPurchase(purchasedProduct);
+                   RemoveAds();
                }
            }
         );
@@ -615,6 +616,29 @@ public class PlayFabLogin : MonoBehaviour, IStoreListener
         UIManager.instance.adsButton.SetActive(false);//広告ボタンを非表示にする
         //AdMobBanner.instance.BannerDestroy();
     }
+
+    //iOSリストアボタンに割り付け Androidのときはボタンを非表示にする
+    public void PushRestoreButton()
+    {
+        m_AppleExtensions.RestoreTransactions((success) =>
+        {
+            if (success == true)
+            {
+                RemoveAds();
+                //リストアが成功した時の処理
+                //購入していなくても成功になる。Unity上でも成功するので基本成功する
+                //購入していた場合、関数ProcessPurchaseが実行される
+                //購入していない場合、なにも起きない
+            }
+            else
+            {
+                //リストアが失敗した時の処理
+                //OnpurchaseFailedは実行されないことに注意
+                Debug.LogError("RestoreTransactions failed");
+            }
+        });
+    }
+
 }
 
 //↓=============================================================================================================================↓
@@ -674,5 +698,3 @@ public class GooglePurchase
     }
 }
 //↑=============================================================================================================================↑
-
-
