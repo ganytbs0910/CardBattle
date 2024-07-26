@@ -6,6 +6,9 @@ using UnityEngine.AI;
 using DG.Tweening;
 using UniRx;
 using TMPro;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 
 //Distance 7以下⇒Runに移行
 //Ditstance 2以下⇒Attack移行
@@ -204,7 +207,7 @@ public class EnemyController : MonoBehaviour
                 //print(other.name + "が" + gameObject.name + "に" + playerWeapon.SumDamage() + "ダメージを与えた");
 
                 // 回避チェック
-                if (Random.Range(0, 100) < agility)
+                if (UnityEngine.Random.Range(0, 100) < agility)
                 {
                     ShowMissText();
                     return; // 攻撃を回避
@@ -217,7 +220,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Projectile_Player"))
         {
             // 回避チェック
-            if (Random.Range(0, 100) < agility)
+            if (UnityEngine.Random.Range(0, 100) < agility)
             {
                 ShowMissText();
                 return; // 攻撃を回避
@@ -277,9 +280,9 @@ public class EnemyController : MonoBehaviour
         lastAttackTime = Time.time; // 攻撃時刻を更新
 
         animator.SetTrigger("Attack");
-        animator.SetInteger("AttackType", Random.Range(1, 3));
+        animator.SetInteger("AttackType", UnityEngine.Random.Range(1, 3));
 
-        //int attackNumber = Random.Range(1, 3); // 1から2の間のランダムな数を生成
+        //int attackNumber = UnityEngine.Random.Range(1, 3); // 1から2の間のランダムな数を生成
 
         //// 生成された数に応じて異なる攻撃アニメーションをトリガー
         //switch (attackNumber)
@@ -304,7 +307,7 @@ public class EnemyController : MonoBehaviour
     {
         int sumDamage;
         //damegeが0.9~1.2倍になる（不要なら外す）
-        damage = (int)(damage * Random.Range(0.9f, 1.2f));
+        damage = (int)(damage * UnityEngine.Random.Range(0.9f, 1.2f));
         sumDamage = damage - defense;
         if (sumDamage <= 0)
         {
@@ -361,7 +364,7 @@ public class EnemyController : MonoBehaviour
         //攻撃アニメーションを呼んでいたらそちらの処理を優先して呼ばれないように
         if (isAttacking)
         {
-            int a = Random.Range(0, 2);
+            int a = UnityEngine.Random.Range(0, 2);
             if (a == 0)
             {
                 animator.SetTrigger("GetHit");
@@ -408,7 +411,7 @@ public class EnemyController : MonoBehaviour
         GameManager.instance.CheckBattleStatus();
 
         //コレクションがドロップするかどうかの判定
-        int dropNumber = Random.Range(1, 101);
+        int dropNumber = UnityEngine.Random.Range(1, 101);
         if (dropNumber <= dropRate)
         {
             //もし既にコレクションを持っている場合はドロップしない
@@ -595,17 +598,17 @@ public class EnemyController : MonoBehaviour
 
 
 
-    public void Poison()
+    public async UniTaskVoid Poison()
     {
         if (!poison)
         {
             poison = true;
-            StartCoroutine(PoisonEffect(10f, 1f));
+            await PoisonEffect(10f, 1f);
             AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }
 
-    IEnumerator PoisonEffect(float duration, float damageInterval)
+    async UniTask PoisonEffect(float duration, float damageInterval)
     {
         float timer = 0;
         while (timer < duration)
@@ -615,64 +618,61 @@ public class EnemyController : MonoBehaviour
             if (hp <= 0)
             {
                 Die();
-                yield break;
+                return;
             }
-            yield return new WaitForSeconds(damageInterval);
+            await UniTask.Delay(TimeSpan.FromSeconds(damageInterval));
             timer += damageInterval;
         }
         poison = false;
     }
-    public void Stan()
+    public async UniTaskVoid Stan()
     {
         if (!stan)
         {
             stan = true;
-            StartCoroutine(StanEffect(5f));
+            await StanEffect(5f);
             AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }
 
-    IEnumerator StanEffect(float duration)
+    async UniTask StanEffect(float duration)
     {
         CantMove = true;
         isAttacking = false;
-        yield return new WaitForSeconds(duration);
+        await UniTask.Delay(TimeSpan.FromSeconds(duration));
         CantMove = false;
         stan = false;
     }
 
-    public void Sleep()
+    public async UniTaskVoid Sleep()
     {
         if (!sleep)
         {
             sleep = true;
-            StartCoroutine(SleepEffect());
+            await SleepEffect();
             AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }
 
-    IEnumerator SleepEffect()
+    async UniTask SleepEffect()
     {
         CantMove = true;
         isAttacking = false;
         // Wait until the enemy takes damage to wake up
-        while (sleep)
-        {
-            yield return null;
-        }
+        await UniTask.WaitUntil(() => !sleep);
     }
 
-    public void Charm()
+    public async UniTaskVoid Charm()
     {
         if (!charm)
         {
             charm = true;
-            StartCoroutine(CharmEffect(10f));
+            await CharmEffect(10f);
             AudioManager.instance.PlaySE(AudioManager.SE.PowerDown);
         }
     }
 
-    IEnumerator CharmEffect(float duration)
+    async UniTask CharmEffect(float duration)
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         Transform newTarget = null;
@@ -680,19 +680,18 @@ public class EnemyController : MonoBehaviour
         if (enemies.Length > 0)
         {
             // Optionally, you can add logic here to choose a specific enemy
-            newTarget = enemies[Random.Range(0, enemies.Length)].transform;
+            newTarget = enemies[UnityEngine.Random.Range(0, enemies.Length)].transform;
         }
 
         if (newTarget != null)
         {
             Transform originalTarget = playerTarget;
             playerTarget = newTarget;
-            yield return new WaitForSeconds(duration);
+            await UniTask.Delay(TimeSpan.FromSeconds(duration));
             playerTarget = originalTarget;
         }
         charm = false;
     }
-
 
     public void PlayAttackEffect()
     {

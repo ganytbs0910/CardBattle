@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
-
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 public class UIManager : MonoBehaviour
 {
@@ -162,7 +163,7 @@ public class UIManager : MonoBehaviour
         UIManager.instance.HeroMessageDetail("ポータル移動完了");
         if (!PlayerPrefs.HasKey("Tutorial"))
         {
-            UIManager.instance.TutorialAnimation(1);
+            TutorialAnimation(1);
         }
     }
 
@@ -324,38 +325,32 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void Loading(int value = 1)
-    {
-        StartCoroutine(LoadingCoroutine(value));
-    }
-
-    IEnumerator LoadingCoroutine(int value = 1)
+    public async UniTaskVoid Loading(int value = 1)
     {
         GameManager.instance.NextStage(value);
         TutorialTextDetail("カードを用いて最深部を目指そう！");
         loadPanel.SetActive(true);
-        loadPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+        await loadPanel.GetComponent<CanvasGroup>().DOFade(1, 0.5f).AsyncWaitForCompletion();
 
-        //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
-        loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
-        yield return new WaitForSeconds(0.5f);
+        await loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).AsyncWaitForCompletion();
+        await loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f).AsyncWaitForCompletion();
+        await UniTask.Delay(500);
 
-        //全てを初期化
+        // 全てを初期化
         loadPanel.SetActive(false);
         winPanel.SetActive(false);
         losePanel.SetActive(false);
         startCheckButton.SetActive(true);
         heroMessageText.gameObject.SetActive(true);
 
-        //地面に置かれたアイテムを消す
         GameManager.instance.DestroyAllItemWithTag("itemObj");
         GameManager.instance.DungeonCameraChange();
         battleStartButton.gameObject.SetActive(true);
         GameManager.instance.battleState = false;
         loadPanel.SetActive(true);
 
-        //loadPanelの子オブジェクトのTMPTextを取得し、1秒かけて現在のy座標を+100して、1秒かけて元の位置に戻す処理を一度だけ行う
-        loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).OnComplete(() => loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f));
+        await loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(100, 1.0f).AsyncWaitForCompletion();
+        await loadPanel.transform.GetChild(0).GetComponent<TMP_Text>().rectTransform.DOAnchorPosY(0, 1.0f).AsyncWaitForCompletion();
         int stage = 10 - PlayerPrefs.GetInt("StageHierarchy");
         if (stage == 0)
         {
@@ -369,22 +364,19 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("Tutorial", 1);
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
         TutorialTextDetail("");
-        //1/2の確率で広告を表示させる
-        //if (Random.Range(0, 2) == 0) AdmobInterstitial.instance.ShowAd();
 
-
-        yield return new WaitForSeconds(0.1f);
-        GameManager.instance.SpawnEnemies();//敵をスポーンさせる
+        await UniTask.Delay(100);
+        GameManager.instance.SpawnEnemies();
         GameManager.instance.SpawnItems();
-        yield return new WaitForSeconds(0.1f);
-        GameManager.instance.CreateCharacterList();//リストを更新
-        yield return new WaitForSeconds(0.1f);
-        GameManager.instance.ResetCharacters();//位置とアニメをリセット
-        yield return new WaitForSeconds(0.1f);
-        GameManager.instance.UpdateAllNavmeshTargets();//Navmeshの更新
-        loadPanel.GetComponent<CanvasGroup>().DOFade(0, 1f);
+        await UniTask.Delay(100);
+        GameManager.instance.CreateCharacterList();
+        await UniTask.Delay(100);
+        GameManager.instance.ResetCharacters();
+        await UniTask.Delay(100);
+        GameManager.instance.UpdateAllNavmeshTargets();
+        await loadPanel.GetComponent<CanvasGroup>().DOFade(0, 1f).AsyncWaitForCompletion();
         HeroMessageDetail("バトルの準備");
-        yield return new WaitForSeconds(1);
+        await UniTask.Delay(1000);
         loadPanel.SetActive(false);
     }
 
@@ -427,11 +419,7 @@ public class UIManager : MonoBehaviour
         HeroMessageDetail("敗北");
     }
 
-    public void GiveUpButton()
-    {
-        StartCoroutine(GiveUpCoroutine());
-    }
-    public IEnumerator GiveUpCoroutine()
+    public async UniTaskVoid GiveUpButton()
     {
         AdmobInterstitial.instance.ShowAd();
         GameManager.instance.battleState = false;
@@ -439,37 +427,28 @@ public class UIManager : MonoBehaviour
         losePanel.SetActive(true);
         StageTextDetail($"ダンジョン : {PlayerPrefs.GetInt("StageHierarchy")}");
 
-        //敵を全て破壊する
-
         HeroMessageDetail("ギブアップ");
         AudioManager.instance.StopBGM();
         AudioManager.instance.PlaySE(AudioManager.SE.YouLose);
 
-        //効果音の長さぶんだけ待ってからBGMを再生
-        StartCoroutine(WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose)));
+        await WaitAndPlayBGM(AudioManager.instance.GetSELength(AudioManager.SE.YouLose));
 
-        //コインを30%に減らす
-        PlayerPrefs.GetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
-        //カードのデータをリセットする
+        PlayerPrefs.SetInt("Coin", (int)(PlayerPrefs.GetInt("Coin") * 0.3f));
         DrawCardController.instance.GameReset();
 
         PlayerController playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-
         playerController.GiveUpAnime();
 
         playerController.agent.enabled = false;
-        yield return new WaitForSeconds(2);
+        await UniTask.Delay(2000);
         losePanel.SetActive(false);
-        //Loading();
         PortalController.instance.GoPortal();
 
-        yield return new WaitForSeconds(1f);
+        await UniTask.Delay(1000);
 
-        //プレイヤーのステータスを元に戻す
         GameManager.instance.GameReset();
         playerController.GameReset();
-        yield return new WaitForSeconds(1f);
-        //GameManager.instance.enemiesの一つ目の要素以外をリストから外す
+        await UniTask.Delay(1000);
         PlayerPrefs.SetInt("EnemyCount", 1);
         for (int i = 1; i < GameManager.instance.enemies.Count; i++)
         {
@@ -477,9 +456,9 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitAndPlayBGM(float delay)
+    private async UniTask WaitAndPlayBGM(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        await UniTask.Delay((int)(delay * 1000));
         if (!AudioManager.instance.audioSourceBGM.isPlaying)
         {
             AudioManager.instance.PlayBGM(AudioManager.BGM.GameOverTheme);
@@ -714,7 +693,7 @@ public class UIManager : MonoBehaviour
         }
         tutorialText.text = detail;
     }
-    public void TutorialAnimation(int value)
+    public async UniTask TutorialAnimation(int value)
     {
         if (PlayerPrefs.HasKey("Tutorial")) return;
         startCheckButton.SetActive(false);
@@ -723,26 +702,27 @@ public class UIManager : MonoBehaviour
         {
             cardListPanel.GetChild(i).GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
+
         switch (value)
         {
             case 1:
                 TutorialTextDetail("カードを選択してください");
                 cardListPanel.GetChild(1).GetComponent<CanvasGroup>().blocksRaycasts = true;
                 Image cloneArrowImage = Instantiate(arrowImage, cardListPanel.GetChild(1)).GetComponent<Image>();
-                //cloneArrowImage.rectTransform.anchoredPositionを(0, 250, 0)にしたい
                 cloneArrowImage.rectTransform.anchoredPosition = new Vector3(0, 250, 0);
 
-                cloneArrowImage.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
+                await cloneArrowImage.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo).AsyncWaitForCompletion();
 
-                //cardListPanel.GetChild(1).GetComponent<Toggle>()がオンになったら出力
-                cardListPanel.GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener((bool value) =>
+                var toggleValueChanged = cardListPanel.GetChild(1).GetComponent<Toggle>().OnValueChangedAsAsyncEnumerable();
+                await foreach (bool isOn in toggleValueChanged)  // ここを 'isOn' に変更
                 {
-                    if (value)
+                    if (isOn)  // そしてここも 'isOn' に変更
                     {
                         TutorialTextDetail("自身をタップしてください");
                         cloneArrowImage.rectTransform.anchoredPosition = new Vector3(-30, 450, 0);
+                        break;
                     }
-                });
+                }
                 break;
             case 2:
                 TutorialTextDetail("敵をタップしてください");
@@ -755,7 +735,6 @@ public class UIManager : MonoBehaviour
                 TutorialTextDetail("バトルを開始してください！");
                 startCheckButton.SetActive(true);
                 break;
-
         }
     }
 
@@ -823,8 +802,8 @@ public class UIManager : MonoBehaviour
     }
 
     private Coroutine activeCoroutine = null; // アクティブなコルーチンを追跡
-    private bool isCoroutineCanceled = false;
-    public void HeroMessageDetail(string message, string otherMessage = null)
+    private UniTaskCompletionSource<bool> activeTaskCompletionSource;
+    public async UniTask HeroMessageDetail(string message, string otherMessage = null)
     {
         switch (message)
         {
@@ -979,28 +958,28 @@ public class UIManager : MonoBehaviour
                 }
                 break;
         }
-        if (activeCoroutine != null)
+        if (activeTaskCompletionSource != null)
         {
-            isCoroutineCanceled = true; // コルーチンをキャンセル
-            StopCoroutine(activeCoroutine);
+            activeTaskCompletionSource.TrySetCanceled();
         }
 
-        isCoroutineCanceled = false; // 新しいコルーチン用にフラグをリセット
-        activeCoroutine = StartCoroutine(ShowMojiokuriText(message));
+        activeTaskCompletionSource = new UniTaskCompletionSource<bool>();
+        await ShowMojiokuriText(message);
     }
 
-    public IEnumerator ShowMojiokuriText(string MojiokuriText)
+    public async UniTask ShowMojiokuriText(string MojiokuriText)
     {
         for (int i = 0; i <= MojiokuriText.Length; i++)
         {
-            if (isCoroutineCanceled) // キャンセルフラグチェック
-            {
-                yield break; // キャンセルされた場合、コルーチンを終了
-            }
             heroMessageText.text = MojiokuriText.Substring(0, i);
-            yield return new WaitForSeconds(delay);
+            await UniTask.Delay((int)(delay * 1000));
+
+            if (activeTaskCompletionSource.Task.Status == UniTaskStatus.Canceled)
+            {
+                return;
+            }
         }
-        activeCoroutine = null;
+        activeTaskCompletionSource.TrySetResult(true);
     }
 
     //静的テキストのローカライズ

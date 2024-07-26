@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 
 
 public class DrawCardController : MonoBehaviour
@@ -71,23 +73,21 @@ public class DrawCardController : MonoBehaviour
         }
     }
 
-    public void ReDrawCardList(int num = 0)
-    {
-        StartCoroutine(ReDrawCardListCoroutine(num));
-    }
-
-    IEnumerator ReDrawCardListCoroutine(int num = 0)
+    public async UniTaskVoid ReDrawCardList(int num = 0, CancellationToken cancellationToken = default)
     {
         if (num == 0) num = parentPanel.transform.childCount;
         PlayerPrefs.DeleteKey("CurrentStageCard");
         cardIDList.Clear();
-        //parentPanelの子オブジェクトを全て削除
+
+        // parentPanelの子オブジェクトを全て削除
         foreach (Transform child in parentPanel.transform)
         {
             Destroy(child.gameObject);
         }
-        yield return null;
-        //yield return new WaitForSeconds(0.1f);
+
+        // UniTaskを使用して1フレーム待機
+        await UniTask.Yield(cancellationToken);
+
         for (int i = 0; i < num; i++)
         {
             DrawCard();
