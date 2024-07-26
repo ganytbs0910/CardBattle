@@ -997,7 +997,6 @@ public class UIManager : MonoBehaviour
             {
                 yield break; // キャンセルされた場合、コルーチンを終了
             }
-
             heroMessageText.text = MojiokuriText.Substring(0, i);
             yield return new WaitForSeconds(delay);
         }
