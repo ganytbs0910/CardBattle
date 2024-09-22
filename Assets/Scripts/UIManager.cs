@@ -99,6 +99,7 @@ public class UIManager : MonoBehaviour
 
     [Header("チュートリアル用")]
     [SerializeField] private Image arrowImage;
+    [SerializeField] private Image tutorialImage, tutorialImage2;
 
 
     void Awake()
@@ -714,6 +715,11 @@ public class UIManager : MonoBehaviour
         }
         tutorialText.text = detail;
     }
+
+    /// <summary>
+    /// チュートリアル
+    /// </summary>
+    /// <param name="value"></param>
     public void TutorialAnimation(int value)
     {
         if (PlayerPrefs.HasKey("Tutorial")) return;
@@ -731,14 +737,13 @@ public class UIManager : MonoBehaviour
                 Image cloneArrowImage = Instantiate(arrowImage, cardListPanel.GetChild(1)).GetComponent<Image>();
                 //cloneArrowImage.rectTransform.anchoredPositionを(0, 250, 0)にしたい
                 cloneArrowImage.rectTransform.anchoredPosition = new Vector3(0, 250, 0);
-
                 cloneArrowImage.DOFade(0, 0.5f).SetLoops(-1, LoopType.Yoyo);
-
                 //cardListPanel.GetChild(1).GetComponent<Toggle>()がオンになったら出力
                 cardListPanel.GetChild(1).GetComponent<Toggle>().onValueChanged.AddListener((bool value) =>
                 {
                     if (value)
                     {
+                        tutorialImage.gameObject.SetActive(true);
                         TutorialTextDetail("自身をタップしてください");
                         cloneArrowImage.rectTransform.anchoredPosition = new Vector3(-30, 450, 0);
                     }
@@ -752,6 +757,7 @@ public class UIManager : MonoBehaviour
                 cloneArrowImage2.rectTransform.anchoredPosition = new Vector3(0, 900, 0);
                 break;
             case 3:
+                tutorialImage2.gameObject.SetActive(true);
                 TutorialTextDetail("バトルを開始してください！");
                 startCheckButton.SetActive(true);
                 break;
