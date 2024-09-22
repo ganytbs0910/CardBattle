@@ -354,4 +354,73 @@ public class ScreenRay : MonoBehaviour
 
         AudioManager.instance.PlaySE(AudioManager.SE.ThrowObject);
     }
+
+    public void HandleCardDrop(CardMovement card)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            Collider[] colliders = Physics.OverlapSphere(hit.point, rayWidth);
+            foreach (Collider collider in colliders)
+            {
+                if (card.targetType == CardEntity.TargetType.Player && collider.CompareTag("Player"))
+                {
+                    ApplyCardEffectToPlayer(card, collider);
+                    SetColor(Color.green, collider.gameObject);
+                    return;
+                }
+                else if (card.targetType == CardEntity.TargetType.Enemy && collider.CompareTag("Enemy"))
+                {
+                    ApplyCardEffectToEnemy(card, collider);
+                    SetColor(Color.red, collider.gameObject);
+                    return;
+                }
+            }
+        }
+        // ターゲットに当たらなかった場合、カードを元の位置に戻す
+        card.GetComponent<CanvasGroup>().alpha = 1;
+        ResetTargetColors();
+    }
+
+    private void ApplyCardEffectToPlayer(CardMovement card, Collider playerCollider)
+    {
+        Destroy(chooseCard);
+        UIManager.instance.HeroMessageDetail("自身強化", debugCardEffectText.text);
+        drawCardController.cardIDList.Remove(card.cardID);
+        playerCollider.gameObject.GetComponent<PlayerController>().GetCardEffect(card.cardID, 1);
+
+        if (card.weapon != null)
+        {
+            playerCollider.gameObject.GetComponent<PlayerController>().EquipWeapon(card.weapon);
+            AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
+        }
+
+        if (card.armor != null)
+        {
+            playerCollider.gameObject.GetComponent<PlayerController>().EquipArmor(card.armor);
+            AudioManager.instance.PlaySE(AudioManager.SE.Equipment);
+        }
+
+        if (card.particle != null)
+        {
+            PlayParticleAtPosition(playerCollider);
+        }
+        cardID = 0;
+        UIManager.instance.TutorialAnimation(2);
+    }
+
+    private void ApplyCardEffectToEnemy(CardMovement card, Collider enemyCollider)
+    {
+        Destroy(chooseCard);
+        UIManager.instance.HeroMessageDetail("敵弱体化", debugCardEffectText.text);
+        drawCardController.cardIDList.Remove(card.cardID);
+        enemyCollider.gameObject.GetComponent<EnemyController>().GetCardEffect(card.cardID);
+        if (card.particle != null)
+        {
+            PlayParticleAtPosition(enemyCollider);
+        }
+        cardID = 0;
+        UIManager.instance.TutorialAnimation(3);
+    }
 }

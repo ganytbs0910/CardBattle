@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using DG.Tweening;
-using TMPro;
-using System;
 
-public class CardMovement : MonoBehaviour
+public class CardMovement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     public Toggle toggle;
     CardController cardController;
@@ -26,14 +22,18 @@ public class CardMovement : MonoBehaviour
 
     public CardEntity.ParticlePosition particlePosition;
 
+    private Canvas canvas;
+    private RectTransform rectTransform;
+    private CanvasGroup canvasGroup;
+    private Vector3 startPosition;
+    private ScreenRay screenRay;
+
     private void Start()
     {
         toggle.group = GetComponentInParent<ToggleGroup>();
-        //Toggleをオフにする
         toggle.isOn = false;
         toggle.onValueChanged.AddListener(OnToggleChanged);
 
-        //プレイヤーに使えるか
         cardController = GetComponent<CardController>();
         cardModel = cardController.model;
         cardID = cardModel.cardID;
@@ -48,23 +48,66 @@ public class CardMovement : MonoBehaviour
         particle = cardModel.particle;
 
         particlePosition = cardModel.particlePosition;
+
+        canvas = GetComponentInParent<Canvas>();
+        rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+        screenRay = FindObjectOfType<ScreenRay>();
     }
 
-    void Update()
+    public void OnBeginDrag(PointerEventData eventData)
     {
+        startPosition = transform.position;
+        canvasGroup.blocksRaycasts = false;
+    }
 
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition;
+        CheckTargetHit();
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        transform.position = startPosition;
+        canvasGroup.blocksRaycasts = true;
+        screenRay.HandleCardDrop(this);
+    }
+
+    private void CheckTargetHit()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, screenRay.rayDistance))
+        {
+            if ((hit.collider.CompareTag("Enemy") && targetType == CardEntity.TargetType.Enemy) ||
+                (hit.collider.CompareTag("Player") && targetType == CardEntity.TargetType.Player))
+            {
+                canvasGroup.alpha = 0;
+            }
+            else
+            {
+                canvasGroup.alpha = 1;
+            }
+        }
+        else
+        {
+            canvasGroup.alpha = 1;
+        }
     }
 
     private void OnToggleChanged(bool isOn)
     {
         if (isOn)
         {
-            // サイズを1.2倍に拡大
             transform.DOScale(1.2f, 0.1f);
         }
         else
         {
-            // サイズを元に戻す
             transform.DOScale(1f, 0.1f);
         }
     }
