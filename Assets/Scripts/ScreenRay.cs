@@ -77,7 +77,7 @@ public class ScreenRay : MonoBehaviour
             {
                 return;
             }
-            
+
             targetMarker.SetActive(false);
             Collider[] colliders = Physics.OverlapSphere(lastRaycastHit.point, rayWidth);
             //collidersの中にPlayerというタグの数の分だけint型を保存する
@@ -121,7 +121,6 @@ public class ScreenRay : MonoBehaviour
 
                 else if (collider.gameObject.tag == "Enemy" && targetType == CardEntity.TargetType.Enemy)
                 {
-                    Debug.Log("Enemyに触れていてMouseUPしたよ！");
                     Destroy(chooseCard);
                     UIManager.instance.HeroMessageDetail("敵弱体化", debugCardEffectText.text);
                     drawCardController.cardIDList.Remove(cardID);
@@ -135,7 +134,6 @@ public class ScreenRay : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("その他に触れていてMouseUPしたよ！");
                     switch (cardID)
                     {
                         case 24:
